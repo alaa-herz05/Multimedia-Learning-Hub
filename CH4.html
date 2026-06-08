@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 4 — Multimedia Skills & Team Roles</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ══════════════════════════════════════
+   ROOT — Dark Green Theme
+══════════════════════════════════════ */
+    :root {
+      --navy: #040d07;
+      --deep: #071209;
+      --mid: #0c1f10;
+      --card-bg: rgba(12, 31, 16, .7);
+      --border: rgba(0, 210, 90, .18);
+      --accent: #00d25a;
+      --accent2: #ff8c42;
+      --gold: #ffc940;
+      --green2: #6effc8;
+      --red: #ff5f6d;
+      --purple: #b48aff;
+      --sky: #38d9f5;
+      --text: #d2edda;
+      --muted: #5e8068;
+      --muted2: #8aab92;
+      --hl: rgba(0, 210, 90, .07);
+      --ar-bg: rgba(255, 201, 64, .05);
+      --ar-border: rgba(255, 201, 64, .25);
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Cairo, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 14.5px;
+      overflow-x: hidden;
+    }
+
+    b,
+    strong {
+      color: #fff;
+    }
+
+    /* ── CANVAS + GRID ── */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0, 210, 90, .03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 210, 90, .03) 1px, transparent 1px);
+      background-size: 55px 55px;
+    }
+
+    /* ══════════════════════════════════════
+   STICKY TOPIC NAV
+══════════════════════════════════════ */
+    .topic-nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(4, 13, 7, .95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      gap: 7px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .topic-nav a {
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      background: rgba(12, 31, 16, .85);
+      padding: 7px 13px;
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: .2s;
+      white-space: nowrap;
+      letter-spacing: .3px;
+    }
+
+    .topic-nav a:hover,
+    .topic-nav a.active {
+      color: var(--navy);
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 14px rgba(0, 210, 90, .4);
+    }
+
+    /* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 52vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 40px 52px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0, 210, 90, .14) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0, 210, 90, .06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      padding: 6px 22px;
+      border-radius: 30px;
+      margin-bottom: 22px;
+      text-transform: uppercase;
+      background: rgba(0, 210, 90, .07);
+      animation: fadeDown .8s ease both;
+    }
+
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: dotPulse 2s infinite;
+    }
+
+    @keyframes dotPulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: .4;
+        transform: scale(1.4)
+      }
+    }
+
+    .hero h1 {
+      font-family: Syne, sans-serif;
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 8px;
+      animation: fadeDown .9s ease .1s both;
+      text-shadow: 0 0 50px rgba(0, 210, 90, .3);
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero .ar-title {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--gold);
+      margin-bottom: 18px;
+      direction: rtl;
+      animation: fadeDown 1s ease .2s both;
+    }
+
+    .hero-sub {
+      color: var(--muted2);
+      font-size: 13.5px;
+      max-width: 620px;
+      margin: 0 auto;
+      animation: fadeDown 1s ease .3s both;
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-16px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    /* ══════════════════════════════════════
+   CONTAINER
+══════════════════════════════════════ */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px 90px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Chapter Banner ── */
+    .chapter-banner {
+      background: linear-gradient(135deg, rgba(0, 210, 90, .09), rgba(4, 13, 7, .75));
+      border: 1px solid var(--accent);
+      border-radius: 18px;
+      padding: 22px 28px;
+      margin: 0 0 36px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, .45), 0 0 0 1px rgba(0, 210, 90, .07);
+    }
+
+    .ch-num {
+      width: 58px;
+      height: 58px;
+      background: linear-gradient(135deg, var(--accent), #007a33);
+      color: var(--navy);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 22px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 20px rgba(0, 210, 90, .4);
+    }
+
+    .ch-titles h2 {
+      font-family: Syne, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -.3px;
+    }
+
+    .ch-titles .ar {
+      font-family: Cairo, sans-serif;
+      font-size: .9rem;
+      color: var(--gold);
+      direction: rtl;
+      text-align: right;
+      margin-top: 3px;
+    }
+
+    .ch-titles .desc {
+      font-size: 12.5px;
+      color: var(--muted2);
+      margin-top: 4px;
+    }
+
+    /* ── Section Headers ── */
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin: 52px 0 18px;
+      scroll-margin-top: 72px;
+    }
+
+    .sec-num {
+      width: 42px;
+      height: 42px;
+      background: rgba(0, 210, 90, .13);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 15px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .sec-titles h3 {
+      font-family: Syne, sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -.2px;
+    }
+
+    .sec-titles .ar {
+      font-family: Cairo, sans-serif;
+      font-size: .85rem;
+      color: var(--gold);
+      direction: rtl;
+      text-align: right;
+      margin-top: 1px;
+    }
+
+    .sec-titles .desc {
+      font-size: 12px;
+      color: var(--muted2);
+      margin-top: 3px;
+    }
+
+    /* ══════════════════════════════════════
+   CARDS
+══════════════════════════════════════ */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 26px;
+      margin-bottom: 14px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .35), 0 1px 0 rgba(255, 255, 255, .03) inset;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .card-title::before {
+      content: '▶';
+      color: var(--accent2);
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .card-title .ar {
+      font-family: Cairo, sans-serif;
+      font-size: .8rem;
+      color: var(--gold);
+      font-weight: 600;
+      direction: rtl;
+    }
+
+    .card p,
+    .card li {
+      margin-bottom: 7px;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .card ul,
+    .card ol {
+      padding-left: 22px;
+    }
+
+    .card li::marker {
+      color: var(--accent);
+    }
+
+    /* Highlight / Note / Tip / AR boxes */
+    .hl {
+      background: var(--hl);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 13px 16px;
+      margin: 10px 0;
+      font-size: 13.5px;
+    }
+
+    .note {
+      background: rgba(255, 140, 66, .07);
+      border: 1px solid rgba(255, 140, 66, .28);
+      border-radius: 10px;
+      padding: 13px 16px;
+      margin: 10px 0;
+      font-size: 13.5px;
+    }
+
+    .note-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent2);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .tip {
+      background: rgba(0, 210, 90, .05);
+      border: 1px solid rgba(0, 210, 90, .25);
+      border-radius: 10px;
+      padding: 13px 16px;
+      margin: 10px 0;
+      font-size: 13.5px;
+    }
+
+    .tip-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .ar-box {
+      background: var(--ar-bg);
+      border: 1px solid var(--ar-border);
+      border-right: 4px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 13px 16px;
+      margin-top: 12px;
+      direction: rtl;
+      text-align: right;
+      font-family: Cairo, sans-serif;
+      font-size: 13.5px;
+      color: #ccd6e8;
+      line-height: 1.9;
+    }
+
+    .ar-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      direction: ltr;
+      text-align: left;
+      display: block;
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 14px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead th {
+      background: var(--mid);
+      color: var(--accent);
+      padding: 11px 14px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .4px;
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(0, 210, 90, .07);
+    }
+
+    tbody tr:hover {
+      background: var(--hl);
+    }
+
+    tbody td {
+      padding: 10px 14px;
+      vertical-align: top;
+      line-height: 1.65;
+    }
+
+    tbody td:first-child {
+      font-weight: 600;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    /* Grids */
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Tags */
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      background: rgba(0, 210, 90, .1);
+      border-radius: 5px;
+      padding: 2px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      margin: 2px;
+    }
+
+    .tag.o {
+      border-color: var(--accent2);
+      color: var(--accent2);
+      background: rgba(255, 140, 66, .1);
+    }
+
+    .tag.p {
+      border-color: var(--purple);
+      color: var(--purple);
+      background: rgba(180, 138, 255, .1);
+    }
+
+    .tag.g {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(255, 201, 64, .08);
+    }
+
+    .tag.s {
+      border-color: var(--sky);
+      color: var(--sky);
+      background: rgba(56, 217, 245, .08);
+    }
+
+    /* HR divider */
+    hr.div {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: .2;
+      margin: 48px 0;
+    }
+
+    /* Exam questions */
+    .exam-q {
+      border-left: 3px solid var(--purple);
+      background: rgba(180, 138, 255, .05);
+      border-radius: 0 8px 8px 0;
+      padding: 13px 16px;
+      margin: 10px 0;
+      font-size: 13.5px;
+    }
+
+    .exam-q .q-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--purple);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .answer {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ══════════════════════════════════════
+   ROLE CARDS — visual team layout
+══════════════════════════════════════ */
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    .role-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 22px;
+      transition: .3s;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .3);
+    }
+
+    .role-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .role-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 210, 90, .15);
+    }
+
+    .role-card.pm::before {
+      background: linear-gradient(90deg, var(--accent), var(--sky));
+    }
+
+    .role-card.md::before {
+      background: linear-gradient(90deg, var(--gold), var(--accent));
+    }
+
+    .role-card.id::before {
+      background: linear-gradient(90deg, var(--sky), var(--accent));
+    }
+
+    .role-card.wr::before {
+      background: linear-gradient(90deg, var(--purple), var(--accent2));
+    }
+
+    .role-card.vs::before {
+      background: linear-gradient(90deg, var(--red), var(--accent2));
+    }
+
+    .role-card.as::before {
+      background: linear-gradient(90deg, var(--gold), var(--red));
+    }
+
+    .role-card.mp::before {
+      background: linear-gradient(90deg, var(--sky), var(--purple));
+    }
+
+    .role-card.wp::before {
+      background: linear-gradient(90deg, var(--accent), var(--sky));
+    }
+
+    .role-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .role-title {
+      font-family: Syne, sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .role-ar {
+      font-family: Cairo, sans-serif;
+      font-size: .8rem;
+      color: var(--gold);
+      direction: rtl;
+      text-align: right;
+      margin-bottom: 10px;
+    }
+
+    .role-section {
+      margin-bottom: 10px;
+    }
+
+    .role-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .role-resp .role-section-label {
+      color: var(--accent);
+    }
+
+    .role-skills .role-section-label {
+      color: var(--sky);
+    }
+
+    .role-section ul {
+      padding-left: 16px;
+    }
+
+    .role-section li {
+      font-size: 12.5px;
+      color: var(--muted2);
+      line-height: 1.65;
+      margin-bottom: 3px;
+    }
+
+    .role-section li::marker {
+      color: var(--accent);
+    }
+
+    .role-section li strong {
+      color: var(--text);
+    }
+
+    /* step boxes */
+    .step-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 13.5px;
+    }
+
+    .step-n {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      color: var(--navy);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ══════════════════════════════════════
+   FINAL REFERENCE TABLE
+══════════════════════════════════════ */
+    .final {
+      background: linear-gradient(135deg, rgba(0, 210, 90, .07), rgba(4, 13, 7, .9));
+      border: 1px solid var(--accent);
+      border-radius: 18px;
+      padding: 32px;
+      margin-top: 52px;
+    }
+
+    .final h2 {
+      font-family: Syne, sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .final h2 .ar {
+      font-family: Cairo, sans-serif;
+      font-size: .85rem;
+      color: var(--gold);
+      font-weight: 600;
+      direction: rtl;
+      display: block;
+      margin-top: 2px;
+      margin-bottom: 20px;
+    }
+
+    /* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(180deg, transparent, var(--deep));
+      border-top: 1px solid var(--border);
+      padding: 50px 24px 36px;
+    }
+
+    .footer-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 36px;
+    }
+
+    .footer-brand h3 {
+      font-family: Syne, sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .footer-brand h3 span {
+      color: var(--accent);
+    }
+
+    .footer-brand p {
+      font-size: 12.5px;
+      color: var(--muted2);
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+
+    .footer-col h4 {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: var(--muted2);
+      font-size: 13px;
+      transition: .2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    .contact-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(12, 31, 16, .7);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: var(--text);
+      transition: .3s;
+    }
+
+    .contact-card:hover {
+      border-color: var(--accent);
+      background: rgba(0, 210, 90, .07);
+      transform: translateX(4px);
+    }
+
+    .contact-card .c-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .contact-card.instagram .c-icon {
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366);
+    }
+
+    .contact-card.whatsapp .c-icon {
+      background: #25D366;
+    }
+
+    .c-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .c-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted2);
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 1px;
+    }
+
+    .c-value {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 28px 0 22px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .copy {
+      font-size: 12px;
+      color: var(--muted2);
+    }
+
+    .copy strong {
+      color: var(--accent);
+    }
+
+    .rights {
+      font-family: Cairo, sans-serif;
+      font-size: 12px;
+      color: var(--muted2);
+      direction: rtl;
+    }
+
+    .rights strong {
+      color: var(--accent);
+    }
+
+    /* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+    @media(max-width:760px) {
+
+      .grid2,
+      .grid3,
+      .roles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 18px 16px;
+      }
+
+      .container {
+        padding: 28px 14px 60px;
+      }
+
+      .chapter-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .ch-titles .ar {
+        text-align: center;
+      }
+    }
+
+    @media(max-width:480px) {
+      .topic-nav a {
+        font-size: 11px;
+        padding: 6px 10px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+
+  <style id="index-back-button-style">
+    .index-back-button {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 99999;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(34, 204, 72, .45);
+      background: rgba(6, 6, 8, .88);
+      backdrop-filter: blur(12px);
+      color: #2eef58 !important;
+      font-family: Inter, Cairo, sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 0 24px rgba(34, 204, 72, .22);
+      transition: .2s
+    }
+
+    .index-back-button:hover {
+      transform: translateY(-2px);
+      background: rgba(34, 204, 72, .14);
+      box-shadow: 0 0 35px rgba(34, 204, 72, .35)
+    }
+
+    @media(max-width:600px) {
+      .index-back-button {
+        top: 10px;
+        left: 10px;
+        padding: 8px 12px;
+        font-size: 12px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="index-back-button" href="index.html">⬅ Back to Index / الرجوع للرئيسية</a>
+
+
+  <canvas id="bg-canvas"></canvas>
+  <div class="bg-grid"></div>
+
+  <!-- ════ STICKY TOPIC NAV ════ -->
+  <nav class="topic-nav">
+    <a href="#overview">📋 Overview</a>
+    <a href="#pm">👔 Project Mgr</a>
+    <a href="#designer">🎨 MM Designer</a>
+    <a href="#interface">🖥️ Interface</a>
+    <a href="#writers">✍️ Writers</a>
+    <a href="#video">🎬 Video</a>
+    <a href="#audio">🎵 Audio</a>
+    <a href="#programmer">💻 Programmer</a>
+    <a href="#web">🌐 Web Producer</a>
+    <a href="#interactive">⚡ Interactive</a>
+    <a href="#review">📋 Review</a>
+  </nav>
+
+  <!-- ════ HERO ════ -->
+  <header class="hero">
+    <div class="hero-badge">
+      <div class="dot"></div>Chapter 4 &middot; Multimedia Studies &middot; Final Exam Guide
+    </div>
+    <h1>Multimedia <span>Skills &amp; Team</span></h1>
+    <div class="ar-title">مهارات الوسائط المتعددة وفريق العمل — دليل المراجعة الشامل للفاينل</div>
+    <p class="hero-sub">Complete bilingual study guide — all slides covered · 8 team roles · Responsibilities ·
+      Background &amp; skills · Interactive systems · Exam Q&amp;A</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Chapter Banner -->
+    <div class="chapter-banner">
+      <div class="ch-num">4</div>
+      <div class="ch-titles">
+        <h2>Multimedia Skills &amp; Training</h2>
+        <div class="ar">مهارات الوسائط المتعددة والتدريب</div>
+        <div class="desc">Project Manager · MM Designer · Interface Designer · Writers · Video · Audio · Programmer ·
+          Web Producer · Interactive Systems</div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+     SECTION 1 — OVERVIEW
+════════════════════════════════ -->
+    <div id="overview" class="section-header">
+      <div class="sec-num">1</div>
+      <div class="sec-titles">
+        <h3>Chapter Overview — Three Core Questions</h3>
+        <div class="ar">نظرة عامة — الأسئلة الثلاثة الرئيسية</div>
+        <div class="desc">What skills are needed · Who does what · What background is required</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">What This Chapter Covers <span class="ar">ما يغطيه هذا الفصل</span></div>
+      <p>This chapter answers three fundamental questions about building a multimedia project:</p>
+      <div class="grid3">
+        <div class="hl" style="text-align:center">
+          <strong style="color:var(--accent);font-size:1.4rem">①</strong><br>
+          <strong>Skills Needed</strong><br>
+          <span style="font-size:12.5px">What skills are required to develop good multimedia?</span>
+        </div>
+        <div class="hl" style="text-align:center">
+          <strong style="color:var(--gold);font-size:1.4rem">②</strong><br>
+          <strong>Responsibilities</strong><br>
+          <span style="font-size:12.5px">What is each team member responsible for?</span>
+        </div>
+        <div class="hl" style="text-align:center">
+          <strong style="color:var(--sky);font-size:1.4rem">③</strong><br>
+          <strong>Background &amp; Training</strong><br>
+          <span style="font-size:12.5px">What background/training/skill is required for each role?</span>
+        </div>
+      </div>
+      <div class="tip">
+        <div class="tip-label">💡 The 8 Team Roles</div>
+        <span class="tag">Project Manager</span>
+        <span class="tag g">Multimedia Designer</span>
+        <span class="tag s">Interface Designer</span>
+        <span class="tag p">Writers</span>
+        <span class="tag o">Video Specialist</span>
+        <span class="tag g">Audio Specialist</span>
+        <span class="tag s">Multimedia Programmer</span>
+        <span class="tag">Web Producer</span>
+      </div>
+      <div class="ar-box">
+        <span class="ar-label">شرح بالعربي</span>
+        الفصل الرابع يدور حول <strong>فريق تطوير الوسائط المتعددة</strong>. يجيب على ثلاثة أسئلة: ما المهارات المطلوبة؟
+        ما مسؤولية كل عضو؟ ما الخلفية والتدريب المطلوب؟<br>
+        الفريق يتكون من <strong>8 أدوار</strong>: مدير المشروع، مصمم الوسائط، مصمم الواجهة، الكتّاب، متخصص الفيديو،
+        متخصص الصوت، مبرمج الوسائط، منتج الويب.
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+     SECTION 2 — PROJECT MANAGER
+════════════════════════════════ -->
+    <div id="pm" class="section-header">
+      <div class="sec-num">2</div>
+      <div class="sec-titles">
+        <h3>Project Manager</h3>
+        <div class="ar">مدير المشروع</div>
+        <div class="desc">The leader · Budget · Vision · Team builder</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Project Manager — Full Detail <span class="ar">مدير المشروع — تفاصيل كاملة</span></div>
+      <div class="grid2">
+        <div class="role-section role-resp">
+          <span class="role-section-label">📋 Responsibilities</span>
+          <ul>
+            <li>Manages the <strong>overall project</strong></li>
+            <li>Handles <strong>day-to-day operations and budget</strong></li>
+            <li>Puts together a <strong>good core team</strong></li>
+            <li>Maintains the <strong>"big picture" — the vision</strong></li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label" style="color:var(--sky)">🛠️ Background / Skills Required</span>
+          <ul>
+            <li>Must <strong>understand hardware &amp; software</strong></li>
+            <li>Strong <strong>communication skills</strong></li>
+            <li>Good <strong>"people" skills</strong> — a good listener</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note">
+        <div class="note-label">⭐ Key Exam Point</div>
+        The Project Manager is the <strong>glue of the team</strong>. They do NOT necessarily create the content — they
+        lead, budget, hire the right people, and keep everyone focused on the vision.
+      </div>
+      <div class="ar-box">
+        <span class="ar-label">شرح بالعربي</span>
+        <strong>مدير المشروع</strong> هو قائد الفريق. مسؤولياته: إدارة المشروع كاملاً + الميزانية اليومية + تجميع الفريق
+        المناسب + الحفاظ على الرؤية الكبيرة للمشروع.<br>
+        المهارات المطلوبة: فهم الأجهزة والبرامج + مهارات تواصل قوية + <strong>مهارات تعامل مع الناس ومستمع جيد</strong>.
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+     SECTION 3 — MULTIMEDIA DESIGNER
+════════════════════════════════ -->
+    <div id="designer" class="section-header">
+      <div class="sec-num">3</div>
+      <div class="sec-titles">
+        <h3>Multimedia Designer</h3>
+        <div class="ar">مصمم الوسائط المتعددة</div>
+        <div class="desc">Content · Structure · Blueprint · Three sub-types of designers</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Multimedia Designer — Responsibilities &amp; Skills <span class="ar">المسؤوليات
+          والمهارات</span></div>
+      <div class="grid2">
+        <div class="role-section role-resp">
+          <span class="role-section-label">📋 Responsibilities</span>
+          <ul>
+            <li>Responsible for <strong>overall content and structure</strong></li>
+            <li>Prepares <strong>blueprint for project</strong>: content, media, interaction (Look and Feel)</li>
+            <li>Sometimes <strong>overlaps with Interface Designer</strong></li>
+            <li><strong>Coordinates the team</strong></li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label" style="color:var(--sky)">🛠️ Background / Skills Required</span>
+          <ul>
+            <li>Ability to <strong>analyze content structurally</strong> and match it with effective presentation</li>
+            <li>Expert with <strong>different media types</strong></li>
+            <li>Ability to look at information from <strong>different points of view</strong></li>
+            <li><strong>Interpersonal skills</strong></li>
+            <li>Understand resources — both <strong>technological and human</strong></li>
+            <li>Solid <strong>organizational skills</strong>, attention to detail</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ar-box">
+        <span class="ar-label">شرح بالعربي</span>
+        <strong>مصمم الوسائط المتعددة</strong> مسؤول عن المحتوى والبنية العامة للمشروع. يُعدّ المخطط التفصيلي
+        (Blueprint) الذي يشمل المحتوى وأنواع الوسائط والتفاعل. أحياناً تتداخل مهامه مع مصمم الواجهة.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Three Sub-Types Under Multimedia Designer <span class="ar">الأنواع الثلاثة الفرعية</span>
+      </div>
+      <div class="grid3">
+        <div class="hl">
+          <strong style="color:var(--accent)">A) Graphic Designers</strong><br>
+          <span style="font-size:12.5px">Deal with <strong>visuals</strong>. Sub-types:</span>
+          <ul style="margin-top:8px;padding-left:18px">
+            <li style="font-size:12.5px"><strong>Illustrators</strong> (Freehand) — create professional drawings using
+              mouse or pressure-sensitive pen</li>
+            <li style="font-size:12.5px"><strong>Animators</strong> (Flash) — create animations</li>
+            <li style="font-size:12.5px"><strong>Image processing specialists</strong> (Photoshop) — edit/process images
+            </li>
+          </ul>
+        </div>
+        <div class="hl">
+          <strong style="color:var(--gold)">B) Instructional Designers</strong><br>
+          <span style="font-size:12.5px">Deal with <strong>subject matter</strong>:</span>
+          <ul style="margin-top:8px;padding-left:18px">
+            <li style="font-size:12.5px">Specialists in <strong>education or training</strong></li>
+            <li style="font-size:12.5px">Ensure subject matter is <strong>clearly and properly presented</strong></li>
+            <li style="font-size:12.5px">Deep <strong>knowledge of content</strong></li>
+          </ul>
+        </div>
+        <div class="hl">
+          <strong style="color:var(--sky)">C) Information Designers</strong><br>
+          <span style="font-size:12.5px">Deal with <strong>content &amp; navigation</strong>:</span>
+          <ul style="margin-top:8px;padding-left:18px">
+            <li style="font-size:12.5px"><strong>Structure content</strong></li>
+            <li style="font-size:12.5px">Determine <strong>user pathways</strong> and feedback</li>
+            <li style="font-size:12.5px">Select <strong>presentation media</strong> based on media strengths</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note">
+        <div class="note-label">⚠️ Note — Many Separate Up</div>
+        In large projects, Graphic Designers, Instructional Designers, and Information Designers are often
+        <strong>separate people / departments</strong>. In small teams, one person may handle all three.
+      </div>
+      <div class="ar-box">
+        <span class="ar-label">شرح بالعربي</span>
+        تحت مصمم الوسائط ثلاثة أنواع فرعية:<br>
+        <strong>أ) مصمم الجرافيك</strong>: يتعامل مع البصريات — رسوم توضيحية (Freehand) + رسوم متحركة (Flash) + معالجة
+        صور (Photoshop).<br>
+        <strong>ب) مصمم تعليمي</strong>: يتعامل مع المادة التعليمية — يضمن وضوحها وملاءمتها للجمهور.<br>
+        <strong>ج) مصمم المعلومات</strong>: يتعامل مع المحتوى والتنقل — يُنظّم المحتوى ويحدد مسارات المستخدم ويختار
+        وسائط العرض.
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+     SECTION 4 — INTERFACE DESIGNER
+════════════════════════════════ -->
+    <div id="interface" class="section-header">
+      <div class="sec-num">4</div>
+      <div class="sec-titles">
+        <h3>Interface Designer</h3>
+        <div class="ar">مصمم الواجهة</div>
+        <div class="desc">User access · Transparent UI · Authoring systems</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Interface Designer — Full Detail <span class="ar">مصمم الواجهة — تفاصيل كاملة</span></div>
+      <div class="grid2">
+        <div class="role-section role-resp">
+          <span class="role-section-label">📋 Responsibilities</span>
+          <ul>
+            <li>Provides <strong>access to media and control</strong> to people who use it</li>
+            <li>Makes the interface <strong>"transparent" to users</strong></li>
+            <li>Effective use of: <strong>windows, icons, backgrounds, controls</strong>, etc.</li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label" style="color:var(--sky)">🛠️ Background / Skills Required</span>
+          <ul>
+            <li>Familiar with <strong>different multimedia interfaces</strong></li>
+            <li>Knows <strong>authoring systems</strong> and user testing</li>
+            <li><strong>Basic drawing skills</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="hl">
+        <strong>🎯 Key concept — "Transparent Interface":</strong> The best interface is one users don't notice — it
+        feels natural and gets out of the way, letting them focus on content rather than figuring out controls.
+      </div>
+      <div class="ar-box">
+        <span class="ar-label">شرح بالعربي</span>
+        <strong>مصمم الواجهة</strong> يُوفّر طريقة وصول سهلة للمستخدمين للوسائط والتحكم فيها. الهدف هو جعل الواجهة
+        <strong>"شفافة"</strong> — أي أن المستخدم لا يشعر بتعقيد الواجهة بل يركز على المحتوى.<br>
+        يستخدم النوافذ والأيقونات والخلفيات وعناصر التحكم بفعالية. يجب أن يكون ملماً بأنظمة التأليف (Authoring Systems)
+        واختبار المستخدمين.
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+     SECTION 5 — WRITERS
+════════════════════════════════ -->
+    <div id="writers" class="section-header">
+      <div class="sec-num">5</div>
+      <div class="sec-titles">
+        <h3>Writers</h3>
+        <div class="ar">الكتّاب</div>
+        <div class="desc">Scripts · Proposals · Narration · Content writers</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Writers — Full Detail <span class="ar">الكتّاب — تفاصيل كاملة</span></div>
+      <div class="grid2">
+        <div class="role-section role-resp">
+          <span class="role-section-label">📋 Responsibilities</span>
+          <ul>
+            <li>Create <strong>character, action, point of view, interactivity</strong></li>
+            <li>Write <strong>proposals</strong></li>
+            <li>Script <strong>actor's narration</strong></li>
+            <li>Write <strong>text screens</strong> (content writers)</li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label" style="color:var(--sky)">🛠️ Background / Skills Required</span>
+          <ul>
+            <li>Background in <strong>marketing</strong></li>
+            <li>Ability to work within <strong>tight deadlines</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="ar-box">
+        <span class="ar-label">شرح بالعربي</span>
+        <strong>الكتّاب</strong> يكتبون كل النصوص في المشروع: الشخصيات، الأفعال، وجهات النظر، التفاعل، المقترحات،
+        سيناريوهات الممثلين، ومحتوى الشاشات النصية.<br>
+        المطلوب: خلفية في <strong>التسويق</strong> + القدرة على العمل ضمن <strong>مواعيد نهائية ضيقة</strong>.
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+     SECTION 6 — VIDEO SPECIALIST
+════════════════════════════════ -->
+    <div id="video" class="section-header">
+      <div class="sec-num">6</div>
+      <div class="sec-titles">
+        <h3>Video Specialist</h3>
+        <div class="ar">متخصص الفيديو</div>
+        <div class="desc">Production coordination · Editing tools · Special effects</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Video Specialist — Full Detail <span class="ar">متخصص الفيديو — تفاصيل كاملة</span></div>
+      <div class="grid2">
+        <div class="role-section role-resp">
+          <span class="role-section-label">📋 Responsibilities</span>
+          <ul>
+            <li>Coordinates: <strong>videographers</strong></li>
+            <li>Coordinates: <strong>sound technicians</strong></li>
+            <li>Coordinates: <strong>lighting designers</strong></li>
+            <li>Coordinates: <strong>set designers</strong></li>
+            <li>Coordinates: <strong>script supervisors</strong></li>
+            <li>Coordinates: <strong>production assistants</strong> and actors</li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label" style="color:var(--sky)">🛠️ Background / Skills Required</span>
+          <ul>
+            <li>Skilled with <strong>QuickTime</strong> or <strong>MS Video</strong> for editing</li>
+            <li>Skilled with <strong>Macromedia Premiere</strong> for special effects</li>
+            <li>Other tools to provide a <strong>nice view to the users</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="ar-box">
+        <span class="ar-label">شرح بالعربي</span>
+        <strong>متخصص الفيديو</strong> يُنسّق كل عناصر إنتاج الفيديو: مصوري الفيديو + تقنيي الصوت + مصممي الإضاءة +
+        مصممي المجموعة + مشرفي السيناريو + مساعدي الإنتاج والممثلين.<br>
+        الأدوات المطلوبة: <strong>QuickTime / MS Video</strong> للتحرير + <strong>Macromedia Premiere</strong> للمؤثرات
+        الخاصة.
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+     SECTION 7 — AUDIO SPECIALIST
+════════════════════════════════ -->
+    <div id="audio" class="section-header">
+      <div class="sec-num">7</div>
+      <div class="sec-titles">
+        <h3>Audio Specialist</h3>
+        <div class="ar">متخصص الصوت</div>
+        <div class="desc">Music selection · Recording · MIDI · Digitizing</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Audio Specialist — Full Detail <span class="ar">متخصص الصوت — تفاصيل كاملة</span></div>
+      <div class="grid2">
+        <div class="role-section role-resp">
+          <span class="role-section-label">📋 Responsibilities</span>
+          <ul>
+            <li><strong>Locating and selecting suitable music</strong> and talent</li>
+            <li><strong>Scheduling recording sessions</strong></li>
+            <li><strong>Digitizing</strong> recorded materials</li>
+            <li><strong>Editing</strong> recorded materials</li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label" style="color:var(--sky)">🛠️ Background / Skills Required</span>
+          <ul>
+            <li>Skilled in <strong>studio recording</strong></li>
+            <li>Fluency in <strong>MIDI</strong> (Musical Instrument Digital Interface)</li>
+            <li>Experience with <strong>sequencing software</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="ar-box">
+        <span class="ar-label">شرح بالعربي</span>
+        <strong>متخصص الصوت</strong> يُوفّر الموسيقى والمؤثرات الصوتية المناسبة للمشروع. مسؤولياته: اختيار الموسيقى +
+        جدولة جلسات التسجيل + رقمنة المواد المسجلة وتحريرها.<br>
+        المطلوب: خبرة في التسجيل الاستوديوهي + <strong>إتقان MIDI</strong> + خبرة مع برامج التسلسل الموسيقي (Sequencing
+        Software).
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+     SECTION 8 — MULTIMEDIA PROGRAMMER
+════════════════════════════════ -->
+    <div id="programmer" class="section-header">
+      <div class="sec-num">8</div>
+      <div class="sec-titles">
+        <h3>Multimedia Programmer</h3>
+        <div class="ar">مبرمج الوسائط المتعددة</div>
+        <div class="desc">Integration · Authoring systems · Programming languages</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Multimedia Programmer — Full Detail <span class="ar">مبرمج الوسائط المتعددة — تفاصيل
+          كاملة</span></div>
+      <div class="grid2">
+        <div class="role-section role-resp">
+          <span class="role-section-label">📋 Responsibilities</span>
+          <ul>
+            <li>Integrates all multimedia elements into a <strong>"seamless" whole</strong></li>
+            <li>Uses <strong>programming languages or authoring systems</strong> (e.g., Authorware)</li>
+            <li><strong>Coding displays</strong> to controlling devices</li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label" style="color:var(--sky)">🛠️ Background / Skills Required</span>
+          <ul>
+            <li><strong>Multimedia languages</strong>: C++, Java, Lingo, etc.</li>
+            <li>Web languages: <strong>HTML, VRML, XML</strong>, etc.</li>
+            <li>Ability to <strong>quickly learn new systems</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="hl">
+        <strong>🎯 Key word: "Seamless"</strong> — The programmer ties everything together so that video, audio,
+        graphics, and text work as one unified experience with no visible "joints" between different media types.
+      </div>
+      <div class="ar-box">
+        <span class="ar-label">شرح بالعربي</span>
+        <strong>مبرمج الوسائط المتعددة</strong> هو من يدمج كل عناصر الوسائط (فيديو + صوت + رسوم + نصوص) في منتج
+        <strong>متسق وسلس (Seamless)</strong> باستخدام لغات برمجة أو أنظمة تأليف.<br>
+        الكلمة المفتاحية في الامتحان: <strong>"Seamless"</strong>. اللغات المطلوبة: C++، Java، Lingo + HTML، VRML، XML.
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+     SECTION 9 — WEB PRODUCER
+════════════════════════════════ -->
+    <div id="web" class="section-header">
+      <div class="sec-num">9</div>
+      <div class="sec-titles">
+        <h3>Multimedia Producer for the Web</h3>
+        <div class="ar">منتج الوسائط للويب</div>
+        <div class="desc">Web pages coordination · HTML · CGI · Photoshop</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Web Producer — Full Detail <span class="ar">منتج الويب — تفاصيل كاملة</span></div>
+      <div class="grid2">
+        <div class="role-section role-resp">
+          <span class="role-section-label">📋 Responsibilities</span>
+          <ul>
+            <li><strong>Coordinates a set of web pages</strong> for the web</li>
+            <li>Manages the overall web presence of the multimedia project</li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label" style="color:var(--sky)">🛠️ Background / Skills Required</span>
+          <ul>
+            <li>Knowledge of <strong>HTML</strong></li>
+            <li>Knowledge of <strong>CGI scripts</strong></li>
+            <li>Knowledge of <strong>Photoshop</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="ar-box">
+        <span class="ar-label">شرح بالعربي</span>
+        <strong>منتج الوسائط للويب</strong> يُنسّق مجموعة صفحات الويب الخاصة بمشروع الوسائط المتعددة. يحتاج معرفة بـ:
+        <strong>HTML + سكريبتات CGI + Photoshop</strong>.
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+     SECTION 10 — VISUAL TEAM SUMMARY
+════════════════════════════════ -->
+    <hr class="div">
+    <div class="section-header" style="margin-top:0">
+      <div class="sec-num">★</div>
+      <div class="sec-titles">
+        <h3>All 8 Roles — Visual Team Cards</h3>
+        <div class="ar">البطاقات المرئية للفريق كاملاً</div>
+        <div class="desc">Quick visual reference for all roles at a glance</div>
+      </div>
+    </div>
+
+    <div class="roles-grid">
+      <!-- PM -->
+      <div class="role-card pm">
+        <span class="role-icon">👔</span>
+        <div class="role-title">Project Manager</div>
+        <div class="role-ar">مدير المشروع</div>
+        <div class="role-section role-resp">
+          <span class="role-section-label">Responsibilities</span>
+          <ul>
+            <li>Overall project + <strong>budget</strong></li>
+            <li>Build the <strong>core team</strong></li>
+            <li>Maintain the <strong>vision</strong></li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label">Skills</span>
+          <ul>
+            <li>Hardware &amp; software understanding</li>
+            <li>Communication + <strong>people skills</strong></li>
+            <li>Good listener</li>
+          </ul>
+        </div>
+      </div>
+      <!-- MM Designer -->
+      <div class="role-card md">
+        <span class="role-icon">🎨</span>
+        <div class="role-title">Multimedia Designer</div>
+        <div class="role-ar">مصمم الوسائط المتعددة</div>
+        <div class="role-section role-resp">
+          <span class="role-section-label">Responsibilities</span>
+          <ul>
+            <li>Content + structure</li>
+            <li>Prepares <strong>project blueprint</strong></li>
+            <li>Coordinates team</li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label">Skills</span>
+          <ul>
+            <li>Structural content analysis</li>
+            <li>Expert in media types</li>
+            <li>Organizational skills</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Interface Designer -->
+      <div class="role-card id">
+        <span class="role-icon">🖥️</span>
+        <div class="role-title">Interface Designer</div>
+        <div class="role-ar">مصمم الواجهة</div>
+        <div class="role-section role-resp">
+          <span class="role-section-label">Responsibilities</span>
+          <ul>
+            <li>Media access &amp; control</li>
+            <li>Make UI <strong>"transparent"</strong></li>
+            <li>Windows, icons, controls</li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label">Skills</span>
+          <ul>
+            <li>Multimedia interfaces</li>
+            <li>Authoring systems + user testing</li>
+            <li>Basic drawing skills</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Writers -->
+      <div class="role-card wr">
+        <span class="role-icon">✍️</span>
+        <div class="role-title">Writers</div>
+        <div class="role-ar">الكتّاب</div>
+        <div class="role-section role-resp">
+          <span class="role-section-label">Responsibilities</span>
+          <ul>
+            <li>Character, action, interactivity</li>
+            <li>Write proposals + <strong>scripts</strong></li>
+            <li>Text screens (content)</li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label">Skills</span>
+          <ul>
+            <li>Marketing background</li>
+            <li>Work under <strong>tight deadlines</strong></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Video -->
+      <div class="role-card vs">
+        <span class="role-icon">🎬</span>
+        <div class="role-title">Video Specialist</div>
+        <div class="role-ar">متخصص الفيديو</div>
+        <div class="role-section role-resp">
+          <span class="role-section-label">Responsibilities</span>
+          <ul>
+            <li>Coordinate <strong>full production crew</strong></li>
+            <li>Videographers, lighting, sets</li>
+            <li>Script supervisors + actors</li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label">Skills</span>
+          <ul>
+            <li>QuickTime / MS Video (editing)</li>
+            <li>Macromedia Premiere (FX)</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Audio -->
+      <div class="role-card as">
+        <span class="role-icon">🎵</span>
+        <div class="role-title">Audio Specialist</div>
+        <div class="role-ar">متخصص الصوت</div>
+        <div class="role-section role-resp">
+          <span class="role-section-label">Responsibilities</span>
+          <ul>
+            <li>Select music &amp; talent</li>
+            <li>Schedule recording sessions</li>
+            <li>Digitize &amp; edit audio</li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label">Skills</span>
+          <ul>
+            <li>Studio recording</li>
+            <li>MIDI fluency</li>
+            <li>Sequencing software</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Programmer -->
+      <div class="role-card mp">
+        <span class="role-icon">💻</span>
+        <div class="role-title">Multimedia Programmer</div>
+        <div class="role-ar">مبرمج الوسائط المتعددة</div>
+        <div class="role-section role-resp">
+          <span class="role-section-label">Responsibilities</span>
+          <ul>
+            <li>Integrate all into <strong>seamless whole</strong></li>
+            <li>Use Authorware or languages</li>
+            <li>Code displays &amp; controls</li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label">Skills</span>
+          <ul>
+            <li>C++, Java, Lingo</li>
+            <li>HTML, VRML, XML</li>
+            <li>Quick learner</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Web Producer -->
+      <div class="role-card wp">
+        <span class="role-icon">🌐</span>
+        <div class="role-title">Web Producer</div>
+        <div class="role-ar">منتج الوسائط للويب</div>
+        <div class="role-section role-resp">
+          <span class="role-section-label">Responsibilities</span>
+          <ul>
+            <li>Coordinates web pages</li>
+            <li>Manages web presence</li>
+          </ul>
+        </div>
+        <div class="role-section role-skills">
+          <span class="role-section-label">Skills</span>
+          <ul>
+            <li>HTML</li>
+            <li>CGI scripts</li>
+            <li>Photoshop</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+     SECTION 11 — INTERACTIVE SYSTEMS
+════════════════════════════════ -->
+    <div id="interactive" class="section-header">
+      <div class="sec-num">10</div>
+      <div class="sec-titles">
+        <h3>Interactive &amp; Adaptive Multimedia Systems</h3>
+        <div class="ar">الأنظمة التفاعلية والتكيّفية</div>
+        <div class="desc">Passive vs interactive · Adaptive systems · Intelligent tutors</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Passive vs Interactive Systems <span class="ar">الأنظمة السلبية مقابل التفاعلية</span>
+      </div>
+      <div class="grid2">
+        <div class="note">
+          <div class="note-label">❌ Passive Systems (Too Common)</div>
+          <p>Many multimedia systems are <strong>too passive</strong> — users just click and watch. There is little real
+            interaction. The user is a spectator, not a participant.</p>
+        </div>
+        <div class="tip">
+          <div class="tip-label">✅ Fully Interactive Systems</div>
+          <p>For truly interactive systems, designers need a <strong>clear picture of what happens as the user
+              interacts</strong>. Every user action must have a planned, meaningful response.</p>
+        </div>
+      </div>
+      <div class="ar-box">
+        <span class="ar-label">شرح بالعربي</span>
+        كثير من أنظمة الوسائط المتعددة <strong>سلبية جداً</strong> — المستخدم يضغط ويشاهد فقط. الأنظمة التفاعلية الكاملة
+        تتطلب من المصممين صورة واضحة لما يحدث عند تفاعل المستخدم مع كل عنصر.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Adaptive Systems <span class="ar">الأنظمة التكيّفية</span></div>
+      <div class="hl">
+        <strong>Adaptive Systems</strong> modify themselves based on <strong>user input</strong>. A key example is
+        <strong>Intelligent Tutors</strong> — educational systems that adjust the difficulty, pacing, and content of
+        instruction based on how the student is responding.
+      </div>
+      <div class="grid2">
+        <div class="hl">
+          <strong>🎓 Intelligent Tutors</strong><br>
+          <ul style="padding-left:18px;margin-top:8px">
+            <li style="font-size:13px">Monitor student performance</li>
+            <li style="font-size:13px">Adjust difficulty based on responses</li>
+            <li style="font-size:13px">Provide personalized learning paths</li>
+            <li style="font-size:13px">Give targeted feedback</li>
+          </ul>
+        </div>
+        <div class="hl">
+          <strong>🔄 How Adaptive Systems Work</strong><br>
+          <div class="step-row" style="margin-top:8px">
+            <div class="step-n" style="width:22px;height:22px;font-size:10px">1</div>
+            <div style="font-size:13px">User interacts with system</div>
+          </div>
+          <div class="step-row">
+            <div class="step-n" style="width:22px;height:22px;font-size:10px">2</div>
+            <div style="font-size:13px">System analyzes input/response</div>
+          </div>
+          <div class="step-row">
+            <div class="step-n" style="width:22px;height:22px;font-size:10px">3</div>
+            <div style="font-size:13px">System modifies itself accordingly</div>
+          </div>
+          <div class="step-row">
+            <div class="step-n" style="width:22px;height:22px;font-size:10px">4</div>
+            <div style="font-size:13px">Delivers personalized experience</div>
+          </div>
+        </div>
+      </div>
+      <div class="ar-box">
+        <span class="ar-label">شرح بالعربي</span>
+        <strong>الأنظمة التكيّفية (Adaptive Systems)</strong> تُعدّل نفسها بناءً على مدخلات المستخدم.<br>
+        المثال الأبرز: <strong>المعلمون الأذكياء (Intelligent Tutors)</strong> — أنظمة تعليمية تُكيّف صعوبة المحتوى
+        وإيقاعه وطريقة تقديمه استناداً إلى كيفية استجابة المتعلم.
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════
+     SECTION 12 — EXAM QUESTIONS
+════════════════════════════════ -->
+    <div id="review" class="section-header">
+      <div class="sec-num">11</div>
+      <div class="sec-titles">
+        <h3>Exam Questions &amp; Final Review</h3>
+        <div class="ar">أسئلة الامتحان والمراجعة النهائية</div>
+        <div class="desc">Expected exam Q&amp;A · Quick reference table</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Expected Exam Questions <span class="ar">أسئلة متوقعة في الامتحان</span></div>
+
+      <div class="exam-q">
+        <span class="q-label">Q1</span>
+        Who is responsible for maintaining the "big picture" or vision of a multimedia project?<br>
+        <span class="answer">Answer:</span> The <strong>Project Manager</strong>. They manage the overall project,
+        handle day-to-day operations and budget, build the core team, and maintain the project vision.
+      </div>
+
+      <div class="exam-q">
+        <span class="q-label">Q2</span>
+        What is the difference between an Instructional Designer and an Information Designer?<br>
+        <span class="answer">Answer:</span> <strong>Instructional Designers</strong> deal with subject matter — they
+        ensure content is clearly and properly presented for the intended audience. <strong>Information
+          Designers</strong> deal with content structure and navigation — they determine user pathways, feedback, and
+        select appropriate media.
+      </div>
+
+      <div class="exam-q">
+        <span class="q-label">Q3</span>
+        What does it mean for an interface to be "transparent"?<br>
+        <span class="answer">Answer:</span> A transparent interface is one that users don't notice — it feels natural
+        and intuitive, allowing users to focus on content rather than figuring out controls. It effectively uses
+        windows, icons, backgrounds, and controls without getting in the user's way.
+      </div>
+
+      <div class="exam-q">
+        <span class="q-label">Q4</span>
+        What key word describes the Multimedia Programmer's main goal?<br>
+        <span class="answer">Answer:</span> <strong>"Seamless"</strong> — the programmer integrates all multimedia
+        elements (video, audio, graphics, text) into a seamless, unified whole using programming languages (C++, Java,
+        Lingo) or authoring systems like Authorware.
+      </div>
+
+      <div class="exam-q">
+        <span class="q-label">Q5</span>
+        What is an Adaptive System? Give an example.<br>
+        <span class="answer">Answer:</span> An adaptive system modifies itself based on user input. Example:
+        <strong>Intelligent Tutors</strong> — educational software that adjusts difficulty, pacing, and content based on
+        how the student responds.
+      </div>
+
+      <div class="exam-q">
+        <span class="q-label">Q6</span>
+        List the tools/skills required for a Video Specialist.<br>
+        <span class="answer">Answer:</span> Skilled with <strong>QuickTime</strong> or <strong>MS Video</strong> for
+        editing, and <strong>Macromedia Premiere</strong> for special effects. Must also coordinate videographers, sound
+        technicians, lighting designers, set designers, script supervisors, and actors.
+      </div>
+
+      <div class="exam-q">
+        <span class="q-label">Q7</span>
+        What three sub-types fall under the Multimedia Designer role?<br>
+        <span class="answer">Answer:</span> <strong>A) Graphic Designers</strong> (deal with visuals — Illustrators,
+        Animators, Image processing specialists), <strong>B) Instructional Designers</strong> (deal with subject
+        matter), <strong>C) Information Designers</strong> (deal with content structure and navigation).
+      </div>
+
+      <div class="exam-q">
+        <span class="q-label">Q8</span>
+        What background is required for the Audio Specialist?<br>
+        <span class="answer">Answer:</span> Studio recording skills, <strong>fluency in MIDI</strong> (Musical
+        Instrument Digital Interface), and experience with sequencing software.
+      </div>
+    </div>
+
+    <!-- FINAL QUICK REFERENCE TABLE -->
+    <div class="final">
+      <h2>📋 Complete Quick Reference Table
+        <span class="ar">جدول المراجعة الشاملة للفاينل — الفصل الرابع</span>
+      </h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Role / الدور</th>
+              <th>Key Responsibilities</th>
+              <th>Tools / Skills</th>
+              <th>Keyword</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Project Manager<br><span style="color:var(--muted2);font-weight:400;font-size:12px">مدير
+                  المشروع</span></td>
+              <td>Overall project, budget, team building, vision</td>
+              <td>Hardware &amp; software knowledge, communication, people skills</td>
+              <td><span class="tag">"Big Picture"</span></td>
+            </tr>
+            <tr>
+              <td>Multimedia Designer<br><span style="color:var(--muted2);font-weight:400;font-size:12px">مصمم
+                  الوسائط</span></td>
+              <td>Overall content &amp; structure, project blueprint, team coordination</td>
+              <td>Structural analysis, multi-media expertise, organizational skills</td>
+              <td><span class="tag g">"Blueprint"</span></td>
+            </tr>
+            <tr>
+              <td>Graphic Designer (A)<br><span style="color:var(--muted2);font-weight:400;font-size:12px">مصمم
+                  الجرافيك</span></td>
+              <td>Visuals — illustrations, animation, image processing</td>
+              <td>Freehand (illustrations), Flash (animation), Photoshop (images)</td>
+              <td><span class="tag">"Visuals"</span></td>
+            </tr>
+            <tr>
+              <td>Instructional Designer (B)<br><span style="color:var(--muted2);font-weight:400;font-size:12px">مصمم
+                  تعليمي</span></td>
+              <td>Clear and proper presentation of subject matter</td>
+              <td>Deep content knowledge, education/training background</td>
+              <td><span class="tag g">"Subject Matter"</span></td>
+            </tr>
+            <tr>
+              <td>Information Designer (C)<br><span style="color:var(--muted2);font-weight:400;font-size:12px">مصمم
+                  المعلومات</span></td>
+              <td>Structure content, user pathways &amp; feedback, select media</td>
+              <td>Navigation design, media strengths awareness</td>
+              <td><span class="tag s">"Navigation"</span></td>
+            </tr>
+            <tr>
+              <td>Interface Designer<br><span style="color:var(--muted2);font-weight:400;font-size:12px">مصمم
+                  الواجهة</span></td>
+              <td>Media access &amp; control, transparent UI (windows, icons, controls)</td>
+              <td>Multimedia interfaces, authoring systems, user testing, basic drawing</td>
+              <td><span class="tag s">"Transparent"</span></td>
+            </tr>
+            <tr>
+              <td>Writers<br><span style="color:var(--muted2);font-weight:400;font-size:12px">الكتّاب</span></td>
+              <td>Character, action, POV, interactivity, proposals, scripts, text screens</td>
+              <td>Marketing background, tight deadline ability</td>
+              <td><span class="tag p">"Script"</span></td>
+            </tr>
+            <tr>
+              <td>Video Specialist<br><span style="color:var(--muted2);font-weight:400;font-size:12px">متخصص
+                  الفيديو</span></td>
+              <td>Coordinate videographers, sound techs, lighting, set designers, actors</td>
+              <td>QuickTime / MS Video (editing), Macromedia Premiere (FX)</td>
+              <td><span class="tag o">"Production Crew"</span></td>
+            </tr>
+            <tr>
+              <td>Audio Specialist<br><span style="color:var(--muted2);font-weight:400;font-size:12px">متخصص
+                  الصوت</span></td>
+              <td>Select music &amp; talent, schedule recording, digitize &amp; edit</td>
+              <td>Studio recording, MIDI fluency, sequencing software</td>
+              <td><span class="tag g">"MIDI"</span></td>
+            </tr>
+            <tr>
+              <td>Multimedia Programmer<br><span style="color:var(--muted2);font-weight:400;font-size:12px">مبرمج
+                  الوسائط</span></td>
+              <td>Integrate all elements into seamless whole, code displays/controls</td>
+              <td>C++, Java, Lingo, HTML, VRML, XML, Authorware</td>
+              <td><span class="tag s">"Seamless"</span></td>
+            </tr>
+            <tr>
+              <td>Web Producer<br><span style="color:var(--muted2);font-weight:400;font-size:12px">منتج الويب</span>
+              </td>
+              <td>Coordinates web pages for multimedia project</td>
+              <td>HTML, CGI scripts, Photoshop</td>
+              <td><span class="tag">"Web Pages"</span></td>
+            </tr>
+            <tr>
+              <td>Passive Systems<br><span style="color:var(--muted2);font-weight:400;font-size:12px">أنظمة سلبية</span>
+              </td>
+              <td>Users click and watch only — limited interaction</td>
+              <td>—</td>
+              <td><span class="tag o">"Click &amp; Watch"</span></td>
+            </tr>
+            <tr>
+              <td>Adaptive Systems<br><span style="color:var(--muted2);font-weight:400;font-size:12px">أنظمة
+                  تكيّفية</span></td>
+              <td>Modify themselves based on user input</td>
+              <td>Intelligent Tutors (example)</td>
+              <td><span class="tag p">"Self-modifying"</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p style="text-align:center;color:var(--muted);font-size:12px;margin-top:36px">Multimedia Studies — Chapter 4:
+      Skills &amp; Team Roles · Complete Final Study Guide · Good Luck! 🎯</p>
+
+  </div><!-- /container -->
+
+  <!-- ════ FOOTER ════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h3>👥 Chapter 4 — <span>Team Skills</span> Guide</h3>
+          <p>Comprehensive bilingual study guide for Chapter 4: Multimedia Skills &amp; Training. Covers all 8 team
+            roles with full responsibilities, required skills, and tools.</p>
+          <p style="font-family:Cairo,sans-serif;direction:rtl;color:var(--muted2)">ملخص شامل للفصل الرابع: مهارات
+            الوسائط المتعددة والتدريب — 8 أدوار كاملة مع الأمثلة</p>
+        </div>
+        <div class="footer-col">
+          <h4>Sections</h4>
+          <ul class="footer-links">
+            <li><a href="#overview">📋 Overview</a></li>
+            <li><a href="#pm">👔 Project Manager</a></li>
+            <li><a href="#designer">🎨 MM Designer</a></li>
+            <li><a href="#interface">🖥️ Interface Designer</a></li>
+            <li><a href="#writers">✍️ Writers</a></li>
+            <li><a href="#video">🎬 Video Specialist</a></li>
+            <li><a href="#audio">🎵 Audio Specialist</a></li>
+            <li><a href="#programmer">💻 Programmer</a></li>
+            <li><a href="#web">🌐 Web Producer</a></li>
+            <li><a href="#interactive">⚡ Interactive Systems</a></li>
+            <li><a href="#review">📋 Review Table</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <div class="contact-cards">
+            <a href="https://www.instagram.com/alaaherzallah05" target="_blank" class="contact-card instagram">
+              <div class="c-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+              </div>
+              <div class="c-info">
+                <div class="c-label">Instagram</div>
+                <div class="c-value">@alaaherzallah05</div>
+              </div>
+            </a>
+            <a href="https://wa.me/962775725298" target="_blank" class="contact-card whatsapp">
+              <div class="c-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+              </div>
+              <div class="c-info">
+                <div class="c-label">WhatsApp</div>
+                <div class="c-value">0775725298</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <div class="copy">© 2025 <strong>Multimedia Studies — Chapter 4 Guide</strong></div>
+        <div class="rights">جميع الحقوق محفوظة · إعداد: <strong>علاء حرزالله</strong></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Particle Canvas (dark green) ──
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    function makeP() { return { x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.4 + .3, vx: (Math.random() - .5) * .28, vy: (Math.random() - .5) * .28, o: Math.random() * .38 + .07 }; }
+    function initP() { particles = Array.from({ length: 110 }, makeP); }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(p => {
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0,210,90,${p.o})`; ctx.fill();
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+      });
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 88) {
+            ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(0,210,90,${.06 * (1 - d / 88)})`; ctx.lineWidth = .5; ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    resize(); initP(); draw();
+    window.addEventListener('resize', () => { resize(); initP(); });
+
+    // ── Active nav highlight on scroll ──
+    const allSections = document.querySelectorAll('[id]');
+    const navLinks = document.querySelectorAll('.topic-nav a[href^="#"]');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      allSections.forEach(s => { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
+      navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + cur); });
+    });
+
+    // ── 3D hover on role cards ──
+    document.querySelectorAll('.role-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `translateY(-4px) rotateY(${x * 6}deg) rotateX(${-y * 5}deg)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+    });
+  </script>
+</body>
+
+</html>

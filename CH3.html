@@ -1,0 +1,2598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 3 — Making Multimedia | Study Guide</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Cairo:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════
+   ROOT — Dark Green Theme
+═══════════════════════════════════════════ */
+    :root {
+      --black: #060608;
+      --deep: #090e0a;
+      --surface: #0d1410;
+      --card: #111a13;
+      --card2: #172019;
+      --border: rgba(34, 170, 60, .22);
+      --border2: rgba(255, 255, 255, .06);
+      --green: #1aaa3c;
+      --green2: #22cc48;
+      --green3: #2eef58;
+      --green-glow: rgba(26, 170, 60, .28);
+      --green-dim: rgba(26, 170, 60, .09);
+      --gold: #ffc940;
+      --gold-dim: rgba(255, 201, 64, .09);
+      --red: #ff4455;
+      --blue: #00c8ff;
+      --purple: #b48aff;
+      --text: #ddeedd;
+      --muted: #5a7060;
+      --muted2: #8aaa90;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Cairo, sans-serif;
+      background: var(--black);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    strong,
+    b {
+      color: #fff;
+    }
+
+    /* ═══════════════════════════════════════════
+   ANIMATED BACKGROUND
+═══════════════════════════════════════════ */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(26, 170, 60, .04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26, 170, 60, .04) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      animation: orbPulse 9s ease-in-out infinite;
+    }
+
+    .orb1 {
+      width: 550px;
+      height: 550px;
+      top: -150px;
+      left: -120px;
+      background: radial-gradient(circle, rgba(26, 170, 60, .08), transparent 70%);
+      animation-delay: 0s;
+    }
+
+    .orb2 {
+      width: 380px;
+      height: 380px;
+      bottom: -100px;
+      right: -80px;
+      background: radial-gradient(circle, rgba(180, 138, 255, .05), transparent 70%);
+      animation-delay: -5s;
+    }
+
+    .orb3 {
+      width: 300px;
+      height: 300px;
+      top: 45%;
+      left: 55%;
+      background: radial-gradient(circle, rgba(0, 200, 255, .03), transparent 70%);
+      animation-delay: -2.5s;
+    }
+
+    @keyframes orbPulse {
+
+      0%,
+      100% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.14)
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+   STICKY TOP NAV
+═══════════════════════════════════════════ */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(6, 6, 8, .88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      height: 54px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-inner::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-brand {
+      font-family: Orbitron, monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--green2);
+      letter-spacing: 2px;
+      white-space: nowrap;
+      padding-right: 20px;
+      border-right: 1px solid var(--border);
+      margin-right: 16px;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .nav-links a {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--muted2);
+      padding: 6px 12px;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: .2s;
+      letter-spacing: .3px;
+    }
+
+    .nav-links a:hover {
+      color: var(--green2);
+      background: var(--green-dim);
+    }
+
+    .nav-links a.active {
+      color: var(--green3);
+      background: var(--green-dim);
+    }
+
+    /* ═══════════════════════════════════════════
+   PAGE WRAP
+═══════════════════════════════════════════ */
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+    .hero {
+      text-align: center;
+      padding: 64px 24px 52px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 65% at 50% 0%, rgba(26, 170, 60, .12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      color: var(--green2);
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      padding: 6px 22px;
+      border-radius: 20px;
+      background: var(--green-dim);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      box-shadow: 0 0 22px var(--green-glow);
+      animation: badgePulse 3s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 22px var(--green-glow)
+      }
+
+      50% {
+        box-shadow: 0 0 44px rgba(26, 170, 60, .45)
+      }
+    }
+
+    .hero h1 {
+      font-family: Orbitron, monospace;
+      font-size: clamp(1.6rem, 5vw, 3rem);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+      text-shadow: 0 0 44px rgba(26, 170, 60, .4);
+      line-height: 1.1;
+    }
+
+    .hero h1 span {
+      color: var(--green2);
+    }
+
+    .hero-sub {
+      font-family: Cairo, sans-serif;
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: 14px;
+      text-shadow: 0 0 18px rgba(255, 201, 64, .3);
+    }
+
+    .hero-desc {
+      font-size: 13.5px;
+      color: var(--muted2);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.9;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      padding: 4px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted2);
+      font-weight: 600;
+      letter-spacing: .5px;
+    }
+
+    /* ═══════════════════════════════════════════
+   SECTION
+═══════════════════════════════════════════ */
+    .section {
+      margin-bottom: 52px;
+      scroll-margin-top: 70px;
+    }
+
+    .sec-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .sec-number {
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--black);
+      background: var(--green2);
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 14px var(--green-glow);
+    }
+
+    .sec-title {
+      font-family: Orbitron, monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green2);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      flex: 1;
+    }
+
+    .sec-line {
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    /* ═══════════════════════════════════════════
+   CONTENT CARD
+═══════════════════════════════════════════ */
+    .content-card {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 18px;
+      padding: 28px 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .04) inset;
+      margin-bottom: 16px;
+      transition: .25s;
+    }
+
+    .content-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), transparent);
+    }
+
+    .content-card:hover {
+      border-color: var(--border);
+    }
+
+    .card-title {
+      font-family: Cairo, sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-title-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--green-dim);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .card-ar {
+      font-family: Cairo, sans-serif;
+      font-size: 13px;
+      color: var(--gold);
+      background: var(--gold-dim);
+      border: 1px solid rgba(255, 201, 64, .15);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      direction: rtl;
+      line-height: 1.85;
+    }
+
+    .card-ar-label {
+      font-size: 10px;
+      font-family: Orbitron, monospace;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+      opacity: .7;
+    }
+
+    .card-body {
+      font-size: 14px;
+      color: var(--muted2);
+      line-height: 1.9;
+    }
+
+    .card-body p {
+      margin-bottom: 10px;
+    }
+
+    .card-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ═══════════════════════════════════════════
+   POINTS LIST
+═══════════════════════════════════════════ */
+    .points {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .points li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border2);
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .points li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .pt-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green2);
+      flex-shrink: 0;
+      margin-top: 7px;
+      box-shadow: 0 0 6px var(--green-glow);
+    }
+
+    /* ═══════════════════════════════════════════
+   CODE BLOCK
+═══════════════════════════════════════════ */
+    .code-block {
+      background: var(--card2);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--green3);
+      margin: 14px 0;
+      overflow-x: auto;
+      line-height: 1.7;
+    }
+
+    .code-label {
+      font-family: Orbitron, monospace;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+      opacity: .7;
+    }
+
+    /* ═══════════════════════════════════════════
+   TABLE
+═══════════════════════════════════════════ */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 12px 0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .data-table th {
+      background: var(--green-dim);
+      color: var(--green2);
+      padding: 11px 14px;
+      text-align: left;
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border2);
+      color: var(--text);
+      vertical-align: top;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+      background: rgba(26, 170, 60, .04);
+    }
+
+    .data-table .highlight {
+      color: var(--green3);
+      font-weight: 700;
+    }
+
+    .data-table .muted {
+      color: var(--muted2);
+    }
+
+    /* ═══════════════════════════════════════════
+   TWO COLUMN
+═══════════════════════════════════════════ */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .col-card {
+      background: var(--card2);
+      border: 1px solid var(--border2);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .col-card-title {
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .col-card.green-card {
+      border-color: rgba(26, 170, 60, .25);
+    }
+
+    .col-card.green-card .col-card-title {
+      color: var(--green2);
+    }
+
+    .col-card.gold-card {
+      border-color: rgba(255, 201, 64, .2);
+    }
+
+    .col-card.gold-card .col-card-title {
+      color: var(--gold);
+    }
+
+    .col-card.red-card {
+      border-color: rgba(255, 68, 85, .2);
+    }
+
+    .col-card.red-card .col-card-title {
+      color: var(--red);
+    }
+
+    /* ═══════════════════════════════════════════
+   FORMULA / HIGHLIGHT BOX
+═══════════════════════════════════════════ */
+    .formula-box {
+      background: rgba(26, 170, 60, .07);
+      border: 1px solid rgba(26, 170, 60, .3);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 14px 0;
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--green3);
+      text-align: center;
+      letter-spacing: .5px;
+    }
+
+    .highlight-box {
+      background: var(--gold-dim);
+      border: 1px solid rgba(255, 201, 64, .2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 14px 0;
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.85;
+    }
+
+    .highlight-box .hl-label {
+      font-family: Orbitron, monospace;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* ═══════════════════════════════════════════
+   REVIEW TABLE SECTION
+═══════════════════════════════════════════ */
+    .review-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 36px 32px;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .review-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), var(--gold), transparent);
+    }
+
+    .review-title {
+      font-family: Orbitron, monospace;
+      font-size: 14px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 24px;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    .review-table th {
+      background: var(--green-dim);
+      color: var(--green2);
+      padding: 12px 16px;
+      text-align: right;
+      direction: rtl;
+      font-family: Cairo, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .review-table th:first-child {
+      text-align: left;
+      direction: ltr;
+      font-family: Orbitron, monospace;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+    }
+
+    .review-table td {
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border2);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+
+    .review-table td:first-child {
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--green2);
+      white-space: nowrap;
+    }
+
+    .review-table td:nth-child(2) {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .review-table td:nth-child(3) {
+      color: var(--muted2);
+      font-size: 12.5px;
+    }
+
+    .review-table td:nth-child(4) {
+      color: var(--gold);
+      direction: rtl;
+      font-family: Cairo, sans-serif;
+      font-size: 12.5px;
+    }
+
+    .review-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .review-table tr:hover td {
+      background: rgba(26, 170, 60, .04);
+    }
+
+    /* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 24px 28px;
+      text-align: center;
+      position: relative;
+      margin-top: 60px;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--green), transparent);
+    }
+
+    .footer-logo {
+      font-family: Orbitron, monospace;
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--green2);
+      letter-spacing: 2px;
+      margin-bottom: 5px;
+    }
+
+    .footer-name {
+      font-family: Cairo, sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .footer-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .footer-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted2);
+      font-family: Cairo, sans-serif;
+      background: var(--card);
+      border: 1px solid var(--border2);
+      padding: 7px 16px;
+      border-radius: 50px;
+      transition: .2s;
+    }
+
+    .footer-item:hover {
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: Orbitron, monospace;
+      letter-spacing: 1.5px;
+    }
+
+    .footer-copy span {
+      color: var(--green2);
+    }
+
+    /* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+    @media(max-width:650px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .content-card {
+        padding: 20px 16px;
+      }
+
+      .review-section {
+        padding: 22px 14px;
+      }
+
+      .data-table th,
+      .data-table td {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+    }
+
+
+    /* ═══════════════════════════════════════════
+   Compatibility layer — CH1/2/3/5/6 mapped to Chapter 7 style
+═══════════════════════════════════════════ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(26, 170, 60, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(26, 170, 60, .04) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .45
+    }
+
+    .container,
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px 80px
+    }
+
+    .top-nav,
+    .topic-nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(6, 6, 8, .88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      flex-wrap: wrap
+    }
+
+    .top-nav a,
+    .topic-nav a {
+      font-family: Orbitron, monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted2);
+      padding: 7px 12px;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: .2s;
+      letter-spacing: .3px;
+      border: 1px solid transparent;
+      background: transparent;
+      text-decoration: none
+    }
+
+    .top-nav a:hover,
+    .top-nav a.active,
+    .topic-nav a:hover,
+    .topic-nav a.active {
+      color: var(--green3);
+      background: var(--green-dim);
+      border-color: var(--border);
+      box-shadow: none
+    }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 64px 24px 52px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 34px;
+      overflow: hidden;
+      min-height: unset;
+      background: transparent;
+      display: block
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 65% at 50% 0%, rgba(26, 170, 60, .12), transparent 70%);
+      pointer-events: none
+    }
+
+    .hero-badge,
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      color: var(--green2);
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      padding: 6px 22px;
+      border-radius: 20px;
+      background: var(--green-dim);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      box-shadow: 0 0 22px var(--green-glow)
+    }
+
+    .badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green2);
+      display: inline-block
+    }
+
+    .hero-badge .dot,
+    .badge .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green2);
+      border-radius: 50%;
+      display: inline-block
+    }
+
+    .hero h1 {
+      font-family: Orbitron, monospace;
+      font-size: clamp(1.6rem, 5vw, 3rem);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+      text-shadow: 0 0 44px rgba(26, 170, 60, .4);
+      line-height: 1.1
+    }
+
+    .hero h1 span {
+      color: var(--green2)
+    }
+
+    .hero .ar-title,
+    .ar-title {
+      font-family: Cairo, sans-serif;
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: 14px;
+      text-shadow: 0 0 18px rgba(255, 201, 64, .3);
+      direction: rtl
+    }
+
+    .hero-sub,
+    .hero p {
+      font-size: 13.5px;
+      color: var(--muted2);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.9
+    }
+
+    .hero-chips,
+    .hero-stats,
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 22px
+    }
+
+    .hero-chip,
+    .hstat,
+    .hero-tag {
+      font-size: 11px;
+      padding: 6px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted2);
+      font-weight: 600;
+      letter-spacing: .5px
+    }
+
+    .hstat .num {
+      font-family: Orbitron, monospace;
+      color: var(--green2);
+      font-size: 1.35rem;
+      font-weight: 900
+    }
+
+    .hstat .lbl {
+      font-size: 10px;
+      color: var(--muted2);
+      text-transform: uppercase
+    }
+
+    .ch-banner,
+    .chapter-banner {
+      background: linear-gradient(135deg, var(--green-dim), rgba(6, 6, 8, .65));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 28px;
+      margin: 0 0 36px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .04) inset
+    }
+
+    .ch-num {
+      font-family: Orbitron, monospace;
+      width: 58px;
+      height: 58px;
+      background: var(--green2);
+      color: var(--black);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 20px;
+      flex-shrink: 0;
+      box-shadow: 0 0 14px var(--green-glow)
+    }
+
+    .ch-titles h2,
+    .ch-info h2 {
+      font-family: Orbitron, monospace;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -.3px
+    }
+
+    .ch-titles .ar,
+    .ch-info .ar {
+      font-family: Cairo, sans-serif;
+      font-size: .9rem;
+      color: var(--gold);
+      direction: rtl;
+      text-align: right;
+      margin-top: 3px
+    }
+
+    .ch-titles .desc,
+    .ch-info .desc {
+      font-size: 12.5px;
+      color: var(--muted2);
+      margin-top: 4px
+    }
+
+    .section,
+    .section-header,
+    .sec-header {
+      margin: 48px 0 18px;
+      scroll-margin-top: 70px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      border: 0;
+      padding: 0
+    }
+
+    .sec-num,
+    .sec-ico,
+    .sec-icon,
+    .sec-number {
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--black);
+      background: var(--green2);
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 14px var(--green-glow);
+      border: 0;
+      margin-top: 0
+    }
+
+    .sec-ico,
+    .sec-icon {
+      font-size: 16px;
+      color: var(--green2);
+      background: var(--green-dim);
+      border: 1px solid var(--border)
+    }
+
+    .sec-titles h2,
+    .sec-titles h3,
+    .sec-text h3,
+    .sec-txt h3,
+    .sec-title {
+      font-family: Orbitron, monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green2);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      flex: 1
+    }
+
+    .sec-titles .ar,
+    .sec-text .ar,
+    .sec-txt .ar {
+      font-family: Cairo, sans-serif;
+      font-size: .85rem;
+      color: var(--gold);
+      direction: rtl;
+      text-align: right;
+      margin-top: 2px
+    }
+
+    .sec-titles .desc,
+    .sec-titles .sub {
+      font-size: 12px;
+      color: var(--muted2);
+      margin-top: 3px
+    }
+
+    .card,
+    .content-card {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .04) inset;
+      backdrop-filter: none;
+      transition: .25s
+    }
+
+    .card::before,
+    .content-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), transparent);
+      opacity: 1
+    }
+
+    .card:hover,
+    .content-card:hover {
+      border-color: var(--border)
+    }
+
+    .card-title {
+      font-family: Cairo, sans-serif;
+      font-size: 1.08rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .card-title::before {
+      content: '◆';
+      color: var(--green2);
+      font-size: 12px;
+      flex-shrink: 0
+    }
+
+    .card-title .ar {
+      font-family: Cairo, sans-serif;
+      font-size: .85rem;
+      color: var(--gold);
+      font-weight: 700;
+      direction: rtl
+    }
+
+    .card p,
+    .card li,
+    .content-card p,
+    .content-card li {
+      font-size: 14px;
+      color: var(--muted2);
+      line-height: 1.9;
+      margin-bottom: 8px
+    }
+
+    .card ul,
+    .card ol,
+    .content-card ul,
+    .content-card ol {
+      padding-left: 22px;
+      margin-top: 6px
+    }
+
+    .ar-box,
+    .card-ar {
+      font-family: Cairo, sans-serif;
+      font-size: 13px;
+      color: var(--gold);
+      background: var(--gold-dim);
+      border: 1px solid rgba(255, 201, 64, .15);
+      border-right: 4px solid var(--gold);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 12px 0 16px;
+      direction: rtl;
+      text-align: right;
+      line-height: 1.85
+    }
+
+    .ar-label,
+    .card-ar-label {
+      font-size: 10px;
+      font-family: Orbitron, monospace;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+      opacity: .8;
+      direction: ltr;
+      text-align: left
+    }
+
+    .hl,
+    .highlight,
+    .key-box,
+    .tip,
+    .note,
+    .warn-box {
+      background: var(--green-dim);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--green2);
+      border-radius: 10px;
+      padding: 13px 16px;
+      margin: 10px 0;
+      font-size: 13.5px;
+      color: var(--muted2)
+    }
+
+    .note {
+      background: rgba(255, 201, 64, .07);
+      border-color: rgba(255, 201, 64, .22);
+      border-left-color: var(--gold)
+    }
+
+    .warn-box,
+    .hl.red {
+      background: rgba(255, 68, 85, .07);
+      border-color: rgba(255, 68, 85, .25);
+      border-left-color: var(--red)
+    }
+
+    .note-label,
+    .key-label,
+    .tip-label {
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px
+    }
+
+    .key-label,
+    .tip-label {
+      color: var(--green2)
+    }
+
+    .formula,
+    pre,
+    .code-block {
+      background: #070907;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 12px 0;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--gold);
+      direction: ltr;
+      overflow-x: auto;
+      white-space: pre-wrap
+    }
+
+    .formula .fl,
+    .formula .flabel {
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      color: var(--muted2);
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: normal
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 14px 0;
+      border-radius: 12px;
+      border: 1px solid var(--border2)
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface)
+    }
+
+    th {
+      background: var(--green-dim);
+      color: var(--green2);
+      font-family: Orbitron, monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase
+    }
+
+    th,
+    td {
+      padding: 11px 13px;
+      border-bottom: 1px solid var(--border2);
+      text-align: left
+    }
+
+    td {
+      color: var(--muted2);
+      font-size: 13.5px
+    }
+
+    tr:last-child td {
+      border-bottom: 0
+    }
+
+    .mono {
+      font-family: var(--mono);
+      background: #070907;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 7px;
+      color: var(--green2);
+      font-size: 12px
+    }
+
+    .section-label {
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--green2);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .section-label::after,
+    .sec-line {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, var(--border), transparent)
+    }
+
+    @media(max-width:700px) {
+
+      .top-nav,
+      .topic-nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap
+      }
+
+      .hero {
+        padding: 48px 16px 38px
+      }
+
+      .container,
+      .page-wrap {
+        padding: 26px 14px 60px
+      }
+
+      .ch-banner,
+      .chapter-banner {
+        padding: 18px;
+        align-items: flex-start
+      }
+
+      .card,
+      .content-card {
+        padding: 20px
+      }
+
+      .section-header,
+      .sec-header {
+        align-items: flex-start
+      }
+
+      .hero h1 {
+        font-size: 1.7rem
+      }
+    }
+  </style>
+
+  <style id="index-back-button-style">
+    .index-back-button {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 99999;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(34, 204, 72, .45);
+      background: rgba(6, 6, 8, .88);
+      backdrop-filter: blur(12px);
+      color: #2eef58 !important;
+      font-family: Inter, Cairo, sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 0 24px rgba(34, 204, 72, .22);
+      transition: .2s
+    }
+
+    .index-back-button:hover {
+      transform: translateY(-2px);
+      background: rgba(34, 204, 72, .14);
+      box-shadow: 0 0 35px rgba(34, 204, 72, .35)
+    }
+
+    @media(max-width:600px) {
+      .index-back-button {
+        top: 10px;
+        left: 10px;
+        padding: 8px 12px;
+        font-size: 12px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="index-back-button" href="index.html">⬅ Back to Index / الرجوع للرئيسية</a>
+
+  <div class="bg-layer">
+    <div class="bg-grid"></div>
+    <div class="bg-orb orb1"></div>
+    <div class="bg-orb orb2"></div>
+    <div class="bg-orb orb3"></div>
+  </div>
+
+
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <a href="#overview" class="active">📋 Overview</a>
+    <a href="#stages">🔄 Stages</a>
+    <a href="#planning">📝 Planning</a>
+    <a href="#hardware">💻 Hardware</a>
+    <a href="#software">🛠️ Software</a>
+    <a href="#team">👥 Team & Skills</a>
+    <a href="#prototype">🧪 Prototype</a>
+    <a href="#review">📚 Review</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge"><span class="dot"></span>Chapter 3 · Multimedia</div>
+    <h1>Making <span>Multimedia</span></h1>
+    <div class="ar-title" style="font-family:'Cairo',sans-serif">صنع الوسائط المتعددة — دليل الدراسة الشامل للفاينل
+    </div>
+    <p class="hero-sub">Complete bilingual study guide · Planning · Production · Hardware & Software · Teamwork ·
+      Delivery · All slides covered</p>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="num">4</div>
+        <div class="lbl">Main Stages</div>
+      </div>
+      <div class="hstat">
+        <div class="num">2</div>
+        <div class="lbl">Platforms</div>
+      </div>
+      <div class="hstat">
+        <div class="num">6</div>
+        <div class="lbl">Plan Elements</div>
+      </div>
+      <div class="hstat">
+        <div class="num">✓</div>
+        <div class="lbl">Full Coverage</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- §1  OVERVIEW                                -->
+    <!-- ════════════════════════════════════════════ -->
+    <div id="overview" class="section-header reveal">
+      <div class="sec-icon">🎯</div>
+      <div class="sec-titles">
+        <h2>What is Making Multimedia?</h2>
+        <div class="ar">ما هو صنع الوسائط المتعددة؟</div>
+        <div class="sub">Introduction · Core elements · What it takes</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">Definition & Core Concept <span class="ar">التعريف والمفهوم الأساسي</span></div>
+      <p><strong>Making multimedia</strong> is the process of combining multiple media types — text, graphics, audio,
+        video, and animation — into a cohesive product, typically delivered via computer, the web, or a CD-ROM.</p>
+      <ul>
+        <li>It requires <strong>planning, production, testing, and delivery</strong> in a structured process.</li>
+        <li>The basic ingredients are: <strong>hardware + software + good ideas</strong>.</li>
+        <li>To make <em>good</em> multimedia, you also need: <strong>talent, skill, organization, time, money, and the
+            help of others</strong>.</li>
+      </ul>
+      <div class="highlight">
+        <strong>Key Statement for Exam:</strong> "To make multimedia, you need hardware, software, and good ideas. To
+        make GOOD multimedia, you also need talent, skill, organization, time, money, and the help of others."
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        الوسائط المتعددة هي دمج عدة أنواع من الوسائط (نص، صور، صوت، فيديو، رسوم متحركة) في منتج واحد متكامل.<br>
+        المكونات الأساسية: <strong>هاردوير + سوفتوير + أفكار جيدة</strong>.<br>
+        لصنع وسائط متعددة <em>جيدة</em>: تحتاج أيضاً موهبة، مهارة، تنظيم، وقت، مال، وتعاون الآخرين.
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">The Four Basic Stages <span class="ar">المراحل الأربع الأساسية</span></div>
+      <div class="stage-grid">
+        <div class="stage-card">
+          <div class="stage-num">📋</div>
+          <div class="stage-title">1. Planning & Costing</div>
+          <div class="stage-desc">Define the idea, budget, timeline, and resources needed</div>
+        </div>
+        <div class="stage-card">
+          <div class="stage-num">🎨</div>
+          <div class="stage-title">2. Design & Production</div>
+          <div class="stage-desc">Create and assemble all media elements into the final product</div>
+        </div>
+        <div class="stage-card">
+          <div class="stage-num">🧪</div>
+          <div class="stage-title">3. Testing</div>
+          <div class="stage-desc">Verify the project meets objectives and the client's needs</div>
+        </div>
+        <div class="stage-card">
+          <div class="stage-num">📦</div>
+          <div class="stage-title">4. Delivery</div>
+          <div class="stage-desc">Package and deliver the final product to the end user</div>
+        </div>
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic — المراحل الأربع</div>
+        1. <strong>التخطيط والتكلفة:</strong> تحديد الفكرة، الميزانية، الجدول الزمني والموارد.<br>
+        2. <strong>التصميم والإنتاج:</strong> إنشاء وتجميع جميع عناصر الوسائط في منتج نهائي.<br>
+        3. <strong>الاختبار:</strong> التحقق من أن المشروع يلبي الأهداف واحتياجات العميل.<br>
+        4. <strong>التسليم:</strong> تغليف وتسليم المنتج النهائي للمستخدم.
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- §2  THE 4 STAGES DETAIL                     -->
+    <!-- ════════════════════════════════════════════ -->
+    <div id="stages" class="section-header reveal">
+      <div class="sec-icon">🔄</div>
+      <div class="sec-titles">
+        <h2>The 4 Stages in Detail</h2>
+        <div class="ar">المراحل الأربع بالتفصيل</div>
+        <div class="sub">Planning → Design → Testing → Delivery</div>
+      </div>
+    </div>
+
+    <!-- Stage 1 -->
+    <div class="card reveal">
+      <div class="card-title">Stage 1 — Planning and Costing <span class="ar">التخطيط والتكلفة</span></div>
+      <p>This is the <strong>most critical stage</strong> — decisions made here affect every stage that follows. It
+        begins with an idea and results in a detailed plan.</p>
+      <p style="margin-top:8px"><strong>Planning involves:</strong></p>
+      <ul>
+        <li>Plan <strong>text, graphics, music, and video</strong> components</li>
+        <li>Develop a <strong>graphic layout</strong> — the "look and feel" of the project</li>
+        <li>Develop a <strong>structure and navigation system</strong></li>
+        <li>Estimate the <strong>time needed</strong> to complete the project</li>
+        <li>Prepare a <strong>budget</strong> (if necessary)</li>
+        <li>Work up a <strong>prototype</strong> — a simple working version to test the concept</li>
+      </ul>
+      <div class="highlight">
+        <strong>The 6 Steps of Planning:</strong><br>
+        ① Develop an idea → ② Identify objectives → ③ Identify skills and resources → ④ Develop a prototype → ⑤ Estimate
+        time → ⑥ Estimate cost
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        مرحلة التخطيط تشمل:<br>
+        • التخطيط لعناصر النص والصور والموسيقى والفيديو.<br>
+        • تطوير المخطط البصري (الشكل والمظهر "Look and Feel").<br>
+        • تطوير هيكل نظام التنقل (Navigation).<br>
+        • تقدير الوقت اللازم للإتمام.<br>
+        • إعداد الميزانية.<br>
+        • إعداد نموذج أولي بسيط (Prototype).
+      </div>
+    </div>
+
+    <!-- Stage 2 -->
+    <div class="card reveal">
+      <div class="card-title">Stage 2 — Designing and Producing <span class="ar">التصميم والإنتاج</span></div>
+      <p>This is where the actual <strong>creation happens</strong>. Each task planned in Stage 1 is now performed to
+        produce the finished product.</p>
+      <ul>
+        <li>Execute each planned task from the project plan.</li>
+        <li>Create and assemble all media elements (text, graphics, audio, video).</li>
+        <li>Create a <strong>finished product</strong> ready for testing.</li>
+        <li>During this stage, there may be <strong>many feedback cycles with the client</strong> until they are happy
+          with the result.</li>
+      </ul>
+      <div class="note">
+        <div class="note-label">Important — Feedback Cycles</div>
+        Design and production is NOT a one-shot process. The team may revise the product multiple times based on client
+        feedback before moving to testing. This is normal and expected.
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        في هذه المرحلة يتم تنفيذ كل مهمة مخطط لها وإنشاء المنتج النهائي.<br>
+        قد تكون هناك <strong>دورات تغذية راجعة متعددة مع العميل</strong> حتى يكون راضياً عن النتيجة قبل الانتقال
+        للاختبار.
+      </div>
+    </div>
+
+    <!-- Stage 3 -->
+    <div class="card reveal">
+      <div class="card-title">Stage 3 — Testing <span class="ar">الاختبار</span></div>
+      <p>Before delivery, the project must be <strong>thoroughly tested</strong> to ensure quality and correctness.</p>
+      <ul>
+        <li>Test to confirm the project <strong>meets all stated objectives</strong>.</li>
+        <li>Test to confirm the project <strong>meets the needs of the client</strong>.</li>
+        <li>Check for broken links, missing media, incorrect content, and technical errors.</li>
+        <li>Ensure the project works correctly on the <strong>target delivery platform</strong>.</li>
+      </ul>
+      <div class="green-note">
+        <div class="green-label">Testing Checklist</div>
+        ✅ Does it meet client objectives? &nbsp; ✅ Does all media load correctly? &nbsp; ✅ Does navigation work? &nbsp;
+        ✅ Does it work on target platform?
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        مرحلة الاختبار للتحقق من أن المشروع:<br>
+        • يلبي الأهداف المحددة مسبقاً.<br>
+        • يلبي احتياجات العميل.<br>
+        • يعمل بشكل صحيح على المنصة المستهدفة.
+      </div>
+    </div>
+
+    <!-- Stage 4 -->
+    <div class="card reveal">
+      <div class="card-title">Stage 4 — Delivering <span class="ar">التسليم</span></div>
+      <p>The final stage is <strong>packaging and delivering</strong> the completed project to the end user.</p>
+      <ul>
+        <li>Package the project for the delivery medium (web, CD-ROM, USB, etc.)</li>
+        <li>Create <strong>CD-ROMs, labels</strong>, and physical packaging if needed.</li>
+        <li>Prepare a <strong>user manual</strong> or documentation for end users.</li>
+        <li>Deploy the project to the <strong>web or local system</strong> as required.</li>
+      </ul>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        التسليم يشمل:<br>
+        • تغليف المشروع (CD-ROM، نشر ويب، إلخ).<br>
+        • إنشاء الأقراص والملصقات والتغليف المادي إن لزم.<br>
+        • إعداد دليل المستخدم (User Manual).<br>
+        • نشر المشروع على الإنترنت أو النظام المحلي.
+      </div>
+    </div>
+
+    <!-- Flow diagram -->
+    <div class="card reveal">
+      <div class="card-title">Complete Project Lifecycle Flow <span class="ar">دورة حياة المشروع الكاملة</span></div>
+      <div class="flow">
+        <div class="fbox a">📋 Planning<br><small style="color:var(--muted)">Idea + Budget</small></div>
+        <div class="arrow">→</div>
+        <div class="fbox g">🎨 Design &<br>Production</div>
+        <div class="arrow">→</div>
+        <div class="fbox y">↩️ Client<br>Feedback</div>
+        <div class="arrow">→</div>
+        <div class="fbox t">🧪 Testing<br>& QA</div>
+        <div class="arrow">→</div>
+        <div class="fbox o">📦 Delivery<br>to User</div>
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        لاحظ أن دورة التغذية الراجعة من العميل (Client Feedback) تعود للتصميم والإنتاج وليس للبداية.
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- §3  PLANNING IN DETAIL                      -->
+    <!-- ════════════════════════════════════════════ -->
+    <div id="planning" class="section-header reveal">
+      <div class="sec-icon">📝</div>
+      <div class="sec-titles">
+        <h2>Planning a Multimedia Project</h2>
+        <div class="ar">التخطيط لمشروع وسائط متعددة</div>
+        <div class="sub">The 6 steps · Look & Feel · Navigation · Prototype · Budget</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">Step 1 — Develop an Idea <span class="ar">الخطوة 1: تطوير الفكرة</span></div>
+      <p>Every multimedia project starts with <strong>an idea</strong> — a concept you want to communicate or a problem
+        you want to solve. This is the creative foundation of the entire project.</p>
+      <ul>
+        <li>What is the purpose of the project?</li>
+        <li>Who is the target audience?</li>
+        <li>What message do you want to communicate?</li>
+        <li>How will users interact with it?</li>
+      </ul>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        كل مشروع يبدأ بفكرة. في هذه الخطوة نحدد:<br>
+        ما هدف المشروع؟ من هو جمهورنا المستهدف؟ ما الرسالة التي نريد إيصالها؟ كيف سيتفاعل المستخدم معه؟
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">Step 2 — Identify Objectives <span class="ar">الخطوة 2: تحديد الأهداف</span></div>
+      <p><strong>Objectives</strong> are the specific, measurable goals the project must achieve. They guide all design
+        decisions and serve as the criteria for testing.</p>
+      <div class="highlight">
+        <strong>Example:</strong> "End users will be able to understand 3 key features of the product after viewing the
+        multimedia demonstration."
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        الأهداف هي الغايات المحددة والقابلة للقياس التي يجب أن يحققها المشروع. تُستخدم لاحقاً في مرحلة الاختبار للتحقق
+        من نجاح المشروع.
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">Step 3 — Identify Skills and Resources <span class="ar">الخطوة 3: تحديد المهارات
+          والموارد</span></div>
+      <p>Before production begins, identify what you <strong>have</strong> and what you <strong>need</strong>:</p>
+      <div class="grid2">
+        <div class="highlight">
+          <strong>Skills Needed:</strong>
+          <ul style="margin-top:6px">
+            <li>Graphic design</li>
+            <li>Video editing</li>
+            <li>Audio production</li>
+            <li>Programming / scripting</li>
+            <li>Project management</li>
+            <li>Copywriting / content creation</li>
+          </ul>
+        </div>
+        <div class="highlight">
+          <strong>Resources Needed:</strong>
+          <ul style="margin-top:6px">
+            <li>Hardware (computers, cameras, microphones)</li>
+            <li>Software (authoring tools, editors)</li>
+            <li>Stock media (images, music, footage)</li>
+            <li>Personnel (designers, developers)</li>
+            <li>Budget allocation</li>
+            <li>Time allocation</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        تحديد المهارات والموارد مهم قبل بدء الإنتاج لمعرفة ما يتوفر لديك وما تحتاج لتوظيفه أو شراءه.
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">Steps 4–6 — Prototype, Time & Cost <span class="ar">النموذج الأولي والوقت والتكلفة</span>
+      </div>
+      <div class="grid3">
+        <div
+          style="background:rgba(45,255,127,.06);border:1px solid rgba(45,255,127,.2);border-radius:12px;padding:16px">
+          <div style="font-weight:700;color:var(--accent);margin-bottom:8px">🧪 Prototype</div>
+          <p style="font-size:13px;color:var(--text)">A <strong>simple, early working version</strong> of the project.
+            Tests whether the concept and navigation work before full production begins.</p>
+          <div style="font-size:12px;color:var(--muted);margin-top:8px">Like a rough draft or wireframe</div>
+        </div>
+        <div
+          style="background:rgba(255,201,64,.05);border:1px solid rgba(255,201,64,.2);border-radius:12px;padding:16px">
+          <div style="font-weight:700;color:var(--gold);margin-bottom:8px">⏱️ Time Estimate</div>
+          <p style="font-size:13px;color:var(--text)">Estimate how long each task will take. Create a
+            <strong>timeline</strong> or flowchart. Account for feedback cycles and revisions.
+          </p>
+          <div style="font-size:12px;color:var(--muted);margin-top:8px">Usually presented as a Gantt chart</div>
+        </div>
+        <div
+          style="background:rgba(255,107,53,.06);border:1px solid rgba(255,107,53,.2);border-radius:12px;padding:16px">
+          <div style="font-weight:700;color:var(--accent2);margin-bottom:8px">💰 Budget / Cost</div>
+          <p style="font-size:13px;color:var(--text)">Estimate costs for: hardware, software licenses, personnel time,
+            stock media, and delivery.</p>
+          <div style="font-size:12px;color:var(--muted);margin-top:8px">Approved by client before production</div>
+        </div>
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        <strong>النموذج الأولي (Prototype):</strong> نسخة بسيطة أولى لاختبار الفكرة والتنقل قبل الإنتاج الكامل.<br>
+        <strong>تقدير الوقت:</strong> جدول زمني لكل مهمة مع مراعاة دورات التعديل. عادةً يُقدَّم كـ Gantt Chart.<br>
+        <strong>الميزانية:</strong> تشمل تكاليف الهاردوير والسوفتوير والموظفين والوسائط.
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">Look & Feel + Navigation System <span class="ar">المظهر ونظام التنقل</span></div>
+      <div class="grid2">
+        <div>
+          <p><strong style="color:var(--accent)">"Look and Feel"</strong> refers to the <strong>visual design and user
+              experience</strong> of the project:</p>
+          <ul>
+            <li>Color scheme and typography</li>
+            <li>Layout and visual hierarchy</li>
+            <li>Consistent style across all screens</li>
+            <li>Overall aesthetic impression</li>
+          </ul>
+        </div>
+        <div>
+          <p><strong style="color:var(--accent)">Navigation System</strong> defines how users <strong>move through the
+              project</strong>:</p>
+          <ul>
+            <li>Menu structure</li>
+            <li>Buttons and links</li>
+            <li>Flow between sections</li>
+            <li>Back/forward / home controls</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        <strong>المظهر (Look & Feel):</strong> التصميم البصري الكامل — الألوان، الخطوط، التخطيط، والانطباع العام.<br>
+        <strong>نظام التنقل (Navigation):</strong> كيف ينتقل المستخدم بين أجزاء المشروع — القوائم، الأزرار، الروابط.
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- §4  HARDWARE                                -->
+    <!-- ════════════════════════════════════════════ -->
+    <div id="hardware" class="section-header reveal">
+      <div class="sec-icon">💻</div>
+      <div class="sec-titles">
+        <h2>Hardware for Multimedia</h2>
+        <div class="ar">الهاردوير للوسائط المتعددة</div>
+        <div class="sub">Platforms · Macintosh vs Windows · Equipment</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">The Two Main Platforms <span class="ar">المنصتان الرئيسيتان</span></div>
+      <p>The most significant platforms for <strong>producing and delivering multimedia</strong> are:</p>
+      <div class="grid2">
+        <div
+          style="background:rgba(45,255,127,.06);border:1px solid rgba(45,255,127,.2);border-radius:12px;padding:18px">
+          <div style="font-size:1.4rem;margin-bottom:8px">🍎</div>
+          <div style="font-weight:800;color:#fff;font-size:14px;margin-bottom:8px">Apple Macintosh</div>
+          <ul style="font-size:13px;padding-left:16px">
+            <li><span class="g">✓</span> <strong>Better suited for multimedia production</strong></li>
+            <li><span class="g">✓</span> Better equipped for sound and video editing</li>
+            <li><span class="g">✓</span> Professional-grade hardware for media workflows</li>
+            <li><span class="g">✓</span> macOS operating system with GUI</li>
+            <li>Historically the industry standard for creative work</li>
+          </ul>
+        </div>
+        <div
+          style="background:rgba(0,200,255,.05);border:1px solid rgba(0,200,255,.15);border-radius:12px;padding:18px">
+          <div style="font-size:1.4rem;margin-bottom:8px">🪟</div>
+          <div style="font-weight:800;color:#fff;font-size:14px;margin-bottom:8px">Microsoft Windows PC</div>
+          <ul style="font-size:13px;padding-left:16px">
+            <li><span class="g">✓</span> Widely available and affordable</li>
+            <li><span class="g">✓</span> Large software ecosystem</li>
+            <li><span class="g">✓</span> Windows operating system with GUI</li>
+            <li>Good combination of affordability + availability</li>
+            <li>Vast hardware options from many manufacturers</li>
+          </ul>
+        </div>
+      </div>
+      <div class="highlight" style="margin-top:14px">
+        <strong>Key Exam Fact:</strong> Both platforms provide a <strong>graphical user interface (GUI)</strong>. The
+        Macintosh platform is considered <strong>better suited for multimedia production</strong> — especially for sound
+        and video editing.
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        المنصتان الرئيسيتان هما Mac وWindows. كلاهما يوفر واجهة رسومية (GUI).<br>
+        <strong>Mac أفضل لإنتاج الوسائط المتعددة</strong> — خاصةً في تحرير الصوت والفيديو.<br>
+        Windows أرخص وأوسع انتشاراً مع نظام بيئي ضخم من البرامج والأجهزة.
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">Graphical User Interface (GUI) <span class="ar">الواجهة الرسومية</span></div>
+      <p>Both Mac and Windows provide an <strong>easy-to-use Graphical User Interface (GUI)</strong>. A GUI allows users
+        to interact with the computer through visual elements rather than text commands.</p>
+      <ul>
+        <li>Icons, windows, menus, and buttons instead of typed commands.</li>
+        <li>Makes multimedia software more <strong>accessible to non-programmers</strong>.</li>
+        <li>Essential for creative tools that require visual feedback.</li>
+      </ul>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        الواجهة الرسومية (GUI) تسمح للمستخدمين بالتفاعل مع الحاسوب من خلال عناصر بصرية (أيقونات، قوائم، نوافذ) بدل
+        الأوامر النصية. كلا المنصتَين توفران GUI سهل الاستخدام.
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">Hardware Requirements for Multimedia Production <span class="ar">متطلبات الهاردوير</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Hardware</th>
+              <th>Purpose in Multimedia</th>
+              <th>بالعربي</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>🖥️ Computer (Mac/PC)</td>
+              <td>Core processing platform for all production</td>
+              <td>المنصة الأساسية للإنتاج</td>
+            </tr>
+            <tr>
+              <td>🖨️ High-res Monitor</td>
+              <td>Accurate color display for graphic design</td>
+              <td>شاشة عالية الدقة للتصميم</td>
+            </tr>
+            <tr>
+              <td>📷 Digital Camera / Scanner</td>
+              <td>Capture images and graphics</td>
+              <td>التقاط الصور والرسومات</td>
+            </tr>
+            <tr>
+              <td>🎥 Video Camera</td>
+              <td>Record original video footage</td>
+              <td>تصوير محتوى الفيديو</td>
+            </tr>
+            <tr>
+              <td>🎤 Microphone & Sound Card</td>
+              <td>Record and process audio</td>
+              <td>تسجيل الصوت ومعالجته</td>
+            </tr>
+            <tr>
+              <td>💾 External Storage</td>
+              <td>Store large media files</td>
+              <td>تخزين الملفات الكبيرة</td>
+            </tr>
+            <tr>
+              <td>📀 CD/DVD Burner</td>
+              <td>Create physical delivery media</td>
+              <td>إنشاء وسائط التسليم المادية</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        إنتاج الوسائط المتعددة يتطلب هاردوير متخصص: كمبيوتر قوي، شاشة عالية الدقة، كاميرا، ميكروفون، وتخزين خارجي لملفات
+        الوسائط الكبيرة.
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- §5  SOFTWARE                                -->
+    <!-- ════════════════════════════════════════════ -->
+    <div id="software" class="section-header reveal">
+      <div class="sec-icon">🛠️</div>
+      <div class="sec-titles">
+        <h2>Software for Multimedia</h2>
+        <div class="ar">البرمجيات للوسائط المتعددة</div>
+        <div class="sub">Production Tools · Authoring Tools · The Basic Tool Set</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">How Software Works in Multimedia <span class="ar">دور البرمجيات</span></div>
+      <p><strong>Multimedia software provides specific instructions to the hardware</strong> for performing tasks.
+        Without the right software, even the most powerful hardware cannot produce multimedia content.</p>
+      <div class="highlight">
+        <strong>Software tools are divided into two main categories:</strong><br>
+        1. <span class="tag">Production Tools</span> — for creating and editing individual media elements<br>
+        2. <span class="tag y">Authoring Tools</span> — for assembling all elements into a final interactive project
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        البرمجيات تعطي تعليمات محددة للهاردوير لتنفيذ المهام. تنقسم لنوعين:<br>
+        <strong>أدوات الإنتاج (Production Tools):</strong> لإنشاء وتحرير عناصر الوسائط الفردية.<br>
+        <strong>أدوات التأليف (Authoring Tools):</strong> لتجميع كل العناصر في مشروع تفاعلي نهائي.
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">Production Tools vs Authoring Tools <span class="ar">مقارنة: أدوات الإنتاج وأدوات
+          التأليف</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Purpose</th>
+              <th>Examples</th>
+              <th>بالعربي</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag">Production Tools</span></td>
+              <td>Create/edit individual media elements (text, images, audio, video)</td>
+              <td>Photoshop (images), Audacity (audio), Premiere (video), Word (text)</td>
+              <td>إنشاء وتحرير عناصر الوسائط الفردية</td>
+            </tr>
+            <tr>
+              <td><span class="tag y">Authoring Tools</span></td>
+              <td>Assemble all media into a complete interactive project</td>
+              <td>Adobe Director, Captivate, PowerPoint, HTML/CSS</td>
+              <td>تجميع كل عناصر الوسائط في مشروع تفاعلي كامل</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">The Basic Tool Set <span class="ar">مجموعة الأدوات الأساسية</span></div>
+      <p>The <strong>basic tool set for building multimedia projects</strong> contains:</p>
+      <ul>
+        <li>✅ <strong>One or more authoring systems</strong> — to assemble the final project</li>
+        <li>✅ <strong>Text editing application</strong> — for writing and formatting text content</li>
+        <li>✅ <strong>Image editing application</strong> — for creating and editing graphics</li>
+        <li>✅ <strong>Sound editing application</strong> — for recording and editing audio</li>
+        <li>✅ <strong>Motion video editing application</strong> — for editing video footage</li>
+      </ul>
+      <div class="green-note">
+        <div class="green-label">Key Exam Statement</div>
+        "The basic tool set for building multimedia projects contains one or more authoring systems and various editing
+        applications for text, images, sounds, and motion video."
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        مجموعة الأدوات الأساسية لبناء مشاريع الوسائط المتعددة تحتوي على:<br>
+        نظام تأليف (Authoring System) + محرر نصوص + محرر صور + محرر صوت + محرر فيديو.
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- §6  TEAMWORK & SKILLS                       -->
+    <!-- ════════════════════════════════════════════ -->
+    <div id="team" class="section-header reveal">
+      <div class="sec-icon">👥</div>
+      <div class="sec-titles">
+        <h2>Creativity, Organization & Teamwork</h2>
+        <div class="ar">الإبداع والتنظيم والعمل الجماعي</div>
+        <div class="sub">Why both creativity AND organization are essential</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">Creativity + Organization — Both Are Required <span class="ar">الإبداع + التنظيم =
+          الضرورة</span></div>
+      <p>Successful multimedia production requires <strong>both</strong> creative and organizational skills working
+        together. Neither alone is sufficient.</p>
+      <div class="grid2">
+        <div
+          style="background:rgba(180,138,255,.07);border:1px solid rgba(180,138,255,.2);border-radius:12px;padding:18px">
+          <div style="font-weight:800;color:var(--purple);margin-bottom:10px">🎨 Creativity</div>
+          <ul style="font-size:13px;padding-left:16px">
+            <li>Artistic vision and design sense</li>
+            <li>Knowledge of how to use hardware & software tools</li>
+            <li>Ability to produce engaging visual and audio content</li>
+            <li>Innovation in user experience design</li>
+          </ul>
+        </div>
+        <div
+          style="background:rgba(45,255,127,.06);border:1px solid rgba(45,255,127,.2);border-radius:12px;padding:18px">
+          <div style="font-weight:800;color:var(--accent);margin-bottom:10px">📋 Organization</div>
+          <ul style="font-size:13px;padding-left:16px">
+            <li>Detailed outline of required skills</li>
+            <li>Time management and scheduling</li>
+            <li>Budget management</li>
+            <li>Resource allocation</li>
+            <li>Team coordination</li>
+          </ul>
+        </div>
+      </div>
+      <div class="highlight" style="margin-top:14px">
+        <strong>Key Statement:</strong> "In a multimedia project, being creative implies knowledge of hardware and
+        software. It is essential to develop an organized outline detailing the skills, time, budget, tools and
+        resources needed for the project."
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        الإبداع في مشروع الوسائط المتعددة يعني امتلاك معرفة بالهاردوير والسوفتوير.<br>
+        التنظيم يعني وضع خطة منظمة تفصيلية تشمل المهارات والوقت والميزانية والأدوات والموارد.<br>
+        <strong>كلاهما ضروري — لا يمكن الاستغناء عن أي منهما.</strong>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">Teamwork is Essential <span class="ar">العمل الجماعي ضرورة</span></div>
+      <p>Multimedia projects are rarely solo endeavors. <strong>Teamwork is essential</strong> for a high-quality
+        result.</p>
+      <p style="margin-top:10px">A typical multimedia team may include:</p>
+      <div class="skill-grid">
+        <span class="skill-pill">Project Manager</span>
+        <span class="skill-pill">Graphic Designer</span>
+        <span class="skill-pill hard">Video Editor</span>
+        <span class="skill-pill hard">Audio Engineer</span>
+        <span class="skill-pill gold">Programmer / Developer</span>
+        <span class="skill-pill">Content Writer</span>
+        <span class="skill-pill gold">Instructional Designer</span>
+        <span class="skill-pill hard">QA Tester</span>
+      </div>
+      <div class="note">
+        <div class="note-label">Why Teamwork?</div>
+        No single person typically has all the skills needed — graphic design, video editing, audio production,
+        programming, and project management all require different expertise.
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        العمل الجماعي ضروري لأن مشاريع الوسائط المتعددة تتطلب مهارات متنوعة لا يمتلكها شخص واحد عادةً.<br>
+        الفريق يشمل عادةً: مدير مشروع، مصمم جرافيك، محرر فيديو، مهندس صوت، مطور، وكاتب محتوى.
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- §7  PROTOTYPE & PROJECT PLAN                -->
+    <!-- ════════════════════════════════════════════ -->
+    <div id="prototype" class="section-header reveal">
+      <div class="sec-icon">🧪</div>
+      <div class="sec-titles">
+        <h2>Prototype & Project Plan Example</h2>
+        <div class="ar">النموذج الأولي ومثال على خطة المشروع</div>
+        <div class="sub">The Staplechase 3000 product demo — What a plan must include</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">The Staplechase 3000 — Case Study <span class="ar">دراسة الحالة — منتج المُدبِّس</span>
+      </div>
+      <p>The textbook uses an example: <em>"Create a multimedia demonstration of your company's new product — the
+          Staplechase 3000 (a really nice stapler). The demonstration will highlight three key features. End users will
+          view it on the company's Web site."</em></p>
+      <div class="highlight">
+        <strong>This exercise demonstrates how to apply ALL the planning concepts in a real scenario.</strong>
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        مثال دراسة الحالة: إنشاء عرض وسائط متعددة لمنتج جديد (مُدبِّس) يُبرز 3 مميزات رئيسية ليُعرض على موقع الشركة. هذا
+        المثال يطبق جميع مفاهيم التخطيط.
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">What a Project Plan Must Include <span class="ar">ما يجب أن تتضمنه خطة المشروع</span>
+      </div>
+      <p>A complete multimedia project plan must include <strong>all four of the following elements</strong>:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Plan Element</th>
+              <th>Description</th>
+              <th>بالعربي</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag">1</span></td>
+              <td><strong>Flowchart or Timeline</strong></td>
+              <td>Visual diagram showing the basic flow/structure of the project</td>
+              <td>مخطط انسيابي أو جدول زمني يُظهر هيكل المشروع</td>
+            </tr>
+            <tr>
+              <td><span class="tag">2</span></td>
+              <td><strong>Hardware & Software Resources List</strong></td>
+              <td>Complete list of all tools, equipment, and software required</td>
+              <td>قائمة كاملة بالأجهزة والبرامج المطلوبة</td>
+            </tr>
+            <tr>
+              <td><span class="tag">3</span></td>
+              <td><strong>Skills Required List</strong></td>
+              <td>What human skills are needed (design, video, audio, development, etc.)</td>
+              <td>قائمة بالمهارات البشرية المطلوبة</td>
+            </tr>
+            <tr>
+              <td><span class="tag">4</span></td>
+              <td><strong>Time Estimate</strong></td>
+              <td>How long the project will take to complete</td>
+              <td>تقدير المدة الزمنية لإتمام المشروع</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic — ملاحظة للامتحان</div>
+        خطة المشروع يجب أن تتضمن أربعة عناصر:<br>
+        1- مخطط انسيابي أو جدول زمني. 2- قائمة الهاردوير والسوفتوير. 3- قائمة المهارات المطلوبة. 4- تقدير الوقت.
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">Sample Flowchart Structure <span class="ar">نموذج هيكل المخطط الانسيابي</span></div>
+      <p>For the Staplechase 3000 web demo, a simple flowchart might look like:</p>
+      <div class="flow" style="flex-wrap:wrap;gap:8px">
+        <div class="fbox a">🏠 Intro<br>Screen</div>
+        <div class="arrow">→</div>
+        <div class="fbox g">🔧 Feature 1<br>Fast Speed</div>
+        <div class="arrow">→</div>
+        <div class="fbox t">💪 Feature 2<br>Strong Grip</div>
+        <div class="arrow">→</div>
+        <div class="fbox y">🎨 Feature 3<br>Sleek Design</div>
+        <div class="arrow">→</div>
+        <div class="fbox o">📞 Call to<br>Action</div>
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        المخطط الانسيابي يُظهر كيف ينتقل المستخدم بين أجزاء العرض التقديمي. بالنسبة لعرض المُدبِّس: شاشة مقدمة ← الميزة
+        1 ← الميزة 2 ← الميزة 3 ← دعوة للعمل.
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- §8  EXAM Q&A                                -->
+    <!-- ════════════════════════════════════════════ -->
+    <div class="section-header reveal">
+      <div class="sec-icon">❓</div>
+      <div class="sec-titles">
+        <h2>Exam Questions & Answers</h2>
+        <div class="ar">أسئلة الامتحان وإجاباتها</div>
+        <div class="sub">All likely exam questions from this chapter</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-title">Chapter 3 — Practice Questions</div>
+
+      <div class="exam-q">
+        <div class="q-label">Q1</div>
+        What are the four basic stages of a multimedia project?<br>
+        <strong style="color:var(--accent)">Answer:</strong> Planning &amp; Costing → Design &amp; Production → Testing
+        → Delivery.
+      </div>
+
+      <div class="exam-q">
+        <div class="q-label">Q2</div>
+        What three basic things do you need to make multimedia?<br>
+        <strong style="color:var(--accent)">Answer:</strong> Hardware, software, and good ideas.
+      </div>
+
+      <div class="exam-q">
+        <div class="q-label">Q3</div>
+        What additional things do you need to make GOOD multimedia?<br>
+        <strong style="color:var(--accent)">Answer:</strong> Talent, skill, organization, time, money, and the help of
+        others (teamwork).
+      </div>
+
+      <div class="exam-q">
+        <div class="q-label">Q4</div>
+        What is the difference between production tools and authoring tools?<br>
+        <strong style="color:var(--accent)">Answer:</strong> Production tools create/edit individual media elements
+        (text, images, audio, video). Authoring tools assemble all media into a complete interactive project.
+      </div>
+
+      <div class="exam-q">
+        <div class="q-label">Q5</div>
+        Which platform is considered better suited for multimedia production?<br>
+        <strong style="color:var(--accent)">Answer:</strong> The Macintosh platform — it is better equipped to manage
+        sound and video editing.
+      </div>
+
+      <div class="exam-q">
+        <div class="q-label">Q6</div>
+        What is a prototype in the context of multimedia planning?<br>
+        <strong style="color:var(--accent)">Answer:</strong> A prototype is a simple, early working version of the
+        project used to test the concept, look, feel, and navigation before full production begins.
+      </div>
+
+      <div class="exam-q">
+        <div class="q-label">Q7</div>
+        What must a multimedia project plan include (4 elements)?<br>
+        <strong style="color:var(--accent)">Answer:</strong> (1) Flowchart/timeline of project flow, (2) List of
+        hardware and software resources, (3) List of required skills, (4) Time estimate for completion.
+      </div>
+
+      <div class="exam-q">
+        <div class="q-label">Q8</div>
+        Why is teamwork essential in multimedia projects?<br>
+        <strong style="color:var(--accent)">Answer:</strong> Because no single person typically has all required skills
+        — graphic design, video editing, audio, programming, and management require different expertise. The combined
+        skills of a team produce better results.
+      </div>
+
+      <div class="exam-q">
+        <div class="q-label">Q9</div>
+        What is "look and feel" in multimedia planning?<br>
+        <strong style="color:var(--accent)">Answer:</strong> The visual design and user experience of the project —
+        including color scheme, typography, layout, and overall aesthetic impression.
+      </div>
+
+      <div class="exam-q">
+        <div class="q-label">Q10</div>
+        What happens during the Design &amp; Production stage?<br>
+        <strong style="color:var(--accent)">Answer:</strong> Each planned task is performed to create the finished
+        product. There may be many feedback cycles with the client until they are satisfied.
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- §9  FINAL REVIEW TABLE                      -->
+    <!-- ════════════════════════════════════════════ -->
+    <div id="review" class="section-header reveal">
+      <div class="sec-icon">📚</div>
+      <div class="sec-titles">
+        <h2>Final Review — Quick Reference</h2>
+        <div class="ar">مراجعة نهائية — مرجع سريع للامتحان</div>
+        <div class="sub">Everything you need to know — one table</div>
+      </div>
+    </div>
+
+    <div class="final reveal">
+      <h2>Quick Reference — Chapter 3: Making Multimedia
+        <span class="ar">مراجعة سريعة — الفصل 3: صنع الوسائط المتعددة</span>
+      </h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Concept</th>
+              <th>Core Idea</th>
+              <th>Arabic — الجوهر</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>To make multimedia</td>
+              <td>Hardware + software + good ideas</td>
+              <td>هاردوير + سوفتوير + أفكار جيدة</td>
+            </tr>
+            <tr>
+              <td>To make GOOD multimedia</td>
+              <td>+ talent, skill, organization, time, money, teamwork</td>
+              <td>+ موهبة، مهارة، تنظيم، وقت، مال، تعاون</td>
+            </tr>
+            <tr>
+              <td>Stage 1 — Planning</td>
+              <td>Idea → objectives → resources → prototype → time → budget</td>
+              <td>فكرة ← أهداف ← موارد ← نموذج ← وقت ← ميزانية</td>
+            </tr>
+            <tr>
+              <td>Stage 2 — Production</td>
+              <td>Execute each task; feedback cycles with client</td>
+              <td>تنفيذ المهام؛ دورات تغذية راجعة مع العميل</td>
+            </tr>
+            <tr>
+              <td>Stage 3 — Testing</td>
+              <td>Verify project meets objectives and client needs</td>
+              <td>التحقق من تلبية الأهداف واحتياجات العميل</td>
+            </tr>
+            <tr>
+              <td>Stage 4 — Delivery</td>
+              <td>Package + CD-ROM/web + user manual</td>
+              <td>تغليف + CD/ويب + دليل المستخدم</td>
+            </tr>
+            <tr>
+              <td>Look and Feel</td>
+              <td>Visual design — colors, fonts, layout, style</td>
+              <td>التصميم البصري — ألوان، خطوط، تخطيط</td>
+            </tr>
+            <tr>
+              <td>Navigation</td>
+              <td>How users move through the project</td>
+              <td>كيف ينتقل المستخدم بين أجزاء المشروع</td>
+            </tr>
+            <tr>
+              <td>Prototype</td>
+              <td>Simple early version to test concept before full production</td>
+              <td>نسخة أولية بسيطة لاختبار الفكرة</td>
+            </tr>
+            <tr>
+              <td>GUI</td>
+              <td>Graphical User Interface — both Mac and Windows have one</td>
+              <td>واجهة رسومية — Mac وWindows كلاهما يملكها</td>
+            </tr>
+            <tr>
+              <td>Best Platform</td>
+              <td>Macintosh — better for sound & video editing</td>
+              <td>Mac أفضل لتحرير الصوت والفيديو</td>
+            </tr>
+            <tr>
+              <td>Production Tools</td>
+              <td>Create/edit individual media elements</td>
+              <td>إنشاء وتحرير عناصر الوسائط الفردية</td>
+            </tr>
+            <tr>
+              <td>Authoring Tools</td>
+              <td>Assemble all media into a finished interactive project</td>
+              <td>تجميع كل العناصر في مشروع تفاعلي</td>
+            </tr>
+            <tr>
+              <td>Basic Tool Set</td>
+              <td>1+ authoring systems + text/image/sound/video editors</td>
+              <td>نظام تأليف + محررات نص وصور وصوت وفيديو</td>
+            </tr>
+            <tr>
+              <td>Teamwork</td>
+              <td>Essential — no one person has all required skills</td>
+              <td>ضروري — لا أحد يمتلك كل المهارات وحده</td>
+            </tr>
+            <tr>
+              <td>Project Plan Must Have</td>
+              <td>Flowchart + resource list + skills list + time estimate</td>
+              <td>مخطط + قائمة موارد + قائمة مهارات + تقدير وقت</td>
+            </tr>
+            <tr>
+              <td>Creativity in Multimedia</td>
+              <td>Implies knowledge of both hardware AND software</td>
+              <td>يعني معرفة بالهاردوير والسوفتوير معاً</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Key Points Box -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px">
+        <div class="green-note">
+          <div class="green-label">Must Memorize — احفظ هذا</div>
+          The 4 stages in ORDER: <strong>Planning → Design → Testing → Delivery</strong><br><br>
+          The 6 planning steps: Idea → Objectives → Skills → Prototype → Time → Cost
+        </div>
+        <div class="note">
+          <div class="note-label">Common Exam Traps — انتبه</div>
+          • Mac is BETTER for multimedia production (not Windows)<br>
+          • Both Mac and Windows have GUI<br>
+          • Teamwork is ESSENTIAL (not optional)<br>
+          • Testing comes BEFORE Delivery, not after
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <p>Making Multimedia &nbsp;·&nbsp; Chapter 3 Study Guide &nbsp;·&nbsp; <strong>Final Exam Ready</strong></p>
+      <p style="margin-top:6px;font-size:12px">
+        Prepared with full coverage of all slides · Bilingual English & Arabic
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    /* ── Particle Canvas (green theme) ── */
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    function makeP() { return { x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.4 + 0.3, vx: (Math.random() - .5) * .28, vy: (Math.random() - .5) * .28, o: Math.random() * .4 + .08 }; }
+    function initP() { particles = Array.from({ length: 110 }, makeP); }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(p => {
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(45,255,127,${p.o})`; ctx.fill();
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+      });
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 110) {
+            ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(45,255,127,${.06 * (1 - d / 110)})`; ctx.lineWidth = .5; ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    resize(); initP(); draw();
+    window.addEventListener('resize', () => { resize(); initP(); });
+
+    /* ── Scroll reveal ── */
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 70); });
+    }, { threshold: .1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    /* ── Nav active highlight ── */
+    const sections = document.querySelectorAll('[id]');
+    const navLinks = document.querySelectorAll('.top-nav a');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+      navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + cur); });
+    });
+  </script>
+</body>
+
+</html>

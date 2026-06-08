@@ -1,0 +1,2517 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 1 — Introduction to Multimedia</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Cairo:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════
+   ROOT — Dark Green Theme
+═══════════════════════════════════════════ */
+    :root {
+      --black: #060608;
+      --deep: #090e0a;
+      --surface: #0d1410;
+      --card: #111a13;
+      --card2: #172019;
+      --border: rgba(34, 170, 60, .22);
+      --border2: rgba(255, 255, 255, .06);
+      --green: #1aaa3c;
+      --green2: #22cc48;
+      --green3: #2eef58;
+      --green-glow: rgba(26, 170, 60, .28);
+      --green-dim: rgba(26, 170, 60, .09);
+      --gold: #ffc940;
+      --gold-dim: rgba(255, 201, 64, .09);
+      --red: #ff4455;
+      --blue: #00c8ff;
+      --purple: #b48aff;
+      --text: #ddeedd;
+      --muted: #5a7060;
+      --muted2: #8aaa90;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Cairo, sans-serif;
+      background: var(--black);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    strong,
+    b {
+      color: #fff;
+    }
+
+    /* ═══════════════════════════════════════════
+   ANIMATED BACKGROUND
+═══════════════════════════════════════════ */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(26, 170, 60, .04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26, 170, 60, .04) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      animation: orbPulse 9s ease-in-out infinite;
+    }
+
+    .orb1 {
+      width: 550px;
+      height: 550px;
+      top: -150px;
+      left: -120px;
+      background: radial-gradient(circle, rgba(26, 170, 60, .08), transparent 70%);
+      animation-delay: 0s;
+    }
+
+    .orb2 {
+      width: 380px;
+      height: 380px;
+      bottom: -100px;
+      right: -80px;
+      background: radial-gradient(circle, rgba(180, 138, 255, .05), transparent 70%);
+      animation-delay: -5s;
+    }
+
+    .orb3 {
+      width: 300px;
+      height: 300px;
+      top: 45%;
+      left: 55%;
+      background: radial-gradient(circle, rgba(0, 200, 255, .03), transparent 70%);
+      animation-delay: -2.5s;
+    }
+
+    @keyframes orbPulse {
+
+      0%,
+      100% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.14)
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+   STICKY TOP NAV
+═══════════════════════════════════════════ */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(6, 6, 8, .88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      height: 54px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-inner::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-brand {
+      font-family: Orbitron, monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--green2);
+      letter-spacing: 2px;
+      white-space: nowrap;
+      padding-right: 20px;
+      border-right: 1px solid var(--border);
+      margin-right: 16px;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .nav-links a {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--muted2);
+      padding: 6px 12px;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: .2s;
+      letter-spacing: .3px;
+    }
+
+    .nav-links a:hover {
+      color: var(--green2);
+      background: var(--green-dim);
+    }
+
+    .nav-links a.active {
+      color: var(--green3);
+      background: var(--green-dim);
+    }
+
+    /* ═══════════════════════════════════════════
+   PAGE WRAP
+═══════════════════════════════════════════ */
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+    .hero {
+      text-align: center;
+      padding: 64px 24px 52px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 65% at 50% 0%, rgba(26, 170, 60, .12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      color: var(--green2);
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      padding: 6px 22px;
+      border-radius: 20px;
+      background: var(--green-dim);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      box-shadow: 0 0 22px var(--green-glow);
+      animation: badgePulse 3s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 22px var(--green-glow)
+      }
+
+      50% {
+        box-shadow: 0 0 44px rgba(26, 170, 60, .45)
+      }
+    }
+
+    .hero h1 {
+      font-family: Orbitron, monospace;
+      font-size: clamp(1.6rem, 5vw, 3rem);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+      text-shadow: 0 0 44px rgba(26, 170, 60, .4);
+      line-height: 1.1;
+    }
+
+    .hero h1 span {
+      color: var(--green2);
+    }
+
+    .hero-sub {
+      font-family: Cairo, sans-serif;
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: 14px;
+      text-shadow: 0 0 18px rgba(255, 201, 64, .3);
+    }
+
+    .hero-desc {
+      font-size: 13.5px;
+      color: var(--muted2);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.9;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      padding: 4px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted2);
+      font-weight: 600;
+      letter-spacing: .5px;
+    }
+
+    /* ═══════════════════════════════════════════
+   SECTION
+═══════════════════════════════════════════ */
+    .section {
+      margin-bottom: 52px;
+      scroll-margin-top: 70px;
+    }
+
+    .sec-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .sec-number {
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--black);
+      background: var(--green2);
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 14px var(--green-glow);
+    }
+
+    .sec-title {
+      font-family: Orbitron, monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green2);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      flex: 1;
+    }
+
+    .sec-line {
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    /* ═══════════════════════════════════════════
+   CONTENT CARD
+═══════════════════════════════════════════ */
+    .content-card {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 18px;
+      padding: 28px 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .04) inset;
+      margin-bottom: 16px;
+      transition: .25s;
+    }
+
+    .content-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), transparent);
+    }
+
+    .content-card:hover {
+      border-color: var(--border);
+    }
+
+    .card-title {
+      font-family: Cairo, sans-serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-title-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--green-dim);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .card-ar {
+      font-family: Cairo, sans-serif;
+      font-size: 13px;
+      color: var(--gold);
+      background: var(--gold-dim);
+      border: 1px solid rgba(255, 201, 64, .15);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      direction: rtl;
+      line-height: 1.85;
+    }
+
+    .card-ar-label {
+      font-size: 10px;
+      font-family: Orbitron, monospace;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+      opacity: .7;
+    }
+
+    .card-body {
+      font-size: 14px;
+      color: var(--muted2);
+      line-height: 1.9;
+    }
+
+    .card-body p {
+      margin-bottom: 10px;
+    }
+
+    .card-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ═══════════════════════════════════════════
+   POINTS LIST
+═══════════════════════════════════════════ */
+    .points {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .points li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border2);
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .points li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .pt-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green2);
+      flex-shrink: 0;
+      margin-top: 7px;
+      box-shadow: 0 0 6px var(--green-glow);
+    }
+
+    /* ═══════════════════════════════════════════
+   CODE BLOCK
+═══════════════════════════════════════════ */
+    .code-block {
+      background: var(--card2);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--green3);
+      margin: 14px 0;
+      overflow-x: auto;
+      line-height: 1.7;
+    }
+
+    .code-label {
+      font-family: Orbitron, monospace;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+      opacity: .7;
+    }
+
+    /* ═══════════════════════════════════════════
+   TABLE
+═══════════════════════════════════════════ */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 12px 0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .data-table th {
+      background: var(--green-dim);
+      color: var(--green2);
+      padding: 11px 14px;
+      text-align: left;
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border2);
+      color: var(--text);
+      vertical-align: top;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+      background: rgba(26, 170, 60, .04);
+    }
+
+    .data-table .highlight {
+      color: var(--green3);
+      font-weight: 700;
+    }
+
+    .data-table .muted {
+      color: var(--muted2);
+    }
+
+    /* ═══════════════════════════════════════════
+   TWO COLUMN
+═══════════════════════════════════════════ */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .col-card {
+      background: var(--card2);
+      border: 1px solid var(--border2);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .col-card-title {
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .col-card.green-card {
+      border-color: rgba(26, 170, 60, .25);
+    }
+
+    .col-card.green-card .col-card-title {
+      color: var(--green2);
+    }
+
+    .col-card.gold-card {
+      border-color: rgba(255, 201, 64, .2);
+    }
+
+    .col-card.gold-card .col-card-title {
+      color: var(--gold);
+    }
+
+    .col-card.red-card {
+      border-color: rgba(255, 68, 85, .2);
+    }
+
+    .col-card.red-card .col-card-title {
+      color: var(--red);
+    }
+
+    /* ═══════════════════════════════════════════
+   FORMULA / HIGHLIGHT BOX
+═══════════════════════════════════════════ */
+    .formula-box {
+      background: rgba(26, 170, 60, .07);
+      border: 1px solid rgba(26, 170, 60, .3);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 14px 0;
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--green3);
+      text-align: center;
+      letter-spacing: .5px;
+    }
+
+    .highlight-box {
+      background: var(--gold-dim);
+      border: 1px solid rgba(255, 201, 64, .2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 14px 0;
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.85;
+    }
+
+    .highlight-box .hl-label {
+      font-family: Orbitron, monospace;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* ═══════════════════════════════════════════
+   REVIEW TABLE SECTION
+═══════════════════════════════════════════ */
+    .review-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 36px 32px;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .review-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), var(--gold), transparent);
+    }
+
+    .review-title {
+      font-family: Orbitron, monospace;
+      font-size: 14px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 24px;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    .review-table th {
+      background: var(--green-dim);
+      color: var(--green2);
+      padding: 12px 16px;
+      text-align: right;
+      direction: rtl;
+      font-family: Cairo, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .review-table th:first-child {
+      text-align: left;
+      direction: ltr;
+      font-family: Orbitron, monospace;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+    }
+
+    .review-table td {
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border2);
+      vertical-align: top;
+      line-height: 1.7;
+    }
+
+    .review-table td:first-child {
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--green2);
+      white-space: nowrap;
+    }
+
+    .review-table td:nth-child(2) {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .review-table td:nth-child(3) {
+      color: var(--muted2);
+      font-size: 12.5px;
+    }
+
+    .review-table td:nth-child(4) {
+      color: var(--gold);
+      direction: rtl;
+      font-family: Cairo, sans-serif;
+      font-size: 12.5px;
+    }
+
+    .review-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .review-table tr:hover td {
+      background: rgba(26, 170, 60, .04);
+    }
+
+    /* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 24px 28px;
+      text-align: center;
+      position: relative;
+      margin-top: 60px;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--green), transparent);
+    }
+
+    .footer-logo {
+      font-family: Orbitron, monospace;
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--green2);
+      letter-spacing: 2px;
+      margin-bottom: 5px;
+    }
+
+    .footer-name {
+      font-family: Cairo, sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .footer-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .footer-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted2);
+      font-family: Cairo, sans-serif;
+      background: var(--card);
+      border: 1px solid var(--border2);
+      padding: 7px 16px;
+      border-radius: 50px;
+      transition: .2s;
+    }
+
+    .footer-item:hover {
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: Orbitron, monospace;
+      letter-spacing: 1.5px;
+    }
+
+    .footer-copy span {
+      color: var(--green2);
+    }
+
+    /* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+    @media(max-width:650px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .content-card {
+        padding: 20px 16px;
+      }
+
+      .review-section {
+        padding: 22px 14px;
+      }
+
+      .data-table th,
+      .data-table td {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+    }
+
+
+    /* ═══════════════════════════════════════════
+   Compatibility layer — CH1/2/3/5/6 mapped to Chapter 7 style
+═══════════════════════════════════════════ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(26, 170, 60, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(26, 170, 60, .04) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .45
+    }
+
+    .container,
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px 80px
+    }
+
+    .top-nav,
+    .topic-nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(6, 6, 8, .88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      flex-wrap: wrap
+    }
+
+    .top-nav a,
+    .topic-nav a {
+      font-family: Orbitron, monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted2);
+      padding: 7px 12px;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: .2s;
+      letter-spacing: .3px;
+      border: 1px solid transparent;
+      background: transparent;
+      text-decoration: none
+    }
+
+    .top-nav a:hover,
+    .top-nav a.active,
+    .topic-nav a:hover,
+    .topic-nav a.active {
+      color: var(--green3);
+      background: var(--green-dim);
+      border-color: var(--border);
+      box-shadow: none
+    }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 64px 24px 52px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 34px;
+      overflow: hidden;
+      min-height: unset;
+      background: transparent;
+      display: block
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 65% at 50% 0%, rgba(26, 170, 60, .12), transparent 70%);
+      pointer-events: none
+    }
+
+    .hero-badge,
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      color: var(--green2);
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      padding: 6px 22px;
+      border-radius: 20px;
+      background: var(--green-dim);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      box-shadow: 0 0 22px var(--green-glow)
+    }
+
+    .badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green2);
+      display: inline-block
+    }
+
+    .hero-badge .dot,
+    .badge .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--green2);
+      border-radius: 50%;
+      display: inline-block
+    }
+
+    .hero h1 {
+      font-family: Orbitron, monospace;
+      font-size: clamp(1.6rem, 5vw, 3rem);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+      text-shadow: 0 0 44px rgba(26, 170, 60, .4);
+      line-height: 1.1
+    }
+
+    .hero h1 span {
+      color: var(--green2)
+    }
+
+    .hero .ar-title,
+    .ar-title {
+      font-family: Cairo, sans-serif;
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: 14px;
+      text-shadow: 0 0 18px rgba(255, 201, 64, .3);
+      direction: rtl
+    }
+
+    .hero-sub,
+    .hero p {
+      font-size: 13.5px;
+      color: var(--muted2);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.9
+    }
+
+    .hero-chips,
+    .hero-stats,
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 22px
+    }
+
+    .hero-chip,
+    .hstat,
+    .hero-tag {
+      font-size: 11px;
+      padding: 6px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted2);
+      font-weight: 600;
+      letter-spacing: .5px
+    }
+
+    .hstat .num {
+      font-family: Orbitron, monospace;
+      color: var(--green2);
+      font-size: 1.35rem;
+      font-weight: 900
+    }
+
+    .hstat .lbl {
+      font-size: 10px;
+      color: var(--muted2);
+      text-transform: uppercase
+    }
+
+    .ch-banner,
+    .chapter-banner {
+      background: linear-gradient(135deg, var(--green-dim), rgba(6, 6, 8, .65));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 28px;
+      margin: 0 0 36px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .04) inset
+    }
+
+    .ch-num {
+      font-family: Orbitron, monospace;
+      width: 58px;
+      height: 58px;
+      background: var(--green2);
+      color: var(--black);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 20px;
+      flex-shrink: 0;
+      box-shadow: 0 0 14px var(--green-glow)
+    }
+
+    .ch-titles h2,
+    .ch-info h2 {
+      font-family: Orbitron, monospace;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -.3px
+    }
+
+    .ch-titles .ar,
+    .ch-info .ar {
+      font-family: Cairo, sans-serif;
+      font-size: .9rem;
+      color: var(--gold);
+      direction: rtl;
+      text-align: right;
+      margin-top: 3px
+    }
+
+    .ch-titles .desc,
+    .ch-info .desc {
+      font-size: 12.5px;
+      color: var(--muted2);
+      margin-top: 4px
+    }
+
+    .section,
+    .section-header,
+    .sec-header {
+      margin: 48px 0 18px;
+      scroll-margin-top: 70px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      border: 0;
+      padding: 0
+    }
+
+    .sec-num,
+    .sec-ico,
+    .sec-icon,
+    .sec-number {
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--black);
+      background: var(--green2);
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 14px var(--green-glow);
+      border: 0;
+      margin-top: 0
+    }
+
+    .sec-ico,
+    .sec-icon {
+      font-size: 16px;
+      color: var(--green2);
+      background: var(--green-dim);
+      border: 1px solid var(--border)
+    }
+
+    .sec-titles h2,
+    .sec-titles h3,
+    .sec-text h3,
+    .sec-txt h3,
+    .sec-title {
+      font-family: Orbitron, monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green2);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      flex: 1
+    }
+
+    .sec-titles .ar,
+    .sec-text .ar,
+    .sec-txt .ar {
+      font-family: Cairo, sans-serif;
+      font-size: .85rem;
+      color: var(--gold);
+      direction: rtl;
+      text-align: right;
+      margin-top: 2px
+    }
+
+    .sec-titles .desc,
+    .sec-titles .sub {
+      font-size: 12px;
+      color: var(--muted2);
+      margin-top: 3px
+    }
+
+    .card,
+    .content-card {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .04) inset;
+      backdrop-filter: none;
+      transition: .25s
+    }
+
+    .card::before,
+    .content-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), transparent);
+      opacity: 1
+    }
+
+    .card:hover,
+    .content-card:hover {
+      border-color: var(--border)
+    }
+
+    .card-title {
+      font-family: Cairo, sans-serif;
+      font-size: 1.08rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .card-title::before {
+      content: '◆';
+      color: var(--green2);
+      font-size: 12px;
+      flex-shrink: 0
+    }
+
+    .card-title .ar {
+      font-family: Cairo, sans-serif;
+      font-size: .85rem;
+      color: var(--gold);
+      font-weight: 700;
+      direction: rtl
+    }
+
+    .card p,
+    .card li,
+    .content-card p,
+    .content-card li {
+      font-size: 14px;
+      color: var(--muted2);
+      line-height: 1.9;
+      margin-bottom: 8px
+    }
+
+    .card ul,
+    .card ol,
+    .content-card ul,
+    .content-card ol {
+      padding-left: 22px;
+      margin-top: 6px
+    }
+
+    .ar-box,
+    .card-ar {
+      font-family: Cairo, sans-serif;
+      font-size: 13px;
+      color: var(--gold);
+      background: var(--gold-dim);
+      border: 1px solid rgba(255, 201, 64, .15);
+      border-right: 4px solid var(--gold);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 12px 0 16px;
+      direction: rtl;
+      text-align: right;
+      line-height: 1.85
+    }
+
+    .ar-label,
+    .card-ar-label {
+      font-size: 10px;
+      font-family: Orbitron, monospace;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+      opacity: .8;
+      direction: ltr;
+      text-align: left
+    }
+
+    .hl,
+    .highlight,
+    .key-box,
+    .tip,
+    .note,
+    .warn-box {
+      background: var(--green-dim);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--green2);
+      border-radius: 10px;
+      padding: 13px 16px;
+      margin: 10px 0;
+      font-size: 13.5px;
+      color: var(--muted2)
+    }
+
+    .note {
+      background: rgba(255, 201, 64, .07);
+      border-color: rgba(255, 201, 64, .22);
+      border-left-color: var(--gold)
+    }
+
+    .warn-box,
+    .hl.red {
+      background: rgba(255, 68, 85, .07);
+      border-color: rgba(255, 68, 85, .25);
+      border-left-color: var(--red)
+    }
+
+    .note-label,
+    .key-label,
+    .tip-label {
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px
+    }
+
+    .key-label,
+    .tip-label {
+      color: var(--green2)
+    }
+
+    .formula,
+    pre,
+    .code-block {
+      background: #070907;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 12px 0;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--gold);
+      direction: ltr;
+      overflow-x: auto;
+      white-space: pre-wrap
+    }
+
+    .formula .fl,
+    .formula .flabel {
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      color: var(--muted2);
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: normal
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 14px 0;
+      border-radius: 12px;
+      border: 1px solid var(--border2)
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface)
+    }
+
+    th {
+      background: var(--green-dim);
+      color: var(--green2);
+      font-family: Orbitron, monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase
+    }
+
+    th,
+    td {
+      padding: 11px 13px;
+      border-bottom: 1px solid var(--border2);
+      text-align: left
+    }
+
+    td {
+      color: var(--muted2);
+      font-size: 13.5px
+    }
+
+    tr:last-child td {
+      border-bottom: 0
+    }
+
+    .mono {
+      font-family: var(--mono);
+      background: #070907;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 7px;
+      color: var(--green2);
+      font-size: 12px
+    }
+
+    .section-label {
+      font-family: Orbitron, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--green2);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .section-label::after,
+    .sec-line {
+      content: '';
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, var(--border), transparent)
+    }
+
+    @media(max-width:700px) {
+
+      .top-nav,
+      .topic-nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap
+      }
+
+      .hero {
+        padding: 48px 16px 38px
+      }
+
+      .container,
+      .page-wrap {
+        padding: 26px 14px 60px
+      }
+
+      .ch-banner,
+      .chapter-banner {
+        padding: 18px;
+        align-items: flex-start
+      }
+
+      .card,
+      .content-card {
+        padding: 20px
+      }
+
+      .section-header,
+      .sec-header {
+        align-items: flex-start
+      }
+
+      .hero h1 {
+        font-size: 1.7rem
+      }
+    }
+  </style>
+
+  <style id="index-back-button-style">
+    .index-back-button {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 99999;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(34, 204, 72, .45);
+      background: rgba(6, 6, 8, .88);
+      backdrop-filter: blur(12px);
+      color: #2eef58 !important;
+      font-family: Inter, Cairo, sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 0 24px rgba(34, 204, 72, .22);
+      transition: .2s
+    }
+
+    .index-back-button:hover {
+      transform: translateY(-2px);
+      background: rgba(34, 204, 72, .14);
+      box-shadow: 0 0 35px rgba(34, 204, 72, .35)
+    }
+
+    @media(max-width:600px) {
+      .index-back-button {
+        top: 10px;
+        left: 10px;
+        padding: 8px 12px;
+        font-size: 12px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="index-back-button" href="index.html">⬅ Back to Index / الرجوع للرئيسية</a>
+
+  <div class="bg-layer">
+    <div class="bg-grid"></div>
+    <div class="bg-orb orb1"></div>
+    <div class="bg-orb orb2"></div>
+    <div class="bg-orb orb3"></div>
+  </div>
+
+
+  <!-- BACKGROUND CANVAS -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ─── TOP NAV ─── -->
+  <nav class="top-nav" id="topnav">
+    <a href="#def">Definition</a>
+    <a href="#senses">Senses</a>
+    <a href="#history">History</a>
+    <a href="#future">Future Trends</a>
+    <a href="#apps">Applications</a>
+    <a href="#flash">Flash Basics</a>
+    <a href="#ux">User Guidelines</a>
+    <a href="#review">Review</a>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <div class="hero">
+    <div class="hero-badge">
+      <div class="dot"></div>COM 205 — Multimedia Applications
+    </div>
+    <h1>Chapter 1<br><span>Introduction to Multimedia</span></h1>
+    <div class="ar-title">مقدمة إلى الوسائط المتعددة — دليل الدراسة الشامل</div>
+    <p class="hero-sub">Complete bilingual study guide · English primary · Arabic explanation boxes · Final exam ready
+    </p>
+    <div class="hero-chips">
+      <span class="hero-chip hl">📖 31 Slides Covered</span>
+      <span class="hero-chip">🎯 Final Exam Ready</span>
+      <span class="hero-chip">🌐 English + عربي</span>
+      <span class="hero-chip">🎬 Flash Basics</span>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- ═══════════════════ §1 WHAT IS MULTIMEDIA ═══════════════════ -->
+    <div id="def">
+      <div class="section-label">Section 1</div>
+    </div>
+    <div class="sec-hdr">
+      <div class="sec-ico">🎯</div>
+      <div class="sec-txt">
+        <h3>What is Multimedia?</h3>
+        <div class="ar">ما هي الوسائط المتعددة؟ — التعريف والمفهوم</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">General Definition <span class="ar">التعريف العام</span></div>
+      <div class="hl">
+        <div class="hl-lbl">Core Definition</div>
+        <strong>Multimedia</strong> is the field concerned with the <strong>computer-controlled integration</strong> of
+        text, graphics, drawings, still and moving images (video), animation, audio, and any other media — where every
+        type of information can be <strong>represented, stored, transmitted, and processed digitally</strong>.
+      </div>
+      <p style="margin-top:10px; font-size:13.5px">In simpler terms: multimedia means that computer information can be
+        represented through <strong>audio, video, and animation</strong> in addition to traditional media (text,
+        graphics, images).</p>
+      <div class="ar-box">
+        <div class="ar-label">Arabic Explanation</div>
+        الوسائط المتعددة (Multimedia) = دمج أنواع متعددة من المحتوى الرقمي بشكل متكامل يتحكم فيه الحاسوب.<br>
+        <strong>المكونات الأساسية:</strong> نص (Text) + رسومات (Graphics) + صور (Images) + فيديو (Video) + صوت (Audio) +
+        تحريك (Animation).<br>
+        <strong>الشرط الأساسي:</strong> كل هذه المكونات تُمثَّل وتُخزَّن وتُنقَل وتُعالَج <strong>رقمياً</strong> بواسطة
+        الحاسوب.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Word Breakdown — Multi + Media <span class="ar">تحليل الكلمة</span></div>
+      <div class="g2">
+        <div style="background:var(--mid); border:1px solid var(--border); border-radius:10px; padding:16px">
+          <div
+            style="font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:900; color:var(--accent); margin-bottom:6px">
+            multi-</div>
+          <p style="font-size:13px; color:var(--text)">Many; more than one.</p>
+          <p style="font-size:12px; color:var(--muted); margin-top:4px">أكثر من نوع واحد</p>
+        </div>
+        <div style="background:var(--mid); border:1px solid var(--border); border-radius:10px; padding:16px">
+          <div
+            style="font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:900; color:var(--accent); margin-bottom:6px">
+            Media</div>
+          <p style="font-size:13px; color:var(--text)">The means by which something is communicated (the medium of
+            sound; the medium of television). Also: the intervening substance through which impressions are conveyed to
+            the senses.</p>
+          <p style="font-size:12px; color:var(--muted); margin-top:4px">وسيلة التواصل والنقل</p>
+        </div>
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        <strong>Multi</strong> = متعدد، أكثر من واحد.<br>
+        <strong>Media</strong> = الوسيلة التي تُنقَل من خلالها المعلومات للحواس (الصوت، التلفزيون، الورق...).<br>
+        معاً: وسائل متعددة تُستخدَم لنقل المعلومات للمستخدم بأكثر من طريقة في آنٍ واحد.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">How People Define Multimedia Today <span class="ar">كيف يُعرِّف الناس الوسائط المتعددة
+          اليوم</span></div>
+      <p style="font-size:13.5px; margin-bottom:10px">Often people define multimedia in terms of existing products they
+        use daily:</p>
+      <div class="g3">
+        <div
+          style="background:var(--mid);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+          <div style="font-size:24px;margin-bottom:6px">🌐</div>
+          <div style="font-weight:700;font-size:13px;color:var(--accent)">The Internet</div>
+          <div style="font-size:11.5px;color:var(--muted);margin-top:3px">الإنترنت</div>
+        </div>
+        <div
+          style="background:var(--mid);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+          <div style="font-size:24px;margin-bottom:6px">📱</div>
+          <div style="font-weight:700;font-size:13px;color:var(--accent)">Mobile Phones</div>
+          <div style="font-size:11.5px;color:var(--muted);margin-top:3px">الهواتف المحمولة</div>
+        </div>
+        <div
+          style="background:var(--mid);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center">
+          <div style="font-size:24px;margin-bottom:6px">🎮</div>
+          <div style="font-weight:700;font-size:13px;color:var(--accent)">Computer Games</div>
+          <div style="font-size:11.5px;color:var(--muted);margin-top:3px">ألعاب الحاسوب</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ §2 SENSES ═══════════════════ -->
+    <div id="senses">
+      <div class="section-label">Section 2</div>
+    </div>
+    <div class="sec-hdr">
+      <div class="sec-ico">👁</div>
+      <div class="sec-txt">
+        <h3>Exploiting Human Senses</h3>
+        <div class="ar">استغلال الحواس البشرية</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">The Five Senses in Multimedia <span class="ar">الحواس الخمس في الوسائط المتعددة</span>
+      </div>
+      <p style="font-size:13.5px; margin-bottom:14px">Effective multimedia exploits all human senses to create immersive
+        and engaging experiences:</p>
+      <div class="sense-grid">
+        <div class="sense-item">
+          <div class="sense-icon">👁️</div>
+          <div class="sense-name">Sight</div>
+          <div class="sense-examples">Images, Video,<br>Text, Color</div>
+        </div>
+        <div class="sense-item">
+          <div class="sense-icon">👂</div>
+          <div class="sense-name">Hearing</div>
+          <div class="sense-examples">Speech, Music,<br>Noises</div>
+        </div>
+        <div class="sense-item">
+          <div class="sense-icon">✋</div>
+          <div class="sense-name">Touch</div>
+          <div class="sense-examples">Shape, Texture,<br>Temperature</div>
+        </div>
+        <div class="sense-item">
+          <div class="sense-icon">👃</div>
+          <div class="sense-name">Smell</div>
+          <div class="sense-examples">Location, Food,<br>Objects</div>
+        </div>
+        <div class="sense-item">
+          <div class="sense-icon">👅</div>
+          <div class="sense-name">Taste</div>
+          <div class="sense-examples">Food, Drink,<br>Objects</div>
+        </div>
+      </div>
+      <div class="note" style="margin-top:12px">
+        <div class="note-lbl">Key Point</div>
+        Sight and Hearing are the two senses most heavily engaged by current multimedia systems. Touch (haptics) is
+        emerging. Smell and Taste remain largely unexploited in computing.
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        الوسائط المتعددة تحاول استغلال كل حواس الإنسان لخلق تجربة غامرة وجذابة:<br>
+        <strong>البصر:</strong> أكثر الحواس استخداماً حالياً (صور، فيديو، نصوص، ألوان).<br>
+        <strong>السمع:</strong> ثاني أهم حاسة (موسيقى، كلام، مؤثرات صوتية).<br>
+        <strong>اللمس (Haptics):</strong> يُستخدَم في الأجهزة الحديثة (اهتزاز الهاتف).<br>
+        <strong>الشم والتذوق:</strong> لا يزالا غير مستغلين بشكل كبير في الحواسيب حتى الآن.
+      </div>
+    </div>
+
+    <!-- ═══════════════════ §3 HISTORY ═══════════════════ -->
+    <div id="history">
+      <div class="section-label">Section 3</div>
+    </div>
+    <div class="sec-hdr">
+      <div class="sec-ico">📜</div>
+      <div class="sec-txt">
+        <h3>Origin & History of Multimedia</h3>
+        <div class="ar">تاريخ ونشأة الوسائط المتعددة</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">The Memex Idea — 1945 <span class="ar">فكرة Memex — 1945</span></div>
+      <div class="hl">
+        <div class="hl-lbl">Visionary Quote — 1945</div>
+        <em>"A device in which one stores all his books, records and communications, and which is mechanised so that it
+          can be consulted with exceeding speed and flexibility. It is an enlarged intimate supplement to his
+          memory."</em>
+      </div>
+      <p style="margin-top:10px; font-size:13.5px">This 1945 vision by <strong>Vannevar Bush</strong> described a
+        concept remarkably close to the modern hyperlinked web — decades before computers were mainstream.</p>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        في عام 1945، تخيّل <strong>Vannevar Bush</strong> جهازاً يُخزِّن كل الكتب والسجلات والتواصل، ويمكن البحث فيه
+        بسرعة ومرونة فائقة — كأنه "امتداد للذاكرة البشرية".<br>
+        هذه الفكرة كانت النواة الأولى لمفهوم الـ <strong>Hypertext</strong> (النص التشعبي) الذي يقوم عليه الإنترنت
+        اليوم.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Evolution Timeline <span class="ar">خط تطور الوسائط المتعددة</span></div>
+      <div class="tw">
+        <table>
+          <thead>
+            <tr>
+              <th>Era</th>
+              <th>Development</th>
+              <th>Significance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="gc">1945</td>
+              <td>Memex concept (Vannevar Bush)</td>
+              <td>First vision of linked information — precursor to hypertext</td>
+            </tr>
+            <tr>
+              <td class="gc">1960s–70s</td>
+              <td>Basic hypertext — clickable text linking to other text</td>
+              <td>Foundation of non-linear navigation</td>
+            </tr>
+            <tr>
+              <td class="gc">1980s–90s</td>
+              <td>Graphics arrive; audio beyond the system beep</td>
+              <td>Visual + sound enrichment of computing</td>
+            </tr>
+            <tr>
+              <td class="gc">2000s</td>
+              <td>Video downloaded / streamed easily</td>
+              <td>Broadband enables rich media distribution</td>
+            </tr>
+            <tr>
+              <td class="gc">Today</td>
+              <td>Mobile, cloud, AR/VR, AI-generated media</td>
+              <td>Multimedia everywhere, on every device</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic — مراحل التطور</div>
+        <strong>المرحلة الأولى:</strong> نص تشعبي (Hypertext) فقط — روابط نصية تقود لنصوص أخرى.<br>
+        <strong>ثم:</strong> وصلت الرسومات (كمساعدة في التنقل والتوضيح).<br>
+        <strong>ثم:</strong> الصوت تجاوز صافرة النظام ليشمل موسيقى ومؤثرات.<br>
+        <strong>ثم:</strong> الفيديو أصبح يُنزَّل ويُبَثّ بسهولة مع انتشار الإنترنت السريع.
+      </div>
+    </div>
+
+    <!-- ═══════════════════ §4 FUTURE TRENDS ═══════════════════ -->
+    <div id="future">
+      <div class="section-label">Section 4</div>
+    </div>
+    <div class="sec-hdr">
+      <div class="sec-ico">🚀</div>
+      <div class="sec-txt">
+        <h3>Future Trends in Multimedia (13.8)</h3>
+        <div class="ar">اتجاهات المستقبل في الوسائط المتعددة</div>
+      </div>
+    </div>
+
+    <div class="g2">
+      <div class="card" style="border-color:rgba(0,230,120,.3)">
+        <div class="card-title" style="color:var(--accent)">1. Virtual Environments <span class="ar">البيئات
+            الافتراضية</span></div>
+        <ul>
+          <li>Computer-based systems that are <strong>3D rather than 2D</strong></li>
+          <li><strong>Interactive</strong> as opposed to passive</li>
+          <li>Use devices that provide a sense of spatial <strong>"presence"</strong> to the user</li>
+        </ul>
+        <p style="margin-top:10px; font-size:13px; font-weight:700; color:var(--muted)">Devices include:</p>
+        <ul>
+          <li>Head-tracked displays and <strong>stereo displays</strong> (visual and audio)</li>
+          <li><strong>Hand trackers</strong></li>
+          <li><strong>Haptic displays</strong> — address the user's sense of touch and temperature</li>
+        </ul>
+        <div class="hl" style="margin-top:10px">
+          <div class="hl-lbl">Key Point</div>
+          Systems can involve <strong>synthesized material</strong> (computer graphics), <strong>recorded
+            material</strong> (video), AND the surrounding <strong>real world</strong> itself → <strong>Augmented
+            Reality (AR)</strong>
+        </div>
+        <div class="ar-box">
+          <div class="ar-label">Arabic</div>
+          <strong>البيئات الافتراضية:</strong> أنظمة ثلاثية الأبعاد تفاعلية تُوهِم المستخدم بأنه موجود فعلاً في بيئة
+          رقمية.<br>
+          <strong>الأجهزة:</strong> خوذات العرض، متتبعات اليد، الشاشات الاستريو، أجهزة اللمس الحراري (Haptic).<br>
+          <strong>الواقع المعزز (AR):</strong> دمج العالم الرقمي مع العالم الحقيقي المحيط بالمستخدم.
+        </div>
+      </div>
+
+      <div class="card" style="border-color:rgba(0,212,170,.3)">
+        <div class="card-title" style="color:var(--teal)">2. Ubiquitous Computing <span class="ar">الحوسبة في كل
+            مكان</span></div>
+        <ul>
+          <li>An environment where a <strong>large number of computers</strong> are seamlessly integrated into our
+            immediate surroundings</li>
+          <li>Connected by <strong>wireless networks</strong></li>
+          <li>Users are <strong>no longer aware</strong> of the computers' presence (analogy to electric motor)</li>
+          <li>People as well as computers are <strong>tracked as they move about</strong></li>
+          <li>Computers <strong>adapt transparently</strong> to the preference of the person using them</li>
+        </ul>
+        <p style="margin-top:10px; font-size:13px; font-weight:700; color:var(--muted)">Main components:</p>
+        <ul>
+          <li>Inexpensive, <strong>low-power, mobile</strong> computers and displays</li>
+          <li>Software infrastructure for ubiquitous applications</li>
+          <li><strong>High-capacity wireless networks</strong> that tie everything together</li>
+        </ul>
+        <div class="ar-box">
+          <div class="ar-label">Arabic</div>
+          <strong>الحوسبة في كل مكان (Ubiquitous Computing):</strong> بيئة تكون فيها الحواسيب مدمجة في كل شيء حولنا بشكل
+          غير مرئي.<br>
+          <strong>التشبيه في المادة:</strong> مثل المحرك الكهربائي — نستخدمه في كل مكان لكن لا ننتبه لوجوده.<br>
+          <strong>الشبكة اللاسلكية</strong> هي العمود الفقري الذي يربط كل شيء.<br>
+          <strong>الحاسوب يتكيف</strong> مع تفضيلات المستخدم تلقائياً دون تدخل.
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ §5 APPLICATIONS ═══════════════════ -->
+    <div id="apps">
+      <div class="section-label">Section 5</div>
+    </div>
+    <div class="sec-hdr">
+      <div class="sec-ico">💡</div>
+      <div class="sec-txt">
+        <h3>Applications of Multimedia</h3>
+        <div class="ar">تطبيقات الوسائط المتعددة</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Application Areas — Full Coverage <span class="ar">مجالات التطبيق الكاملة</span></div>
+      <div class="app-grid">
+
+        <div class="app-card">
+          <div class="app-icon">🎭</div>
+          <div class="app-name">Entertainment</div>
+          <div class="app-desc">Interactivity and group participation: video-on-demand, interactive cinema,
+            collaborative games, home shopping.</div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-icon">🏥</div>
+          <div class="app-name">Healthcare</div>
+          <div class="app-desc">Sharing of visual data, PC-conferencing, multimedia patient records — remote diagnosis
+            and treatment.</div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-icon">🗺️</div>
+          <div class="app-name">GIS (Geographic Information)</div>
+          <div class="app-desc">Storage model for spatially organized data, fast zoom and pan, visual and audio data
+            associated with points of interest.</div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-icon">🎓</div>
+          <div class="app-name">Education</div>
+          <div class="app-desc">Lecture archives, videoconferencing, intelligent multimedia textbooks. Example: Yale
+            University radiology learning system.</div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-icon">🏭</div>
+          <div class="app-name">Manufacturing / Engineering</div>
+          <div class="app-desc">Close coordination between parallel development teams; enhanced CAD and CAM applications
+            with audio, video, and increased interactivity.</div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-icon">📢</div>
+          <div class="app-name">Organizational</div>
+          <div class="app-desc">Animated advertisements, group communication tools, interactive training modules and
+            simulation.</div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-icon">🏫</div>
+          <div class="app-name">Schools</div>
+          <div class="app-desc">Educational software to enrich learning (e.g., "Just Grandma and Me" — reading skills +
+            entertainment with interactive sights and sounds).</div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-icon">🏠</div>
+          <div class="app-name">Home</div>
+          <div class="app-desc">Most multimedia reaches homes via TV sets or monitors with built-in user inputs (e.g.,
+            genealogy software with text, images, sounds, video).</div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-icon">🏛️</div>
+          <div class="app-name">Public Places</div>
+          <div class="app-desc">Stand-alone terminals / kiosks providing information and help — making everyday life
+            simpler.</div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-icon">💼</div>
+          <div class="app-name">Business</div>
+          <div class="app-desc">Presentations, training, marketing, advertising, product demos, databases, catalogues,
+            instant messaging, networked communication.</div>
+        </div>
+
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic — مجالات التطبيق</div>
+        الوسائط المتعددة تُستخدَم في عشرة مجالات رئيسية:<br>
+        <strong>ترفيه:</strong> فيديو حسب الطلب، سينما تفاعلية، ألعاب جماعية.<br>
+        <strong>صحة:</strong> مشاركة الصور الطبية، مؤتمرات الفيديو، السجلات الطبية المتعددة الوسائط.<br>
+        <strong>GIS:</strong> نظم المعلومات الجغرافية — خرائط تفاعلية مع بيانات صوتية ومرئية.<br>
+        <strong>تعليم:</strong> أرشيف محاضرات، كتب مدرسية ذكية (مثال: نظام Yale لتعلم الأشعة).<br>
+        <strong>أعمال:</strong> عروض تقديمية، تسويق، تدريب، كتالوجات رقمية.<br>
+        <strong>المنازل:</strong> الترفيه المنزلي وشجرة العائلة الرقمية.<br>
+        <strong>الأماكن العامة:</strong> الأكشاك (Kiosks) التفاعلية لتقديم المعلومات.
+      </div>
+    </div>
+
+    <!-- ═══════════════════ §6 FLASH BASICS ═══════════════════ -->
+    <div id="flash">
+      <div class="section-label">Section 6</div>
+    </div>
+    <div class="sec-hdr">
+      <div class="sec-ico">⚡</div>
+      <div class="sec-txt">
+        <h3>Flash Multimedia — Content Creation Basics</h3>
+        <div class="ar">أساسيات Flash لإنشاء المحتوى المتعدد الوسائط</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Flash Interface Elements <span class="ar">عناصر واجهة Flash</span></div>
+      <div class="g2">
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--accent)">Main Interface Components:
+          </p>
+          <div class="flash-row">
+            <div class="flash-lbl">Tool Bar</div>
+            <div class="flash-val">Drawing and selection tools</div>
+          </div>
+          <div class="flash-row">
+            <div class="flash-lbl">Stage</div>
+            <div class="flash-val">The visible area where content is placed</div>
+          </div>
+          <div class="flash-row">
+            <div class="flash-lbl">Timeline</div>
+            <div class="flash-val">Controls when objects appear / disappear</div>
+          </div>
+          <div class="flash-row">
+            <div class="flash-lbl">Frames</div>
+            <div class="flash-val">Individual time units in the timeline</div>
+          </div>
+          <div class="flash-row">
+            <div class="flash-lbl">Layers</div>
+            <div class="flash-val">Separate drawing canvases stacked on top</div>
+          </div>
+          <div class="flash-row">
+            <div class="flash-lbl">Library</div>
+            <div class="flash-val">Stores reusable symbols and assets</div>
+          </div>
+          <div class="flash-row">
+            <div class="flash-lbl">Speed</div>
+            <div class="flash-val">Frame rate (frames per second)</div>
+          </div>
+          <div class="flash-row">
+            <div class="flash-lbl">Movie Dimensions</div>
+            <div class="flash-val">Width × Height of the stage in pixels</div>
+          </div>
+        </div>
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--accent)">Drawing Objects:</p>
+          <div
+            style="background:var(--mid); border:1px solid var(--border); border-radius:10px; padding:14px; font-size:13px;">
+            <div style="margin-bottom:6px"><span class="tag g">1</span> Circle (Oval)</div>
+            <div style="margin-bottom:6px"><span class="tag g">2</span> Rectangle</div>
+            <div style="margin-bottom:6px"><span class="tag g">3</span> Lines</div>
+            <div style="margin-bottom:6px"><span class="tag g">4</span> Characters (Text)</div>
+            <div style="margin-bottom:6px"><span class="tag g">5</span> Eraser</div>
+            <div class="hl" style="margin-top:10px; font-size:12px">
+              <div class="hl-lbl">Circle & Rectangle</div>
+              Both have: <strong>Border line</strong> + <strong>Inside filling</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic — واجهة Flash</div>
+        <strong>Stage:</strong> منطقة العمل المرئية حيث تضع الكائنات | <strong>Timeline:</strong> شريط الوقت يتحكم في
+        ظهور واختفاء الكائنات.<br>
+        <strong>Layers:</strong> طبقات مستقلة فوق بعضها — كل طبقة تحتوي على كائنات مستقلة.<br>
+        <strong>Library:</strong> مكتبة تخزِّن الـ Symbols (الرموز) القابلة لإعادة الاستخدام.<br>
+        <strong>أدوات الرسم:</strong> دائرة (لها حد + تعبئة) + مستطيل + خطوط + نص + ممحاة.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Frames, Key Frames & Blank Key Frames <span class="ar">الإطارات والإطارات المفتاحية</span>
+      </div>
+      <div class="tw">
+        <table>
+          <thead>
+            <tr>
+              <th>Concept</th>
+              <th>Purpose</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Regular Frame</td>
+              <td>Continues the content of the previous frame — no change</td>
+              <td>Rectangle stays visible from frame 1 to frame 20</td>
+            </tr>
+            <tr>
+              <td class="gc">Key Frame</td>
+              <td>Marks a change point: object position, object size, or adding new objects</td>
+              <td>Rectangle moves upward frames 1–20, then downward frames 21–40</td>
+            </tr>
+            <tr>
+              <td class="oc">Blank Key Frame</td>
+              <td>Removes old objects and allows drawing entirely new ones</td>
+              <td>Frame 1–20: rectangle shown. Frame 21–40: circle shown instead</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="hl" style="margin-top:10px">
+        <div class="hl-lbl">Timeline Example</div>
+        <strong>Visible:</strong> Rectangle shown from Frame 1 → Frame 20<br>
+        <strong>Not Visible:</strong> After Frame 20 (unless continued with more frames)
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic — أنواع الإطارات</div>
+        <strong>Frame عادي:</strong> يستمر المحتوى كما هو من الإطار السابق.<br>
+        <strong>Key Frame (إطار مفتاحي):</strong> يُستخدَم لـ: (1) تغيير موضع الكائن (2) تغيير حجمه (3) إضافة كائن
+        جديد.<br>
+        <strong>Blank Key Frame (إطار مفتاحي فارغ):</strong> يُزيل الكائنات القديمة ويسمح برسم كائنات جديدة تماماً.<br>
+        <strong>مثال:</strong> من 1–20 مستطيل | من 21–40 دائرة بدلاً منه (باستخدام Blank Key Frame في الإطار 21).
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Symbols, Motion Tween & ActionScript <span class="ar">الرموز والتحريك التلقائي
+          والبرمجة</span></div>
+      <div class="g2">
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--accent)">Symbols & Motion Tween:</p>
+          <ul style="font-size:13px">
+            <li><strong>Symbols</strong> are used to move objects from state to state in a <strong>linear
+                manner</strong></li>
+            <li><strong>Motion Tween</strong> = Flash automatically creates the in-between frames between two key frames
+            </li>
+            <li>Example: Circle symbol moves from frame 1 (left) to frame 10 (right) automatically</li>
+            <li><strong>Instances</strong> of a symbol can be dragged onto the stage — many instances from one symbol
+            </li>
+            <li>To program an instance (move it, change its color), give it an <strong>instance name</strong><br><code
+                style="font-size:11px; color:var(--accent2)">c1.visible = "true"</code></li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--accent)">ActionScript:</p>
+          <ul style="font-size:13px">
+            <li>Used to add <strong>programming control</strong> to the movie</li>
+            <li>Commands: <code style="color:var(--accent2); font-size:11.5px">play()</code>, <code
+                style="color:var(--accent2); font-size:11.5px">stop()</code>, <code
+                style="color:var(--accent2); font-size:11.5px">trace()</code></li>
+          </ul>
+          <p style="font-size:13px; margin:10px 0 6px; font-weight:700">Two places to insert code:</p>
+          <div class="flash-row">
+            <div class="flash-lbl">At Frame</div>
+            <div class="flash-val">When player reaches a certain frame</div>
+          </div>
+          <div class="flash-row">
+            <div class="flash-lbl">At Button</div>
+            <div class="flash-val">When user clicks the button</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:12px; background:var(--mid)">
+        <div class="card-title" style="font-size:.88rem">📦 Publishing the Flash Movie <span class="ar">نشر
+            الفلاش</span></div>
+        <p style="font-size:13px">Publishing generates an <strong>.swf file</strong> from the original Flash file in the
+          same directory, which is then run by browsers.</p>
+        <div style="display:flex; align-items:center; gap:14px; margin-top:10px; flex-wrap:wrap">
+          <div
+            style="background:rgba(0,230,120,.1); border:1px solid var(--accent); border-radius:8px; padding:10px 18px; font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent)">
+            Movie1.fla</div>
+          <div style="font-size:20px; color:var(--muted)">→ Publish →</div>
+          <div
+            style="background:rgba(255,107,53,.1); border:1px solid var(--accent2); border-radius:8px; padding:10px 18px; font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent2)">
+            Movie1.swf</div>
+        </div>
+        <div class="ar-box" style="margin-top:10px">
+          <div class="ar-label">Arabic</div>
+          النشر (Publishing) يُحوِّل ملف Flash الأصلي (.fla) إلى ملف .swf في نفس المجلد.<br>
+          ملف .swf هو الذي يُشغِّله المتصفح — وليس الملف الأصلي .fla.
+        </div>
+      </div>
+
+      <div class="ar-box">
+        <div class="ar-label">Arabic — الرموز والبرمجة</div>
+        <strong>Symbol (رمز):</strong> كائن قابل لإعادة الاستخدام يُخزَّن في الـ Library.<br>
+        <strong>Motion Tween:</strong> Flash يُنشئ الإطارات الوسيطة تلقائياً بين إطارين مفتاحيين (توفير الوقت).<br>
+        <strong>Instance (مثيل):</strong> نسخة من الرمز على الـ Stage — يمكن وضع عدة مثيلات من نفس الرمز.<br>
+        <strong>ActionScript:</strong> لغة برمجة Flash — تُضاف على إطار (عند وصول التشغيل للإطار) أو على زر (عند نقر
+        المستخدم).
+      </div>
+    </div>
+
+    <!-- ═══════════════════ §7 USER GUIDELINES ═══════════════════ -->
+    <div id="ux">
+      <div class="section-label">Section 7</div>
+    </div>
+    <div class="sec-hdr">
+      <div class="sec-ico">👤</div>
+      <div class="sec-txt">
+        <h3>User-Friendliness & Content Guidelines</h3>
+        <div class="ar">إرشادات المستخدم وجودة المحتوى</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">User-Friendly Multimedia Content Production <span class="ar">إنتاج محتوى متعدد وسائط صديق
+          للمستخدم</span></div>
+      <p style="font-size:13.5px; margin-bottom:12px">Good multimedia content must follow these principles:</p>
+      <div class="tw">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Guideline</th>
+              <th>Example / Detail</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><strong>Acceptable Content Size</strong></td>
+              <td>50 MB file is NOT acceptable — keep media lean</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><strong>Audio / Image Clearness</strong></td>
+              <td>Media must be clear, crisp, and legible</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><strong>Not Too Long</strong></td>
+              <td>Approximately less than 5 minutes (~&lt;5 min)</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><strong>One Item at a Time</strong></td>
+              <td>Focus on a single concept per frame/slide</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><strong>Use Dialogue Boxes</strong></td>
+              <td>For user engagement and interaction</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td><strong>User Centered</strong></td>
+              <td>Allow user to control: stop, forward, skip, etc.</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td><strong>Metadata</strong></td>
+              <td>Add name, subject, etc. — to make content searchable</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td><strong>Show Progress</strong></td>
+              <td>For long media, show a progress indicator / time bar</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ar-box">
+        <div class="ar-label">Arabic — معايير المحتوى الجيد</div>
+        <strong>الحجم المناسب:</strong> 50 ميجابايت غير مقبول — يجب تحسين الحجم.<br>
+        <strong>الوضوح:</strong> الصوت والصور يجب أن تكون واضحة وعالية الجودة.<br>
+        <strong>القِصَر:</strong> أقل من 5 دقائق تقريباً للمقطع الواحد.<br>
+        <strong>فكرة واحدة في كل مرة:</strong> لا تُثقِّل المستخدم بمعلومات كثيرة دفعة واحدة.<br>
+        <strong>التحكم للمستخدم:</strong> إيقاف مؤقت، تقديم، تخطي — يجب أن يتحكم المستخدم.<br>
+        <strong>البيانات الوصفية (Metadata):</strong> الاسم والموضوع لتسهيل البحث عن المحتوى.
+      </div>
+    </div>
+
+    <div class="card" style="border-color:rgba(255,95,109,.3)">
+      <div class="card-title" style="color:var(--red)">⚠️ When NOT to Use Multimedia <span class="ar">متى لا تستخدم
+          الوسائط المتعددة؟</span></div>
+      <div class="note">
+        <div class="note-lbl">Important Warning</div>
+        <strong>Don't use multimedia just because you can!</strong>
+      </div>
+      <ul style="margin-top:10px">
+        <li>When the media <strong>doesn't have a clear purpose</strong> and is just used for the <em>"Wow!" factor</em>
+        </li>
+        <li>When you <strong>don't have creativity</strong> to justify its use</li>
+        <li>The media should <strong>satisfy an identified purpose</strong> — not just look impressive</li>
+      </ul>
+      <div class="ar-box">
+        <div class="ar-label">Arabic</div>
+        <strong>لا تستخدم الوسائط المتعددة فقط لأنك تستطيع!</strong><br>
+        متى تتجنبها؟<br>
+        • عندما لا يوجد هدف واضح من استخدامها — مجرد "Wow Factor"<br>
+        • عندما لا تمتلك الإبداع الكافي لجعلها فعّالة<br>
+        <strong>القاعدة:</strong> المحتوى يجب أن يُلبِّي حاجة محددة ومعروفة — وليس مجرد زخرفة.
+      </div>
+    </div>
+
+    <!-- ═══════════════════ REVIEW TABLE ═══════════════════ -->
+    <hr class="div">
+
+    <div id="review" class="review-wrap">
+      <h2>📋 Complete Review Table — Chapter 1
+        <span class="ar">جدول المراجعة الشاملة — الفصل الأول</span>
+      </h2>
+
+      <div class="tw" style="margin-bottom:24px">
+        <table>
+          <thead>
+            <tr>
+              <th>Topic</th>
+              <th>Key Points</th>
+              <th>Arabic Summary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Definition of Multimedia</td>
+              <td>Computer-controlled integration of text, graphics, images, video, animation, audio — represented,
+                stored, transmitted, and processed digitally</td>
+              <td>دمج رقمي متكامل يتحكم فيه الحاسوب لأنواع متعددة من الوسائط</td>
+            </tr>
+            <tr>
+              <td>Word Origin</td>
+              <td>Multi = many; Media = means of communication / transmission</td>
+              <td>Multi = متعدد | Media = وسيلة التواصل</td>
+            </tr>
+            <tr>
+              <td>Human Senses</td>
+              <td>Sight (most used), Hearing, Touch (haptics), Smell, Taste</td>
+              <td>البصر والسمع الأكثر استخداماً، اللمس ناشئ، الشم والتذوق غير مستغلَّين</td>
+            </tr>
+            <tr>
+              <td>Memex (1945)</td>
+              <td>Vannevar Bush's vision of a device storing all books/records — precursor to hypertext and the web</td>
+              <td>رؤية 1945 لجهاز يخزن كل المعرفة — أصل فكرة الإنترنت</td>
+            </tr>
+            <tr>
+              <td>Current State</td>
+              <td>Graphics (navigation + illustration), audio (music/effects), video (streaming)</td>
+              <td>رسوم + صوت متقدم + فيديو مُبَثّ</td>
+            </tr>
+            <tr>
+              <td>Virtual Environments</td>
+              <td>3D, interactive, immersive. Devices: head trackers, haptic displays. Includes Augmented Reality</td>
+              <td>بيئات ثلاثية الأبعاد تفاعلية — الواقع الافتراضي والمعزز</td>
+            </tr>
+            <tr>
+              <td>Ubiquitous Computing</td>
+              <td>Computers seamlessly integrated everywhere via wireless; user unaware; computers adapt to preferences
+              </td>
+              <td>الحوسبة في كل مكان — خفية، لاسلكية، تتكيف مع المستخدم</td>
+            </tr>
+            <tr>
+              <td>Applications (10 areas)</td>
+              <td>Entertainment, Healthcare, GIS, Education, Manufacturing, Organizational, Schools, Home, Public
+                Places, Business</td>
+              <td>10 مجالات: ترفيه، صحة، خرائط، تعليم، تصنيع، مؤسسات، مدارس، منازل، أماكن عامة، أعمال</td>
+            </tr>
+            <tr>
+              <td>Flash Interface</td>
+              <td>Stage, Timeline, Layers, Frames, Library, Toolbar, Movie Dimensions, Speed</td>
+              <td>المسرح، الجدول الزمني، الطبقات، المكتبة، الإطارات</td>
+            </tr>
+            <tr>
+              <td>Frame Types</td>
+              <td>Regular frame (continues), Key Frame (changes: position/size/add), Blank Key Frame (removes + new
+                objects)</td>
+              <td>عادي (يستمر) | مفتاحي (يغيير) | فارغ مفتاحي (يزيل ويُضيف جديداً)</td>
+            </tr>
+            <tr>
+              <td>Symbol & Motion Tween</td>
+              <td>Symbol = reusable object in Library. Motion Tween = auto in-between frames. Instance = copy on stage
+              </td>
+              <td>الرمز = كائن قابل لإعادة الاستخدام | Tween = Flash يملأ الإطارات الوسطى تلقائياً</td>
+            </tr>
+            <tr>
+              <td>ActionScript</td>
+              <td>Programming control: play(), stop(), trace(). Placed on Frame or Button</td>
+              <td>لغة برمجة Flash — تُضاف على إطار أو زر</td>
+            </tr>
+            <tr>
+              <td>Publishing</td>
+              <td>.fla → Publish → .swf (browser-runnable file)</td>
+              <td>نشر الفيلم: .fla → .swf (يُشغِّله المتصفح)</td>
+            </tr>
+            <tr>
+              <td>User Guidelines</td>
+              <td>Small size, clear, &lt;5 min, one idea, user control, metadata, progress bar</td>
+              <td>حجم صغير، وضوح، أقل من 5 دقائق، فكرة واحدة، تحكم المستخدم، بيانات وصفية</td>
+            </tr>
+            <tr>
+              <td>When NOT to Use</td>
+              <td>Don't use without clear purpose — no "Wow Factor" without substance</td>
+              <td>لا تستخدمها بدون هدف واضح — ليس فقط لتبدو رائعة</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="font-size:13px; font-weight:700; color:var(--accent); margin-bottom:14px">🔑 Key Points to Remember for
+        Final Exam:</p>
+      <div class="g2">
+        <div>
+          <div class="key-point">
+            <div class="kp-num">1</div>
+            <div>Multimedia = computer-controlled integration of multiple media types, all digitally processed</div>
+          </div>
+          <div class="key-point">
+            <div class="kp-num">2</div>
+            <div>Two main human senses used: <strong>Sight + Hearing</strong>. Touch = Haptics (emerging)</div>
+          </div>
+          <div class="key-point">
+            <div class="kp-num">3</div>
+            <div>1945 Memex idea → first vision of hypertext/web</div>
+          </div>
+          <div class="key-point">
+            <div class="kp-num">4</div>
+            <div><strong>Virtual Environments</strong> = 3D, interactive, presence devices (haptic, head-tracker).
+              Includes AR</div>
+          </div>
+          <div class="key-point">
+            <div class="kp-num">5</div>
+            <div><strong>Ubiquitous Computing</strong> = invisible computers everywhere, wireless, adapt to user</div>
+          </div>
+          <div class="key-point">
+            <div class="kp-num">6</div>
+            <div>10 application areas — especially: Education, Healthcare, Entertainment, Business</div>
+          </div>
+          <div class="key-point">
+            <div class="kp-num">7</div>
+            <div>Flash: Stage + Timeline + Layers + Library + Frames + ActionScript</div>
+          </div>
+        </div>
+        <div>
+          <div class="key-point">
+            <div class="kp-num">8</div>
+            <div><strong>Key Frame</strong> = change in position, size, or object. <strong>Blank Key Frame</strong> =
+              remove + draw new</div>
+          </div>
+          <div class="key-point">
+            <div class="kp-num">9</div>
+            <div>Symbol = reusable asset. Instance = copy on stage. Motion Tween = auto animation</div>
+          </div>
+          <div class="key-point">
+            <div class="kp-num">10</div>
+            <div>ActionScript on: (1) Frame — when reached; (2) Button — when clicked</div>
+          </div>
+          <div class="key-point">
+            <div class="kp-num">11</div>
+            <div>Publish: .fla → .swf (the file browsers run)</div>
+          </div>
+          <div class="key-point">
+            <div class="kp-num">12</div>
+            <div>User guidelines: &lt;5 min, one idea at a time, user control (stop/forward/skip), metadata</div>
+          </div>
+          <div class="key-point">
+            <div class="kp-num">13</div>
+            <div>"Don't use multimedia just because you can" — needs clear purpose, not just "Wow factor"</div>
+          </div>
+          <div class="key-point">
+            <div class="kp-num">14</div>
+            <div>GIS = Geographic Information Systems — spatially organized data with zoom, pan, audio/visual</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ar-box" style="margin-top:18px">
+        <div class="ar-label">Arabic — ملاحظات الفاينل</div>
+        <strong>أهم نقطتان للامتحان:</strong><br>
+        ① تعريف الوسائط المتعددة الكامل: دمج رقمي متكامل يتحكم فيه الحاسوب (نص + صور + فيديو + صوت + تحريك).<br>
+        ② الفرق بين أنواع الإطارات في Flash: عادي / مفتاحي (يُغيِّر) / فارغ مفتاحي (يُزيل ويُضيف).<br>
+        <strong>أهم مفاهيم Flash:</strong> Symbol → Instance → Motion Tween → ActionScript (on Frame / on Button) →
+        Publish (.swf)<br>
+        <strong>الاتجاهات المستقبلية:</strong> بيئات افتراضية (3D + AR + أجهزة حضور) | حوسبة في كل مكان (لاسلكية +
+        تكيفية + غير مرئية).
+      </div>
+    </div>
+
+    <p style="text-align:center; color:var(--muted); font-size:12px; margin-top:40px">COM 205 — Multimedia Applications
+      · Chapter 1 · Good Luck on Your Final! 🎯</p>
+  </div>
+
+  <script>
+    // ─── ANIMATED BACKGROUND ───
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, dots = [];
+
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+
+    function initDots() {
+      dots = [];
+      const n = Math.floor((W * H) / 14000);
+      for (let i = 0; i < n; i++) {
+        dots.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: Math.random() * 1.5 + 0.3,
+          vx: (Math.random() - 0.5) * 0.22,
+          vy: (Math.random() - 0.5) * 0.22,
+          opacity: Math.random() * 0.6 + 0.1
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      const distLimit = 110;
+
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+        d.x += d.vx; d.y += d.vy;
+        if (d.x < 0 || d.x > W) d.vx *= -1;
+        if (d.y < 0 || d.y > H) d.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0,230,120,${d.opacity})`;
+        ctx.fill();
+
+        for (let j = i + 1; j < dots.length; j++) {
+          const d2 = dots[j];
+          const dx = d.x - d2.x, dy = d.y - d2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < distLimit) {
+            ctx.beginPath();
+            ctx.moveTo(d.x, d.y);
+            ctx.lineTo(d2.x, d2.y);
+            ctx.strokeStyle = `rgba(0,230,120,${0.08 * (1 - dist / distLimit)})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', () => { resize(); initDots(); });
+    resize(); initDots(); draw();
+
+    // ─── NAV SCROLL HIGHLIGHT ───
+    const sections = ['def', 'senses', 'history', 'future', 'apps', 'flash', 'ux', 'review'];
+    const navLinks = document.querySelectorAll('.top-nav a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 120) current = id;
+      });
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    });
+  </script>
+</body>
+
+</html>
