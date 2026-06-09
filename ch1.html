@@ -1472,7 +1472,88 @@
         font-size: 1.7rem
       }
     }
-  </style>
+  
+    /* ═══════════════════════════════════════════
+       FLASH IMAGE STUDY CARDS — Added visuals
+    ═══════════════════════════════════════════ */
+    .flash-visual-card{
+      background:linear-gradient(135deg, rgba(26,170,60,.08), rgba(6,6,8,.72));
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:20px;
+      margin:18px 0 24px;
+      box-shadow:0 10px 34px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.04);
+      position:relative;
+      overflow:hidden;
+    }
+    .flash-visual-card::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 15% 0%, rgba(34,204,72,.13), transparent 28%),
+        linear-gradient(90deg, rgba(34,204,72,.08), transparent 60%);
+      pointer-events:none;
+    }
+    .flash-visual-title{
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:12px;
+      font-family:Orbitron, Cairo, sans-serif;
+      color:var(--green2);
+      font-size:13px;
+      font-weight:900;
+      letter-spacing:1.3px;
+      text-transform:uppercase;
+    }
+    .flash-visual-title span{
+      color:var(--gold);
+      font-family:Cairo, sans-serif;
+      font-size:13px;
+      letter-spacing:0;
+      text-transform:none;
+      margin-left:auto;
+      direction:rtl;
+    }
+    .flash-img{
+      position:relative;
+      z-index:1;
+      width:100%;
+      display:block;
+      border-radius:14px;
+      border:1px solid rgba(34,204,72,.35);
+      background:#050805;
+      box-shadow:0 0 28px rgba(34,204,72,.15), 0 12px 30px rgba(0,0,0,.45);
+      margin:10px auto 12px;
+    }
+    .flash-img-caption{
+      position:relative;
+      z-index:1;
+      color:var(--muted2);
+      font-size:13px;
+      line-height:1.8;
+      text-align:center;
+    }
+    .flash-img-caption strong{
+      color:var(--green3);
+    }
+    .flash-mini-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin:14px 0;
+    }
+    @media(max-width:700px){
+      .flash-mini-grid{grid-template-columns:1fr}
+      .flash-visual-card{padding:14px}
+      .flash-visual-title{align-items:flex-start;flex-direction:column}
+      .flash-visual-title span{margin-left:0}
+    }
+
+</style>
 
   <style id="index-back-button-style">
     .index-back-button {
@@ -1957,6 +2038,7 @@
       </div>
     </div>
 
+
     <!-- ═══════════════════ §6 FLASH BASICS ═══════════════════ -->
     <div id="flash">
       <div class="section-label">Section 6</div>
@@ -1971,181 +2053,191 @@
 
     <div class="card">
       <div class="card-title">Flash Interface Elements <span class="ar">عناصر واجهة Flash</span></div>
-      <div class="g2">
-        <div>
-          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--accent)">Main Interface Components:
-          </p>
-          <div class="flash-row">
-            <div class="flash-lbl">Tool Bar</div>
-            <div class="flash-val">Drawing and selection tools</div>
-          </div>
-          <div class="flash-row">
-            <div class="flash-lbl">Stage</div>
-            <div class="flash-val">The visible area where content is placed</div>
-          </div>
-          <div class="flash-row">
-            <div class="flash-lbl">Timeline</div>
-            <div class="flash-val">Controls when objects appear / disappear</div>
-          </div>
-          <div class="flash-row">
-            <div class="flash-lbl">Frames</div>
-            <div class="flash-val">Individual time units in the timeline</div>
-          </div>
-          <div class="flash-row">
-            <div class="flash-lbl">Layers</div>
-            <div class="flash-val">Separate drawing canvases stacked on top</div>
-          </div>
-          <div class="flash-row">
-            <div class="flash-lbl">Library</div>
-            <div class="flash-val">Stores reusable symbols and assets</div>
-          </div>
-          <div class="flash-row">
-            <div class="flash-lbl">Speed</div>
-            <div class="flash-val">Frame rate (frames per second)</div>
-          </div>
-          <div class="flash-row">
-            <div class="flash-lbl">Movie Dimensions</div>
-            <div class="flash-val">Width × Height of the stage in pixels</div>
-          </div>
-        </div>
-        <div>
-          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--accent)">Drawing Objects:</p>
-          <div
-            style="background:var(--mid); border:1px solid var(--border); border-radius:10px; padding:14px; font-size:13px;">
-            <div style="margin-bottom:6px"><span class="tag g">1</span> Circle (Oval)</div>
-            <div style="margin-bottom:6px"><span class="tag g">2</span> Rectangle</div>
-            <div style="margin-bottom:6px"><span class="tag g">3</span> Lines</div>
-            <div style="margin-bottom:6px"><span class="tag g">4</span> Characters (Text)</div>
-            <div style="margin-bottom:6px"><span class="tag g">5</span> Eraser</div>
-            <div class="hl" style="margin-top:10px; font-size:12px">
-              <div class="hl-lbl">Circle & Rectangle</div>
-              Both have: <strong>Border line</strong> + <strong>Inside filling</strong>
-            </div>
-          </div>
+      <p>Flash Professional provides a workspace for creating multimedia movies. The most important interface elements are the <strong>Tool Bar</strong>, <strong>Timeline</strong>, <strong>Frames</strong>, <strong>Layers</strong>, <strong>Library</strong>, <strong>Movie Dimensions</strong>, and <strong>Speed / Frame Rate</strong>.</p>
+
+      <div class="flash-visual-card">
+        <div class="flash-visual-title">Flash Content Creation Tool <span>واجهة إنشاء محتوى Flash</span></div>
+        <img class="flash-img" src="images/flash-interface.png" alt="Flash Interface Elements">
+        <div class="flash-img-caption">
+          Shows the main Flash workspace: <strong>Tool Bar</strong>, <strong>Layer</strong>, <strong>Frames</strong>, <strong>Library</strong>, <strong>Movie Dimensions</strong>, and <strong>Speed</strong>.
         </div>
       </div>
+
       <div class="ar-box">
         <div class="ar-label">Arabic — واجهة Flash</div>
-        <strong>Stage:</strong> منطقة العمل المرئية حيث تضع الكائنات | <strong>Timeline:</strong> شريط الوقت يتحكم في
-        ظهور واختفاء الكائنات.<br>
-        <strong>Layers:</strong> طبقات مستقلة فوق بعضها — كل طبقة تحتوي على كائنات مستقلة.<br>
-        <strong>Library:</strong> مكتبة تخزِّن الـ Symbols (الرموز) القابلة لإعادة الاستخدام.<br>
-        <strong>أدوات الرسم:</strong> دائرة (لها حد + تعبئة) + مستطيل + خطوط + نص + ممحاة.
+        <strong>Tool Bar:</strong> شريط الأدوات للرسم والتحديد.<br>
+        <strong>Timeline:</strong> شريط الوقت الذي يتحكم بظهور واختفاء الكائنات.<br>
+        <strong>Frames:</strong> وحدات زمنية صغيرة داخل الـ Timeline.<br>
+        <strong>Layers:</strong> طبقات مستقلة فوق بعضها.<br>
+        <strong>Library:</strong> مكتبة تخزّن الرموز والعناصر القابلة لإعادة الاستخدام.<br>
+        <strong>Movie Dimensions:</strong> أبعاد مساحة العمل بالبكسل.<br>
+        <strong>Speed:</strong> سرعة العرض بعدد الإطارات في الثانية.
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Frames, Key Frames & Blank Key Frames <span class="ar">الإطارات والإطارات المفتاحية</span>
+      <div class="card-title">Drawing Objects <span class="ar">رسم الكائنات</span></div>
+      <p>Flash provides drawing tools such as <strong>Circle</strong>, <strong>Rectangle</strong>, <strong>Lines</strong>, <strong>Text / Characters</strong>, and <strong>Eraser</strong>. Circle and rectangle objects usually have two parts: <strong>border line</strong> and <strong>inside filling</strong>.</p>
+
+      <div class="flash-visual-card">
+        <div class="flash-visual-title">Drawing Tools <span>أدوات الرسم</span></div>
+        <img class="flash-img" src="images/drawing-objects.png" alt="Drawing Objects in Flash">
+        <div class="flash-img-caption">
+          Circle, rectangle, line, text, and eraser tools. Circle and rectangle contain a <strong>border line</strong> and <strong>inside filling</strong>.
+        </div>
       </div>
-      <div class="tw">
-        <table>
-          <thead>
-            <tr>
-              <th>Concept</th>
-              <th>Purpose</th>
-              <th>Example</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Regular Frame</td>
-              <td>Continues the content of the previous frame — no change</td>
-              <td>Rectangle stays visible from frame 1 to frame 20</td>
-            </tr>
-            <tr>
-              <td class="gc">Key Frame</td>
-              <td>Marks a change point: object position, object size, or adding new objects</td>
-              <td>Rectangle moves upward frames 1–20, then downward frames 21–40</td>
-            </tr>
-            <tr>
-              <td class="oc">Blank Key Frame</td>
-              <td>Removes old objects and allows drawing entirely new ones</td>
-              <td>Frame 1–20: rectangle shown. Frame 21–40: circle shown instead</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="hl" style="margin-top:10px">
-        <div class="hl-lbl">Timeline Example</div>
-        <strong>Visible:</strong> Rectangle shown from Frame 1 → Frame 20<br>
-        <strong>Not Visible:</strong> After Frame 20 (unless continued with more frames)
-      </div>
+
       <div class="ar-box">
-        <div class="ar-label">Arabic — أنواع الإطارات</div>
-        <strong>Frame عادي:</strong> يستمر المحتوى كما هو من الإطار السابق.<br>
-        <strong>Key Frame (إطار مفتاحي):</strong> يُستخدَم لـ: (1) تغيير موضع الكائن (2) تغيير حجمه (3) إضافة كائن
-        جديد.<br>
-        <strong>Blank Key Frame (إطار مفتاحي فارغ):</strong> يُزيل الكائنات القديمة ويسمح برسم كائنات جديدة تماماً.<br>
-        <strong>مثال:</strong> من 1–20 مستطيل | من 21–40 دائرة بدلاً منه (باستخدام Blank Key Frame في الإطار 21).
+        <div class="ar-label">Arabic — أدوات الرسم</div>
+        الأدوات الأساسية في Flash: دائرة، مستطيل، خطوط، نصوص، وممحاة.<br>
+        الدائرة والمستطيل يحتويان غالباً على <strong>خط حدود</strong> و <strong>تعبئة داخلية</strong>.
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Symbols, Motion Tween & ActionScript <span class="ar">الرموز والتحريك التلقائي
-          والبرمجة</span></div>
-      <div class="g2">
-        <div>
-          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--accent)">Symbols & Motion Tween:</p>
-          <ul style="font-size:13px">
-            <li><strong>Symbols</strong> are used to move objects from state to state in a <strong>linear
-                manner</strong></li>
-            <li><strong>Motion Tween</strong> = Flash automatically creates the in-between frames between two key frames
-            </li>
-            <li>Example: Circle symbol moves from frame 1 (left) to frame 10 (right) automatically</li>
-            <li><strong>Instances</strong> of a symbol can be dragged onto the stage — many instances from one symbol
-            </li>
-            <li>To program an instance (move it, change its color), give it an <strong>instance name</strong><br><code
-                style="font-size:11px; color:var(--accent2)">c1.visible = "true"</code></li>
-          </ul>
-        </div>
-        <div>
-          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--accent)">ActionScript:</p>
-          <ul style="font-size:13px">
-            <li>Used to add <strong>programming control</strong> to the movie</li>
-            <li>Commands: <code style="color:var(--accent2); font-size:11.5px">play()</code>, <code
-                style="color:var(--accent2); font-size:11.5px">stop()</code>, <code
-                style="color:var(--accent2); font-size:11.5px">trace()</code></li>
-          </ul>
-          <p style="font-size:13px; margin:10px 0 6px; font-weight:700">Two places to insert code:</p>
-          <div class="flash-row">
-            <div class="flash-lbl">At Frame</div>
-            <div class="flash-val">When player reaches a certain frame</div>
-          </div>
-          <div class="flash-row">
-            <div class="flash-lbl">At Button</div>
-            <div class="flash-val">When user clicks the button</div>
-          </div>
-        </div>
-      </div>
+      <div class="card-title">Timeline & Frame Visibility <span class="ar">الخط الزمني وظهور الإطارات</span></div>
+      <p>The <strong>Timeline</strong> shows frame visibility. If an object exists from frame 1 to frame 20, it will appear during these frames. After that range, it becomes not visible unless the object is continued or another key frame is created.</p>
 
-      <div class="card" style="margin-top:12px; background:var(--mid)">
-        <div class="card-title" style="font-size:.88rem">📦 Publishing the Flash Movie <span class="ar">نشر
-            الفلاش</span></div>
-        <p style="font-size:13px">Publishing generates an <strong>.swf file</strong> from the original Flash file in the
-          same directory, which is then run by browsers.</p>
-        <div style="display:flex; align-items:center; gap:14px; margin-top:10px; flex-wrap:wrap">
-          <div
-            style="background:rgba(0,230,120,.1); border:1px solid var(--accent); border-radius:8px; padding:10px 18px; font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent)">
-            Movie1.fla</div>
-          <div style="font-size:20px; color:var(--muted)">→ Publish →</div>
-          <div
-            style="background:rgba(255,107,53,.1); border:1px solid var(--accent2); border-radius:8px; padding:10px 18px; font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--accent2)">
-            Movie1.swf</div>
-        </div>
-        <div class="ar-box" style="margin-top:10px">
-          <div class="ar-label">Arabic</div>
-          النشر (Publishing) يُحوِّل ملف Flash الأصلي (.fla) إلى ملف .swf في نفس المجلد.<br>
-          ملف .swf هو الذي يُشغِّله المتصفح — وليس الملف الأصلي .fla.
+      <div class="flash-visual-card">
+        <div class="flash-visual-title">Timeline Visibility <span>ظهور الكائن داخل الإطارات</span></div>
+        <img class="flash-img" src="images/timeline-visibility.png" alt="Timeline Visibility Example">
+        <div class="flash-img-caption">
+          Example: the rectangle is <strong>visible from frame 1 to frame 20</strong>, then becomes <strong>not visible</strong> after frame 20.
         </div>
       </div>
 
       <div class="ar-box">
-        <div class="ar-label">Arabic — الرموز والبرمجة</div>
-        <strong>Symbol (رمز):</strong> كائن قابل لإعادة الاستخدام يُخزَّن في الـ Library.<br>
-        <strong>Motion Tween:</strong> Flash يُنشئ الإطارات الوسيطة تلقائياً بين إطارين مفتاحيين (توفير الوقت).<br>
-        <strong>Instance (مثيل):</strong> نسخة من الرمز على الـ Stage — يمكن وضع عدة مثيلات من نفس الرمز.<br>
-        <strong>ActionScript:</strong> لغة برمجة Flash — تُضاف على إطار (عند وصول التشغيل للإطار) أو على زر (عند نقر
-        المستخدم).
+        <div class="ar-label">Arabic — Timeline</div>
+        الـ Timeline يوضح متى يظهر الكائن ومتى يختفي.<br>
+        مثال: المستطيل يظهر من Frame 1 إلى Frame 20، وبعد Frame 20 لا يظهر إذا لم يتم تمديده.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Key Frames <span class="ar">الإطارات المفتاحية</span></div>
+      <p><strong>Key Frames</strong> are used when we want to create a change in the animation. They can be used for changing the object position, changing the object size, or adding a new object.</p>
+
+      <div class="flash-visual-card">
+        <div class="flash-visual-title">Key Frames Uses <span>استخدامات Key Frames</span></div>
+        <img class="flash-img" src="images/keyframes.png" alt="Key Frames Uses">
+        <div class="flash-img-caption">
+          Key frames mark important change points, such as moving an object upward from frames <strong>1–20</strong> and downward from frames <strong>21–40</strong>.
+        </div>
+      </div>
+
+      <div class="ar-box">
+        <div class="ar-label">Arabic — Key Frames</div>
+        الـ Key Frame يُستخدم عند حدوث تغيير في الحركة أو الشكل.<br>
+        أهم الاستخدامات: تغيير موضع الكائن، تغيير حجم الكائن، أو إضافة كائن جديد.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Blank Key Frames <span class="ar">الإطارات المفتاحية الفارغة</span></div>
+      <p><strong>Blank Key Frames</strong> are used to remove the old object and draw a new object in the same layer and timeline.</p>
+
+      <div class="flash-visual-card">
+        <div class="flash-visual-title">Blank Key Frames <span>إطار مفتاحي فارغ</span></div>
+        <img class="flash-img" src="images/blank-keyframes.png" alt="Blank Key Frames">
+        <div class="flash-img-caption">
+          Blank key frames allow the designer to remove old content and start drawing a new object at a specific frame.
+        </div>
+      </div>
+
+      <div class="flash-visual-card">
+        <div class="flash-visual-title">Blank Key Frame Example <span>مثال مستطيل ثم دائرة</span></div>
+        <img class="flash-img" src="images/rectangle-circle-example.png" alt="Rectangle and Circle Frame Example">
+        <div class="flash-img-caption">
+          Example: <strong>Frame 1–20</strong> rectangle will be shown, then <strong>Frame 21–40</strong> circle will be shown.
+        </div>
+      </div>
+
+      <div class="ar-box">
+        <div class="ar-label">Arabic — Blank Key Frames</div>
+        الـ Blank Key Frame يحذف الكائن القديم ويسمح برسم كائن جديد.<br>
+        مثال مهم: من Frame 1 إلى 20 يظهر المستطيل، ومن Frame 21 إلى 40 تظهر الدائرة بدلاً منه.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Symbols & Motion Tween <span class="ar">الرموز والتحريك التلقائي</span></div>
+      <p><strong>Symbols</strong> are reusable objects stored in the Library. They are used to move an object from one state to another in a <strong>linear manner</strong>. <strong>Motion Tween</strong> automatically creates the frames between two key frames.</p>
+
+      <div class="flash-visual-card">
+        <div class="flash-visual-title">Symbols & Motion Tween <span>Symbols و Motion Tween</span></div>
+        <img class="flash-img" src="images/symbols-motion-tween.png" alt="Symbols and Motion Tween">
+        <div class="flash-img-caption">
+          A circle symbol moves from <strong>frame 1</strong> on the left to <strong>frame 10</strong> on the right using <strong>Motion Tween</strong>.
+        </div>
+      </div>
+
+      <div class="ar-box">
+        <div class="ar-label">Arabic — Symbols</div>
+        الـ Symbol هو كائن قابل لإعادة الاستخدام ومخزن داخل Library.<br>
+        Motion Tween يجعل Flash ينشئ الإطارات الوسطية تلقائياً بين البداية والنهاية.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Action Script <span class="ar">أكشن سكربت</span></div>
+      <p><strong>Action Script</strong> is used to add programming control to the movie, such as <code>play()</code>, <code>stop()</code>, and <code>trace()</code>. Code can be inserted in two common places: <strong>at Frame</strong> or <strong>at Button</strong>.</p>
+
+      <div class="flash-visual-card">
+        <div class="flash-visual-title">Action Script Places <span>أماكن كتابة الكود</span></div>
+        <img class="flash-img" src="images/action-script.png" alt="Action Script Places">
+        <div class="flash-img-caption">
+          ActionScript code can be inserted <strong>at a frame</strong> when the player reaches it, or <strong>at a button</strong> when the user clicks it.
+        </div>
+      </div>
+
+      <div class="ar-box">
+        <div class="ar-label">Arabic — Action Script</div>
+        ActionScript تُستخدم لإضافة تحكم برمجي للفيلم مثل play و stop و trace.<br>
+        يمكن وضع الكود على Frame معيّن، أو داخل Button عند ضغط المستخدم عليه.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Instances & Instance Name <span class="ar">المثيلات واسم المثيل</span></div>
+      <p>An <strong>instance</strong> is a copy of a symbol placed on the stage. You can drag many instances of the same symbol. To program an instance, you must give it an <strong>instance name</strong>, for example: <code>c1.visible = "true"</code>.</p>
+
+      <div class="flash-visual-card">
+        <div class="flash-visual-title">Instance Name <span>اسم الـ Instance</span></div>
+        <img class="flash-img" src="images/instance-name.png" alt="Instance Name in Flash">
+        <div class="flash-img-caption">
+          The symbol is stored in the Library, and the copy on the Stage is an <strong>instance</strong>. Naming the instance allows programming control.
+        </div>
+      </div>
+
+      <div class="ar-box">
+        <div class="ar-label">Arabic — Instance</div>
+        الـ Instance هي نسخة من الـ Symbol موجودة على الـ Stage.<br>
+        يمكن سحب أكثر من Instance من نفس الـ Symbol.<br>
+        حتى تتحكم فيها بالكود يجب إعطاؤها Instance Name مثل: <code>c1.visible = "true"</code>.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Publishing the Movie <span class="ar">نشر ملف الفلاش</span></div>
+      <p>Publishing the movie generates an <strong>SWF</strong> file from the original Flash file in the <strong>same directory</strong>. The SWF file is the file that can be run by browsers.</p>
+
+      <div class="formula">
+        <div class="flabel">Publish Example</div>
+        Movie1.fla  →  Publish  →  Movie1.swf
+      </div>
+
+      <div class="flash-visual-card">
+        <div class="flash-visual-title">Publishing the Movie <span>تحويل FLA إلى SWF</span></div>
+        <img class="flash-img" src="images/publishing-movie.png" alt="Publishing the Movie">
+        <div class="flash-img-caption">
+          Publishing converts the original <strong>.fla</strong> file into a browser-ready <strong>.swf</strong> file in the same folder.
+        </div>
+      </div>
+
+      <div class="ar-box">
+        <div class="ar-label">Arabic — Publishing</div>
+        عند عمل Publish، يقوم Flash بإنشاء ملف SWF من ملف FLA الأصلي في نفس المجلد.<br>
+        ملف SWF هو الذي يتم تشغيله داخل المتصفح.
       </div>
     </div>
 
