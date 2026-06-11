@@ -506,7 +506,7 @@
   <nav class="top-nav">
     <div class="nav-inner">
       <div class="nav-links">
-         <a href="index.html" class="active">🏠 Home</a>
+          <a href="index.html" class="active">🏠 Home</a>
         <a href="#s1">Pixels</a>
         <a href="#s2">Color Depth</a>
         <a href="#s3">Image Types</a>
@@ -944,6 +944,324 @@
     </section>
 
     <!-- ════ SECTION 10: HUFFMAN (DETAILED) ════ -->
+    <section class="section" id="s10">
+      <div class="sec-header">
+        <div class="sec-number">10</div>
+        <div class="sec-title">🌳 Huffman Encoding — Detailed</div>
+        <div class="sec-line"></div>
+      </div>
+
+      <!-- Concept -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">💡</div>What is Huffman Encoding?</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          ترميز هوفمان هو خوارزمية ضغط بدون فقدان (Lossless) تعتمد على إحصائيات تكرار الرموز. الفكرة الأساسية: <strong>الحروف الأكثر تكراراً تأخذ رموزاً أقصر</strong>، والحروف الأقل تكراراً تأخذ رموزاً أطول. الناتج كود خالٍ من البادئات (Prefix-Free) مما يضمن فك الضغط الصحيح دون غموض. يُبنى شجرة ثنائية تُحدَّد منها الرموز.
+        </div>
+        <ul class="points">
+          <li><span class="pt-dot"></span><strong>Lossless compression</strong> — original data fully recoverable</li>
+          <li><span class="pt-dot"></span><strong>Statistical encoding:</strong> both sender and receiver know occurrence probabilities</li>
+          <li><span class="pt-dot"></span><strong>Frequent characters → shorter codes</strong> | Rare characters → longer codes</li>
+          <li><span class="pt-dot"></span>Successive characters coded <strong>independently</strong></li>
+          <li><span class="pt-dot"></span>Result is <strong>Prefix-Free</strong> → unique, unambiguous decoding guaranteed</li>
+          <li><span class="pt-dot"></span>A <strong>binary tree</strong> is built: leaves = characters, internal nodes = combined probabilities, edges = 0 or 1</li>
+        </ul>
+      </div>
+
+      <!-- Why Prefix-Free matters -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">🔑</div>Why Prefix-Free Codes Matter</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          في كود Huffman، لا يكون رمز أي حرف هو بداية (prefix) رمز حرف آخر. هذا يضمن فك الضغط الصحيح — عند القراءة من اليسار لليمين يمكن تحديد كل حرف بوضوح بدون غموض. مثلاً: إذا B=1 وA=010، فالتسلسل 1010 = B,A وليس غيره.
+        </div>
+        <div class="code-block">
+          <span class="code-label">Why prefix-free matters — example</span>
+          Codes: B=1, A=010, D=011, E=001, C=000<br><br>
+          Decoding "1010010":<br>
+          1 → B<br>
+          010 → A<br>
+          010 → A<br>
+          Result: BAA  ✓ (no ambiguity possible)
+        </div>
+      </div>
+
+      <!-- Step-by-step algorithm -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">📋</div>Huffman Algorithm — Step by Step</div>
+        <div class="card-ar">
+          <span class="card-ar-label">خوارزمية هوفمان — خطوة بخطوة</span>
+          1. رتّب الحروف تصاعدياً حسب احتمالياتها (الأقل أولاً). 2. ادمج أقل اثنين في عقدة جديدة. 3. كرّر حتى تبقى عقدة جذر واحدة (احتمالها = 1.0). 4. اعطِ 0 للفرع الأيسر و1 للأيمن (أو العكس باتساق). 5. اقرأ الكود من الجذر إلى كل ورقة.
+        </div>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <div class="step-title">Sort by Probability (Ascending)</div>
+              <div class="step-desc">List all characters ordered from lowest to highest probability. The two lowest will be combined first.</div>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <div class="step-title">Combine Two Lowest</div>
+              <div class="step-desc">Take the two nodes with the smallest probabilities. Combine them into a new parent node whose probability = sum of the two children.</div>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <div class="step-title">Re-insert and Repeat</div>
+              <div class="step-desc">Insert the new combined node back into the sorted list. Repeat steps 1–2 until only one node remains (the root, with probability = 1.0).</div>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <div class="step-title">Assign Edge Labels (0 and 1)</div>
+              <div class="step-desc">Label every left edge as 0 and every right edge as 1 (or vice versa, consistently). This is done on the final tree.</div>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <div class="step-title">Read Code for Each Character</div>
+              <div class="step-desc">For each character (leaf node), read the bits along the path from the ROOT down to that leaf. That bit-string is its Huffman code.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full Worked Example -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">🧮</div>Worked Example — Full Solution</div>
+        <div class="card-ar">
+          <span class="card-ar-label">مثال محلول بالكامل</span>
+          الحروف A,B,C,D,E مع احتمالياتها: B=0.51 (الأعلى) يأخذ أقصر رمز "1". C=0.09 (الأقل) يأخذ أطول رمز "000". متوسط طول الرمز = 1.98 بت/رمز مقارنةً بـ 8 بت في ASCII.
+        </div>
+
+        <div class="code-block">
+          <span class="code-label">Given: Characters A, B, C, D, E</span>
+          A: p = 0.16 &nbsp;|&nbsp; B: p = 0.51 &nbsp;|&nbsp; C: p = 0.09 &nbsp;|&nbsp; D: p = 0.13 &nbsp;|&nbsp; E: p = 0.11
+        </div>
+
+        <div class="code-block">
+          <span class="code-label">Step 1 — Sort ascending: C(0.09), E(0.11), D(0.13), A(0.16), B(0.51)</span>
+          Step 2 — Combine C+E = CE (0.20). New list: D(0.13), A(0.16), CE(0.20), B(0.51)<br>
+          Step 3 — Sort: D(0.13), A(0.16), CE(0.20), B(0.51). Combine D+A = DA(0.29)<br>
+          Step 4 — Sort: CE(0.20), DA(0.29), B(0.51). Combine CE+DA = CEDA(0.49)<br>
+          Step 5 — Combine CEDA+B = Root(1.00) ✓
+        </div>
+
+        <!-- Tree SVG -->
+        <div class="tree-container">
+          <span class="tree-title">🌳 Huffman Tree Visualization</span>
+          <svg class="tree-svg" viewBox="0 0 680 340" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <!-- Lines/edges -->
+            <!-- Root to CEDA (left=0) -->
+            <line x1="340" y1="30" x2="180" y2="110" stroke="#0090e0" stroke-width="2"/>
+            <!-- Root to B (right=1) -->
+            <line x1="340" y1="30" x2="530" y2="110" stroke="#0090e0" stroke-width="2"/>
+            <!-- CEDA to CE (left=0) -->
+            <line x1="180" y1="130" x2="100" y2="200" stroke="#0090e0" stroke-width="2"/>
+            <!-- CEDA to DA (right=1) -->
+            <line x1="180" y1="130" x2="280" y2="200" stroke="#0090e0" stroke-width="2"/>
+            <!-- CE to C (left=0) -->
+            <line x1="100" y1="220" x2="60" y2="290" stroke="#0090e0" stroke-width="2"/>
+            <!-- CE to E (right=1) -->
+            <line x1="100" y1="220" x2="145" y2="290" stroke="#0090e0" stroke-width="2"/>
+            <!-- DA to D (left=0) -->
+            <line x1="280" y1="220" x2="240" y2="290" stroke="#0090e0" stroke-width="2"/>
+            <!-- DA to A (right=1) -->
+            <line x1="280" y1="220" x2="325" y2="290" stroke="#0090e0" stroke-width="2"/>
+
+            <!-- Edge labels -->
+            <text x="245" y="75" font-family="monospace" font-size="12" font-weight="700" fill="#0090e0">0</text>
+            <text x="448" y="75" font-family="monospace" font-size="12" font-weight="700" fill="#e07800">1</text>
+            <text x="128" y="170" font-family="monospace" font-size="12" font-weight="700" fill="#0090e0">0</text>
+            <text x="238" y="170" font-family="monospace" font-size="12" font-weight="700" fill="#e07800">1</text>
+            <text x="65" y="260" font-family="monospace" font-size="12" font-weight="700" fill="#0090e0">0</text>
+            <text x="130" y="260" font-family="monospace" font-size="12" font-weight="700" fill="#e07800">1</text>
+            <text x="250" y="260" font-family="monospace" font-size="12" font-weight="700" fill="#0090e0">0</text>
+            <text x="312" y="260" font-family="monospace" font-size="12" font-weight="700" fill="#e07800">1</text>
+
+            <!-- Internal nodes -->
+            <!-- Root -->
+            <circle cx="340" cy="28" r="22" fill="#e8f2ff" stroke="#0090e0" stroke-width="2"/>
+            <text x="340" y="23" text-anchor="middle" font-family="Orbitron,monospace" font-size="9" font-weight="700" fill="#0090e0">ROOT</text>
+            <text x="340" y="36" text-anchor="middle" font-family="monospace" font-size="10" fill="#405070">1.00</text>
+
+            <!-- CEDA -->
+            <circle cx="180" cy="120" r="20" fill="#e8f2ff" stroke="#0090e0" stroke-width="2"/>
+            <text x="180" y="115" text-anchor="middle" font-family="monospace" font-size="9" fill="#0090e0">CEDA</text>
+            <text x="180" y="128" text-anchor="middle" font-family="monospace" font-size="10" fill="#405070">0.49</text>
+
+            <!-- B leaf -->
+            <circle cx="530" cy="120" r="22" fill="#0090e0" stroke="#0060b0" stroke-width="2"/>
+            <text x="530" y="114" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#fff">B</text>
+            <text x="530" y="128" text-anchor="middle" font-family="monospace" font-size="10" fill="#c0e8ff">0.51</text>
+            <text x="530" y="148" text-anchor="middle" font-family="Orbitron,monospace" font-size="9" font-weight="700" fill="#e07800">= "1"</text>
+
+            <!-- CE node -->
+            <circle cx="100" cy="212" r="18" fill="#e8f2ff" stroke="#0090e0" stroke-width="2"/>
+            <text x="100" y="207" text-anchor="middle" font-family="monospace" font-size="9" fill="#0090e0">CE</text>
+            <text x="100" y="220" text-anchor="middle" font-family="monospace" font-size="10" fill="#405070">0.20</text>
+
+            <!-- DA node -->
+            <circle cx="280" cy="212" r="18" fill="#e8f2ff" stroke="#0090e0" stroke-width="2"/>
+            <text x="280" y="207" text-anchor="middle" font-family="monospace" font-size="9" fill="#0090e0">DA</text>
+            <text x="280" y="220" text-anchor="middle" font-family="monospace" font-size="10" fill="#405070">0.29</text>
+
+            <!-- C leaf -->
+            <circle cx="60" cy="305" r="22" fill="#0090e0" stroke="#0060b0" stroke-width="2"/>
+            <text x="60" y="299" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#fff">C</text>
+            <text x="60" y="313" text-anchor="middle" font-family="monospace" font-size="10" fill="#c0e8ff">0.09</text>
+            <text x="60" y="328" text-anchor="middle" font-family="Orbitron,monospace" font-size="8" font-weight="700" fill="#e07800">"000"</text>
+
+            <!-- E leaf -->
+            <circle cx="145" cy="305" r="22" fill="#0090e0" stroke="#0060b0" stroke-width="2"/>
+            <text x="145" y="299" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#fff">E</text>
+            <text x="145" y="313" text-anchor="middle" font-family="monospace" font-size="10" fill="#c0e8ff">0.11</text>
+            <text x="145" y="328" text-anchor="middle" font-family="Orbitron,monospace" font-size="8" font-weight="700" fill="#e07800">"001"</text>
+
+            <!-- D leaf -->
+            <circle cx="240" cy="305" r="22" fill="#0090e0" stroke="#0060b0" stroke-width="2"/>
+            <text x="240" y="299" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#fff">D</text>
+            <text x="240" y="313" text-anchor="middle" font-family="monospace" font-size="10" fill="#c0e8ff">0.13</text>
+            <text x="240" y="328" text-anchor="middle" font-family="Orbitron,monospace" font-size="8" font-weight="700" fill="#e07800">"010"</text>
+
+            <!-- A leaf -->
+            <circle cx="325" cy="305" r="22" fill="#0090e0" stroke="#0060b0" stroke-width="2"/>
+            <text x="325" y="299" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#fff">A</text>
+            <text x="325" y="313" text-anchor="middle" font-family="monospace" font-size="10" fill="#c0e8ff">0.16</text>
+            <text x="325" y="328" text-anchor="middle" font-family="Orbitron,monospace" font-size="8" font-weight="700" fill="#e07800">"011"</text>
+          </svg>
+        </div>
+
+        <div class="code-block">
+          <span class="code-label">Final Huffman Codes</span>
+          B = 1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (1 bit  — most frequent, p=0.51)<br>
+          A = 011 &nbsp;&nbsp;&nbsp; (3 bits — p=0.16)<br>
+          D = 010 &nbsp;&nbsp;&nbsp; (3 bits — p=0.13)<br>
+          E = 001 &nbsp;&nbsp;&nbsp; (3 bits — p=0.11)<br>
+          C = 000 &nbsp;&nbsp;&nbsp; (3 bits — least frequent, p=0.09)
+        </div>
+
+        <div class="code-block">
+          <span class="code-label">Average Code Length Calculation</span>
+          L̄ = Σ (bits × probability)<br><br>
+          = (1×0.51) + (3×0.16) + (3×0.13) + (3×0.11) + (3×0.09)<br>
+          = 0.51 + 0.48 + 0.39 + 0.33 + 0.27<br>
+          = <strong>1.98 bits/symbol</strong>
+        </div>
+
+        <div class="highlight-box">
+          <span class="hl-label">📊 Compression Comparison — 1000 Characters</span>
+          <strong>Huffman:</strong> 1000 × 1.98 = 1,980 bits ≈ <strong>248 Bytes</strong><br>
+          <strong>ASCII:</strong> 1000 × 8 bits = 8,000 bits = <strong>1,000 Bytes (1 KB)</strong><br>
+          <strong style="color:#0090e0;">Saving: ~75% size reduction!</strong>
+        </div>
+      </div>
+
+      <!-- Second Example -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">✏️</div>Second Example — Practice Problem</div>
+        <div class="card-ar">
+          <span class="card-ar-label">مثال تدريبي ثانٍ</span>
+          احسب كود هوفمان وطول الرمز المتوسط للحروف: A(0.4), B(0.2), C(0.2), D(0.1), E(0.1). الحرف A الأكثر تكراراً يأخذ رمزاً قصيراً.
+        </div>
+        <div class="code-block">
+          <span class="code-label">Given probabilities</span>
+          A=0.4, B=0.2, C=0.2, D=0.1, E=0.1
+        </div>
+        <div class="code-block">
+          <span class="code-label">Building the tree</span>
+          Sort: D(0.1), E(0.1), B(0.2), C(0.2), A(0.4)<br>
+          Combine D+E = DE(0.2)<br>
+          Sort: B(0.2), C(0.2), DE(0.2), A(0.4)<br>
+          Combine B+C = BC(0.4)<br>
+          Sort: DE(0.2), A(0.4), BC(0.4)<br>
+          Combine DE+A = DEA(0.6)<br>  
+          Combine DEA+BC = Root(1.0)
+        </div>
+        <div class="code-block">
+          <span class="code-label">Resulting Codes (one valid assignment)</span>
+          BC branch = 0x  (left subtree)<br>
+          B = 00<br>
+          C = 01<br>
+          DEA branch = 1x<br>
+          A = 10<br>
+          DE branch = 11x<br>
+          D = 110<br>
+          E = 111
+        </div>
+        <div class="code-block">
+          <span class="code-label">Average Length</span>
+          L̄ = (2×0.2)+(2×0.2)+(2×0.4)+(3×0.1)+(3×0.1)<br>
+             = 0.4 + 0.4 + 0.8 + 0.3 + 0.3 = <strong>2.2 bits/symbol</strong>
+        </div>
+      </div>
+
+      <!-- Encoding & Decoding -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">🔄</div>Encoding &amp; Decoding Process</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          <strong>الترميز:</strong> استبدل كل حرف في النص بكوده الثنائي. <strong>فك الترميز:</strong> ابدأ من جذر الشجرة، اقرأ بتاً بتاً: 0 = اذهب يساراً، 1 = اذهب يميناً. عند الوصول لورقة (حرف) اكتبه وعُد للجذر.
+        </div>
+        <div class="two-col">
+          <div class="col-card blue-card">
+            <div class="col-card-title">🔒 Encoding</div>
+            <ul class="points">
+              <li><span class="pt-dot"></span>Replace each character with its Huffman code</li>
+              <li><span class="pt-dot"></span>"BAC" → <code>1 011 000</code></li>
+              <li><span class="pt-dot"></span>Frequent chars → fewer bits total</li>
+            </ul>
+          </div>
+          <div class="col-card gold-card">
+            <div class="col-card-title">🔓 Decoding</div>
+            <ul class="points">
+              <li><span class="pt-dot"></span>Start at tree root</li>
+              <li><span class="pt-dot"></span>0 = go left, 1 = go right</li>
+              <li><span class="pt-dot"></span>On reaching a leaf → write character, return to root</li>
+            </ul>
+          </div>
+        </div>
+        <div class="code-block">
+          <span class="code-label">Decoding Example — Input: 1 011 001</span>
+          1 → go right → reach leaf B → output: B, reset<br>
+          0 → go left<br>
+          1 → go right<br>
+          1 → go right → reach leaf A → output: A, reset<br>
+          0 → go left<br>
+          0 → go left<br>
+          1 → go right → reach leaf E → output: E<br>
+          <strong>Result: BAE</strong>
+        </div>
+      </div>
+
+      <!-- Key Properties Summary -->
+      <div class="info-box">
+        <span class="hl-label">📌 Huffman Key Properties — Summary</span>
+        <div class="two-col" style="margin-top:10px">
+          <div>
+            <strong>✅ Advantages</strong><br>
+            • Optimal prefix-free code<br>
+            • Lossless — no data lost<br>
+            • Simple to implement<br>
+            • Variable-length codes adapt to data frequency
+          </div>
+          <div>
+            <strong>⚠️ Limitations</strong><br>
+            • Both encoder and decoder need the same probability table<br>
+            • If probabilities change, the tree must be rebuilt<br>
+            • Overhead: must transmit the tree/table along with data<br>
+            • Less efficient than arithmetic coding for very skewed distributions
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ════ REVIEW TABLE ════ -->
     <section class="review-section" id="review">
       <div class="review-title">📋 Quick Review Table — جدول المراجعة السريعة</div>
