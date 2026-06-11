@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Multimedia Exam — CH0–CH7 Complete | Final Prep</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#060f0a; --deep:#091408; --mid:#0e2016;
+  --card:rgba(14,32,22,.65); --border:rgba(45,255,127,.15);
+  --accent:#2dff7f; --accent2:#ff6b35; --gold:#ffc940;
+  --teal:#00ffd0; --red:#ff5f6d; --purple:#b48aff;
+  --green:#2dff7f; --text:#d0eedd; --muted:#5a8a6a;
+  --hi:rgba(45,255,127,.07);
+  --ar-bg:rgba(255,201,64,.05); --ar-border:rgba(255,201,64,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Cairo,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.6}
+
+/* NAV */
+.top-nav{position:sticky;top:0;z-index:999;background:rgba(6,15,10,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:10px 20px;display:flex;gap:7px;justify-content:center;flex-wrap:wrap}
+.top-nav a{text-decoration:none;color:var(--text);border:1px solid var(--border);background:rgba(14,32,22,.75);padding:6px 13px;border-radius:9px;font-size:12.5px;font-weight:700;transition:.2s;white-space:nowrap}
+.top-nav a:hover,.top-nav a.active{color:var(--bg);background:var(--accent);border-color:var(--accent);box-shadow:0 0 14px rgba(45,255,127,.4)}
+
+/* HERO */
+.hero{position:relative;z-index:1;padding:60px 24px 44px;text-align:center;border-bottom:1px solid var(--border);background:linear-gradient(160deg,#060f0a,#091408 50%,#0a1f0d)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(45,255,127,.13),transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--accent);color:var(--accent);font-size:11px;font-weight:700;letter-spacing:2px;padding:5px 20px;border-radius:30px;margin-bottom:18px;text-transform:uppercase;background:rgba(45,255,127,.07)}
+.dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+.hero h1{font-family:Syne,sans-serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:8px}
+.hero h1 span{color:var(--accent)}
+.hero .ar-sub{color:var(--gold);font-size:1rem;margin-bottom:10px;font-family:Cairo,sans-serif}
+
+/* SCOREBOARD */
+.scoreboard{position:relative;z-index:1;max-width:900px;margin:28px auto 0;padding:0 20px}
+.score-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px 28px;backdrop-filter:blur(10px);display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.score-ring{position:relative;width:110px;height:110px;flex-shrink:0}
+.score-ring svg{transform:rotate(-90deg);width:110px;height:110px}
+.score-ring .track{fill:none;stroke:rgba(45,255,127,.1);stroke-width:8}
+.score-ring .fill{fill:none;stroke:var(--accent);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset 1s ease;stroke-dasharray:283;stroke-dashoffset:283}
+.score-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-pct{font-family:Syne,sans-serif;font-size:1.5rem;font-weight:800;color:#fff}
+.score-label{font-size:10px;color:var(--muted)}
+.score-stats{display:flex;gap:20px;flex-wrap:wrap;flex:1}
+.stat-item{text-align:center}
+.stat-item .val{font-family:Syne,sans-serif;font-size:1.8rem;font-weight:800;line-height:1}
+.stat-item .lbl{font-size:11px;color:var(--muted)}
+.val.correct{color:var(--green)}
+.val.wrong{color:var(--red)}
+.val.skip{color:var(--gold)}
+.val.total{color:var(--accent)}
+.progress-bar{height:6px;background:rgba(45,255,127,.1);border-radius:10px;margin-top:16px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--teal));border-radius:10px;transition:width .5s ease;width:0%}
+.score-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.btn{padding:9px 22px;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;border:none;font-family:Cairo,sans-serif;transition:.2s}
+.btn-accent{background:var(--accent);color:var(--bg)}
+.btn-accent:hover{box-shadow:0 4px 20px rgba(45,255,127,.4);transform:translateY(-2px)}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-red{background:rgba(255,95,109,.15);border:1px solid rgba(255,95,109,.4);color:var(--red)}
+.btn-red:hover{background:rgba(255,95,109,.25)}
+
+/* FILTERS */
+.filters{position:relative;z-index:1;max-width:900px;margin:18px auto 0;padding:0 20px;display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.filter-btn{padding:6px 15px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:rgba(14,32,22,.7);color:var(--muted);font-family:Cairo,sans-serif;transition:.2s}
+.filter-btn.active{background:rgba(45,255,127,.12);border-color:var(--accent);color:var(--accent)}
+.chapter-filter{padding:6px 13px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:rgba(14,32,22,.7);color:var(--text);font-family:Cairo,sans-serif;outline:none}
+.chapter-filter:focus{border-color:var(--accent)}
+.search-box{flex:1;min-width:180px;background:rgba(14,32,22,.7);border:1px solid var(--border);border-radius:8px;padding:7px 14px;color:var(--text);font-family:Cairo,sans-serif;font-size:13px;outline:none}
+.search-box:focus{border-color:var(--accent)}
+.search-box::placeholder{color:var(--muted)}
+
+/* CHAPTER DIVIDER */
+.ch-divider{margin:28px 0 4px}
+.ch-header{display:flex;align-items:center;gap:12px;padding:14px 20px;background:linear-gradient(90deg,rgba(45,255,127,.1),rgba(45,255,127,.02));border:1px solid rgba(45,255,127,.2);border-radius:14px;margin-bottom:4px}
+.ch-icon{width:40px;height:40px;border-radius:10px;background:rgba(45,255,127,.15);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.ch-title{font-family:Syne,sans-serif;font-weight:800;color:#fff;font-size:1.05rem}
+.ch-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.ch-count{margin-left:auto;background:rgba(45,255,127,.1);border:1px solid rgba(45,255,127,.2);color:var(--accent);font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px}
+
+/* QUESTIONS */
+.questions-wrap{position:relative;z-index:1;max-width:900px;margin:8px auto 60px;padding:0 20px}
+.q-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px 24px;margin-bottom:14px;backdrop-filter:blur(6px);transition:.3s;animation:fadeUp .5s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.q-card.answered-correct{border-color:rgba(45,255,127,.4);background:rgba(45,255,127,.04)}
+.q-card.answered-wrong{border-color:rgba(255,95,109,.4);background:rgba(255,95,109,.04)}
+.q-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px}
+.q-num{width:38px;height:38px;background:var(--accent);color:var(--bg);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0;font-family:Syne,sans-serif}
+.q-num.correct-num{background:var(--green)}
+.q-num.wrong-num{background:var(--red)}
+.q-type-tag{font-size:10px;font-weight:700;color:var(--purple);background:rgba(180,138,255,.1);border:1px solid rgba(180,138,255,.2);padding:2px 8px;border-radius:5px;margin-bottom:4px;display:inline-block;margin-right:6px}
+.q-chapter-tag{font-size:10px;font-weight:700;color:var(--accent);background:rgba(45,255,127,.08);border:1px solid rgba(45,255,127,.2);padding:2px 8px;border-radius:5px;margin-bottom:4px;display:inline-block}
+.q-text{font-size:14.5px;font-weight:600;color:#fff;line-height:1.65;flex:1}
+.options{display:flex;flex-direction:column;gap:8px}
+.option{display:flex;align-items:center;gap:12px;padding:11px 16px;background:rgba(14,32,22,.5);border:1px solid rgba(45,255,127,.1);border-radius:10px;cursor:pointer;transition:.2s;font-size:13.5px;direction:ltr}
+.option:hover:not(.disabled){background:rgba(45,255,127,.08);border-color:rgba(45,255,127,.3);transform:translateX(3px)}
+.option.disabled{cursor:default}
+.option-letter{width:28px;height:28px;border-radius:7px;background:rgba(45,255,127,.08);border:1px solid rgba(45,255,127,.2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:var(--accent);flex-shrink:0;font-family:Syne,sans-serif;transition:.2s}
+.option.selected .option-letter{background:var(--accent);color:var(--bg)}
+.option.correct-opt{background:rgba(45,255,127,.1)!important;border-color:rgba(45,255,127,.45)!important}
+.option.correct-opt .option-letter{background:var(--green);color:var(--bg)}
+.option.wrong-opt{background:rgba(255,95,109,.1)!important;border-color:rgba(255,95,109,.4)!important}
+.option.wrong-opt .option-letter{background:var(--red);color:#fff}
+.option.show-correct{background:rgba(45,255,127,.08)!important;border-color:rgba(45,255,127,.35)!important;animation:pulse-border .8s ease}
+.option.show-correct .option-letter{background:var(--green);color:var(--bg)}
+@keyframes pulse-border{0%,100%{box-shadow:none}50%{box-shadow:0 0 14px rgba(45,255,127,.4)}}
+
+/* FEEDBACK */
+.feedback{margin-top:14px;border-radius:12px;padding:16px 18px;font-size:13.5px;line-height:1.75;display:none}
+.feedback.show{display:block;animation:fadeUp .4s ease}
+.feedback.correct-fb{background:rgba(45,255,127,.06);border:1px solid rgba(45,255,127,.3)}
+.feedback.wrong-fb{background:rgba(255,95,109,.06);border:1px solid rgba(255,95,109,.3)}
+.fb-header{font-weight:800;font-size:14px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.fb-correct-head{color:var(--green)}
+.fb-wrong-head{color:var(--red)}
+.fb-correct-ans{margin-top:8px;background:rgba(45,255,127,.1);border:1px solid rgba(45,255,127,.2);border-radius:8px;padding:9px 13px;font-weight:700;color:var(--green);font-size:13.5px}
+.fb-en{color:var(--text);margin-top:8px;font-size:13px;line-height:1.7}
+.fb-ar{background:rgba(255,201,64,.05);border:1px solid rgba(255,201,64,.2);border-right:3px solid var(--gold);border-radius:0 8px 8px 0;padding:9px 13px;margin-top:8px;direction:rtl;text-align:right;font-size:13px;color:#d4c070;line-height:1.8}
+.fb-ar-lbl{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;direction:ltr;text-align:left}
+
+/* TRUE/FALSE badge */
+.tf-badge{display:inline-block;padding:2px 10px;border-radius:5px;font-size:11px;font-weight:700;margin-right:6px}
+.tf-t{background:rgba(45,255,127,.12);color:var(--green);border:1px solid rgba(45,255,127,.25)}
+.tf-f{background:rgba(255,95,109,.1);color:var(--red);border:1px solid rgba(255,95,109,.25)}
+
+/* PROBLEM SOLVING */
+.prob-card{background:linear-gradient(135deg,rgba(0,255,208,.04),rgba(14,32,22,.7));border:1px solid rgba(0,255,208,.25);border-radius:18px;padding:22px 24px;margin-bottom:14px;backdrop-filter:blur(6px);animation:fadeUp .5s ease both}
+.prob-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.prob-num{width:38px;height:38px;background:var(--teal);color:var(--bg);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0;font-family:Syne,sans-serif}
+.prob-type-tag{font-size:10px;font-weight:700;color:var(--teal);background:rgba(0,255,208,.1);border:1px solid rgba(0,255,208,.25);padding:2px 8px;border-radius:5px;margin-bottom:4px;display:inline-block;margin-right:6px}
+.prob-q{font-size:14.5px;font-weight:600;color:#fff;line-height:1.65;flex:1}
+.prob-toggle{margin-top:12px;background:rgba(0,255,208,.08);border:1px solid rgba(0,255,208,.2);color:var(--teal);padding:9px 18px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:Cairo,sans-serif;transition:.2s;width:100%;text-align:left}
+.prob-toggle:hover{background:rgba(0,255,208,.15);box-shadow:0 0 12px rgba(0,255,208,.2)}
+.prob-solution{display:none;margin-top:12px;border-radius:12px;overflow:hidden}
+.prob-solution.show{display:block;animation:fadeUp .35s ease}
+.prob-sol-body{background:rgba(0,255,208,.05);border:1px solid rgba(0,255,208,.2);border-radius:12px;padding:16px 18px;font-size:13.5px;line-height:1.85;color:var(--text)}
+.prob-sol-body .sol-label{font-family:Syne,sans-serif;font-size:12px;font-weight:800;color:var(--teal);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.prob-sol-body .sol-en{color:var(--text);white-space:pre-line}
+.prob-sol-body .sol-ar{background:rgba(255,201,64,.05);border:1px solid rgba(255,201,64,.2);border-right:3px solid var(--gold);border-radius:0 8px 8px 0;padding:10px 13px;margin-top:10px;direction:rtl;text-align:right;font-size:13px;color:#d4c070;line-height:1.9;white-space:pre-line}
+.prob-sol-body .sol-ar-lbl{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;direction:ltr;text-align:left}
+
+/* EMPTY */
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-state .big{font-size:3rem;margin-bottom:12px}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.3s}
+.modal-overlay.show{opacity:1;pointer-events:all}
+.modal{background:var(--deep);border:1px solid var(--border);border-radius:24px;padding:36px;max-width:460px;width:100%;text-align:center;transform:scale(.9);transition:.3s;position:relative}
+.modal-overlay.show .modal{transform:scale(1)}
+.modal h2{font-family:Syne,sans-serif;font-size:1.8rem;color:#fff;margin-bottom:6px}
+.modal .grade{font-size:4rem;font-weight:900;font-family:Syne,sans-serif;margin:16px 0}
+.modal .grade.A{color:var(--green)}
+.modal .grade.B{color:var(--accent)}
+.modal .grade.C{color:var(--gold)}
+.modal .grade.D{color:var(--red)}
+.modal-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:20px 0}
+.modal-stat{background:rgba(14,32,22,.8);border:1px solid var(--border);border-radius:12px;padding:14px}
+.modal-stat .ms-val{font-family:Syne,sans-serif;font-size:1.5rem;font-weight:800}
+.modal-stat .ms-lbl{font-size:11px;color:var(--muted)}
+.modal-msg{font-size:14px;color:var(--muted);margin-bottom:24px;direction:rtl;font-family:Cairo,sans-serif}
+
+/* MINI SCORE */
+.mini-score{position:fixed;bottom:20px;right:20px;z-index:500;background:rgba(6,15,10,.96);border:1px solid var(--border);border-radius:14px;padding:10px 16px;backdrop-filter:blur(10px);display:flex;gap:14px;align-items:center;font-size:13px}
+.ms-c{color:var(--green);font-weight:800}
+.ms-w{color:var(--red);font-weight:800}
+.ms-t{color:var(--muted)}
+
+@media(max-width:600px){.score-card{flex-direction:column;text-align:center}.score-stats{justify-content:center}.hero h1{font-size:1.9rem}}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <a href="index.html">🏠 Home</a>
+  <a href="#ch0">Ch.0</a>
+  <a href="#ch1">Ch.1</a>
+  <a href="#ch2">Ch.2</a>
+  <a href="#ch3">Ch.3</a>
+  <a href="#ch4">Ch.4</a>
+  <a href="#tfSection">T/F</a>
+  <a href="#ch5">Ch.5 Text</a>
+  <a href="#ch6">Ch.6 Sound</a>
+  <a href="#ch7">Ch.7 Graphics</a>
+  <a href="exam_multi.html" class="active">📝 Exam</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> Final Exam Prep — CH0 to CH7</div>
+  <h1>Multimedia <span>Exam Bank</span></h1>
+  <div class="ar-sub" style="font-family:Cairo,sans-serif">197 سؤال — CH0 حتى CH7 — MCQ + True/False + Problem Solving</div>
+</section>
+
+<!-- SCOREBOARD -->
+<div class="scoreboard">
+  <div class="score-card">
+    <div class="score-ring">
+      <svg viewBox="0 0 100 100">
+        <circle class="track" cx="50" cy="50" r="45"/>
+        <circle class="fill" id="ringFill" cx="50" cy="50" r="45"/>
+      </svg>
+      <div class="score-center">
+        <span class="score-pct" id="scorePct">0%</span>
+        <span class="score-label">Score</span>
+      </div>
+    </div>
+    <div class="score-stats">
+      <div class="stat-item"><div class="val correct" id="countCorrect">0</div><div class="lbl">✅ Correct</div></div>
+      <div class="stat-item"><div class="val wrong" id="countWrong">0</div><div class="lbl">❌ Wrong</div></div>
+      <div class="stat-item"><div class="val skip" id="countSkip">0</div><div class="lbl">⏳ Left</div></div>
+      <div class="stat-item"><div class="val total" id="countTotal">0</div><div class="lbl">📊 Total</div></div>
+    </div>
+    <div style="flex-basis:100%">
+      <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+      <div class="score-actions">
+        <button class="btn btn-accent" onclick="showResults()">📊 Show Results</button>
+        <button class="btn btn-ghost" onclick="shuffleQuestions()">🔀 Shuffle</button>
+        <button class="btn btn-red" onclick="resetAll()">🔄 Reset</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <button class="filter-btn active" onclick="filterCat('all',this)">All</button>
+  <button class="filter-btn" onclick="filterCat('unanswered',this)">⏳ Unanswered</button>
+  <button class="filter-btn" onclick="filterCat('correct',this)">✅ Correct</button>
+  <button class="filter-btn" onclick="filterCat('wrong',this)">❌ Wrong</button>
+  <button class="filter-btn" onclick="filterCat('prob',this)">🧮 Problem Solving</button>
+  <select class="chapter-filter" onchange="filterChapter(this.value)">
+    <option value="all">All Chapters</option>
+    <option value="CH0">Ch.0 — Intro</option>
+    <option value="CH1">Ch.1 — Overview</option>
+    <option value="CH2">Ch.2 — Systems</option>
+    <option value="CH3">Ch.3 — Making MM</option>
+    <option value="CH4">Ch.4 — Team Roles</option>
+    <option value="TF">True / False</option>
+    <option value="CH5">Ch.5 — Text</option>
+    <option value="CH6">Ch.6 — Sound</option>
+    <option value="CH7">Ch.7 — Graphics</option>
+  </select>
+  <input type="text" class="search-box" placeholder="🔍 Search questions..." oninput="searchQ(this.value)"/>
+</div>
+
+<!-- QUESTIONS CONTAINER -->
+<div class="questions-wrap" id="questionsWrap"></div>
+
+<!-- MINI SCORE -->
+<div class="mini-score">
+  <span>✅ <span class="ms-c" id="msC">0</span></span>
+  <span>❌ <span class="ms-w" id="msW">0</span></span>
+  <span class="ms-t">/ <span id="msT">0</span></span>
+</div>
+
+<!-- RESULTS MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div id="modalEmoji" style="font-size:3rem;margin-bottom:8px">🎯</div>
+    <h2>Your Result</h2>
+    <div class="grade A" id="modalGrade">0%</div>
+    <div class="modal-stats">
+      <div class="modal-stat"><div class="ms-val" style="color:var(--green)" id="mCorrect">0</div><div class="ms-lbl">Correct ✅</div></div>
+      <div class="modal-stat"><div class="ms-val" style="color:var(--red)" id="mWrong">0</div><div class="ms-lbl">Wrong ❌</div></div>
+      <div class="modal-stat"><div class="ms-val" style="color:var(--gold)" id="mSkip">0</div><div class="ms-lbl">Skipped ⏳</div></div>
+    </div>
+    <div class="modal-msg" id="modalMsg"></div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-accent" onclick="closeModal()">Close</button>
+      <button class="btn btn-red" onclick="closeModal();resetAll()">🔄 Retry</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [
+// ══════════════════════════════════════════
+// CHAPTER 0 — Introduction to Multimedia
+// ══════════════════════════════════════════
+{id:1,ch:'CH0',type:'MCQ',
+ q:'What does HTTP stand for?',
+ opts:['HyperText Transfer Protocol','High Transfer Text Protocol','HyperText Transport Program','Host Transfer Text Protocol'],
+ ans:0,
+ en:'HTTP = HyperText Transfer Protocol. It was originally designed to transmit hypermedia documents on the Web.',
+ ar:'HTTP = بروتوكول نقل النص التشعبي. صُمِّم في الأصل لنقل وثائق الهايبرميديا عبر الويب.'},
+
+{id:2,ch:'CH0',type:'MCQ',
+ q:'URI is used to:',
+ opts:['Send emails','Identify resources on the web','Transfer files','Route packets'],
+ ans:1,
+ en:'URI = Uniform Resource Identifier. It identifies a specific resource (page, image, file) on the web.',
+ ar:'URI = معرّف الموارد الموحّد. يُستخدم لتحديد موارد محددة (صفحات، صور، ملفات) على الويب.'},
+
+{id:3,ch:'CH0',type:'MCQ',
+ q:'HTML is defined using:',
+ opts:['XML','SGML','HTTP','CSS'],
+ ans:1,
+ en:'HTML is defined using SGML (Standard Generalized Markup Language), the meta-language that defines markup languages.',
+ ar:'HTML مُعرَّف باستخدام SGML — لغة الترميز العامة المعيارية التي تُعرِّف لغات الترميز.'},
+
+{id:4,ch:'CH0',type:'MCQ',
+ q:'XHTML is best described as:',
+ opts:['A video format','HTML rewritten using XML rules','A database language','A type of CSS'],
+ ans:1,
+ en:'XHTML is HTML rewritten to conform to XML rules — stricter syntax, all tags must be properly closed and nested.',
+ ar:'XHTML هو HTML مُعاد كتابته وفق قواعد XML — بناء جملة أكثر صرامة، كل العلامات يجب إغلاقها.'},
+
+{id:5,ch:'CH0',type:'MCQ',
+ q:'Interactive multimedia means:',
+ opts:['Fixed sequence playback','User controls what and when elements are delivered','Automatic slideshow','Streaming only'],
+ ans:1,
+ en:'Interactive multimedia allows the end user to control what content is delivered and when, giving freedom of navigation.',
+ ar:'الوسائط المتعددة التفاعلية تسمح للمستخدم بالتحكم فيما يُعرض ومتى يُعرض — حرية في التنقل.'},
+
+{id:6,ch:'CH0',type:'MCQ',
+ q:'Linear multimedia:',
+ opts:['Allows full user control','Follows a fixed sequence from beginning to end','Allows jumping to any point','Is always interactive'],
+ ans:1,
+ en:'Linear multimedia presents content in a fixed, predetermined sequence — the user cannot control the flow. Like a movie.',
+ ar:'الوسائط الخطية تعرض المحتوى بتسلسل ثابت مُحدد مسبقاً — لا يتحكم المستخدم في التدفق. مثل الفيلم.'},
+
+{id:7,ch:'CH0',type:'MCQ',
+ q:'Non-linear multimedia:',
+ opts:['Has no interaction','Allows user navigation — enter and exit at any point','Plays automatically','Uses no menus'],
+ ans:1,
+ en:'Non-linear multimedia allows users to navigate freely, entering and exiting content at any point — like a website.',
+ ar:'الوسائط غير الخطية تتيح للمستخدم التنقل بحرية، الدخول والخروج من أي نقطة — مثل موقع الويب.'},
+
+{id:8,ch:'CH0',type:'MCQ',
+ q:'CD-ROM storage capacity is approximately:',
+ opts:['700 MB / 80 minutes','4.7 GB / 2 hours','18 GB','1 TB'],
+ ans:0,
+ en:'A standard CD-ROM holds about 700 MB of data or approximately 80 minutes of multimedia content.',
+ ar:'القرص المضغوط العادي يسع حوالي 700 ميغابايت من البيانات أو نحو 80 دقيقة من محتوى الوسائط المتعددة.'},
+
+{id:9,ch:'CH0',type:'MCQ',
+ q:'DVD maximum storage capacity is about:',
+ opts:['700 MB','4.7 GB','18 GB','100 GB'],
+ ans:2,
+ en:'Dual-layer, double-sided DVDs can store up to 18 GB. A single-layer single-sided DVD holds 4.7 GB.',
+ ar:'DVD ذو طبقتين ووجهين يصل إلى 18 جيجابايت. DVD أحادي الطبقة والوجه = 4.7 جيجابايت.'},
+
+{id:10,ch:'CH0',type:'MCQ',
+ q:'Virtual Reality (VR) is mainly an extension of:',
+ opts:['Television','Multimedia','The Internet','Gaming only'],
+ ans:1,
+ en:'VR is primarily an extension of multimedia technology — combining sound, animation, video, and interactivity in an immersive 3D environment.',
+ ar:'الواقع الافتراضي هو امتداد أساسي لتقنيات الوسائط المتعددة، يجمع صوتاً ورسوماً وفيديو وتفاعلية في بيئة ثلاثية الأبعاد.'},
+
+{id:11,ch:'CH0',type:'MCQ',
+ q:'VRML documents have the extension:',
+ opts:['.vr','.vrml','.wrl','.3d'],
+ ans:2,
+ en:'VRML (Virtual Reality Modeling Language) documents use the .wrl (World) file extension.',
+ ar:'ملفات VRML (لغة نمذجة الواقع الافتراضي) تستخدم الامتداد .wrl (اختصار World = عالم).'},
+
+{id:12,ch:'CH0',type:'MCQ',
+ q:'VR documents are transmitted using:',
+ opts:['HTTP','VRML','FTP','SMTP'],
+ ans:1,
+ en:'VRML = Virtual Reality Modeling Language. It is the standard used to create and transmit VR documents on the Web.',
+ ar:'VRML = لغة نمذجة الواقع الافتراضي. المعيار المستخدم لإنشاء ونقل وثائق VR على الويب.'},
+
+{id:13,ch:'CH0',type:'MCQ',
+ q:'The best example of a hypermedia application is:',
+ opts:['A printed book','World Wide Web','A radio broadcast','A plain text file'],
+ ans:1,
+ en:'The World Wide Web is the best example of hypermedia — it combines text, images, audio, video, and hyperlinks.',
+ ar:'الويب العالمي هو أفضل مثال على تطبيق الهايبرميديا — يجمع النص والصور والصوت والفيديو والروابط التشعبية.'},
+
+{id:14,ch:'CH0',type:'MCQ',
+ q:'______ is text, graphics, video and sound linked and accessible in hypertext format.',
+ opts:['Linear Multimedia','Interactive Multimedia','Hyperactive Multimedia','Static Multimedia'],
+ ans:2,
+ en:'Hyperactive (Hypermedia) Multimedia = media elements (text, graphics, video, sound) linked together via hyperlinks, accessible in hypertext format.',
+ ar:'الوسائط التشعبية = عناصر وسائط (نص، صور، فيديو، صوت) مرتبطة معاً عبر روابط تشعبية، يمكن الوصول إليها بصيغة hypertext.'},
+
+{id:15,ch:'CH0',type:'MCQ',
+ q:'Suitable initial delay for VCR-like streaming functionality is:',
+ opts:['1 second','5 seconds','10 seconds','30 seconds'],
+ ans:2,
+ en:'A 10-second initial delay (buffering) allows enough data to be stored before playback, enabling smooth VCR-like controls (pause, rewind).',
+ ar:'تأخير أولي مقداره 10 ثوانٍ (تخزين مؤقت) يتيح تخزين بيانات كافية قبل التشغيل، مما يُمكِّن التحكم السلس كالفيديو (إيقاف مؤقت، ترجيع).'},
+
+// ══════════════════════════════════════════
+// CHAPTER 1 — Overview of Multimedia
+// ══════════════════════════════════════════
+{id:16,ch:'CH1',type:'MCQ',
+ q:'Which one of the following is NOT typically part of a multimedia specification?',
+ opts:['Text','Audio','Borders','Video'],
+ ans:2,
+ en:'The core multimedia elements are: Text, Images/Graphics, Audio, Video, and Animation. Borders are a CSS styling concept, not a media type.',
+ ar:'عناصر الوسائط المتعددة الأساسية: نص، صور، صوت، فيديو، ورسوم متحركة. الحدود (Borders) مفهوم تنسيق CSS وليس نوع وسائط.'},
+
+{id:17,ch:'CH1',type:'MCQ',
+ q:'A multimedia element does NOT include:',
+ opts:['Text','Images','Database','Audio'],
+ ans:2,
+ en:'Multimedia elements are: Text, Images, Audio, Video, Animation. A database is a data storage system, not a media element.',
+ ar:'عناصر الوسائط المتعددة هي: نص، صور، صوت، فيديو، رسوم متحركة. قاعدة البيانات نظام تخزين بيانات وليست عنصر وسائط.'},
+
+{id:18,ch:'CH1',type:'MCQ',
+ q:'Which type of multimedia allows users to enter and exit at any point?',
+ opts:['Linear','Static','Nonlinear','Continuous'],
+ ans:2,
+ en:'Nonlinear multimedia allows users to navigate freely — entering and exiting at any point, choosing their own path.',
+ ar:'الوسائط غير الخطية تتيح للمستخدمين التنقل بحرية — الدخول والخروج من أي نقطة، واختيار مسارهم الخاص.'},
+
+{id:19,ch:'CH1',type:'MCQ',
+ q:'When users are given navigational control, multimedia is called:',
+ opts:['Linear','Static','Nonlinear','Continuous'],
+ ans:2,
+ en:'When the user has control over navigation (choosing what to see and when), multimedia is classified as Nonlinear.',
+ ar:'عندما يتحكم المستخدم في التنقل (اختيار ما يرى ومتى)، تُصنَّف الوسائط المتعددة على أنها غير خطية (Nonlinear).'},
+
+{id:20,ch:'CH1',type:'MCQ',
+ q:'What is Multimedia used for?',
+ opts:['Entertainment only','Healthcare only','GIS only','All of the above'],
+ ans:3,
+ en:'Multimedia is used across many fields: Entertainment, Education, Healthcare, Business, GIS (Geographic Information Systems), and more.',
+ ar:'تُستخدم الوسائط المتعددة في مجالات عديدة: الترفيه، التعليم، الرعاية الصحية، الأعمال، نظم المعلومات الجغرافية (GIS)، وأكثر.'},
+
+{id:21,ch:'CH1',type:'MCQ',
+ q:'The earliest mass communication medium is:',
+ opts:['Television','Radio','Newspaper','Internet'],
+ ans:2,
+ en:'The newspaper is considered the earliest mass communication medium, predating radio and television by centuries.',
+ ar:'تُعدّ الصحيفة أقدم وسيلة إعلام جماهيري، وهي أسبق من الراديو والتلفزيون بقرون.'},
+
+{id:22,ch:'CH1',type:'MCQ',
+ q:'General definition: Multimedia is the combination of:',
+ opts:['Text and images only','Text, graphics, audio, video, and animation','Video and audio only','Images and text only'],
+ ans:1,
+ en:'Multimedia is the combination of text, graphics, audio, video, and animation delivered together in a single application or presentation.',
+ ar:'الوسائط المتعددة هي دمج النص والرسومات والصوت والفيديو والرسوم المتحركة معاً في تطبيق أو عرض واحد.'},
+
+// ══════════════════════════════════════════
+// CHAPTER 2 — Multimedia Systems & Hardware
+// ══════════════════════════════════════════
+{id:23,ch:'CH2',type:'MCQ',
+ q:'Which is a capture device in a multimedia system?',
+ opts:['Monitor','Hard Disk','Microphone','Router'],
+ ans:2,
+ en:'Capture devices collect/input media into the computer: cameras, microphones, scanners, video capture cards.',
+ ar:'أجهزة التقاط الوسائط تجمع المدخلات: الكاميرات، الميكروفونات، الماسحات الضوئية، وبطاقات التقاط الفيديو.'},
+
+{id:24,ch:'CH2',type:'MCQ',
+ q:'Which is a storage device in a multimedia system?',
+ opts:['Microphone','Hard Disk','Monitor','Keyboard'],
+ ans:1,
+ en:'Storage devices hold multimedia data: hard disks, DVDs, USB drives, SSDs, and cloud storage.',
+ ar:'أجهزة التخزين تحفظ بيانات الوسائط: الأقراص الصلبة، DVD، ذاكرة USB، SSD، والتخزين السحابي.'},
+
+{id:25,ch:'CH2',type:'MCQ',
+ q:'Which is a communication network for multimedia delivery?',
+ opts:['Scanner','Hard Disk','Internet','Monitor'],
+ ans:2,
+ en:'Communication networks deliver multimedia content: the Internet, intranet, LAN, and cable TV networks.',
+ ar:'شبكات الاتصالات تنقل محتوى الوسائط: الإنترنت، الشبكة الداخلية (Intranet)، LAN، وشبكات التلفزيون الكبلي.'},
+
+{id:26,ch:'CH2',type:'MCQ',
+ q:'Which is a display device in a multimedia system?',
+ opts:['Microphone','Scanner','Monitor','Hard Disk'],
+ ans:2,
+ en:'Display devices output/present multimedia: monitors, projectors, speakers (for audio), headphones, and VR headsets.',
+ ar:'أجهزة العرض تُخرج وتعرض الوسائط: الشاشات، أجهزة العرض، السماعات (للصوت)، سماعات الرأس، ونظارات VR.'},
+
+// ══════════════════════════════════════════
+// CHAPTER 3 — Making Multimedia
+// ══════════════════════════════════════════
+{id:27,ch:'CH3',type:'MCQ',
+ q:'Which is NOT a stage of multimedia production?',
+ opts:['Planning and Costing','Testing','Marketing','Delivering'],
+ ans:2,
+ en:'The 4 stages are: (1) Planning & Costing, (2) Designing & Producing, (3) Testing, (4) Delivering. Marketing is NOT one of the stages.',
+ ar:'المراحل الأربع هي: التخطيط، التصميم والإنتاج، الاختبار، التسليم. التسويق (Marketing) ليس مرحلة من مراحل الإنتاج.'},
+
+{id:28,ch:'CH3',type:'MCQ',
+ q:'The ______ stage ensures that the project meets the client\'s needs and objectives.',
+ opts:['Planning','Designing','Testing','Delivering'],
+ ans:2,
+ en:'The Testing stage verifies that the project meets all stated objectives and satisfies the client\'s requirements before delivery.',
+ ar:'مرحلة الاختبار تتحقق من أن المشروع يلبي جميع الأهداف المحددة ويرضي متطلبات العميل قبل التسليم.'},
+
+{id:29,ch:'CH3',type:'MCQ',
+ q:'A multimedia project begins with an idea during the ______ stage.',
+ opts:['Testing','Delivering','Designing','Planning and Costing'],
+ ans:3,
+ en:'Every multimedia project begins with an idea during the Planning and Costing stage, where goals, resources, budget, and timeline are defined.',
+ ar:'كل مشروع وسائط متعددة يبدأ بفكرة في مرحلة التخطيط والتكلفة، حيث تُحدَّد الأهداف والموارد والميزانية والجدول الزمني.'},
+
+{id:30,ch:'CH3',type:'MCQ',
+ q:'During the planning stage, it is important to identify objectives, skills, resources, and create a ______.',
+ opts:['Final product','Database','Prototype','Marketing plan'],
+ ans:2,
+ en:'A prototype is a simple early working version of the project, created during planning to test the concept before full production.',
+ ar:'النموذج الأولي (Prototype) نسخة أولية بسيطة تعمل من المشروع، تُنشأ أثناء التخطيط لاختبار الفكرة قبل الإنتاج الكامل.'},
+
+{id:31,ch:'CH3',type:'MCQ',
+ q:'With multimedia authoring software, you can make:',
+ opts:['Video productions only','Animations only','Games only','All of the above'],
+ ans:3,
+ en:'Authoring software enables creation of: video productions, animations, games, interactive websites, e-learning — all types of multimedia projects.',
+ ar:'برامج التأليف تُمكِّن من إنشاء: إنتاجات الفيديو، الرسوم المتحركة، الألعاب، المواقع التفاعلية، التعليم الإلكتروني — جميع أنواع مشاريع الوسائط.'},
+
+{id:32,ch:'CH3',type:'MCQ',
+ q:'Which of these is NOT a common platform for producing multimedia projects?',
+ opts:['Macintosh','Windows PC','DOS','Linux'],
+ ans:2,
+ en:'DOS (Disk Operating System) is an old command-line OS with no GUI — not a modern multimedia platform. Mac and Windows are the main platforms.',
+ ar:'DOS نظام تشغيل قديم يعتمد على سطر الأوامر بدون واجهة رسومية — ليس منصة وسائط متعددة حديثة. Mac وWindows هما المنصتان الرئيسيتان.'},
+
+{id:33,ch:'CH3',type:'MCQ',
+ q:'The Macintosh platform is better suited for multimedia production because:',
+ opts:['It is cheaper than Windows','It is better equipped to manage sound and video editing','It runs DOS programs','It has no GUI'],
+ ans:1,
+ en:'The Macintosh platform is better equipped for multimedia production — especially managing sound and video editing workflows.',
+ ar:'منصة Mac مجهزة بشكل أفضل لإنتاج الوسائط المتعددة — خاصةً في إدارة سير عمل تحرير الصوت والفيديو.'},
+
+{id:34,ch:'CH3',type:'MCQ',
+ q:'Both Mac and Windows provide a(n):',
+ opts:['Command line interface only','DOS environment','Graphical User Interface (GUI)','Assembly language compiler'],
+ ans:2,
+ en:'Both Mac (macOS) and Windows provide an easy-to-use Graphical User Interface (GUI) with icons, windows, menus, and buttons.',
+ ar:'كلا منصتَي Mac (macOS) وWindows توفران واجهة رسومية سهلة الاستخدام (GUI) مع أيقونات ونوافذ وقوائم وأزرار.'},
+
+{id:35,ch:'CH3',type:'MCQ',
+ q:'Authoring tools are used to:',
+ opts:['Only edit images','Only record audio','Merge multimedia elements into a complete project','Only write code'],
+ ans:2,
+ en:'Authoring tools assemble and merge all multimedia elements (text, images, audio, video) into one complete interactive project.',
+ ar:'أدوات التأليف تجمع وتدمج جميع عناصر الوسائط المتعددة (نص، صور، صوت، فيديو) في مشروع تفاعلي واحد متكامل.'},
+
+{id:36,ch:'CH3',type:'MCQ',
+ q:'The first part of a multimedia proposal should be:',
+ opts:['Technical Specifications','Budget Estimate','Executive Summary','Project Timeline'],
+ ans:2,
+ en:'The Executive Summary is the first part of any proposal — it gives a quick overview of the project goals, scope, and approach.',
+ ar:'الملخص التنفيذي (Executive Summary) هو أول جزء في أي اقتراح — يعطي نظرة سريعة على أهداف المشروع ونطاقه ومنهجه.'},
+
+{id:37,ch:'CH3',type:'MCQ',
+ q:'A simple working example to test an idea before full production is called:',
+ opts:['Final Product','Alpha Version','Prototype','Demo Reel'],
+ ans:2,
+ en:'A prototype is a simple, early working version of the project built to test whether the concept, navigation, and look & feel work correctly.',
+ ar:'النموذج الأولي (Prototype) نسخة أولية بسيطة تعمل من المشروع تُبنى لاختبار ما إذا كانت الفكرة والتنقل والمظهر تعمل بشكل صحيح.'},
+
+{id:38,ch:'CH3',type:'MCQ',
+ q:'The protocol used for transmitting hypermedia on the web is called:',
+ opts:['FTP','SMTP','HTTP','DNS'],
+ ans:2,
+ en:'HTTP (HyperText Transfer Protocol) was originally designed specifically to transmit hypermedia documents across the web.',
+ ar:'HTTP (بروتوكول نقل النص التشعبي) صُمِّم في الأصل تحديداً لنقل وثائق الهايبرميديا عبر الويب.'},
+
+// ══════════════════════════════════════════
+// CHAPTER 4 — Multimedia Team Roles
+// ══════════════════════════════════════════
+{id:39,ch:'CH4',type:'MCQ',
+ q:'The person responsible for overall development and implementation of a multimedia project is:',
+ opts:['Multimedia Programmer','Interface Designer','Project Manager','Audio Specialist'],
+ ans:2,
+ en:'The Project Manager is responsible for overall project management — day-to-day operations, budget, team coordination, scheduling, and the project\'s overall vision.',
+ ar:'مدير المشروع مسؤول عن الإدارة الكاملة للمشروع — العمليات اليومية والميزانية وتنسيق الفريق والجدولة والرؤية العامة للمشروع.'},
+
+{id:40,ch:'CH4',type:'MCQ',
+ q:'Which of these is NOT a responsibility of the Project Manager?',
+ opts:['Managing budget','Coordinating team members','Scheduling recording sessions','Overall project management'],
+ ans:2,
+ en:'Scheduling recording sessions is typically the Audio Specialist\'s responsibility, not the Project Manager\'s core role.',
+ ar:'جدولة جلسات التسجيل هي عادةً مسؤولية أخصائي الصوت (Audio Specialist)، وليست من المهام الأساسية لمدير المشروع.'},
+
+{id:41,ch:'CH4',type:'MCQ',
+ q:'The work of a(n) ______ is best when it is "transparent" to users.',
+ opts:['Audio Specialist','Video Specialist','Interface Designer','Multimedia Programmer'],
+ ans:2,
+ en:'A good Interface Designer creates an interface so intuitive and easy to use that users don\'t even notice it — it\'s "transparent."',
+ ar:'مصمم الواجهة الجيد يخلق واجهة بديهية وسهلة الاستخدام لدرجة أن المستخدمين لا يلاحظونها — تكون "شفافة".'},
+
+{id:42,ch:'CH4',type:'MCQ',
+ q:'The Multimedia Designer prepares:',
+ opts:['The final code','The marketing plan','The blueprint of the project','The audio tracks'],
+ ans:2,
+ en:'The Multimedia Designer prepares the blueprint (overall plan/storyboard) of the project — defining content, media types, and interaction design.',
+ ar:'مصمم الوسائط المتعددة يُعدّ المخطط التفصيلي (Blueprint) للمشروع — يُحدد المحتوى وأنواع الوسائط وتصميم التفاعل.'},
+
+{id:43,ch:'CH4',type:'MCQ',
+ q:'Interface designers should be:',
+ opts:['Only programmers','Familiar with film editing, authoring systems, basic drawing, and user testing','Only graphic designers','Only web developers'],
+ ans:1,
+ en:'Interface designers need a broad skill set: film editing knowledge, authoring system experience, basic drawing ability, and user testing skills.',
+ ar:'مصممو الواجهات يحتاجون مجموعة مهارات واسعة: معرفة بتحرير الأفلام، خبرة في أنظمة التأليف، مهارة رسم أساسية، وكفاءة في اختبار المستخدم.'},
+
+{id:44,ch:'CH4',type:'MCQ',
+ q:'The Multimedia Programmer integrates multimedia elements using:',
+ opts:['Only HTML','Only CSS','Programming languages and authoring systems','Only video editors'],
+ ans:2,
+ en:'The Multimedia Programmer uses programming languages (C, Java, etc.) and authoring systems to integrate all media elements and make the project functional.',
+ ar:'المبرمج متعدد الوسائط يستخدم لغات البرمجة (C، Java، إلخ) وأنظمة التأليف لدمج جميع عناصر الوسائط وجعل المشروع يعمل.'},
+
+{id:45,ch:'CH4',type:'MCQ',
+ q:'The Audio Specialist skill includes:',
+ opts:['3D modeling','MIDI and sound recording','Video compositing','Database design'],
+ ans:1,
+ en:'The Audio Specialist works with MIDI (Musical Instrument Digital Interface), sound recording, audio editing, and mixing.',
+ ar:'أخصائي الصوت يعمل مع MIDI (واجهة الأداة الموسيقية الرقمية)، وتسجيل الصوت وتحريره والمزج.'},
+
+{id:46,ch:'CH4',type:'MCQ',
+ q:'When a multimedia project reaches the delivery stage, it is said to be:',
+ opts:['Beta Released','Alpha Tested','Going Gold','Published'],
+ ans:2,
+ en:'"Going Gold" is the term used when a multimedia project reaches the delivery stage — it is ready for final duplication and distribution.',
+ ar:'"Going Gold" هو المصطلح المستخدم عندما يصل مشروع الوسائط المتعددة إلى مرحلة التسليم — جاهز للنسخ النهائي والتوزيع.'},
+
+{id:47,ch:'CH4',type:'MCQ',
+ q:'Information Designers in a multimedia team:',
+ opts:['Only write code','Structure content and navigation','Only create graphics','Only record audio'],
+ ans:1,
+ en:'Information Designers structure the content and navigation flow of a multimedia project — organizing information for clarity and usability.',
+ ar:'مصممو المعلومات يُهيكلون المحتوى وتدفق التنقل في مشروع الوسائط المتعددة — تنظيم المعلومات لتحقيق الوضوح وسهولة الاستخدام.'},
+
+{id:48,ch:'CH4',type:'MCQ',
+ q:'Instructional Designers in a multimedia team focus on:',
+ opts:['Recording sessions','Content clarity and learning effectiveness','Video color grading','Network setup'],
+ ans:1,
+ en:'Instructional Designers focus on making content clear, pedagogically effective, and suitable for the intended learners or audience.',
+ ar:'المصممون التعليميون يركزون على جعل المحتوى واضحاً وفعالاً من الناحية البيداغوجية ومناسباً للمتعلمين أو الجمهور المستهدف.'},
+
+{id:49,ch:'CH4',type:'MCQ',
+ q:'Which of these describes static media?',
+ opts:['Audio','Video','Animation','Text and Images'],
+ ans:3,
+ en:'Static media does NOT depend on time: Text and Images. Continuous (time-dependent) media includes: Audio, Video, Animation.',
+ ar:'الوسائط الثابتة لا تعتمد على الزمن: النص والصور. الوسائط المستمرة (الزمنية) تشمل: الصوت والفيديو والرسوم المتحركة.'},
+
+{id:50,ch:'CH4',type:'MCQ',
+ q:'Which of these describes continuous media?',
+ opts:['Text','Images','Graphics','Video and Audio'],
+ ans:3,
+ en:'Continuous media depends on time for proper presentation: Audio, Video, Animation. Static media (text, images) does not require timing.',
+ ar:'الوسائط المستمرة تعتمد على الزمن للعرض الصحيح: الصوت والفيديو والرسوم المتحركة. الوسائط الثابتة (نص، صور) لا تتطلب توقيتاً.'},
+
+// ══════════════════════════════════════════
+// TRUE / FALSE — All Chapters
+// ══════════════════════════════════════════
+{id:51,ch:'TF',type:'TF',
+ q:'Multimedia consists of text, graphics, sound, animation, and video.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — Multimedia is defined as the combination of text, graphics, sound, animation, and video in a single application.',
+ ar:'صحيح — الوسائط المتعددة تُعرَّف بأنها دمج النص والرسومات والصوت والرسوم المتحركة والفيديو في تطبيق واحد.'},
+
+{id:52,ch:'TF',type:'TF',
+ q:'HTTP was originally designed to transmit hypermedia.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — HTTP (HyperText Transfer Protocol) was specifically designed to transmit hypermedia documents on the Web.',
+ ar:'صحيح — HTTP صُمِّم تحديداً لنقل وثائق الهايبرميديا عبر الويب.'},
+
+{id:53,ch:'TF',type:'TF',
+ q:'HTML uses binary format only.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — HTML is a text-based markup language (plain text). It is not binary. Binary formats are used for images, audio, and video files.',
+ ar:'خطأ — HTML لغة ترميز نصية (نص عادي). إنها ليست ثنائية. تُستخدم التنسيقات الثنائية لملفات الصور والصوت والفيديو.'},
+
+{id:54,ch:'TF',type:'TF',
+ q:'XML allows defining custom tags.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — Unlike HTML which has fixed tags, XML allows you to define your own custom tags to describe data in a meaningful way.',
+ ar:'صحيح — على عكس HTML ذات العلامات الثابتة، يتيح XML تعريف علاماتك المخصصة لوصف البيانات بطريقة ذات معنى.'},
+
+{id:55,ch:'TF',type:'TF',
+ q:'Interactive multimedia allows user control over content delivery.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — Interactive multimedia gives the end user control over what content is delivered and when it is delivered.',
+ ar:'صحيح — الوسائط التفاعلية تمنح المستخدم التحكم في المحتوى المُقدَّم وتوقيت تقديمه.'},
+
+{id:56,ch:'TF',type:'TF',
+ q:'Linear multimedia allows users to control navigation freely.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — Linear multimedia presents content in a fixed, predetermined sequence. The user has NO navigation control. That is Nonlinear.',
+ ar:'خطأ — الوسائط الخطية تعرض المحتوى بتسلسل ثابت ومحدد مسبقاً. لا يملك المستخدم أي تحكم في التنقل. ذلك خاص بالوسائط غير الخطية.'},
+
+{id:57,ch:'TF',type:'TF',
+ q:'Non-linear multimedia allows users to enter and exit at any point.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — Nonlinear multimedia gives full navigation freedom — users can enter, exit, and jump to any point in the content.',
+ ar:'صحيح — الوسائط غير الخطية تمنح حرية تنقل كاملة — يمكن للمستخدمين الدخول والخروج والانتقال إلى أي نقطة في المحتوى.'},
+
+{id:58,ch:'TF',type:'TF',
+ q:'DVD can store up to 18 GB of data.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — A dual-layer, double-sided DVD (DVD-18) can store up to 18 GB. Single-layer single-sided (DVD-5) holds 4.7 GB.',
+ ar:'صحيح — DVD ذو طبقتين ووجهين (DVD-18) يسع ما يصل إلى 18 جيجابايت. DVD أحادي الطبقة والوجه (DVD-5) يسع 4.7 جيجابايت.'},
+
+{id:59,ch:'TF',type:'TF',
+ q:'Virtual Reality uses multimedia elements like sound and animation.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — VR incorporates multiple multimedia elements: 3D graphics, animation, spatial audio, and interactivity to create immersive experiences.',
+ ar:'صحيح — الواقع الافتراضي يدمج عناصر وسائط متعددة: رسومات ثلاثية الأبعاد ورسوم متحركة وصوت مكاني وتفاعلية لخلق تجارب غامرة.'},
+
+{id:60,ch:'TF',type:'TF',
+ q:'Multimedia development starts with planning.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — The very first stage of any multimedia project is Planning & Costing, where the idea, objectives, resources, and budget are defined.',
+ ar:'صحيح — المرحلة الأولى من أي مشروع وسائط متعددة هي التخطيط والتكلفة، حيث تُحدَّد الفكرة والأهداف والموارد والميزانية.'},
+
+{id:61,ch:'TF',type:'TF',
+ q:'Creativity alone is enough to create a good multimedia project.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — To make GOOD multimedia you need: talent, skill, organization, time, money, AND the help of others (teamwork). Creativity alone is not enough.',
+ ar:'خطأ — لصنع وسائط متعددة جيدة تحتاج: موهبة ومهارة وتنظيم ووقت ومال ومساعدة الآخرين (العمل الجماعي). الإبداع وحده لا يكفي.'},
+
+{id:62,ch:'TF',type:'TF',
+ q:'Multimedia requires hardware and software knowledge.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — "In a multimedia project, being creative implies knowledge of hardware and software." — this is a direct quote from the course material.',
+ ar:'صحيح — "في مشروع الوسائط المتعددة، الإبداع يعني معرفة بالهاردوير والسوفتوير" — هذا اقتباس مباشر من مواد الدورة.'},
+
+{id:63,ch:'TF',type:'TF',
+ q:'Project Manager maintains the overall vision of the project.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — The Project Manager is responsible for maintaining the overall vision and ensuring all team members work toward the same goals.',
+ ar:'صحيح — مدير المشروع مسؤول عن الحفاظ على الرؤية الكاملة وضمان عمل جميع أعضاء الفريق نحو نفس الأهداف.'},
+
+{id:64,ch:'TF',type:'TF',
+ q:'Multimedia Designer defines content, media, and interaction.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — The Multimedia Designer defines what content is included, which media types to use, and how users will interact with the project.',
+ ar:'صحيح — مصمم الوسائط المتعددة يُحدد المحتوى المُدرَج وأنواع الوسائط المستخدمة وكيفية تفاعل المستخدمين مع المشروع.'},
+
+{id:65,ch:'TF',type:'TF',
+ q:'Audio Specialist works with MIDI and sound recording.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — The Audio Specialist handles MIDI (Musical Instrument Digital Interface), sound recording, editing, and audio mixing for the project.',
+ ar:'صحيح — أخصائي الصوت يتعامل مع MIDI وتسجيل الصوت وتحريره والمزج الصوتي للمشروع.'},
+
+{id:66,ch:'TF',type:'TF',
+ q:'Testing ensures the project meets user needs.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — The Testing stage ensures the project meets all stated objectives and the specific needs of the client and end users.',
+ ar:'صحيح — مرحلة الاختبار تضمن أن المشروع يلبي جميع الأهداف المحددة والاحتياجات المحددة للعميل والمستخدمين النهائيين.'},
+
+{id:67,ch:'TF',type:'TF',
+ q:'A prototype is a simple version of the project used to test the concept.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — A prototype is a simple, early working version of the project created to test whether the concept, navigation, and design work before full production.',
+ ar:'صحيح — النموذج الأولي نسخة أولية بسيطة تعمل من المشروع تُنشأ لاختبار ما إذا كانت الفكرة والتنقل والتصميم يعملان قبل الإنتاج الكامل.'},
+
+{id:68,ch:'TF',type:'TF',
+ q:'URI identifies a resource on the web.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — URI = Uniform Resource Identifier. It uniquely identifies any resource (document, image, video) on the web.',
+ ar:'صحيح — URI = معرّف الموارد الموحّد. يُحدد بشكل فريد أي مورد (مستند، صورة، فيديو) على الويب.'},
+
+{id:69,ch:'TF',type:'TF',
+ q:'HTML is defined using SGML.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — HTML is an application of SGML (Standard Generalized Markup Language), the meta-language that defines rules for creating markup languages.',
+ ar:'صحيح — HTML تطبيق من تطبيقات SGML (لغة الترميز العامة المعيارية)، اللغة الأولية التي تُحدد قواعد إنشاء لغات الترميز.'},
+
+{id:70,ch:'TF',type:'TF',
+ q:'Multimedia systems require both hardware and software.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — A multimedia system requires both: hardware (capture, storage, display devices) and software (authoring tools, editors, players).',
+ ar:'صحيح — نظام الوسائط المتعددة يتطلب كليهما: الهاردوير (أجهزة الالتقاط والتخزين والعرض) والسوفتوير (أدوات التأليف والمحررات والمشغلات).'},
+
+// ══════════════════════════════════════════
+// EXTRA — From Past Exam Papers (Q1/Q2/Q3 Banks)
+// ══════════════════════════════════════════
+{id:71,ch:'CH3',type:'MCQ',
+ q:'______ allows an end user to control what and when the elements are delivered.',
+ opts:['Linear Multimedia','Static Multimedia','Interactive Multimedia','Hyperactive Multimedia'],
+ ans:2,
+ en:'Interactive multimedia gives the end user complete control over what content is delivered and when — they choose their path.',
+ ar:'الوسائط التفاعلية تمنح المستخدم تحكماً كاملاً في المحتوى المُقدَّم وتوقيت تقديمه — يختار مساره بنفسه.'},
+
+{id:72,ch:'CH0',type:'MCQ',
+ q:'______ is text, graphics, video and sound linked and accessible in hypertext format.',
+ opts:['Linear Multimedia','Interactive Multimedia','Hyperactive Multimedia','Static Multimedia'],
+ ans:2,
+ en:'Hyperactive Multimedia (Hypermedia) = media elements (text, graphics, video, sound) linked via hyperlinks and accessible in hypertext format. Best example: the Web.',
+ ar:'الوسائط التشعبية (Hyperactive) = عناصر وسائط (نص، صور، فيديو، صوت) مرتبطة عبر روابط تشعبية ويمكن الوصول إليها بصيغة hypertext. أفضل مثال: الويب.'},
+
+{id:73,ch:'CH4',type:'MCQ',
+ q:'Which type of multimedia professional is best described when their work is "transparent" to users?',
+ opts:['Audio Specialist','Project Manager','Interface Designer','Video Specialist'],
+ ans:2,
+ en:'The Interface Designer\'s best work is "transparent" — the interface is so intuitive that users don\'t even notice the design; they just use it naturally.',
+ ar:'أفضل عمل لمصمم الواجهة يكون "شفافاً" — الواجهة بديهية جداً لدرجة أن المستخدمين لا يلاحظون التصميم؛ يستخدمونها بشكل طبيعي.'},
+
+{id:74,ch:'CH4',type:'MCQ',
+ q:'The person who integrates multimedia elements using an authoring system is the:',
+ opts:['Audio Specialist','Interface Designer','Multimedia Programmer','Video Specialist'],
+ ans:2,
+ en:'The Multimedia Programmer\'s primary role is to integrate all multimedia elements using authoring systems and programming languages.',
+ ar:'الدور الأساسي للمبرمج متعدد الوسائط هو دمج جميع عناصر الوسائط باستخدام أنظمة التأليف ولغات البرمجة.'},
+
+{id:75,ch:'CH3',type:'MCQ',
+ q:'The responsibilities of a Project Manager include:',
+ opts:['Only coding','Only graphic design','Overall management, budget, day-to-day operations, team coordination','Only audio recording'],
+ ans:2,
+ en:'Project Manager responsibilities: overall project management, day-to-day operations, managing the budget, coordinating team members, and scheduling.',
+ ar:'مسؤوليات مدير المشروع: الإدارة الكاملة للمشروع، العمليات اليومية، إدارة الميزانية، تنسيق أعضاء الفريق، والجدولة.'},
+
+{id:76,ch:'CH1',type:'MCQ',
+ q:'Which of the following is an example of Continuous Media?',
+ opts:['Text','Still Image','Graphic','Animation'],
+ ans:3,
+ en:'Continuous media requires time for proper presentation: Audio, Video, Animation. Static media (text, still images, graphics) does not depend on time.',
+ ar:'الوسائط المستمرة تتطلب الزمن للعرض الصحيح: الصوت والفيديو والرسوم المتحركة. الوسائط الثابتة (نص، صور ثابتة، رسومات) لا تعتمد على الزمن.'},
+
+{id:77,ch:'CH1',type:'MCQ',
+ q:'Which of the following is an example of Static Media?',
+ opts:['Audio','Video','Animation','Still Image'],
+ ans:3,
+ en:'Static media does NOT depend on time: Text, Still Images, Graphics. Continuous (time-dependent) media: Audio, Video, Animation.',
+ ar:'الوسائط الثابتة لا تعتمد على الزمن: النص والصور الثابتة والرسومات. الوسائط المستمرة (الزمنية): الصوت والفيديو والرسوم المتحركة.'},
+
+{id:78,ch:'CH3',type:'MCQ',
+ q:'The basic stages of a multimedia project in the correct order are:',
+ opts:['Testing → Planning → Producing → Delivering','Planning → Designing & Producing → Testing → Delivering','Delivering → Planning → Testing → Producing','Designing → Testing → Planning → Delivering'],
+ ans:1,
+ en:'The correct order is: (1) Planning & Costing → (2) Designing & Producing → (3) Testing → (4) Delivering. This order is fixed.',
+ ar:'الترتيب الصحيح: (1) التخطيط والتكلفة ← (2) التصميم والإنتاج ← (3) الاختبار ← (4) التسليم. هذا الترتيب ثابت.'},
+
+{id:79,ch:'CH4',type:'MCQ',
+ q:'Which multimedia role is responsible for scripts and written text content?',
+ opts:['Video Specialist','Audio Specialist','Writers / Copy Writers','Interface Designer'],
+ ans:2,
+ en:'Writers (Copywriters) are responsible for creating scripts, narrative text, instructional text, and all written content in the multimedia project.',
+ ar:'الكتّاب (كتّاب النصوص) مسؤولون عن إنشاء النصوص السردية والتعليمية وجميع المحتوى المكتوب في مشروع الوسائط المتعددة.'},
+
+{id:80,ch:'CH4',type:'MCQ',
+ q:'The Video Specialist in a multimedia team:',
+ opts:['Writes all the code','Manages the overall budget','Coordinates the video production team and handles video editing','Designs the navigation system'],
+ ans:2,
+ en:'The Video Specialist coordinates the video team, handles video shooting, editing, color correction, and integrates video content into the multimedia project.',
+ ar:'أخصائي الفيديو ينسق فريق الفيديو ويتولى التصوير والتحرير وتصحيح الألوان ودمج محتوى الفيديو في مشروع الوسائط المتعددة.'},
+
+{id:81,ch:'CH3',type:'MCQ',
+ q:'During the Designing and Producing stage, there may be many:',
+ opts:['Budget meetings only','Feedback cycles with the client','Hardware failures','Legal reviews'],
+ ans:1,
+ en:'During Design & Production, there may be MANY feedback cycles with the client until they are happy with the result before moving to Testing.',
+ ar:'أثناء مرحلة التصميم والإنتاج، قد تكون هناك دورات تغذية راجعة كثيرة مع العميل حتى يكون راضياً عن النتيجة قبل الانتقال للاختبار.'},
+
+{id:82,ch:'CH3',type:'MCQ',
+ q:'What does the Delivery stage of a multimedia project include?',
+ opts:['Only writing code','Creating CD-ROMs, labels, and preparing user manuals','Only testing','Only planning the budget'],
+ ans:1,
+ en:'Delivery includes: packaging the project, creating CD-ROMs and labels (if physical), preparing user manuals, and deploying to web if needed.',
+ ar:'التسليم يشمل: تغليف المشروع، إنشاء الأقراص المضغوطة والملصقات (إن كان مادياً)، إعداد دليل المستخدم، ونشره على الويب إذا لزم.'},
+
+{id:83,ch:'CH0',type:'MCQ',
+ q:'VRML documents have been developed primarily for use on:',
+ opts:['Intranets only','CD-ROMs only','The World Wide Web','Local databases'],
+ ans:2,
+ en:'VRML (Virtual Reality Modeling Language) documents were developed primarily for creating and sharing 3D virtual environments on the World Wide Web.',
+ ar:'تم تطوير وثائق VRML (لغة نمذجة الواقع الافتراضي) أساساً لإنشاء ومشاركة بيئات ثلاثية الأبعاد افتراضية على الويب العالمي.'},
+
+{id:84,ch:'CH3',type:'MCQ',
+ q:'To make GOOD multimedia, in addition to hardware, software and ideas, you also need:',
+ opts:['Only money','Only time','Only talent','Talent, skill, organization, time, money, and teamwork'],
+ ans:3,
+ en:'"To make GOOD multimedia you also need talent and skill, organization, time, money and the help of others." — direct from course material.',
+ ar:'"لصنع وسائط متعددة جيدة تحتاج أيضاً موهبة ومهارة وتنظيماً ووقتاً ومالاً ومساعدة الآخرين" — مباشرة من مواد الدورة.'},
+
+{id:85,ch:'CH4',type:'MCQ',
+ q:'Which is a key skill required by the Project Manager?',
+ opts:['MIDI and sound editing','Communication skills, leadership, hardware/software understanding','3D modeling','Video color grading'],
+ ans:1,
+ en:'Project Manager key skills: Communication skills, leadership ability, understanding of hardware and software, good listening, and organizational skills.',
+ ar:'المهارات الأساسية لمدير المشروع: مهارات التواصل، القيادة، فهم الهاردوير والسوفتوير، الاستماع الجيد، والمهارات التنظيمية.'},
+
+// ══════════════════════════════════════════════════════════
+// CHAPTER 5 — Text in Multimedia
+// Topics: Typeface, Font, Kerning, Leading, Unicode, Hypertext, HTML, Serif, WYSIWYG
+// ══════════════════════════════════════════════════════════
+{id:101,ch:'CH5',type:'MCQ',
+ q:'What is a typeface?',
+ opts:['A collection of characters of a single size and style','A family of graphic characters including many sizes and styles','The measurement of letter height in points','A bitmapped representation of a letter'],
+ ans:1,
+ en:'A typeface (e.g. Arial, Times) is a whole family of graphic characters including many sizes and styles. A font is one specific member of that family (e.g. Arial Bold 12pt).',
+ ar:'الـ Typeface (مثل Arial، Times) هو عائلة كاملة من الأحرف تشمل أحجاماً وأساليب مختلفة. الـ Font هو فرد واحد محدد من تلك العائلة.'},
+
+{id:102,ch:'CH5',type:'MCQ',
+ q:'Font sizes are measured in:',
+ opts:['Pixels','Inches','Points','Centimetres'],
+ ans:2,
+ en:'Font sizes are always measured in Points. 1 point = 1/72 inch. Measured from the top to bottom of capital letter descenders.',
+ ar:'أحجام الخط تُقاس دائماً بالـ Points (نقاط). كل نقطة = 1/72 بوصة.'},
+
+{id:103,ch:'CH5',type:'MCQ',
+ q:'Which term describes the space adjustment between pairs of letters?',
+ opts:['Leading','Kerning','Tracking','Hinting'],
+ ans:1,
+ en:'Kerning adjusts the horizontal space between specific letter pairs to improve visual appearance (e.g. the letters AV naturally look too spaced apart).',
+ ar:'الـ Kerning يضبط المسافة الأفقية بين زوج محدد من الأحرف لتحسين المظهر البصري (مثلاً: الأحرف AV تبدو بعيدة بصرياً).'},
+
+{id:104,ch:'CH5',type:'MCQ',
+ q:'What is "leading" in typography?',
+ opts:['Space between individual letters','Vertical line spacing between rows of text','The weight of a font such as bold','A small decoration at the end of a letter'],
+ ans:1,
+ en:'Leading (pronounced "ledding") is the vertical spacing between lines of text. More leading = more breathing room between lines.',
+ ar:'الـ Leading (تُنطق "ليدينغ") هو المسافة الرأسية بين أسطر النص. زيادة الـ Leading تعطي مسافة تنفس أكبر بين الأسطر.'},
+
+{id:105,ch:'CH5',type:'MCQ',
+ q:'Which font type CANNOT be scaled without losing quality?',
+ opts:['PostScript','TrueType','Bitmapped','OpenType'],
+ ans:2,
+ en:'Bitmapped fonts store letters as fixed pixel grids. Enlarging them produces jagged "staircase" edges. PostScript/TrueType use math curves and scale cleanly.',
+ ar:'الخطوط الـ Bitmap مخزونة كشبكة نقاط ثابتة — تكبيرها ينتج حوافاً متدرجة خشنة. PostScript/TrueType تستخدم منحنيات رياضية وتتسع بسلاسة.'},
+
+{id:106,ch:'CH5',type:'MCQ',
+ q:'WYSIWYG stands for:',
+ opts:['What You See Is What You Get','Where Your Script Is Where You Go','Write Your Script In Web You Get','Web Yet Still In Graphics You Get'],
+ ans:0,
+ en:'WYSIWYG = What You See Is What You Get. The on-screen display exactly matches the final printed or published output.',
+ ar:'WYSIWYG = ما تراه على الشاشة هو بالضبط ما ستحصل عليه عند الطباعة أو النشر.'},
+
+{id:107,ch:'CH5',type:'MCQ',
+ q:'Sans-serif fonts are characterized by:',
+ opts:['Small decorative strokes at letter ends','The absence of decorative strokes at letter ends','Extra-wide letter spacing','Being suitable only for headings'],
+ ans:1,
+ en:'"Sans" is French for "without". Sans-serif fonts (e.g. Arial) LACK the small decorative endings of serif fonts (e.g. Times New Roman).',
+ ar:'"Sans" بالفرنسية تعني "بلا". خطوط Sans-serif (مثل Arial) تخلو من الزخرفة الصغيرة على أطراف الأحرف التي تميز خطوط Serif.'},
+
+{id:108,ch:'CH5',type:'MCQ',
+ q:'Which character set supports ALL known languages?',
+ opts:['ASCII','Extended ASCII','UNICODE','UTF-8 only'],
+ ans:2,
+ en:'UNICODE contains 65,000+ characters covering all known languages and alphabets. It was developed in 1989 for multilingual text.',
+ ar:'UNICODE يحتوي على أكثر من 65,000 حرف يشمل جميع اللغات المعروفة؛ طُوِّر عام 1989 لدعم النصوص متعددة اللغات.'},
+
+{id:109,ch:'CH5',type:'MCQ',
+ q:'What is "font substitution"?',
+ opts:['Replacing a font with a bitmap version','Using an alternative font when the required one is missing','Converting uppercase to lowercase','Applying a different color to text'],
+ ans:1,
+ en:'Font substitution occurs when a document is opened on a machine that lacks the original font — the OS uses a similar available font instead.',
+ ar:'استبدال الخط يحدث عندما تُفتح وثيقة على جهاز لا يحتوي على الخط الأصلي — يستبدل نظام التشغيل خطاً مشابهاً متاحاً.'},
+
+{id:110,ch:'CH5',type:'MCQ',
+ q:'Which HTML tag specifies the font to display?',
+ opts:['<text>','<font>','<style>','<typeface>'],
+ ans:1,
+ en:'The HTML <font> tag specifies the typeface to display. If the font is unavailable on the user\'s machine, the browser uses its default font.',
+ ar:'الوسم HTML <font> يُحدد الخط المراد عرضه. إن لم يكن موجوداً، يستخدم المتصفح الخط الافتراضي.'},
+
+{id:111,ch:'CH5',type:'MCQ',
+ q:'The "X-height" of a font refers to:',
+ opts:['The height of capital letters','The height of the lowercase letter x','The spacing between lines','The point size of the font'],
+ ans:1,
+ en:'X-height is the height of the lowercase letter "x" and is a key measure for determining the visual size of a font at a given point size.',
+ ar:'X-height هو ارتفاع الحرف الصغير "x" — مقياس أساسي لتحديد الحجم البصري للخط عند حجم نقطة معين.'},
+
+{id:112,ch:'CH5',type:'MCQ',
+ q:'What does anti-aliasing do to on-screen text?',
+ opts:['Removes all colors from text','Blends edge pixels to create smoother letter outlines','Converts text to bitmapped format','Automatically increases kerning'],
+ ans:1,
+ en:'Anti-aliasing blends intermediate-color pixels along letter edges, reducing the jagged staircase effect and creating smoother outlines on screen.',
+ ar:'الـ Anti-aliasing يمزج بيكسلات اللون الوسيط على أطراف الأحرف للتقليل من التأثير المتدرج الخشن وإنشاء مخططات أكثر نعومة.'},
+
+{id:113,ch:'CH5',type:'MCQ',
+ q:'In hypermedia, what is a "node"?',
+ opts:['A navigation button','A content element (text, graphics, sounds) linked to other nodes','A broken hyperlink','A CSS styling rule'],
+ ans:1,
+ en:'A node is any content element (text, graphics, sound) in a hypermedia system that is connected to other nodes via links.',
+ ar:'الـ Node هو أي عنصر محتوى (نص، رسوميات، صوت) في نظام Hypermedia مرتبط بعقد أخرى عبر روابط.'},
+
+{id:114,ch:'CH5',type:'MCQ',
+ q:'Who coined the term "hypertext"?',
+ opts:['Tim Berners-Lee','Doug Engelbart','Ted Nelson','Johann Gutenberg'],
+ ans:2,
+ en:'Ted Nelson coined the term "hypertext" in 1965, envisioning linked text systems that would fundamentally change how humans think and access information.',
+ ar:'Ted Nelson ابتكر مصطلح "hypertext" عام 1965، متصوراً أنظمة نص مرتبطة ستغيّر أساسياً طريقة تفكير البشر والوصول إلى المعلومات.'},
+
+{id:115,ch:'CH5',type:'MCQ',
+ q:'What is "localization" of text?',
+ opts:['Converting fonts to bitmap format','Translating and adapting content for a specific language or culture','Reducing font file sizes','Applying regional color palettes'],
+ ans:1,
+ en:'Localization adapts content — translation, cultural adjustments, date formats, etc. — for a specific language or regional audience.',
+ ar:'الـ Localization يُكيِّف المحتوى — الترجمة والتعديلات الثقافية وصيغ التاريخ إلخ — للغة أو المنطقة المحددة.'},
+
+{id:116,ch:'CH5',type:'MCQ',
+ q:'A Boolean search in hypertext uses which operators?',
+ opts:['PLUS, MINUS, EQUALS','AND, OR, NOT','FIND, REPLACE, SEARCH','IF, THEN, ELSE'],
+ ans:1,
+ en:'Boolean operators AND, OR, NOT allow combining or excluding search terms for precise information retrieval in hypertext systems.',
+ ar:'عمليات Boolean (AND, OR, NOT) تُمكِّن من جمع مصطلحات البحث أو استثنائها للحصول على نتائج دقيقة.'},
+
+{id:117,ch:'CH5',type:'MCQ',
+ q:'Monitor landscape orientation means the display is:',
+ opts:['Taller than wide','Wider than tall','Square shaped','Rotated 90 degrees'],
+ ans:1,
+ en:'Landscape = wider than tall (horizontal). Portrait = taller than wide (vertical). Monitors default to landscape orientation.',
+ ar:'الـ Landscape = العرض أكثر من الارتفاع (أفقي). الـ Portrait = الارتفاع أكثر من العرض (رأسي). الشاشات تفضل Landscape.'},
+
+{id:118,ch:'CH5',type:'MCQ',
+ q:'What is "ransom-note typography"?',
+ opts:['Using hidden text in a document','Using too many different typefaces in one design','Displaying text in a threatening font','Applying excessive kerning'],
+ ans:1,
+ en:'Using too many typefaces in one project produces a chaotic, unprofessional look nicknamed "ransom-note typography".',
+ ar:'استخدام عدد كبير جداً من الخطوط المختلفة في مشروع واحد ينتج مظهراً فوضوياً غير احترافي يُعرف بـ "ransom-note typography".'},
+
+{id:119,ch:'CH5',type:'MCQ',
+ q:'PostScript fonts describe characters using:',
+ opts:['Pixel grids','Bezier curves','Raster maps','ASCII codes'],
+ ans:1,
+ en:'PostScript (developed by Apple & Adobe) describes font outlines as mathematical Bezier curves, enabling smooth scaling to any size.',
+ ar:'PostScript (طوّرته Apple وAdobe) يصف مخططات الخطوط بمنحنيات Bezier الرياضية، مما يسمح بتوسيعها بسلاسة لأي حجم.'},
+
+{id:120,ch:'CH5',type:'MCQ',
+ q:'Reading text on a computer screen is slower than from a book partly because:',
+ opts:['Screens use serif fonts only','Eye blinking drops from 20-25 to only 3-5 times per minute','Screen resolution is always lower than print','WYSIWYG forces slower rendering'],
+ ans:1,
+ en:'When using a computer screen, the blink rate drops dramatically (3-5/min vs 20-25/min when reading a book), causing eye fatigue and dryness.',
+ ar:'عند استخدام الشاشة، ينخفض معدل الرف بشكل كبير (3-5 مرات/دقيقة مقارنةً بـ 20-25 عند قراءة كتاب)، مما يسبب تعب العين.'},
+
+// CH5 True/False
+{id:121,ch:'CH5',type:'TF',
+ q:'A font and a typeface refer to the same thing.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — A typeface is the family (e.g. Arial); a font is one specific size and style within that family (e.g. Arial Bold 12pt). They are different concepts.',
+ ar:'خطأ — الـ Typeface هو العائلة (مثل Arial)؛ الـ Font هو الحجم والأسلوب المحدد داخل تلك العائلة (مثل Arial Bold 12pt). مفهومان مختلفان.'},
+
+{id:122,ch:'CH5',type:'TF',
+ q:'TrueType fonts can be scaled to any size without jagged edges.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — TrueType fonts use mathematical outlines and anti-aliasing, rendering smoothly at any size without pixelation or jagged edges.',
+ ar:'صحيح — خطوط TrueType تستخدم مخططات رياضية وanti-aliasing، فتُرسم بسلاسة بأي حجم دون تشويه أو حواف خشنة.'},
+
+{id:123,ch:'CH5',type:'TF',
+ q:'UNICODE was developed before the ASCII character set.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — ASCII dates to the 1960s; UNICODE was developed in 1989 to handle multilingual text. ASCII came first.',
+ ar:'خطأ — ASCII يعود إلى ستينيات القرن العشرين؛ UNICODE طُوِّر عام 1989. ASCII جاء أولاً.'},
+
+{id:124,ch:'CH5',type:'TF',
+ q:'Leading refers to the horizontal space between individual letter pairs.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — Leading is VERTICAL line spacing between rows of text. Kerning is the HORIZONTAL space between specific letter pairs.',
+ ar:'خطأ — الـ Leading هو المسافة الرأسية بين الأسطر. الـ Kerning هو المسافة الأفقية بين زوج محدد من الأحرف.'},
+
+{id:125,ch:'CH5',type:'TF',
+ q:'A hyperlink anchor is the reference point of origin in a document.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — The anchor marks the source reference point in a document that links to another document, image, or file.',
+ ar:'صحيح — الـ Anchor يُحدد نقطة المصدر في وثيقة مرتبطة بوثيقة أخرى أو صورة أو ملف.'},
+
+{id:126,ch:'CH5',type:'TF',
+ q:'Bitmapped fonts can be enlarged without any quality loss.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — Bitmapped fonts are stored as fixed pixel grids; enlarging them causes visible jagged edges (staircase effect).',
+ ar:'خطأ — الخطوط الـ Bitmap مخزونة كشبكة نقاط ثابتة؛ تكبيرها يُسبب حوافاً خشنة مرئية (تأثير السلم).'},
+
+{id:127,ch:'CH5',type:'TF',
+ q:'HTML was originally designed to handle multimedia as well as text.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — HTML was originally designed for text only; multimedia support was added later through extensions like DHTML, CSS, and HTML5.',
+ ar:'خطأ — HTML صُمِّم أصلاً للنص فقط؛ دعم الوسائط المتعددة أُضيف لاحقاً عبر امتدادات مثل DHTML وCSS وHTML5.'},
+
+{id:128,ch:'CH5',type:'TF',
+ q:'A sans-serif font has small decorative strokes at the ends of letters.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — "Sans" means "without". Sans-serif fonts (e.g. Arial) deliberately LACK those decorative strokes. Serif fonts (e.g. Times) have them.',
+ ar:'خطأ — "Sans" تعني "بلا". خطوط Sans-serif (مثل Arial) تخلو عمداً من الزخرفة. خطوط Serif (مثل Times) تمتلكها.'},
+
+{id:129,ch:'CH5',type:'TF',
+ q:'Intercap notation (e.g. LastName) is used to improve readability of compound words.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — Capitalizing each component\'s first letter in a compound technical term (e.g. UserProfile) improves readability where spaces are not allowed.',
+ ar:'صحيح — تكبير الحرف الأول لكل جزء في المصطلحات التقنية المركبة (مثل UserProfile) يُحسِّن القراءة حيث لا تُسمح المسافات.'},
+
+{id:130,ch:'CH5',type:'TF',
+ q:'Fontographer can be used to create PostScript, TrueType, and bitmapped fonts.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — Fontographer (Macromedia) is a professional font editing tool capable of creating all three major font formats: PostScript, TrueType, and Bitmapped.',
+ ar:'صحيح — Fontographer (Macromedia) أداة تحرير خطوط احترافية قادرة على إنشاء الأنواع الثلاثة الرئيسية: PostScript وTrueType وBitmapped.'},
+
+// ══════════════════════════════════════════════════════════
+// CHAPTER 6 — Sound in Multimedia
+// Topics: Acoustics, MIDI, Digital Audio, Sampling, File Formats, Copyright
+// ══════════════════════════════════════════════════════════
+{id:131,ch:'CH6',type:'MCQ',
+ q:'What is "acoustics"?',
+ opts:['The study of light and optics','The branch of physics that studies sound','The measurement of file compression','A type of audio format'],
+ ans:1,
+ en:'Acoustics is the branch of physics dedicated to studying sound — its production, propagation, and effects on matter.',
+ ar:'علم الصوتيات (Acoustics) هو فرع الفيزياء المخصص لدراسة الصوت — إنتاجه وانتشاره وآثاره.'},
+
+{id:132,ch:'CH6',type:'MCQ',
+ q:'Sound pressure level (loudness) is measured in:',
+ opts:['Hertz (Hz)','Decibels (dB)','Kilohertz (kHz)','Watts'],
+ ans:1,
+ en:'Decibels (dB) measure sound intensity/loudness. Frequency (pitch) is separately measured in Hertz (Hz).',
+ ar:'الديسيبل (dB) يقيس شدة الصوت. التردد (النغمة) يُقاس بالهيرتز (Hz) بشكل منفصل.'},
+
+{id:133,ch:'CH6',type:'MCQ',
+ q:'The human audible frequency range is:',
+ opts:['0 – 20 Hz','20 Hz – 20 kHz','20 kHz – 1 GHz','1 GHz – 10 THz'],
+ ans:1,
+ en:'Humans hear between 20 Hz (deep bass) and 20,000 Hz (20 kHz, very high treble). Below 20 Hz = infrasound; above 20 kHz = ultrasound.',
+ ar:'يسمع الإنسان بين 20 Hz (باص عميق) و20,000 Hz (20 kHz، تربيل عالٍ جداً). أقل من 20 Hz = Infrasound؛ أعلى من 20 kHz = Ultrasound.'},
+
+{id:134,ch:'CH6',type:'MCQ',
+ q:'MIDI stands for:',
+ opts:['Multiple Instrument Digital Integration','Musical Instrument Digital Interface','Multimedia Input Device Interface','Music and Image Digital Interchange'],
+ ans:1,
+ en:'MIDI = Musical Instrument Digital Interface. A 1980s communications standard allowing electronic musical instruments and computers to communicate.',
+ ar:'MIDI = واجهة الآلة الموسيقية الرقمية. معيار اتصالات من الثمانينيات يتيح للآلات الإلكترونية والحاسبات التواصل.'},
+
+{id:135,ch:'CH6',type:'MCQ',
+ q:'MIDI data is best described as:',
+ opts:['A digital recording of actual sound waves','A numeric shorthand storing musical instructions','A compressed waveform','A sampled stereo recording'],
+ ans:1,
+ en:'MIDI stores musical instructions (notes, duration, velocity) as numbers — like sheet music in numeric form — NOT actual recorded sound.',
+ ar:'MIDI يخزن التعليمات الموسيقية (النوتات، المدة، السرعة) كأرقام — مثل النوتة الموسيقية بصيغة رقمية — وليس تسجيلاً صوتياً فعلياً.'},
+
+{id:136,ch:'CH6',type:'MCQ',
+ q:'Digital audio sampling rate is measured in:',
+ opts:['Decibels','Bits per sample','Kilohertz (kHz)','Megabytes'],
+ ans:2,
+ en:'Sampling rate (number of samples taken per second) is measured in kHz. CD quality = 44.1 kHz (44,100 samples per second).',
+ ar:'معدل أخذ العينات (القياسات في الثانية) يُقاس بالكيلوهيرتز. جودة CD = 44.1 kHz (44,100 عينة في الثانية).'},
+
+{id:137,ch:'CH6',type:'MCQ',
+ q:'Which is a key ADVANTAGE of MIDI over digital audio?',
+ opts:['Consistent playback on any device','Ability to reproduce spoken dialog','Much smaller file sizes','Device-independent playback'],
+ ans:2,
+ en:'MIDI files store instructions (not sound data), making them far smaller — they load and stream much faster on the web.',
+ ar:'ملفات MIDI تخزن تعليمات (وليس بيانات صوتية)، مما يجعلها أصغر بكثير — تحمّل وتبث بسرعة أكبر على الويب.'},
+
+{id:138,ch:'CH6',type:'MCQ',
+ q:'Which is a key DISADVANTAGE of MIDI?',
+ opts:['Cannot be embedded in web pages','Playback quality depends on the hardware device (device-dependent)','Requires twice the storage of digital audio','Cannot store musical notes'],
+ ans:1,
+ en:'MIDI is device-dependent: the same file may sound completely different on different hardware because each device has its own synthesizer.',
+ ar:'MIDI يعتمد على الجهاز: نفس الملف قد يُصدر صوتاً مختلفاً تماماً على أجهزة مختلفة لأن كل جهاز لديه محاكيه الصوتي الخاص.'},
+
+{id:139,ch:'CH6',type:'MCQ',
+ q:'The CD-quality audio Red Book Standard (ISO 10149) uses:',
+ opts:['8-bit samples at 22.05 kHz','16-bit samples at 44.1 kHz','32-bit samples at 96 kHz','8-bit samples at 44.1 kHz'],
+ ans:1,
+ en:'The Red Book Standard defines CD-quality audio as 16-bit samples at 44.1 kHz, accurately reproducing all human-audible frequencies.',
+ ar:'معيار Red Book يُحدد جودة CD بعينات 16-bit بمعدل 44.1 kHz، يتسم بدقة جميع الترددات المسموعة بشرياً.'},
+
+{id:140,ch:'CH6',type:'MCQ',
+ q:'"Quantization" in digital audio means:',
+ opts:['Increasing the sampling frequency','Rounding each sample\'s amplitude to the nearest integer','Removing background noise','Converting MIDI to digital audio'],
+ ans:1,
+ en:'Quantization rounds the measured amplitude of each sample to the nearest representable integer, introducing a small rounding error called quantization noise.',
+ ar:'الـ Quantization يُقرِّب قيمة شدة كل عينة إلى أقرب عدد صحيح قابل للتمثيل، مما يُدخل خطأ تقريب صغيراً.'},
+
+{id:141,ch:'CH6',type:'MCQ',
+ q:'"Downsampling" is used primarily to:',
+ opts:['Improve audio fidelity','Reduce file size by lowering the number of samples per second','Convert mono to stereo','Add fade effects'],
+ ans:1,
+ en:'Downsampling reduces the number of samples per second, creating smaller files at the cost of some audio quality reduction.',
+ ar:'الـ Downsampling يُقلل عدد العينات في الثانية، مما ينتج ملفات أصغر على حساب جزء من جودة الصوت.'},
+
+{id:142,ch:'CH6',type:'MCQ',
+ q:'According to Vaughn\'s Law of Minimums, inexpensive equipment is acceptable when:',
+ opts:['Only for beginners','It meets an adequate quality level satisfying you and your audience','Only for MIDI, not digital audio','The project has no deadline'],
+ ans:1,
+ en:'Vaughn\'s Law: there is an acceptable minimum quality level. If cheap equipment satisfies the audience, there is no need to spend more.',
+ ar:'قانون Vaughn: يوجد مستوى أدنى مقبول من الجودة. إذا كان الجهاز الرخيص يُرضي الجمهور، لا داعي للإنفاق أكثر.'},
+
+{id:143,ch:'CH6',type:'MCQ',
+ q:'Which audio file format does Windows use for system sounds?',
+ opts:['AIFF','MIDI','WAV','MP3 only'],
+ ans:2,
+ en:'Windows stores system sounds as WAV files in the Windows\\Media directory. Macintosh uses AIFF or AIFC formats.',
+ ar:'Windows يخزن أصوات النظام كملفات WAV في مجلد Windows\\Media. Mac يستخدم صيغة AIFF أو AIFC.'},
+
+{id:144,ch:'CH6',type:'MCQ',
+ q:'To reproduce spoken dialog in a multimedia project you should use:',
+ opts:['MIDI','Digital audio','Both are equally suitable','Neither; use text-to-speech only'],
+ ans:1,
+ en:'MIDI represents musical instruments and cannot easily reproduce human speech. Digital audio directly records any sound including speech.',
+ ar:'MIDI مُصمَّم للآلات الموسيقية ولا يمكنه بسهولة استنساخ الكلام البشري. الصوت الرقمي يُسجِّل أي صوت مباشرةً بما فيه الكلام.'},
+
+{id:145,ch:'CH6',type:'MCQ',
+ q:'Digital audio is described as "device-independent" because:',
+ opts:['It plays only on dedicated hardware','The same recording sounds identical on any playback hardware','It does not need a sound card','It compresses automatically on any device'],
+ ans:1,
+ en:'Digital audio stores the actual sound wave as samples, so playback is consistent (same sound) regardless of the hardware used.',
+ ar:'الصوت الرقمي يخزن الموجة الصوتية الفعلية كعينات، فيثبت التشغيل (نفس الصوت) بغض النظر عن الأجهزة.'},
+
+{id:146,ch:'CH6',type:'MCQ',
+ q:'MIDI is analogous to which type of graphic?',
+ opts:['Bitmapped (raster)','Vector','RAW','TIFF'],
+ ans:1,
+ en:'Like vector graphics storing math equations to recreate images, MIDI stores numeric instructions to recreate music — both are compact and scalable.',
+ ar:'مثلما تخزن الرسوميات المتجهة معادلات رياضية لإعادة إنشاء الصور، يخزن MIDI تعليمات رقمية لإعادة إنشاء الموسيقى — كلاهما مدمج وقابل للتوسع.'},
+
+{id:147,ch:'CH6',type:'MCQ',
+ q:'Streaming audio means:',
+ opts:['Waiting for the full file to download before playing','Playing audio while it is still being downloaded','Converting audio to a text-based stream','Playing audio in reverse'],
+ ans:1,
+ en:'Streaming buffers and plays audio as it downloads, avoiding long wait times. Playback quality depends on connection speed.',
+ ar:'الـ Streaming يخزن الصوت في Buffer ويُشغِّله أثناء التحميل، متجنباً أوقات انتظار طويلة. تتوقف الجودة على سرعة الاتصال.'},
+
+{id:148,ch:'CH6',type:'MCQ',
+ q:'Stereo audio requires how much storage compared to mono?',
+ opts:['Same amount','25% more','Twice as much','Four times as much'],
+ ans:2,
+ en:'Stereo uses two channels (left + right), exactly doubling the storage requirement compared to mono (one channel).',
+ ar:'الـ Stereo يستخدم قناتين (يسار + يمين)، يضاعف متطلبات التخزين بالضبط مقارنةً بـ Mono (قناة واحدة).'},
+
+{id:149,ch:'CH6',type:'MCQ',
+ q:'Which scripting language is native to Macromedia Director?',
+ opts:['ActionScript','Open Script','LINGO','JavaScript'],
+ ans:2,
+ en:'LINGO is Director\'s native scripting language. ActionScript is for Flash; Open Script is for Toolbook.',
+ ar:'LINGO هي لغة البرمجة النصية الخاصة بـ Director. ActionScript: لـ Flash. Open Script: لـ Toolbook.'},
+
+// CH6 True/False
+{id:150,ch:'CH6',type:'TF',
+ q:'MIDI audio sounds identical on all playback devices.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — MIDI is device-dependent: playback quality varies based on the sound synthesizer of each device. Digital audio is device-independent.',
+ ar:'خطأ — MIDI يعتمد على الجهاز: تختلف جودة التشغيل حسب المحاكي الصوتي لكل جهاز. الصوت الرقمي مستقل عن الجهاز.'},
+
+{id:151,ch:'CH6',type:'TF',
+ q:'A higher sampling rate produces better audio quality.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — A higher sampling rate captures more detail per second, more accurately representing the original sound wave.',
+ ar:'صحيح — معدل أخذ عينات أعلى يلتقط تفاصيل أكثر في الثانية، مما يمثل الموجة الصوتية الأصلية بدقة أكبر.'},
+
+{id:152,ch:'CH6',type:'TF',
+ q:'MIDI files are generally larger than digital audio files of the same music.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — MIDI files are much SMALLER: they store instructions (like sheet music), not actual sound data.',
+ ar:'خطأ — ملفات MIDI أصغر بكثير: تخزن تعليمات (مثل النوتة الموسيقية)، وليس بيانات صوتية فعلية.'},
+
+{id:153,ch:'CH6',type:'TF',
+ q:'Infrasound has frequencies above 20 kHz.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — Infrasound is 0–20 Hz (BELOW human hearing). Ultrasound is above 20 kHz (ABOVE human hearing).',
+ ar:'خطأ — الـ Infrasound هو 0-20 Hz (دون السمع البشري). الـ Ultrasound هو فوق 20 kHz (فوق السمع البشري).'},
+
+{id:154,ch:'CH6',type:'TF',
+ q:'Digital audio provides consistent, device-independent playback.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — Digital audio stores the actual sound wave as samples, ensuring identical playback on any hardware.',
+ ar:'صحيح — الصوت الرقمي يخزن الموجة الصوتية الفعلية كعينات، مما يضمن تشغيلاً متطابقاً على أي جهاز.'},
+
+{id:155,ch:'CH6',type:'TF',
+ q:'You may freely use any music in your multimedia project without permission.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — Copyright law requires permission to use others\' original works. Royalty-free sound clips can be purchased legally.',
+ ar:'خطأ — قانون حقوق الملكية الفكرية يشترط الإذن لاستخدام أعمال الآخرين. يمكن شراء مقاطع صوتية خالية من الحقوق بشكل قانوني.'},
+
+{id:156,ch:'CH6',type:'TF',
+ q:'Increasing bit depth from 8-bit to 16-bit reduces audio file size.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — Increasing bit depth INCREASES file size because more bits are stored per sample, capturing a wider dynamic range.',
+ ar:'خطأ — زيادة عمق البت تزيد حجم الملف لأن بتات أكثر تُخزَّن لكل عينة، ملتقطةً نطاقاً ديناميكياً أوسع.'},
+
+{id:157,ch:'CH6',type:'TF',
+ q:'MIDI requires knowledge of music theory to produce effectively.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — Working with MIDI requires music theory knowledge, the ability to play an instrument, and sequencer software.',
+ ar:'صحيح — العمل مع MIDI يستلزم معرفة نظرية الموسيقى، القدرة على عزف آلة موسيقية، وبرنامج Sequencer.'},
+
+// ══════════════════════════════════════════════════════════
+// CHAPTER 7 — Graphic / Image Data Structures
+// Topics: Pixels, Resolution, Bit Depth, Bitmap, Vector, RGB, Compression, RLE, Huffman, JPEG, GIF
+// ══════════════════════════════════════════════════════════
+{id:158,ch:'CH7',type:'MCQ',
+ q:'What is a "pixel"?',
+ opts:['A unit of color depth','The smallest picture element in a digital image','A data compression algorithm','A type of graphics card'],
+ ans:1,
+ en:'Pixel = Picture Element. It is the smallest individually addressable unit in a digital image. Quality depends on how many pixels there are (resolution).',
+ ar:'Pixel = عنصر الصورة. هي أصغر وحدة موجَّهة مستقلة في الصورة الرقمية. الجودة تتوقف على عدد البيكسلات (الدقة).'},
+
+{id:159,ch:'CH7',type:'MCQ',
+ q:'Image resolution is defined as:',
+ opts:['The number of colors in the image','Width x Height in pixels','The file size in bytes','The bit depth of each pixel'],
+ ans:1,
+ en:'Resolution = Width x Height in pixels. Higher resolution = more pixels = more detail = higher quality image.',
+ ar:'الدقة = العرض × الارتفاع بالبيكسلات. دقة أعلى = بيكسلات أكثر = تفاصيل أكثر = جودة أعلى.'},
+
+{id:160,ch:'CH7',type:'MCQ',
+ q:'A 1-bit pixel-depth image contains exactly:',
+ opts:['256 colors','16 colors','2 colors (black and white)','65,536 colors'],
+ ans:2,
+ en:'1 bit = 2 states only: 0 (black) or 1 (white). This is a monochrome binary image — the simplest possible.',
+ ar:'1 بت = حالتان فقط: 0 (أسود) أو 1 (أبيض). هذه هي الصورة الثنائية أحادية اللون — الأبسط على الإطلاق.'},
+
+{id:161,ch:'CH7',type:'MCQ',
+ q:'A 24-bit True Color image can display how many colors?',
+ opts:['256','65,536','16,777,216','4,294,967,296'],
+ ans:2,
+ en:'24 bits = 8 bits per channel (R, G, B). 2^24 = 16,777,216 colors = True Color. This is the standard for photorealistic images.',
+ ar:'24 بت = 8 بت لكل قناة (R, G, B). 2^24 = 16,777,216 لون = True Color. هذا المعيار للصور الواقعية.'},
+
+{id:162,ch:'CH7',type:'MCQ',
+ q:'The main DISADVANTAGE of bitmap graphics is:',
+ opts:['Cannot store photographs','Loses quality when scaled up','Always larger than vector files','Cannot support color'],
+ ans:1,
+ en:'Bitmap images store a fixed pixel grid; enlarging them stretches pixels, causing blurring and visible pixelation.',
+ ar:'صور Bitmap تخزن شبكة بيكسلات ثابتة؛ تكبيرها يمد البيكسلات مما يسبب تشويشاً وتلوثاً مرئياً.'},
+
+{id:163,ch:'CH7',type:'MCQ',
+ q:'The main ADVANTAGE of vector graphics is:',
+ opts:['Better for storing photographs','Scalable to any size without quality loss — stored as math equations','Smaller file size than bitmap for photos','Supports more colors than any bitmap format'],
+ ans:1,
+ en:'Vector graphics store shapes as mathematical equations (lines, curves, direction). They scale to any size without any quality degradation.',
+ ar:'الرسوميات المتجهة تخزن الأشكال كمعادلات رياضية (خطوط، منحنيات، اتجاه). تتوسع لأي حجم دون أي تدهور في الجودة.'},
+
+{id:164,ch:'CH7',type:'MCQ',
+ q:'Interlacing a video display means:',
+ opts:['Displaying the full frame in a single pass','Displaying odd scan lines first, then even, halving bandwidth','Refreshing the screen 100 times per second','Converting color to grayscale'],
+ ans:1,
+ en:'Interlacing splits a frame into 2 fields: odd lines (1,3,5...) first, then even (2,4,6...). This halves the memory-to-controller bandwidth.',
+ ar:'الـ Interlacing يقسم الإطار إلى حقلين: الخطوط الفردية (1,3,5...) ثم الزوجية (2,4,6...). يُضاعف عرض النطاق بين الذاكرة والمتحكم.'},
+
+{id:165,ch:'CH7',type:'MCQ',
+ q:'The RGB color model is:',
+ opts:['Device-independent','Device-dependent — different devices reproduce the same RGB values differently','Used only for printing','Based on subtractive color mixing'],
+ ans:1,
+ en:'RGB is device-dependent because actual colors depend on the specific phosphors/dyes in each display, which vary by manufacturer.',
+ ar:'RGB يعتمد على الجهاز لأن الألوان الفعلية تعتمد على مواد الفوسفور/الأصبغة الخاصة بكل شاشة، وهي تختلف بين المصنِّعين.'},
+
+{id:166,ch:'CH7',type:'MCQ',
+ q:'GIF format is best suited for:',
+ opts:['High-resolution digital photographs','Sharp-edged line art, logos, and simple animations with limited colors','RAW camera images','High-dynamic-range images'],
+ ans:1,
+ en:'GIF uses lossless compression favoring flat uniform-color areas with sharp edges. It supports max 256 colors and simple animations.',
+ ar:'GIF يستخدم ضغطاً بلا خسارة يُفضِّل المناطق المنبسطة ذات الحدة. يدعم 256 لوناً كحد أقصى والرسوميات المتحركة البسيطة.'},
+
+{id:167,ch:'CH7',type:'MCQ',
+ q:'Lossless compression means:',
+ opts:['Some data is permanently lost for better compression','The decompressed data exactly matches the original','The file cannot be decompressed','Only suitable for audio files'],
+ ans:1,
+ en:'In lossless compression, decompression perfectly recovers all original data. No information is lost. Examples: PNG, RLE, Huffman.',
+ ar:'في الضغط بلا خسارة، يسترد فك الضغط جميع البيانات الأصلية بكاملها. لا تفقد من المعلومات. أمثلة: PNG وRLE وHuffman.'},
+
+{id:168,ch:'CH7',type:'MCQ',
+ q:'Lossy compression achieves higher compression ratios by:',
+ opts:['Guaranteeing perfect data recovery','Permanently discarding some less-important data','Using longer Huffman codes','Doubling the sample rate'],
+ ans:1,
+ en:'Lossy compression (e.g. JPEG) permanently discards some data deemed less perceptible to the human eye, achieving much higher compression ratios.',
+ ar:'الضغط مع خسارة (مثل JPEG) يتخلص نهائياً من بعض البيانات الأقل إدراكاً، محققاً نسب ضغط أعلى بكثير.'},
+
+{id:169,ch:'CH7',type:'MCQ',
+ q:'Run-Length Encoding (RLE) is MOST efficient for:',
+ opts:['Images with random noise (every pixel a different color)','Images with long consecutive runs of the same color','Audio files','Vector graphics only'],
+ ans:1,
+ en:'RLE replaces repeated consecutive bytes with a count + value pair. It excels when there are long runs of the same color (logos, cartoons, solid backgrounds).',
+ ar:'RLE يستبدل البيتات المتكررة المتتالية بزوج (العدد + القيمة). يتميز عندما توجد تسلسلات طويلة من نفس اللون (شعارات، رسوم كاريكاتور).'},
+
+{id:170,ch:'CH7',type:'MCQ',
+ q:'In Huffman encoding, frequently occurring characters are assigned:',
+ opts:['Longer bit codes','Shorter bit codes','Fixed-length codes','Random codes'],
+ ans:1,
+ en:'Huffman assigns shorter codes to frequent characters and longer codes to rare ones, minimizing the total bits needed to encode the data.',
+ ar:'Huffman يخصص رموزاً أقصر للحروف الأكثر تكراراً ورموزاً أطول للنادرة، مقللاً إجمالي البتات اللازمة لترميز البيانات.'},
+
+{id:171,ch:'CH7',type:'MCQ',
+ q:'JPEG compression is primarily used for:',
+ opts:['Simple logos and line art','Photographic images where some quality loss is acceptable','Lossless compression of medical images','GIF animations'],
+ ans:1,
+ en:'JPEG is lossy and uses DCT (Discrete Cosine Transform); it is ideal for photographs where minor quality loss is imperceptible to the human eye.',
+ ar:'JPEG خسار ويستخدم DCT (تحويل جيب التمام المتقطع)؛ مثالي للصور الفوتوغرافية حيث يكون فقدان الجودة البسيط غير محسوس.'},
+
+{id:172,ch:'CH7',type:'MCQ',
+ q:'Which standard was used for CGA graphics cards (1981)?',
+ opts:['640x480, 256 colors','640x200 (2 colors) or 160x200 (16 colors)','1024x768, 16.7 million colors','800x600, 256 colors'],
+ ans:1,
+ en:'CGA (Color Graphics Adapter, 1981) was the first color graphics card: 640x200 with 2 colors or 160x200 with 16 colors.',
+ ar:'CGA (1981) كان أول كارت شاشة ملوَّن: 640x200 بلونين أو 160x200 بـ16 لوناً.'},
+
+{id:173,ch:'CH7',type:'MCQ',
+ q:'Pixel depth (bit depth) determines:',
+ opts:['The physical size of each pixel on screen','The maximum number of colors that can be represented (2^n)','The image resolution','The compression ratio'],
+ ans:1,
+ en:'Pixel depth n bits allows 2^n colors. 8-bit = 256 colors; 16-bit = 65,536 colors; 24-bit = 16,777,216 (True Color).',
+ ar:'عمق البيكسل n بت يدعم 2^n لون. 8 بت = 256؛ 16 بت = 65,536؛ 24 بت = 16,777,216 (True Color).'},
+
+{id:174,ch:'CH7',type:'MCQ',
+ q:'Entropy encoding (RLE, Huffman) is classified as:',
+ opts:['Lossy','Lossless — treats data as a generic digital sequence','Used only for video','Based on human visual perception'],
+ ans:1,
+ en:'Entropy encoding (RLE, Huffman, Arithmetic) is lossless and treats the data stream as generic binary sequences without semantic interpretation.',
+ ar:'ترميز الإنتروبيا (RLE، Huffman، الحسابي) بلا خسارة ويتعامل مع تدفق البيانات كتسلسلات ثنائية عامة دون تفسير دلالي.'},
+
+{id:175,ch:'CH7',type:'MCQ',
+ q:'An 8-bit grayscale image can display how many shades of gray?',
+ opts:['2','16','256','65,536'],
+ ans:2,
+ en:'8-bit grayscale: 2^8 = 256 intensity levels, ranging from 0 (pure black) to 255 (pure white).',
+ ar:'تدرج رمادي 8-بت: 2^8 = 256 مستوى شدة، تتدرج من 0 (أسود كامل) إلى 255 (أبيض كامل).'},
+
+{id:176,ch:'CH7',type:'MCQ',
+ q:'Which compression standard is specifically designed for still images?',
+ opts:['MPEG','H.261','JPEG','DVI-RTV'],
+ ans:2,
+ en:'JPEG (Joint Photographic Experts Group) is the standard specifically for still image compression. MPEG = video; H.261 = video conferencing.',
+ ar:'JPEG (مجموعة خبراء التصوير المشتركة) هو المعيار المخصص لضغط الصور الثابتة. MPEG = فيديو؛ H.261 = مؤتمرات فيديو.'},
+
+// CH7 True/False
+{id:177,ch:'CH7',type:'TF',
+ q:'Higher pixel depth always means more colors can be displayed.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — Pixel depth n bits = 2^n possible colors. Every extra bit doubles the color palette exponentially.',
+ ar:'صحيح — عمق البيكسل n بت = 2^n لون ممكن. كل بت إضافي يضاعف لوحة الألوان بشكل أسي.'},
+
+{id:178,ch:'CH7',type:'TF',
+ q:'Vector graphics lose quality when scaled to a larger size.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — Vector graphics store shapes as math equations and scale to ANY size without quality loss. Only bitmaps degrade when enlarged.',
+ ar:'خطأ — الرسوميات المتجهة تخزن الأشكال كمعادلات رياضية وتتوسع لأي حجم بلا خسارة جودة. فقط Bitmap يتشوه عند التكبير.'},
+
+{id:179,ch:'CH7',type:'TF',
+ q:'Lossless compression guarantees exact data recovery after decompression.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — By definition, lossless compression reconstructs the original data perfectly — not a single bit is changed.',
+ ar:'صحيح — بحكم التعريف، الضغط بلا خسارة يُعيد بناء البيانات الأصلية بكاملها — لا يتبدل بت واحد.'},
+
+{id:180,ch:'CH7',type:'TF',
+ q:'JPEG compression is lossless.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — JPEG is LOSSY (DCT-based), permanently discarding some visual information to achieve high compression ratios.',
+ ar:'خطأ — JPEG خسار (مبني على DCT)، يتخلص نهائياً من بعض المعلومات البصرية لتحقيق نسب ضغط عالية.'},
+
+{id:181,ch:'CH7',type:'TF',
+ q:'RLE is most efficient for images containing random noise.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — RLE is LEAST efficient for random noise (no repeating sequences to compress). In the worst case it can actually increase file size.',
+ ar:'خطأ — RLE أقل كفاءة مع الصور ذات التشويش العشوائي (لا توجد تسلسلات متكررة للضغط). في أسوأ الحالات قد يزيد حجم الملف.'},
+
+{id:182,ch:'CH7',type:'TF',
+ q:'A 32-bit color image stores 4 bytes per pixel.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — 32-bit = 4 bytes/pixel: 1 byte each for Red, Green, Blue, and an Alpha (transparency) channel.',
+ ar:'صحيح — 32 بت = 4 بايت/بيكسل: 1 بايت لكل من الأحمر والأخضر والأزرق وقناة Alpha (الشفافية).'},
+
+{id:183,ch:'CH7',type:'TF',
+ q:'VGA (1987) supports 16.7 million colors at 640x480.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — VGA supports 16 colors at 640x480 or 256 colors at 320x200. The 16.7 million colors came with SVGA (1988) and later standards.',
+ ar:'خطأ — VGA يدعم 16 لوناً عند 640x480 أو 256 لوناً عند 320x200. جاءت 16.7 مليون لون مع SVGA (1988) والمعايير اللاحقة.'},
+
+{id:184,ch:'CH7',type:'TF',
+ q:'Huffman encoding assigns longer codes to more frequent characters.',
+ opts:['True','False'],
+ ans:1,
+ en:'FALSE — Huffman assigns SHORTER codes to frequent characters. Longer codes go to RARE characters to minimize total bit usage.',
+ ar:'خطأ — Huffman يخصص رموزاً أقصر للحروف الأكثر شيوعاً. الرموز الأطول تُعطى للحروف النادرة لتقليل إجمالي البت المستخدم.'},
+
+{id:185,ch:'CH7',type:'TF',
+ q:'The RGB color model uses additive mixing of light.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — RGB is additive: combining maximum Red + Green + Blue light produces white. Used in screens, projectors, and monitors.',
+ ar:'صحيح — RGB إضافي: جمع أقصى الأحمر + الأخضر + الأزرق ينتج الأبيض. يُستخدم في الشاشات والمسقطات.'},
+
+{id:186,ch:'CH7',type:'TF',
+ q:'A binary image has only 2 possible values per pixel.',
+ opts:['True','False'],
+ ans:0,
+ en:'TRUE — 1-bit (binary) images have exactly 2 states per pixel: 0 (black) and 1 (white) — the simplest image representation.',
+ ar:'صحيح — الصورة الثنائية 1-بت لها حالتان فقط لكل بيكسل: 0 (أسود) و1 (أبيض) — أبسط تمثيل للصورة.'},
+
+// ══════════════════════════════════════════════════════════
+// CHAPTER 5 — Problem Solving
+// ══════════════════════════════════════════════════════════
+{id:187,ch:'CH5',type:'PROB',
+ q:'A developer writes a compound identifier "userprofile". Rewrite it using intercap convention and explain why this is preferred in programming.',
+ sol:`✅ Answer: UserProfile\n\nCapitalize the first letter of each word component.\n\nWhy: Intercap improves readability when spaces are not allowed — as in variable names, class names, and URLs. Without intercap, "userprofile" is harder to parse at a glance.\n\nOther valid forms: userProfile (camelCase) for variables, UserProfile (PascalCase) for class names.`,
+ ar:`الإجابة: UserProfile\n\nنكبّر الحرف الأول من كل جزء من المعرّف المركّب.\n\nالسبب: الـ Intercap يحسّن القراءة حيث لا تُسمح المسافات — كأسماء المتغيرات والفئات وعناوين URL. بدونه، "userprofile" أصعب للفهم بنظرة واحدة.`},
+
+{id:188,ch:'CH5',type:'PROB',
+ q:'Explain the difference between kerning and leading, and give one practical scenario where each needs to be adjusted.',
+ sol:`KERNING — Horizontal space between specific letter pairs.\nScenario: A heading with "AV" — the letters appear too far apart visually. Reduce kerning to close the gap and improve readability.\n\nLEADING — Vertical line spacing between rows of text.\nScenario: A dense block of body text feels cramped and hard to read. Increase leading to add breathing room between lines.`,
+ ar:`KERNING — المسافة الأفقية بين زوج محدد من الحروف.\nمثال: عنوان فيه "AV" — الحروف تبدو متباعدة بصرياً؛ نقلّل الكيرنينج لتقريبها.\n\nLEADING — مسافة الأسطر الرأسية بين صفوف النص.\nمثال: فقرة كثيفة النص تبدو مضغوطة؛ نزيد الـ Leading لإضافة مسافة بين السطور.`},
+
+{id:189,ch:'CH5',type:'PROB',
+ q:'A multimedia project will be viewed on both Mac and PC. The designer used a custom font. What problem may arise and how can it be avoided?',
+ sol:`Problem: Font Substitution\nIf the custom font is not installed on the viewer's machine, the OS replaces it with a different font, altering layout, spacing, and visual appearance.\n\nSolutions:\n1. Convert text to bitmaps/outlines before distributing.\n2. Use common cross-platform fonts (e.g. Arial, Times New Roman, Verdana).\n3. Embed the font in the document or package where possible.\n4. Use web-safe fonts or hosted font services (e.g. Google Fonts) for web projects.`,
+ ar:`المشكلة: استبدال الخط (Font Substitution)\nإذا لم يكن الخط المخصص مثبتاً على جهاز المشاهد، يستبدله نظام التشغيل بخط مختلف مما يغيّر التخطيط والمسافات والمظهر البصري.\n\nالحلول:\n1. حوّل النص إلى bitmap أو outlines قبل التوزيع.\n2. استخدم خطوطاً مشتركة بين المنصات (Arial، Times، Verdana).\n3. ضمّن الخط في الوثيقة حيثما أمكن.\n4. استخدم خطوط الويب الآمنة أو خدمات مستضافة (مثل Google Fonts).`},
+
+// ══════════════════════════════════════════════════════════
+// CHAPTER 6 — Problem Solving
+// ══════════════════════════════════════════════════════════
+{id:190,ch:'CH6',type:'PROB',
+ q:'Calculate the uncompressed file size (in KB) of a MONO digital audio recording at 22.05 kHz, 16-bit resolution, for 10 seconds.',
+ sol:`Formula (Mono):\nSize = Sampling Rate × Duration × (Bit Depth ÷ 8)\n\nCalculation:\n= 22,050 × 10 × (16 ÷ 8)\n= 22,050 × 10 × 2\n= 441,000 bytes\n= 441,000 ÷ 1,024\n≈ 430.7 KB`,
+ ar:`المعادلة (Mono):\nالحجم = معدل العينات × المدة × (عمق البت ÷ 8)\n\nالحساب:\n= 22,050 × 10 × (16 ÷ 8)\n= 22,050 × 10 × 2\n= 441,000 بايت\n= 441,000 ÷ 1,024\n≈ 430.7 KB`},
+
+{id:191,ch:'CH6',type:'PROB',
+ q:'Calculate the file size (in MB) for STEREO digital audio at CD quality (44.1 kHz, 16-bit) for 30 seconds.',
+ sol:`Formula (Stereo):\nSize = Sampling Rate × Duration × (Bit Depth ÷ 8) × 2 channels\n\nCalculation:\n= 44,100 × 30 × (16 ÷ 8) × 2\n= 44,100 × 30 × 2 × 2\n= 5,292,000 bytes\n= 5,292,000 ÷ 1,048,576\n≈ 5.04 MB`,
+ ar:`المعادلة (Stereo):\nالحجم = معدل العينات × المدة × (عمق البت ÷ 8) × 2 قناة\n\nالحساب:\n= 44,100 × 30 × (16 ÷ 8) × 2\n= 44,100 × 30 × 2 × 2\n= 5,292,000 بايت\n= 5,292,000 ÷ 1,048,576\n≈ 5.04 MB`},
+
+{id:192,ch:'CH6',type:'PROB',
+ q:'You are building a website with background music. Bandwidth is limited and you have no control over user hardware. Choose MIDI or Digital Audio and justify your choice.',
+ sol:`Best Choice: MIDI\n\nReasons:\n1. MIDI files are far smaller (store instructions, not sound data) → loads much faster on limited bandwidth.\n2. For background music (not speech), MIDI quality is sufficient.\n3. Background music does not require perfect fidelity — slight device-to-device variation is acceptable.\n\nTrade-off: If precise sound quality is critical or spoken dialog is required, switch to Digital Audio because MIDI cannot reproduce speech and is device-dependent.`,
+ ar:`الاختيار الأفضل: MIDI\n\nالأسباب:\n1. ملفات MIDI أصغر بكثير (تخزّن تعليمات لا بيانات صوتية) → تُحمَّل بسرعة أعلى مع عرض النطاق المحدود.\n2. للموسيقى الخلفية (ليس الكلام)، جودة MIDI كافية.\n3. الموسيقى الخلفية لا تستلزم دقة كاملة — الاختلاف البسيط بين الأجهزة مقبول.\n\nالمقايضة: إذا كانت الجودة الصوتية الدقيقة ضرورية أو يوجد كلام بشري، استخدم Digital Audio لأن MIDI لا يمكنه إعادة إنتاج الكلام وهو يعتمد على الجهاز.`},
+
+// ══════════════════════════════════════════════════════════
+// CHAPTER 7 — Problem Solving
+// ══════════════════════════════════════════════════════════
+{id:193,ch:'CH7',type:'PROB',
+ q:'Calculate the uncompressed size (in KB) of a 100×100 pixel image with 8-bit pixel depth.',
+ sol:`Formula:\nSize = Width × Height × (Bit Depth ÷ 8)\n\nCalculation:\n= 100 × 100 × (8 ÷ 8)\n= 100 × 100 × 1\n= 10,000 bytes\n= 10,000 ÷ 1,024\n≈ 9.77 KB  (≈ 10 KB)`,
+ ar:`المعادلة:\nالحجم = العرض × الارتفاع × (عمق البت ÷ 8)\n\nالحساب:\n= 100 × 100 × (8 ÷ 8)\n= 100 × 100 × 1\n= 10,000 بايت\n= 10,000 ÷ 1,024\n≈ 9.77 KB  (≈ 10 KB)`},
+
+{id:194,ch:'CH7',type:'PROB',
+ q:'A 24-bit RGB image has a resolution of 800×600 pixels. Calculate the uncompressed file size in MB.',
+ sol:`Formula:\nSize = Width × Height × (Bit Depth ÷ 8)\n24-bit = 3 bytes per pixel (1 byte each for R, G, B)\n\nCalculation:\n= 800 × 600 × 3\n= 1,440,000 bytes\n= 1,440,000 ÷ 1,048,576\n≈ 1.37 MB`,
+ ar:`المعادلة:\nالحجم = العرض × الارتفاع × (عمق البت ÷ 8)\n24-بت = 3 بايت لكل بيكسل (1 بايت لكل من R، G، B)\n\nالحساب:\n= 800 × 600 × 3\n= 1,440,000 بايت\n= 1,440,000 ÷ 1,048,576\n≈ 1.37 MB`},
+
+{id:195,ch:'CH7',type:'PROB',
+ q:'Apply Run-Length Encoding (RLE) to: BBBBWWWYYYYYYGGGGYYYYYYY\nShow the encoded output, count the pairs, and calculate the compression ratio.',
+ sol:`Original string: BBBBWWWYYYYYYGGGGYYYYYYY\nLength: 23 characters\n\nRLE Encoded Output:\n(B,4) (W,3) (Y,6) (G,4) (Y,7)\n= 5 pairs = 10 symbols\n\nCompression Ratio = 23 ÷ 10 = 2.3 : 1\n≈ 57% size reduction\n\nNote: Each pair = (color, count) = 2 symbols.`,
+ ar:`السلسلة الأصلية: BBBBWWWYYYYYYGGGGYYYYYYY\nالطول: 23 حرفاً\n\nالمشفَّر بـ RLE:\n(B,4) (W,3) (Y,6) (G,4) (Y,7)\n= 5 أزواج = 10 رموز\n\nنسبة الضغط = 23 ÷ 10 = 2.3 : 1\n≈ تخفيض الحجم بـ 57%\n\nملاحظة: كل زوج = (اللون، العدد) = رمزان.`},
+
+{id:196,ch:'CH7',type:'PROB',
+ q:'Given Huffman codes: A=010, B=1, C=000, D=011, E=001\nProbabilities: p(A)=0.16, p(B)=0.51, p(C)=0.09, p(D)=0.13, p(E)=0.11\nCalculate the average code length and compare to ASCII (8-bit fixed) for 1000 characters.',
+ sol:`Average Code Length = Σ (code_length × probability)\n= (3×0.16) + (1×0.51) + (3×0.09) + (3×0.13) + (3×0.11)\n= 0.48 + 0.51 + 0.27 + 0.39 + 0.33\n= 1.98 bits/symbol\n\nFor 1,000 characters:\n• Huffman: 1,000 × 1.98 = 1,980 bits = 248 bytes\n• ASCII:   1,000 × 8   = 8,000 bits = 1,000 bytes\n\nSaving: ~75% reduction in storage compared to ASCII.`,
+ ar:`متوسط طول الرمز = مجموع (طول الرمز × الاحتمالية)\n= (3×0.16) + (1×0.51) + (3×0.09) + (3×0.13) + (3×0.11)\n= 0.48 + 0.51 + 0.27 + 0.39 + 0.33\n= 1.98 بت/رمز\n\nلـ 1,000 حرف:\n• Huffman: 1,000 × 1.98 = 1,980 بت = 248 بايت\n• ASCII:   1,000 × 8   = 8,000 بت = 1,000 بايت\n\nالتوفير: ~75% تخفيض في التخزين مقارنةً بـ ASCII.`},
+
+{id:197,ch:'CH7',type:'PROB',
+ q:'Calculate the storage required for 1 minute of uncompressed RGB video at 100×100 resolution, 24 frames per second.',
+ sol:`Formula:\nSize = Width × Height × 3 bytes × FPS × Seconds\n\nCalculation:\n= 100 × 100 × 3 × 24 × 60\n= 43,200,000 bytes\n= 43,200,000 ÷ 1,048,576\n≈ 41.2 MB\n\nThis shows why video compression (MPEG, H.264) is essential — even tiny 100×100 video at 24fps for 1 minute needs ~41 MB uncompressed.`,
+ ar:`المعادلة:\nالحجم = العرض × الارتفاع × 3 بايت × إطار/ثانية × الثواني\n\nالحساب:\n= 100 × 100 × 3 × 24 × 60\n= 43,200,000 بايت\n= 43,200,000 ÷ 1,048,576\n≈ 41.2 MB\n\nهذا يوضّح لماذا ضغط الفيديو (MPEG, H.264) ضروري — حتى فيديو صغير 100×100 بـ 24 إطار/ثانية لدقيقة واحدة يحتاج ~41 MB بدون ضغط.`},
+];
+
+// ── STATE ──
+let state = {};
+let currentFilter='all', currentChapter='all', currentSearch='';
+
+function getQ(id){ return QUESTIONS.find(q=>q.id===id); }
+
+// ── RENDER ──
+function render(){
+  const wrap = document.getElementById('questionsWrap');
+  let filtered = QUESTIONS.filter(q=>{
+    let show=true;
+    if(currentChapter!=='all') show=show&&q.ch===currentChapter;
+    if(currentSearch) show=show&&q.q.toLowerCase().includes(currentSearch.toLowerCase());
+    if(currentFilter==='wrong') show=show&&state[q.id]==='wrong';
+    if(currentFilter==='correct') show=show&&state[q.id]==='correct';
+    if(currentFilter==='unanswered') show=show&&!state[q.id]&&q.type!=='PROB';
+    if(currentFilter==='prob') show=show&&q.type==='PROB';
+    return show;
+  });
+  if(!filtered.length){
+    wrap.innerHTML=`<div class="empty-state"><div class="big">🔍</div><p>No questions match your filter</p></div>`;
+    updateScore(); return;
+  }
+  // Group by chapter for dividers
+  const chapterInfo={
+    CH0:{icon:'🌐',title:'Chapter 0 — Introduction to Multimedia',sub:'HTTP · URI · HTML · VR · Linear vs Nonlinear · CD/DVD'},
+    CH1:{icon:'🎬',title:'Chapter 1 — Overview of Multimedia',sub:'Definition · Elements · Types · Applications'},
+    CH2:{icon:'💻',title:'Chapter 2 — Multimedia Systems & Hardware',sub:'Capture · Storage · Networks · Display'},
+    CH3:{icon:'🎨',title:'Chapter 3 — Making Multimedia',sub:'4 Stages · Planning · Hardware · Software · Prototype'},
+    CH4:{icon:'👥',title:'Chapter 4 — Multimedia Team Roles',sub:'Project Manager · Designer · Programmer · Audio · Interface'},
+    TF:{icon:'✅',title:'True / False — Chapters 0–4',sub:'Critical statements from every chapter for the final exam'},
+    CH5:{icon:'🔤',title:'Chapter 5 — Text in Multimedia',sub:'Typeface · Font · Kerning · Leading · Unicode · Hypertext · WYSIWYG · Anti-aliasing'},
+    CH6:{icon:'🔊',title:'Chapter 6 — Sound in Multimedia',sub:'Acoustics · MIDI · Digital Audio · Sampling · File Formats · Copyright'},
+    CH7:{icon:'🖼️',title:'Chapter 7 — Graphic / Image Data Structures',sub:'Pixel · Resolution · Bit Depth · Bitmap · Vector · RGB · RLE · Huffman · JPEG · GIF'},
+  };
+  let html=''; let lastCh='';
+  filtered.forEach((q,i)=>{
+    if(q.ch!==lastCh && currentChapter==='all'){
+      const info=chapterInfo[q.ch]||{icon:'📚',title:q.ch,sub:''};
+      const chCount=filtered.filter(x=>x.ch===q.ch).length;
+      const anchorId={'CH0':'ch0','CH1':'ch1','CH2':'ch2','CH3':'ch3','CH4':'ch4','TF':'tfSection','CH5':'ch5','CH6':'ch6','CH7':'ch7'}[q.ch]||q.ch.toLowerCase();
+      html+=`<div class="ch-divider" id="${anchorId}">
+        <div class="ch-header">
+          <div class="ch-icon">${info.icon}</div>
+          <div><div class="ch-title">${info.title}</div><div class="ch-sub">${info.sub}</div></div>
+          <span class="ch-count">${chCount} Q</span>
+        </div>
+      </div>`;
+      lastCh=q.ch;
+    }
+    html+=buildCard(q,i);
+  });
+  wrap.innerHTML=html;
+  updateScore();
+}
+
+function buildProbCard(q,idx){
+  const chLabels={CH0:'Ch.0 · Intro',CH1:'Ch.1 · Overview',CH2:'Ch.2 · Systems',CH3:'Ch.3 · Making MM',CH4:'Ch.4 · Team',TF:'True / False',CH5:'Ch.5 · Text',CH6:'Ch.6 · Sound',CH7:'Ch.7 · Graphics'};
+  const solLines = (q.sol||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const arLines  = (q.ar||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return `<div class="prob-card" id="qcard-${q.id}" style="animation-delay:${Math.min(idx,20)*35}ms">
+    <div class="prob-header">
+      <div class="prob-num">${q.id}</div>
+      <div style="flex:1">
+        <span class="prob-type-tag">🧮 Problem Solving</span><span class="q-chapter-tag">${chLabels[q.ch]||q.ch}</span>
+        <div class="prob-q">${q.q.replace(/\n/g,'<br>')}</div>
+      </div>
+    </div>
+    <button class="prob-toggle" onclick="toggleSol(${q.id},this)">▶ Show Solution &amp; Explanation</button>
+    <div class="prob-solution" id="probsol-${q.id}">
+      <div class="prob-sol-body">
+        <div class="sol-label">✅ Solution</div>
+        <div class="sol-en">${solLines}</div>
+        <div class="sol-ar"><div class="sol-ar-lbl">Arabic — الشرح</div>${arLines}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleSol(id,btn){
+  const sol=document.getElementById('probsol-'+id);
+  const shown=sol.classList.toggle('show');
+  btn.textContent=shown?'▼ Hide Solution':'▶ Show Solution & Explanation';
+}
+
+function buildCard(q,idx){
+  if(q.type==='PROB') return buildProbCard(q,idx);
+  const answered=state[q.id];
+  const cardClass=answered==='correct'?'answered-correct':answered==='wrong'?'answered-wrong':'';
+  const numClass=answered==='correct'?'correct-num':answered==='wrong'?'wrong-num':'';
+  const chLabels={CH0:'Ch.0 · Intro',CH1:'Ch.1 · Overview',CH2:'Ch.2 · Systems',CH3:'Ch.3 · Making MM',CH4:'Ch.4 · Team',TF:'True / False',CH5:'Ch.5 · Text',CH6:'Ch.6 · Sound',CH7:'Ch.7 · Graphics'};
+  const typeBadge=q.type==='TF'?`<span class="q-type-tag">T/F</span>`:`<span class="q-type-tag">MCQ</span>`;
+
+  const opts=q.opts.map((o,i)=>{
+    let cls='option';
+    if(answered){
+      cls+=' disabled';
+      if(i===q.ans) cls+=' correct-opt';
+      else if(answered==='wrong'&&i===q._selected) cls+=' wrong-opt';
+    }
+    const letter=q.type==='TF'?(i===0?'T':'F'):'ABCD'[i];
+    return `<div class="${cls}" ${!answered?`onclick="answer(${q.id},${i})"`:''}><span class="option-letter">${letter}</span>${o}</div>`;
+  }).join('');
+
+  let fbHtml='';
+  if(answered){
+    const isC=answered==='correct';
+    fbHtml=`<div class="feedback ${isC?'correct-fb':'wrong-fb'} show">
+      <div class="fb-header ${isC?'fb-correct-head':'fb-wrong-head'}">${isC?'✅ Correct! Great job! 🎉':'❌ Wrong Answer'}</div>
+      ${!isC?`<div class="fb-correct-ans">✅ Correct Answer: ${q.opts[q.ans]}</div>`:''}
+      <div class="fb-en">${q.en}</div>
+      <div class="fb-ar"><div class="fb-ar-lbl">Arabic — الشرح</div>${q.ar}</div>
+    </div>`;
+  }
+
+  return `<div class="q-card ${cardClass}" id="qcard-${q.id}" style="animation-delay:${Math.min(idx,20)*35}ms">
+    <div class="q-header">
+      <div class="q-num ${numClass}">${q.id}</div>
+      <div style="flex:1">
+        ${typeBadge}<span class="q-chapter-tag">${chLabels[q.ch]||q.ch}</span>
+        <div class="q-text">${q.q}</div>
+      </div>
+    </div>
+    <div class="options">${opts}</div>
+    ${fbHtml}
+  </div>`;
+}
+
+function answer(qId,optIdx){
+  const q=getQ(qId);
+  q._selected=optIdx;
+  state[qId]=optIdx===q.ans?'correct':'wrong';
+  const tmp=document.createElement('div');
+  tmp.innerHTML=buildCard(q,0);
+  document.getElementById('qcard-'+qId).replaceWith(tmp.firstElementChild);
+  updateScore();
+}
+
+// ── SCORE ──
+function updateScore(){
+  const scorable=QUESTIONS.filter(q=>q.type!=='PROB');
+  const total=scorable.length;
+  const correct=Object.values(state).filter(v=>v==='correct').length;
+  const wrong=Object.values(state).filter(v=>v==='wrong').length;
+  const answered=correct+wrong;
+  const skip=total-answered;
+  const pct=answered?Math.round(correct/answered*100):0;
+  document.getElementById('countCorrect').textContent=correct;
+  document.getElementById('countWrong').textContent=wrong;
+  document.getElementById('countSkip').textContent=skip;
+  document.getElementById('countTotal').textContent=total;
+  document.getElementById('scorePct').textContent=pct+'%';
+  document.getElementById('progFill').style.width=(answered/total*100)+'%';
+  document.getElementById('msC').textContent=correct;
+  document.getElementById('msW').textContent=wrong;
+  document.getElementById('msT').textContent=total;
+  const circ=283, offset=circ-(pct/100*circ);
+  document.getElementById('ringFill').style.strokeDashoffset=offset;
+  document.getElementById('ringFill').style.stroke=pct>=80?'var(--green)':pct>=60?'var(--accent)':pct>=40?'var(--gold)':'var(--red)';
+}
+
+// ── FILTERS ──
+function filterCat(cat,btn){
+  currentFilter=cat;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+function filterChapter(val){currentChapter=val;render();}
+function searchQ(val){currentSearch=val;render();}
+
+// ── RESET ──
+function resetAll(){
+  QUESTIONS.forEach(q=>{delete q._selected});
+  state={};
+  render();
+}
+
+// ── SHUFFLE ──
+function shuffleQuestions(){
+  for(let i=QUESTIONS.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [QUESTIONS[i],QUESTIONS[j]]=[QUESTIONS[j],QUESTIONS[i]];
+  }
+  render();
+}
+
+// ── MODAL ──
+function showResults(){
+  const total=QUESTIONS.length;
+  const correct=Object.values(state).filter(v=>v==='correct').length;
+  const wrong=Object.values(state).filter(v=>v==='wrong').length;
+  const skip=total-correct-wrong;
+  const pct=correct+wrong?Math.round(correct/(correct+wrong)*100):0;
+  document.getElementById('mCorrect').textContent=correct;
+  document.getElementById('mWrong').textContent=wrong;
+  document.getElementById('mSkip').textContent=skip;
+  let grade,emoji,msg;
+  if(pct>=90){grade='A';emoji='🏆';msg='ممتاز جداً! أنت مستعد للفاينل بكل ثقة 💪';}
+  else if(pct>=80){grade='A';emoji='🎯';msg='ممتاز! راجع الأخطاء البسيطة وستكون مثالياً.';}
+  else if(pct>=70){grade='B';emoji='👍';msg='جيد جداً! راجع الأسئلة الغلط وستحقق أفضل.';}
+  else if(pct>=60){grade='C';emoji='📚';msg='جيد، لكن تحتاج مراجعة أكثر للفصول الضعيفة.';}
+  else{grade='D';emoji='💡';msg='تحتاج مراجعة أقوى. راجع Study Guide ثم حاول مجدداً.';}
+  document.getElementById('modalGrade').textContent=pct+'%';
+  document.getElementById('modalGrade').className='grade '+grade;
+  document.getElementById('modalEmoji').textContent=emoji;
+  document.getElementById('modalMsg').textContent=msg;
+  document.getElementById('modalOverlay').classList.add('show');
+}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('show');}
+document.getElementById('modalOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});
+
+// ── CANVAS ──
+const canvas=document.getElementById('bg-canvas');
+const ctx=canvas.getContext('2d');
+let W,H,pts=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+function initPts(){pts=Array.from({length:90},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,r:Math.random()*1.4+.3,o:Math.random()*.35+.07}));}
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p=>{
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(45,255,127,${p.o})`;ctx.fill();
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>W)p.vx*=-1;
+    if(p.y<0||p.y>H)p.vy*=-1;
+  });
+  for(let i=0;i<pts.length;i++){
+    for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<100){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(45,255,127,${.055*(1-d/100)})`;ctx.lineWidth=.5;ctx.stroke();}
+    }
+  }
+  requestAnimationFrame(draw);
+}
+resize();initPts();draw();
+window.addEventListener('resize',()=>{resize();initPts();});
+
+// ── INIT ──
+render();
+updateScore();
+</script>
+</body>
+</html>
