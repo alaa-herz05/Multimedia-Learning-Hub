@@ -1,52 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chapter 2 — Multimedia Systems & Data Transmission | Study Guide</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Cairo:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
+  <title>Chapter 2 — Multimedia System Components | Clean Study Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Cairo:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ═══════════════════════════════════════════
-   ROOT — Dark Green Theme
+   ROOT — Light Cyan/Blue Theme
 ═══════════════════════════════════════════ */
     :root {
-      --black: #060608;
-      --deep: #090e0a;
-      --surface: #0d1410;
-      --card: #111a13;
-      --card2: #172019;
-      --border: rgba(34, 170, 60, .22);
-      --border2: rgba(255, 255, 255, .06);
-      --green: #1aaa3c;
-      --green2: #22cc48;
-      --green3: #2eef58;
-      --green-glow: rgba(26, 170, 60, .28);
-      --green-dim: rgba(26, 170, 60, .09);
-      --gold: #ffc940;
-      --gold-dim: rgba(255, 201, 64, .09);
-      --red: #ff4455;
-      --blue: #00c8ff;
-      --purple: #b48aff;
-      --text: #ddeedd;
-      --muted: #5a7060;
-      --muted2: #8aaa90;
+      --black: #ffffff;
+      --deep: #f4f8ff;
+      --surface: #eef4ff;
+      --card: #f9fbff;
+      --card2: #eef4ff;
+      --border: rgba(0, 160, 220, .22);
+      --border2: rgba(0, 100, 180, .1);
+      --cyan: #0099cc;
+      --cyan2: #00aadd;
+      --cyan3: #00ccff;
+      --cyan-glow: rgba(0, 170, 221, .22);
+      --cyan-dim: rgba(0, 170, 221, .08);
+      --gold: #e07b00;
+      --gold-dim: rgba(224, 123, 0, .07);
+      --red: #e03050;
+      --blue: #0077cc;
+      --purple: #7755cc;
+      --text: #1a2a3a;
+      --muted: #7a9ab0;
+      --muted2: #4a6a80;
       --mono: 'JetBrains Mono', monospace;
     }
 
-    *,
-    *::before,
-    *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: Inter, Cairo, sans-serif;
@@ -58,808 +46,11 @@
       line-height: 1.75;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    strong,
-    b {
-      color: #fff;
-    }
+    a { text-decoration: none; color: inherit; }
+    strong, b { color: #0a1520; }
 
     /* ═══════════════════════════════════════════
    ANIMATED BACKGROUND
-═══════════════════════════════════════════ */
-    .bg-layer {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .bg-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(26, 170, 60, .04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(26, 170, 60, .04) 1px, transparent 1px);
-      background-size: 50px 50px;
-    }
-
-    .bg-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
-      animation: orbPulse 9s ease-in-out infinite;
-    }
-
-    .orb1 {
-      width: 550px;
-      height: 550px;
-      top: -150px;
-      left: -120px;
-      background: radial-gradient(circle, rgba(26, 170, 60, .08), transparent 70%);
-      animation-delay: 0s;
-    }
-
-    .orb2 {
-      width: 380px;
-      height: 380px;
-      bottom: -100px;
-      right: -80px;
-      background: radial-gradient(circle, rgba(180, 138, 255, .05), transparent 70%);
-      animation-delay: -5s;
-    }
-
-    .orb3 {
-      width: 300px;
-      height: 300px;
-      top: 45%;
-      left: 55%;
-      background: radial-gradient(circle, rgba(0, 200, 255, .03), transparent 70%);
-      animation-delay: -2.5s;
-    }
-
-    @keyframes orbPulse {
-
-      0%,
-      100% {
-        transform: scale(1)
-      }
-
-      50% {
-        transform: scale(1.14)
-      }
-    }
-
-    /* ═══════════════════════════════════════════
-   STICKY TOP NAV
-═══════════════════════════════════════════ */
-    .top-nav {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: rgba(6, 6, 8, .88);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 20px;
-    }
-
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 0;
-      height: 54px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
-    .nav-inner::-webkit-scrollbar {
-      display: none;
-    }
-
-    .nav-brand {
-      font-family: Orbitron, monospace;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--green2);
-      letter-spacing: 2px;
-      white-space: nowrap;
-      padding-right: 20px;
-      border-right: 1px solid var(--border);
-      margin-right: 16px;
-      flex-shrink: 0;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 4px;
-      flex-shrink: 0;
-    }
-
-    .nav-links a {
-      font-size: 11.5px;
-      font-weight: 600;
-      color: var(--muted2);
-      padding: 6px 12px;
-      border-radius: 8px;
-      white-space: nowrap;
-      transition: .2s;
-      letter-spacing: .3px;
-    }
-
-    .nav-links a:hover {
-      color: var(--green2);
-      background: var(--green-dim);
-    }
-
-    .nav-links a.active {
-      color: var(--green3);
-      background: var(--green-dim);
-    }
-
-    /* ═══════════════════════════════════════════
-   PAGE WRAP
-═══════════════════════════════════════════ */
-    .page-wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 20px 80px;
-    }
-
-    /* ═══════════════════════════════════════════
-   HERO
-═══════════════════════════════════════════ */
-    .hero {
-      text-align: center;
-      padding: 64px 24px 52px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 48px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 65% at 50% 0%, rgba(26, 170, 60, .12), transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid var(--border);
-      color: var(--green2);
-      font-family: Orbitron, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      padding: 6px 22px;
-      border-radius: 20px;
-      background: var(--green-dim);
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      box-shadow: 0 0 22px var(--green-glow);
-      animation: badgePulse 3s ease-in-out infinite;
-    }
-
-    @keyframes badgePulse {
-
-      0%,
-      100% {
-        box-shadow: 0 0 22px var(--green-glow)
-      }
-
-      50% {
-        box-shadow: 0 0 44px rgba(26, 170, 60, .45)
-      }
-    }
-
-    .hero h1 {
-      font-family: Orbitron, monospace;
-      font-size: clamp(1.6rem, 5vw, 3rem);
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: -1px;
-      margin-bottom: 8px;
-      text-shadow: 0 0 44px rgba(26, 170, 60, .4);
-      line-height: 1.1;
-    }
-
-    .hero h1 span {
-      color: var(--green2);
-    }
-
-    .hero-sub {
-      font-family: Cairo, sans-serif;
-      font-size: 1rem;
-      color: var(--gold);
-      margin-bottom: 14px;
-      text-shadow: 0 0 18px rgba(255, 201, 64, .3);
-    }
-
-    .hero-desc {
-      font-size: 13.5px;
-      color: var(--muted2);
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.9;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 22px;
-    }
-
-    .hero-tag {
-      font-size: 11px;
-      padding: 4px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--muted2);
-      font-weight: 600;
-      letter-spacing: .5px;
-    }
-
-    /* ═══════════════════════════════════════════
-   SECTION
-═══════════════════════════════════════════ */
-    .section {
-      margin-bottom: 52px;
-      scroll-margin-top: 70px;
-    }
-
-    .sec-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 24px;
-      position: relative;
-    }
-
-    .sec-number {
-      font-family: Orbitron, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--black);
-      background: var(--green2);
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 0 14px var(--green-glow);
-    }
-
-    .sec-title {
-      font-family: Orbitron, monospace;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--green2);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      flex: 1;
-    }
-
-    .sec-line {
-      height: 1px;
-      flex: 1;
-      background: linear-gradient(90deg, var(--border), transparent);
-    }
-
-    /* ═══════════════════════════════════════════
-   CONTENT CARD
-═══════════════════════════════════════════ */
-    .content-card {
-      background: var(--card);
-      border: 1px solid var(--border2);
-      border-radius: 18px;
-      padding: 28px 28px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 6px 30px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .04) inset;
-      margin-bottom: 16px;
-      transition: .25s;
-    }
-
-    .content-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--green), transparent);
-    }
-
-    .content-card:hover {
-      border-color: var(--border);
-    }
-
-    .card-title {
-      font-family: Cairo, sans-serif;
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .card-title-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      background: var(--green-dim);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-
-    .card-ar {
-      font-family: Cairo, sans-serif;
-      font-size: 13px;
-      color: var(--gold);
-      background: var(--gold-dim);
-      border: 1px solid rgba(255, 201, 64, .15);
-      border-radius: 10px;
-      padding: 12px 16px;
-      margin-bottom: 16px;
-      direction: rtl;
-      line-height: 1.85;
-    }
-
-    .card-ar-label {
-      font-size: 10px;
-      font-family: Orbitron, monospace;
-      color: var(--gold);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 6px;
-      opacity: .7;
-    }
-
-    .card-body {
-      font-size: 14px;
-      color: var(--muted2);
-      line-height: 1.9;
-    }
-
-    .card-body p {
-      margin-bottom: 10px;
-    }
-
-    .card-body p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* ═══════════════════════════════════════════
-   POINTS LIST
-═══════════════════════════════════════════ */
-    .points {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .points li {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      padding: 9px 0;
-      border-bottom: 1px solid var(--border2);
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.7;
-    }
-
-    .points li:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .pt-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--green2);
-      flex-shrink: 0;
-      margin-top: 7px;
-      box-shadow: 0 0 6px var(--green-glow);
-    }
-
-    /* ═══════════════════════════════════════════
-   CODE BLOCK
-═══════════════════════════════════════════ */
-    .code-block {
-      background: var(--card2);
-      border: 1px solid var(--border2);
-      border-radius: 12px;
-      padding: 16px 20px;
-      font-family: var(--mono);
-      font-size: 13px;
-      color: var(--green3);
-      margin: 14px 0;
-      overflow-x: auto;
-      line-height: 1.7;
-    }
-
-    .code-label {
-      font-family: Orbitron, monospace;
-      font-size: 9px;
-      font-weight: 700;
-      color: var(--green);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      display: block;
-      opacity: .7;
-    }
-
-    /* ═══════════════════════════════════════════
-   TABLE
-═══════════════════════════════════════════ */
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-      margin: 12px 0;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .data-table th {
-      background: var(--green-dim);
-      color: var(--green2);
-      padding: 11px 14px;
-      text-align: left;
-      font-family: Orbitron, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .data-table td {
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--border2);
-      color: var(--text);
-      vertical-align: top;
-    }
-
-    .data-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .data-table tr:hover td {
-      background: rgba(26, 170, 60, .04);
-    }
-
-    .data-table .highlight {
-      color: var(--green3);
-      font-weight: 700;
-    }
-
-    .data-table .muted {
-      color: var(--muted2);
-    }
-
-    /* ═══════════════════════════════════════════
-   TWO COLUMN
-═══════════════════════════════════════════ */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 14px;
-    }
-
-    .col-card {
-      background: var(--card2);
-      border: 1px solid var(--border2);
-      border-radius: 14px;
-      padding: 18px;
-    }
-
-    .col-card-title {
-      font-family: Orbitron, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .col-card.green-card {
-      border-color: rgba(26, 170, 60, .25);
-    }
-
-    .col-card.green-card .col-card-title {
-      color: var(--green2);
-    }
-
-    .col-card.gold-card {
-      border-color: rgba(255, 201, 64, .2);
-    }
-
-    .col-card.gold-card .col-card-title {
-      color: var(--gold);
-    }
-
-    .col-card.red-card {
-      border-color: rgba(255, 68, 85, .2);
-    }
-
-    .col-card.red-card .col-card-title {
-      color: var(--red);
-    }
-
-    /* ═══════════════════════════════════════════
-   FORMULA / HIGHLIGHT BOX
-═══════════════════════════════════════════ */
-    .formula-box {
-      background: rgba(26, 170, 60, .07);
-      border: 1px solid rgba(26, 170, 60, .3);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin: 14px 0;
-      font-family: var(--mono);
-      font-size: 14px;
-      color: var(--green3);
-      text-align: center;
-      letter-spacing: .5px;
-    }
-
-    .highlight-box {
-      background: var(--gold-dim);
-      border: 1px solid rgba(255, 201, 64, .2);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin: 14px 0;
-      font-size: 13.5px;
-      color: var(--text);
-      line-height: 1.85;
-    }
-
-    .highlight-box .hl-label {
-      font-family: Orbitron, monospace;
-      font-size: 9px;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    /* ═══════════════════════════════════════════
-   REVIEW TABLE SECTION
-═══════════════════════════════════════════ */
-    .review-section {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 36px 32px;
-      margin-top: 60px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .review-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--green), var(--gold), transparent);
-    }
-
-    .review-title {
-      font-family: Orbitron, monospace;
-      font-size: 14px;
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 24px;
-      letter-spacing: 2px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .review-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13.5px;
-    }
-
-    .review-table th {
-      background: var(--green-dim);
-      color: var(--green2);
-      padding: 12px 16px;
-      text-align: right;
-      direction: rtl;
-      font-family: Cairo, sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .review-table th:first-child {
-      text-align: left;
-      direction: ltr;
-      font-family: Orbitron, monospace;
-      font-size: 9px;
-      letter-spacing: 1.5px;
-    }
-
-    .review-table td {
-      padding: 11px 16px;
-      border-bottom: 1px solid var(--border2);
-      vertical-align: top;
-      line-height: 1.7;
-    }
-
-    .review-table td:first-child {
-      font-family: Orbitron, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--green2);
-      white-space: nowrap;
-    }
-
-    .review-table td:nth-child(2) {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .review-table td:nth-child(3) {
-      color: var(--muted2);
-      font-size: 12.5px;
-    }
-
-    .review-table td:nth-child(4) {
-      color: var(--gold);
-      direction: rtl;
-      font-family: Cairo, sans-serif;
-      font-size: 12.5px;
-    }
-
-    .review-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .review-table tr:hover td {
-      background: rgba(26, 170, 60, .04);
-    }
-
-    /* ═══════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════ */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 36px 24px 28px;
-      text-align: center;
-      position: relative;
-      margin-top: 60px;
-    }
-
-    footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--green), transparent);
-    }
-
-    .footer-logo {
-      font-family: Orbitron, monospace;
-      font-size: 1rem;
-      font-weight: 900;
-      color: var(--green2);
-      letter-spacing: 2px;
-      margin-bottom: 5px;
-    }
-
-    .footer-name {
-      font-family: Cairo, sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 16px;
-    }
-
-    .footer-info {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    .footer-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--muted2);
-      font-family: Cairo, sans-serif;
-      background: var(--card);
-      border: 1px solid var(--border2);
-      padding: 7px 16px;
-      border-radius: 50px;
-      transition: .2s;
-    }
-
-    .footer-item:hover {
-      border-color: var(--border);
-      color: var(--text);
-    }
-
-    .footer-copy {
-      font-size: 11px;
-      color: var(--muted);
-      font-family: Orbitron, monospace;
-      letter-spacing: 1.5px;
-    }
-
-    .footer-copy span {
-      color: var(--green2);
-    }
-
-    /* ═══════════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════════ */
-    @media(max-width:650px) {
-      .two-col {
-        grid-template-columns: 1fr;
-      }
-
-      .content-card {
-        padding: 20px 16px;
-      }
-
-      .review-section {
-        padding: 22px 14px;
-      }
-
-      .data-table th,
-      .data-table td {
-        padding: 8px 10px;
-        font-size: 12px;
-      }
-    }
-
-
-    /* ═══════════════════════════════════════════
-   Compatibility layer — CH1/2/3/5/6 mapped to Chapter 7 style
 ═══════════════════════════════════════════ */
     body::before {
       content: '';
@@ -867,2141 +58,802 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      background-image: linear-gradient(rgba(26, 170, 60, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(26, 170, 60, .04) 1px, transparent 1px);
+      background-image:
+        linear-gradient(rgba(0,170,221,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,170,221,.04) 1px, transparent 1px);
       background-size: 50px 50px;
     }
 
-    #bg-canvas {
+    .bg-orb {
       position: fixed;
-      inset: 0;
-      z-index: 0;
+      border-radius: 50%;
+      filter: blur(90px);
       pointer-events: none;
-      opacity: .45
+      z-index: 0;
+      animation: orbPulse 9s ease-in-out infinite;
     }
+    .orb1 { width:550px; height:550px; top:-150px; left:-120px; background: radial-gradient(circle, rgba(0,170,221,.07), transparent 70%); animation-delay:0s; }
+    .orb2 { width:380px; height:380px; bottom:-100px; right:-80px; background: radial-gradient(circle, rgba(120,100,255,.04), transparent 70%); animation-delay:-5s; }
+    .orb3 { width:300px; height:300px; top:45%; left:55%; background: radial-gradient(circle, rgba(0,120,200,.03), transparent 70%); animation-delay:-2.5s; }
 
-    .container,
-    .page-wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 40px 20px 80px
-    }
+    @keyframes orbPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.14)} }
 
-    .top-nav,
-    .topic-nav {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: rgba(6, 6, 8, .88);
+    /* ═══════════════════════════════════════════
+   TOP NAV
+═══════════════════════════════════════════ */
+    .top-nav {
+      position: sticky; top: 0; z-index: 999;
+      background: rgba(255,255,255,.92);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       padding: 10px 20px;
-      display: flex;
-      justify-content: center;
-      gap: 4px;
-      flex-wrap: wrap
+      display: flex; justify-content: center; gap: 4px; flex-wrap: wrap;
     }
 
-    .top-nav a,
-    .topic-nav a {
+    .top-nav a {
       font-family: Orbitron, monospace;
-      font-size: 11px;
-      font-weight: 600;
+      font-size: 11px; font-weight: 600;
       color: var(--muted2);
-      padding: 7px 12px;
-      border-radius: 8px;
-      white-space: nowrap;
-      transition: .2s;
+      padding: 7px 12px; border-radius: 8px;
+      white-space: nowrap; transition: .2s;
       letter-spacing: .3px;
       border: 1px solid transparent;
-      background: transparent;
-      text-decoration: none
     }
-
-    .top-nav a:hover,
-    .top-nav a.active,
-    .topic-nav a:hover,
-    .topic-nav a.active {
-      color: var(--green3);
-      background: var(--green-dim);
+    .top-nav a:hover, .top-nav a.active {
+      color: var(--cyan2); background: var(--cyan-dim);
       border-color: var(--border);
-      box-shadow: none
     }
 
+    /* ═══════════════════════════════════════════
+   PAGE WRAP
+═══════════════════════════════════════════ */
+    .container {
+      position: relative; z-index: 1;
+      max-width: 1000px; margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    /* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
     .hero {
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
       text-align: center;
       padding: 64px 24px 52px;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 34px;
-      overflow: hidden;
-      min-height: unset;
-      background: transparent;
-      display: block
+      margin-bottom: 34px; overflow: hidden;
     }
-
     .hero::before {
       content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 65% at 50% 0%, rgba(26, 170, 60, .12), transparent 70%);
-      pointer-events: none
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 65% at 50% 0%, rgba(0,170,221,.1), transparent 70%);
+      pointer-events: none;
     }
 
-    .hero-badge,
     .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      display: inline-flex; align-items: center; gap: 8px;
       border: 1px solid var(--border);
-      color: var(--green2);
+      color: var(--cyan2);
       font-family: Orbitron, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      padding: 6px 22px;
-      border-radius: 20px;
-      background: var(--green-dim);
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      box-shadow: 0 0 22px var(--green-glow)
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 3px; padding: 6px 22px;
+      border-radius: 20px; background: var(--cyan-dim);
+      margin-bottom: 20px; text-transform: uppercase;
+      box-shadow: 0 0 22px var(--cyan-glow);
+      animation: badgePulse 3s ease-in-out infinite;
     }
+    .badge .dot { width:6px; height:6px; background:var(--cyan2); border-radius:50%; display:inline-block; }
 
-    .badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--green2);
-      display: inline-block
-    }
-
-    .hero-badge .dot,
-    .badge .dot {
-      width: 6px;
-      height: 6px;
-      background: var(--green2);
-      border-radius: 50%;
-      display: inline-block
+    @keyframes badgePulse {
+      0%,100%{ box-shadow: 0 0 22px var(--cyan-glow) }
+      50%{ box-shadow: 0 0 44px rgba(0,170,221,.4) }
     }
 
     .hero h1 {
       font-family: Orbitron, monospace;
-      font-size: clamp(1.6rem, 5vw, 3rem);
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: -1px;
+      font-size: clamp(1.6rem, 5vw, 3rem); font-weight: 900;
+      color: #0a1520; letter-spacing: -1px;
       margin-bottom: 8px;
-      text-shadow: 0 0 44px rgba(26, 170, 60, .4);
-      line-height: 1.1
+      text-shadow: 0 0 44px rgba(0,170,221,.3);
+      line-height: 1.1;
     }
+    .hero h1 span { color: var(--cyan2); }
 
-    .hero h1 span {
-      color: var(--green2)
-    }
-
-    .hero .ar-title,
     .ar-title {
       font-family: Cairo, sans-serif;
-      font-size: 1rem;
-      color: var(--gold);
+      font-size: 1rem; color: var(--gold);
       margin-bottom: 14px;
-      text-shadow: 0 0 18px rgba(255, 201, 64, .3);
-      direction: rtl
+      text-shadow: 0 0 18px rgba(224,123,0,.25);
+      direction: rtl;
     }
 
-    .hero-sub,
     .hero p {
-      font-size: 13.5px;
-      color: var(--muted2);
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.9
+      font-size: 13.5px; color: var(--muted2);
+      max-width: 600px; margin: 0 auto; line-height: 1.9;
     }
 
-    .hero-chips,
-    .hero-stats,
     .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 22px
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 8px; margin-top: 22px;
     }
-
-    .hero-chip,
-    .hstat,
     .hero-tag {
-      font-size: 11px;
-      padding: 6px 14px;
-      border-radius: 12px;
+      font-size: 11px; padding: 6px 14px;
+      border-radius: 12px; border: 1px solid var(--border);
+      background: var(--card); color: var(--muted2);
+      font-weight: 600; letter-spacing: .5px;
+    }
+
+    /* ═══════════════════════════════════════════
+   CHAPTER BANNER
+═══════════════════════════════════════════ */
+    .ch-banner {
+      background: linear-gradient(135deg, var(--cyan-dim), rgba(255,255,255,.5));
       border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--muted2);
-      font-weight: 600;
-      letter-spacing: .5px
+      border-radius: 18px; padding: 22px 28px;
+      margin: 0 0 36px; display: flex; align-items: center; gap: 18px;
+      box-shadow: 0 4px 20px rgba(0,150,220,.08), 0 1px 0 rgba(255,255,255,.8) inset;
     }
-
-    .hstat .num {
-      font-family: Orbitron, monospace;
-      color: var(--green2);
-      font-size: 1.35rem;
-      font-weight: 900
-    }
-
-    .hstat .lbl {
-      font-size: 10px;
-      color: var(--muted2);
-      text-transform: uppercase
-    }
-
-    .ch-banner,
-    .chapter-banner {
-      background: linear-gradient(135deg, var(--green-dim), rgba(6, 6, 8, .65));
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 22px 28px;
-      margin: 0 0 36px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      box-shadow: 0 6px 30px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .04) inset
-    }
-
     .ch-num {
       font-family: Orbitron, monospace;
-      width: 58px;
-      height: 58px;
-      background: var(--green2);
-      color: var(--black);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 20px;
-      flex-shrink: 0;
-      box-shadow: 0 0 14px var(--green-glow)
+      width: 58px; height: 58px;
+      background: var(--cyan2); color: #fff;
+      border-radius: 14px; display: flex;
+      align-items: center; justify-content: center;
+      font-weight: 900; font-size: 20px; flex-shrink: 0;
+      box-shadow: 0 0 14px var(--cyan-glow);
     }
-
-    .ch-titles h2,
     .ch-info h2 {
       font-family: Orbitron, monospace;
-      font-size: 1.25rem;
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: -.3px
+      font-size: 1.25rem; font-weight: 900;
+      color: #0a1520; letter-spacing: -.3px;
     }
-
-    .ch-titles .ar,
     .ch-info .ar {
       font-family: Cairo, sans-serif;
-      font-size: .9rem;
-      color: var(--gold);
-      direction: rtl;
-      text-align: right;
-      margin-top: 3px
+      font-size: .9rem; color: var(--gold);
+      direction: rtl; text-align: right; margin-top: 3px;
     }
+    .ch-info .desc { font-size: 12.5px; color: var(--muted2); margin-top: 4px; }
 
-    .ch-titles .desc,
-    .ch-info .desc {
-      font-size: 12.5px;
-      color: var(--muted2);
-      margin-top: 4px
-    }
-
-    .section,
-    .section-header,
+    /* ═══════════════════════════════════════════
+   SECTION HEADERS
+═══════════════════════════════════════════ */
     .sec-header {
-      margin: 48px 0 18px;
-      scroll-margin-top: 70px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      position: relative;
-      border: 0;
-      padding: 0
+      margin: 48px 0 18px; scroll-margin-top: 70px;
+      display: flex; align-items: center; gap: 14px;
     }
-
-    .sec-num,
-    .sec-ico,
-    .sec-icon,
     .sec-number {
-      font-family: Orbitron, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--black);
-      background: var(--green2);
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 0 14px var(--green-glow);
-      border: 0;
-      margin-top: 0
+      font-family: Orbitron, monospace; font-size: 10px; font-weight: 700;
+      color: #fff; background: var(--cyan2);
+      width: 34px; height: 34px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; box-shadow: 0 0 14px var(--cyan-glow);
     }
-
-    .sec-ico,
     .sec-icon {
-      font-size: 16px;
-      color: var(--green2);
-      background: var(--green-dim);
-      border: 1px solid var(--border)
+      font-size: 16px; color: var(--cyan2);
+      background: var(--cyan-dim); border: 1px solid var(--border);
+      width: 34px; height: 34px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-
-    .sec-titles h2,
-    .sec-titles h3,
-    .sec-text h3,
-    .sec-txt h3,
-    .sec-title {
-      font-family: Orbitron, monospace;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--green2);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      flex: 1
+    .sec-titles { flex: 1; }
+    .sec-titles h3 {
+      font-family: Orbitron, monospace; font-size: 13px; font-weight: 700;
+      color: var(--cyan2); letter-spacing: 2px; text-transform: uppercase;
     }
-
-    .sec-titles .ar,
-    .sec-text .ar,
-    .sec-txt .ar {
-      font-family: Cairo, sans-serif;
-      font-size: .85rem;
-      color: var(--gold);
-      direction: rtl;
-      text-align: right;
-      margin-top: 2px
+    .sec-titles .ar {
+      font-family: Cairo, sans-serif; font-size: .85rem; color: var(--gold);
+      direction: rtl; text-align: right; margin-top: 2px;
     }
+    .sec-line { height:1px; flex:1; background: linear-gradient(90deg, var(--border), transparent); }
 
-    .sec-titles .desc,
-    .sec-titles .sub {
-      font-size: 12px;
-      color: var(--muted2);
-      margin-top: 3px
-    }
-
-    .card,
-    .content-card {
+    /* ═══════════════════════════════════════════
+   CARDS
+═══════════════════════════════════════════ */
+    .card {
       background: var(--card);
       border: 1px solid var(--border2);
-      border-radius: 18px;
-      padding: 28px;
+      border-radius: 18px; padding: 28px;
       margin-bottom: 16px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 6px 30px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .04) inset;
-      backdrop-filter: none;
-      transition: .25s
+      position: relative; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,130,200,.07), 0 1px 0 rgba(255,255,255,.9) inset;
+      transition: .25s;
     }
-
-    .card::before,
-    .content-card::before {
+    .card::before {
       content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--green), transparent);
-      opacity: 1
+      position: absolute; top:0; left:0; right:0; height:2px;
+      background: linear-gradient(90deg, var(--cyan2), transparent);
     }
-
-    .card:hover,
-    .content-card:hover {
-      border-color: var(--border)
-    }
+    .card:hover { border-color: var(--border); box-shadow: 0 6px 28px rgba(0,150,220,.13); }
 
     .card-title {
-      font-family: Cairo, sans-serif;
-      font-size: 1.08rem;
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap
+      font-family: Cairo, sans-serif; font-size: 1.1rem; font-weight: 900;
+      color: #0a1520; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
     }
-
-    .card-title::before {
-      content: '◆';
-      color: var(--green2);
-      font-size: 12px;
-      flex-shrink: 0
-    }
-
     .card-title .ar {
-      font-family: Cairo, sans-serif;
-      font-size: .85rem;
-      color: var(--gold);
-      font-weight: 700;
-      direction: rtl
+      font-family: Cairo, sans-serif; font-size: .85rem; color: var(--gold);
+      direction: rtl; font-weight: 700;
+    }
+    .card-title-icon {
+      width: 34px; height: 34px; border-radius: 10px;
+      background: var(--cyan-dim); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; flex-shrink: 0;
     }
 
-    .card p,
-    .card li,
-    .content-card p,
-    .content-card li {
-      font-size: 14px;
-      color: var(--muted2);
-      line-height: 1.9;
-      margin-bottom: 8px
+    /* ═══════════════════════════════════════════
+   AR BOX
+═══════════════════════════════════════════ */
+    .ar-box {
+      font-family: Cairo, sans-serif; font-size: 13px;
+      color: var(--gold); background: var(--gold-dim);
+      border: 1px solid rgba(224,123,0,.15);
+      border-radius: 10px; padding: 12px 16px;
+      margin-top: 12px; direction: rtl; line-height: 1.85;
+    }
+    .ar-label {
+      font-size: 10px; font-family: Orbitron, monospace;
+      color: var(--gold); letter-spacing: 2px;
+      text-transform: uppercase; display: block;
+      margin-bottom: 6px; opacity: .7;
     }
 
-    .card ul,
-    .card ol,
-    .content-card ul,
-    .content-card ol {
-      padding-left: 22px;
-      margin-top: 6px
+    /* ═══════════════════════════════════════════
+   POINTS LIST
+═══════════════════════════════════════════ */
+    .points { list-style: none; margin: 0; padding: 0; }
+    .points li {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 9px 0; border-bottom: 1px solid var(--border2);
+      font-size: 14px; color: var(--text); line-height: 1.7;
+    }
+    .points li:last-child { border-bottom: none; padding-bottom: 0; }
+    .pt-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--cyan2); flex-shrink: 0; margin-top: 7px;
+      box-shadow: 0 0 6px var(--cyan-glow);
     }
 
-    .ar-box,
-    .card-ar {
-      font-family: Cairo, sans-serif;
-      font-size: 13px;
-      color: var(--gold);
-      background: var(--gold-dim);
-      border: 1px solid rgba(255, 201, 64, .15);
-      border-right: 4px solid var(--gold);
-      border-radius: 10px;
-      padding: 12px 16px;
-      margin: 12px 0 16px;
-      direction: rtl;
-      text-align: right;
-      line-height: 1.85
-    }
-
-    .ar-label,
-    .card-ar-label {
-      font-size: 10px;
-      font-family: Orbitron, monospace;
-      color: var(--gold);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 6px;
-      opacity: .8;
-      direction: ltr;
-      text-align: left
-    }
-
-    .hl,
-    .highlight,
-    .key-box,
-    .tip,
-    .note,
-    .warn-box {
-      background: var(--green-dim);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--green2);
-      border-radius: 10px;
-      padding: 13px 16px;
-      margin: 10px 0;
-      font-size: 13.5px;
-      color: var(--muted2)
-    }
-
-    .note {
-      background: rgba(255, 201, 64, .07);
-      border-color: rgba(255, 201, 64, .22);
-      border-left-color: var(--gold)
-    }
-
-    .warn-box,
-    .hl.red {
-      background: rgba(255, 68, 85, .07);
-      border-color: rgba(255, 68, 85, .25);
-      border-left-color: var(--red)
-    }
-
-    .note-label,
-    .key-label,
-    .tip-label {
-      font-family: Orbitron, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 6px
-    }
-
-    .key-label,
-    .tip-label {
-      color: var(--green2)
-    }
-
-    .formula,
-    pre,
+    /* ═══════════════════════════════════════════
+   CODE / FORMULA BOX
+═══════════════════════════════════════════ */
     .code-block {
-      background: #070907;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 18px;
-      margin: 12px 0;
-      font-family: var(--mono);
-      font-size: 12.5px;
-      color: var(--gold);
-      direction: ltr;
-      overflow-x: auto;
-      white-space: pre-wrap
+      background: var(--card2); border: 1px solid var(--border2);
+      border-radius: 12px; padding: 16px 20px;
+      font-family: var(--mono); font-size: 13px; color: var(--cyan);
+      margin: 14px 0; overflow-x: auto; line-height: 1.7;
+    }
+    .code-label {
+      font-family: Orbitron, monospace; font-size: 9px; font-weight: 700;
+      color: var(--cyan2); letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 8px; display: block; opacity: .7;
     }
 
-    .formula .fl,
-    .formula .flabel {
-      font-family: Orbitron, monospace;
-      font-size: 10px;
-      color: var(--muted2);
-      margin-bottom: 5px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      white-space: normal
+    .formula-box {
+      background: rgba(0,170,221,.06); border: 1px solid rgba(0,170,221,.25);
+      border-radius: 12px; padding: 16px 20px; margin: 14px 0;
+      font-family: var(--mono); font-size: 14px; color: var(--cyan);
+      text-align: center; letter-spacing: .5px;
     }
 
-    .table-wrap {
-      overflow-x: auto;
-      margin: 14px 0;
-      border-radius: 12px;
-      border: 1px solid var(--border2)
+    .highlight-box {
+      background: var(--gold-dim); border: 1px solid rgba(224,123,0,.18);
+      border-radius: 12px; padding: 16px 20px; margin: 14px 0;
+      font-size: 13.5px; color: var(--text); line-height: 1.85;
+    }
+    .highlight-box .hl-label {
+      font-family: Orbitron, monospace; font-size: 9px; font-weight: 700;
+      color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+      display: block; margin-bottom: 6px;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--surface)
+    /* ═══════════════════════════════════════════
+   TWO-COL GRID
+═══════════════════════════════════════════ */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .col-card {
+      background: var(--card2); border: 1px solid var(--border2);
+      border-radius: 14px; padding: 18px;
     }
-
-    th {
-      background: var(--green-dim);
-      color: var(--green2);
-      font-family: Orbitron, monospace;
-      font-size: 11px;
-      letter-spacing: 1px;
-      text-transform: uppercase
+    .col-card-title {
+      font-family: Orbitron, monospace; font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
     }
+    .col-card.cyan-card { border-color: rgba(0,170,221,.25); }
+    .col-card.cyan-card .col-card-title { color: var(--cyan2); }
+    .col-card.gold-card { border-color: rgba(224,123,0,.2); }
+    .col-card.gold-card .col-card-title { color: var(--gold); }
+    .col-card.red-card { border-color: rgba(224,48,80,.2); }
+    .col-card.red-card .col-card-title { color: var(--red); }
+    .col-card.blue-card { border-color: rgba(0,119,204,.2); }
+    .col-card.blue-card .col-card-title { color: var(--blue); }
 
-    th,
-    td {
-      padding: 11px 13px;
-      border-bottom: 1px solid var(--border2);
-      text-align: left
+    /* ═══════════════════════════════════════════
+   DATA TABLE
+═══════════════════════════════════════════ */
+    .data-table { width:100%; border-collapse:collapse; font-size:13px; margin:12px 0; border-radius:12px; overflow:hidden; }
+    .data-table th {
+      background: var(--cyan-dim); color: var(--cyan2); padding: 11px 14px;
+      text-align: left; font-family: Orbitron, monospace;
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; border-bottom: 1px solid var(--border);
     }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border2); color: var(--text); vertical-align: top; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: rgba(0,170,221,.04); }
+    .data-table .highlight { color: var(--cyan); font-weight: 700; }
+    .data-table .muted { color: var(--muted2); }
 
-    td {
-      color: var(--muted2);
-      font-size: 13.5px
+    /* ═══════════════════════════════════════════
+   EXAM / QUESTIONS SECTION
+═══════════════════════════════════════════ */
+    .exam-q {
+      background: var(--card2); border: 1px solid var(--border2);
+      border-radius: 14px; padding: 20px 22px;
+      margin-bottom: 14px; font-size: 14px; color: var(--text); line-height: 1.8;
     }
+    .exam-q.mcq { border-left: 3px solid var(--cyan2); }
 
-    tr:last-child td {
-      border-bottom: 0
+    .q-label {
+      font-family: Orbitron, monospace; font-size: 9px; font-weight: 700;
+      color: var(--cyan2); letter-spacing: 2px; text-transform: uppercase;
+      display: block; margin-bottom: 10px; opacity: .85;
     }
+    .q-label.mcq { color: var(--blue); }
 
-    .mono {
-      font-family: var(--mono);
-      background: #070907;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 2px 7px;
-      color: var(--green2);
-      font-size: 12px
+    .answer { font-weight: 700; color: var(--cyan); }
+
+    .mcq-opts { list-style: none; padding: 0; margin: 14px 0 8px; display: flex; flex-direction: column; gap: 7px; }
+    .mcq-opts li {
+      padding: 8px 14px; border-radius: 8px;
+      border: 1px solid var(--border2); font-size: 13.5px;
+      background: var(--card); color: var(--muted2);
     }
-
-    .section-label {
-      font-family: Orbitron, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--green2);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px
+    .mcq-opts li.correct {
+      background: rgba(0,170,221,.08); border-color: rgba(0,170,221,.35);
+      color: var(--cyan); font-weight: 700;
     }
-
-    .section-label::after,
-    .sec-line {
-      content: '';
-      height: 1px;
-      flex: 1;
-      background: linear-gradient(90deg, var(--border), transparent)
+    .mcq-ans {
+      font-size: 12.5px; color: var(--muted2); margin-top: 8px;
+      padding: 8px 14px; background: var(--card); border-radius: 8px;
+      border: 1px solid var(--border2);
     }
+    .mcq-ans span { color: var(--text); }
 
-    @media(max-width:700px) {
-
-      .top-nav,
-      .topic-nav {
-        justify-content: flex-start;
-        overflow-x: auto;
-        flex-wrap: nowrap
-      }
-
-      .hero {
-        padding: 48px 16px 38px
-      }
-
-      .container,
-      .page-wrap {
-        padding: 26px 14px 60px
-      }
-
-      .ch-banner,
-      .chapter-banner {
-        padding: 18px;
-        align-items: flex-start
-      }
-
-      .card,
-      .content-card {
-        padding: 20px
-      }
-
-      .section-header,
-      .sec-header {
-        align-items: flex-start
-      }
-
-      .hero h1 {
-        font-size: 1.7rem
-      }
+    /* ═══════════════════════════════════════════
+   REVIEW TABLE SECTION
+═══════════════════════════════════════════ */
+    .review-section {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 22px; padding: 36px 32px;
+      margin-top: 60px; position: relative; overflow: hidden;
     }
-  </style>
-
-  <style id="index-back-button-style">
-    .index-back-button {
-      position: fixed;
-      top: 16px;
-      left: 16px;
-      z-index: 99999;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(34, 204, 72, .45);
-      background: rgba(6, 6, 8, .88);
-      backdrop-filter: blur(12px);
-      color: #2eef58 !important;
-      font-family: Inter, Cairo, sans-serif;
-      font-size: 13px;
-      font-weight: 800;
-      text-decoration: none;
-      box-shadow: 0 0 24px rgba(34, 204, 72, .22);
-      transition: .2s
+    .review-section::before {
+      content: ''; position: absolute; top:0; left:0; right:0; height:2px;
+      background: linear-gradient(90deg, var(--cyan2), var(--gold), transparent);
     }
-
-    .index-back-button:hover {
-      transform: translateY(-2px);
-      background: rgba(34, 204, 72, .14);
-      box-shadow: 0 0 35px rgba(34, 204, 72, .35)
+    .review-title {
+      font-family: Orbitron, monospace; font-size: 14px; font-weight: 900;
+      color: #0a1520; margin-bottom: 24px; letter-spacing: 2px;
+      display: flex; align-items: center; gap: 12px;
     }
+    .review-table { width:100%; border-collapse:collapse; font-size:13.5px; }
+    .review-table th {
+      background: var(--cyan-dim); color: var(--cyan2); padding: 12px 16px;
+      font-family: Cairo, sans-serif; font-size: 12px; font-weight: 700;
+      border-bottom: 1px solid var(--border); text-align: left;
+    }
+    .review-table th:last-child { text-align: right; direction: rtl; }
+    .review-table td { padding: 11px 16px; border-bottom: 1px solid var(--border2); vertical-align: top; line-height: 1.7; }
+    .review-table td:first-child { font-family: Orbitron, monospace; font-size: 10px; font-weight: 700; color: var(--cyan2); white-space: nowrap; }
+    .review-table td:nth-child(2) { color: var(--text); font-weight: 600; }
+    .review-table td:nth-child(3) { color: var(--muted2); font-size: 12.5px; }
+    .review-table td:last-child { color: var(--gold); direction: rtl; font-family: Cairo, sans-serif; font-size: 12.5px; text-align: right; }
+    .review-table tr:last-child td { border-bottom: none; }
+    .review-table tr:hover td { background: rgba(0,170,221,.04); }
 
-    @media(max-width:600px) {
-      .index-back-button {
-        top: 10px;
-        left: 10px;
-        padding: 8px 12px;
-        font-size: 12px
-      }
+    /* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 24px 28px; text-align: center;
+      position: relative; margin-top: 60px;
+    }
+    footer::before {
+      content: ''; position: absolute; top:0; left:50%;
+      transform: translateX(-50%); width:100px; height:1px;
+      background: linear-gradient(90deg, transparent, var(--cyan2), transparent);
+    }
+    .footer-logo { font-family: Orbitron, monospace; font-size:1rem; font-weight:900; color:var(--cyan2); letter-spacing:2px; margin-bottom:5px; }
+    .footer-copy { font-size:11px; color:var(--muted); font-family:Orbitron, monospace; letter-spacing:1.5px; }
+    .footer-copy span { color:var(--cyan2); }
+
+    /* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+    @media(max-width:650px){
+      .two-col { grid-template-columns: 1fr; }
+      .card { padding: 20px 16px; }
+      .review-section { padding: 22px 14px; }
+      .data-table th, .data-table td { padding: 8px 10px; font-size:12px; }
     }
   </style>
 </head>
 
 <body>
 
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+<div class="bg-orb orb3"></div>
 
-  <div class="bg-layer">
-    <div class="bg-grid"></div>
-    <div class="bg-orb orb1"></div>
-    <div class="bg-orb orb2"></div>
-    <div class="bg-orb orb3"></div>
-  </div>
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="active">🏠 Home</a>
+  <a href="#components">Components</a>
+  <a href="#images">Images</a>
+  <a href="#audio">Audio</a>
+  <a href="#review">Review</a>
+  <a href="#exam">Exam Q&A</a>
+  <a href="#mcq">MCQ</a>
+</nav>
 
+<div class="container">
 
-  <!-- ══ HERO ══════════════════════════════════════════════ -->
+  <!-- HERO -->
   <div class="hero">
-    <div class="badge">Chapter 2 · Multimedia Systems · Final Exam Study Guide</div>
-    <h1>Multimedia <span>Systems</span></h1>
-    <div class="ar-title">أنظمة الوسائط المتعددة — دليل الدراسة الشامل للفاينل</div>
-    <p>Complete bilingual study guide · Media types · Data transmission · Streaming · LDUs · Networking applications ·
-      Exam questions</p>
+    <div class="badge"><span class="dot"></span> CHAPTER 2 &nbsp;·&nbsp; CLEAN STUDY GUIDE</div>
+    <h1>Multimedia <span>System</span><br>&amp; Digital Media</h1>
+    <div class="ar-title">مكونات نظام الوسائط المتعددة والوسائط الرقمية</div>
+    <p>ملف منظم حسب مواضيع الباوربوينت فقط: المكونات المطلوبة لنظام Multimedia، الصور، والصوت.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">🖥️ System Components</span>
+      <span class="hero-tag">🖼️ Images & Bitmaps</span>
+      <span class="hero-tag">🔊 Audio & Sampling</span>
+      <span class="hero-tag">📝 Related Questions</span>
+    </div>
   </div>
 
-  <div class="lang-bar">📗 <strong>English</strong> — Main content &nbsp;|&nbsp; 🌙 <strong
-      style="color:var(--gold)">العربي</strong> — Translation &amp; explanation boxes</div>
-
-  <!-- ══ TOP NAV ══════════════════════════════════════════ -->
-  <nav class="top-nav">
-    <a href="index.html" class="active">🏠 Home</a>
-    <a href="#components">1. Components</a>
-    <a href="#mediatypes">2. Media Types</a>
-    <a href="#analog-digital">3. Analog vs Digital</a>
-    <a href="#media-classification">4. Media Classification</a>
-    <a href="#transmission">5. Transmission Methods</a>
-    <a href="#serial">6. Serial Transmission</a>
-    <a href="#distribution">7. Time/Width Distribution</a>
-    <a href="#ldus">8. LDUs</a>
-    <a href="#networking">9. MM Networking</a>
-    <a href="#streaming">10. Streaming</a>
-    <a href="#review">11. Review Table</a>
-    <a href="#exam">12. Exam Qs</a>
-  </nav>
-
-  <!-- ══ MAIN CONTAINER ════════════════════════════════════ -->
-  <div class="container">
-
-    <!-- CHAPTER BANNER -->
-    <div class="ch-banner">
-      <div class="ch-num">2</div>
-      <div class="ch-info">
-        <h2>Multimedia Systems — Components, Media & Data Transmission</h2>
-        <div class="ar">أنظمة الوسائط المتعددة — المكونات والوسائط ونقل البيانات</div>
-        <div class="desc">Covers: MM components · Graphics · Images · Audio · Video · Analog vs Digital · Static vs
-          Continuous media · Parallel/Serial/Async/Sync/Isochronous transmission · LDUs · Streaming · MM networking
-          applications</div>
-      </div>
+  <!-- CHAPTER BANNER -->
+  <div class="ch-banner">
+    <div class="ch-num">02</div>
+    <div class="ch-info">
+      <h2>PowerPoint Topics Only</h2>
+      <div class="ar">المواضيع الموجودة داخل سلايدات الشابتر فقط</div>
+      <div class="desc">Hardware & Software Components · Images · Audio</div>
     </div>
+  </div>
 
-    <!-- ════════════════════════════
-       §1  MULTIMEDIA COMPONENTS
-  ════════════════════════════ -->
-    <div id="components" class="sec-header">
-      <div class="sec-num">1</div>
-      <div class="sec-text">
-        <h3>Components of a Multimedia System</h3>
+  <!-- SECTION 1 -->
+  <div id="components">
+    <div class="sec-header">
+      <div class="sec-number">01</div>
+      <div class="sec-titles">
+        <h3>Multimedia System Components</h3>
         <div class="ar">مكونات نظام الوسائط المتعددة</div>
       </div>
+      <div class="sec-line"></div>
     </div>
 
     <div class="card">
-      <div class="card-title">Hardware &amp; Software Components <span class="ar">مكونات العتاد والبرمجيات</span></div>
-      <p>A multimedia system requires a combination of hardware and software components working together:</p>
-      <div class="cmp-grid" style="grid-template-columns:1fr 1fr">
-        <div class="cmp-card green">
-          <div class="cmp-title">📥 Capture Devices</div>
-          <ul>
-            <li>Video cameras, video recorders</li>
-            <li>Audio microphones</li>
-            <li>Keyboards, mice, graphics tablets</li>
-            <li>3D input devices, tactile sensors</li>
-            <li>VR devices, digitizing hardware</li>
+      <div class="card-title"><div class="card-title-icon">🖥️</div> Hardware &amp; Software Components <span class="ar">المكونات المطلوبة</span></div>
+      <div class="ar-box"><div class="ar-label">Arabic</div>يتكون نظام الوسائط المتعددة من: أجهزة التقاط، أجهزة تخزين، شبكات اتصال، أنظمة حاسوب، وأجهزة عرض.</div>
+
+      <div class="two-col">
+        <div class="col-card cyan-card">
+          <div class="col-card-title">📹 Capture Devices</div>
+          <ul class="points">
+            <li><div class="pt-dot"></div>Video Camera</li>
+            <li><div class="pt-dot"></div>Video Recorder</li>
+            <li><div class="pt-dot"></div>Audio Microphone</li>
+            <li><div class="pt-dot"></div>Keyboards, mice, graphics tablets</li>
+            <li><div class="pt-dot"></div>3D input devices, tactile sensors, VR devices</li>
+            <li><div class="pt-dot"></div>Digitizing Hardware</li>
           </ul>
         </div>
-        <div class="cmp-card orange">
-          <div class="cmp-title">💾 Storage Devices</div>
-          <ul>
-            <li>Hard disks (HDD/SSD)</li>
-            <li>CD-ROMs, DVD-ROMs</li>
-            <li>Flash memory, cloud storage</li>
+        <div class="col-card blue-card">
+          <div class="col-card-title">💾 Storage Devices</div>
+          <ul class="points">
+            <li><div class="pt-dot"></div>Hard disks</li>
+            <li><div class="pt-dot"></div>CD-ROMs</li>
+            <li><div class="pt-dot"></div>DVD-ROM</li>
           </ul>
         </div>
-        <div class="cmp-card teal">
-          <div class="cmp-title">🌐 Communication Networks</div>
-          <ul>
-            <li>Local Networks (LAN)</li>
-            <li>Intranets</li>
-            <li>Internet</li>
-            <li>Special high-speed multimedia networks</li>
+        <div class="col-card gold-card">
+          <div class="col-card-title">🌐 Communication Networks</div>
+          <ul class="points">
+            <li><div class="pt-dot"></div>Local Networks</li>
+            <li><div class="pt-dot"></div>Intranets</li>
+            <li><div class="pt-dot"></div>Internet</li>
+            <li><div class="pt-dot"></div>Multimedia or other special high-speed networks</li>
           </ul>
         </div>
-        <div class="cmp-card purple">
-          <div class="cmp-title">🖥️ Computer Systems</div>
-          <ul>
-            <li>Multimedia desktop machines</li>
-            <li>Workstations</li>
-            <li>MPEG/VIDEO/DSP hardware</li>
+        <div class="col-card red-card">
+          <div class="col-card-title">🧠 Computer Systems</div>
+          <ul class="points">
+            <li><div class="pt-dot"></div>Multimedia Desktop machines</li>
+            <li><div class="pt-dot"></div>Workstations</li>
+            <li><div class="pt-dot"></div>MPEG / VIDEO / DSP Hardware</li>
           </ul>
         </div>
-        <div class="cmp-card yellow" style="grid-column:1/-1">
-          <div class="cmp-title">📺 Display Devices</div>
-          <p>CD-quality speakers · HDTV · Monitors · Colour printers</p>
-        </div>
-      </div>
-
-      <div class="highlight">
-        <strong>Compression</strong> — convenient to bundle files for archiving and transmission of larger files. E.g.
-        <strong>ZIP</strong>. All multimedia data benefits from compression due to its large size.
-      </div>
-
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        نظام الوسائط المتعددة يحتاج خمسة أنواع من المكونات:<br>
-        • <strong>أجهزة الالتقاط:</strong> كاميرات، ميكروفونات، أقلام رسم، أجهزة VR.<br>
-        • <strong>أجهزة التخزين:</strong> هارد ديسك، CD/DVD، فلاش.<br>
-        • <strong>شبكات الاتصال:</strong> LAN، الإنترنت، شبكات خاصة للوسائط.<br>
-        • <strong>أنظمة الحاسوب:</strong> محطات عمل، معالجات DSP لفيديو وصوت.<br>
-        • <strong>أجهزة العرض:</strong> شاشات، مكبرات صوت، طابعات ملونة.<br>
-        الضغط (Compression) ضروري لتقليل حجم الملفات وتسهيل نقلها وتخزينها.
-      </div>
-    </div>
-
-    <!-- ════════════════════════════
-       §2  MEDIA TYPES
-  ════════════════════════════ -->
-    <div id="mediatypes" class="sec-header">
-      <div class="sec-num">2</div>
-      <div class="sec-text">
-        <h3>Types of Multimedia Data</h3>
-        <div class="ar">أنواع بيانات الوسائط المتعددة</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Graphics <span class="ar">الرسوميات</span></div>
-      <ul>
-        <li><strong>Format:</strong> Constructed from primitive objects — lines, polygons, circles, curves, arcs.</li>
-        <li><strong>Input:</strong> Generated by graphics editor programs (e.g., Adobe Illustrator) or automatically
-          (e.g., Macromedia Flash).</li>
-        <li>Graphics are usually <strong>editable/revisable</strong> (unlike raster images).</li>
-        <li><strong>Input devices:</strong> keyboard, mouse, trackball, graphics tablet.</li>
-        <li><span class="g">Low storage overhead</span> — vector format is compact.</li>
-      </ul>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        الرسوميات (Graphics) تُبنى من أشكال هندسية بدائية (خطوط، مضلعات، دوائر). تُنشأ ببرامج رسم مثل Illustrator.
-        ميزتها الرئيسية: <strong>قابلية التعديل</strong> وحجم تخزين صغير نسبياً لأنها مخزنة كمعادلات رياضية وليس
-        كبيكسلات.
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Images <span class="ar">الصور</span></div>
-      <p>Still pictures — uncompressed they are stored as a <strong>bitmap</strong> (a grid of pixels).</p>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Colour Depth</th>
-              <th>Bits/Pixel</th>
-              <th>Description</th>
-              <th>بالعربي</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Black &amp; White</td>
-              <td>1 bit</td>
-              <td>Only black or white per pixel</td>
-              <td>أبيض وأسود فقط</td>
-            </tr>
-            <tr>
-              <td>Greyscale / Colour Map</td>
-              <td>8 bits</td>
-              <td>256 shades of grey or 256 colours</td>
-              <td>تدرجات رمادي أو 256 لون</td>
-            </tr>
-            <tr>
-              <td>True Colour</td>
-              <td>24 bits</td>
-              <td>16.7 million colours (RGB)</td>
-              <td>ألوان حقيقية — ملايين الألوان</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="formula">
-        <div class="fl">Image Size Calculations</div>512×512 Greyscale (8-bit): 512 × 512 × 8 bits = 2,097,152 bits =
-        0.25 MB
-        512×512 True Colour (24-bit): 512 × 512 × 24 bits = 6,291,456 bits = 0.75 MB
-        10 Megapixel camera (24-bit): ~10,000,000 × 24 = 240,000,000 bits ≈ 29 MB (!)
-      </div>
-      <div class="key-box">
-        <div class="key-label">🔑 Key Point</div>
-        As image size increases, storage overhead increases rapidly. <strong>Compression is always applied</strong>
-        (e.g., JPEG, PNG).
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        الصور (Images) تُخزَّن كـ bitmap (شبكة من البيكسلات). كل بيكسل يحتاج 1 أو 8 أو 24 بت حسب عمق الألوان.<br>
-        حساب الحجم: عرض × ارتفاع × bits/pixel. صورة 512×512 بـ 24 بت = 0.75 ميجابايت بدون ضغط!<br>
-        الكاميرات الحديثة (10+ ميجابيكسل) تنتج ملفات ≈29 ميجابايت → الضغط ضروري.
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Audio <span class="ar">الصوت</span></div>
-      <ul>
-        <li>Audio signals are <strong>continuous analog signals</strong>.</li>
-        <li><strong>Input:</strong> Microphones → digitised and stored.</li>
-        <li><strong>CD Quality:</strong> 16-bit sampling at <strong>44.1 kHz</strong>.</li>
-        <li>Even higher audiophile rates exist: <strong>24-bit at 96 kHz</strong>.</li>
-      </ul>
-      <div class="formula">
-        <div class="fl">Audio Size Calculations</div>1 min Mono CD quality (16-bit, 44.1kHz, uncompressed) = 5 MB
-        1 min Stereo CD quality (16-bit, 44.1kHz, uncompressed) = 10 MB
-        Typical compressed (MP3) ≈ 1 MB per minute
-      </div>
-      <div class="key-box">
-        <div class="key-label">🔑 Key Point</div>
-        Audio is <strong>usually compressed</strong> (e.g., MP3, AAC) to reduce file size significantly.
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        الصوت إشارة تماثلية مستمرة (Analog) تُحوَّل لرقمية بالميكروفون.<br>
-        جودة CD: <strong>16 بت</strong> بمعدل أخذ عينات <strong>44,100 مرة في الثانية</strong>.<br>
-        دقيقة واحدة صوت أحادي غير مضغوط = 5 ميجابايت. ستيريو = 10 ميجابايت.<br>
-        لهذا نستخدم MP3 الذي يضغط الصوت تقريباً إلى 1 ميجابايت/دقيقة.
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Video <span class="ar">الفيديو</span></div>
-      <ul>
-        <li>Analog video is captured by a video camera then <strong>digitised</strong>.</li>
-        <li>Raw video = <strong>a series of single images (frames)</strong>.</li>
-        <li>Typical frame rates: <strong>25, 30, or 50 frames per second (fps)</strong>.</li>
-      </ul>
-      <div class="formula">
-        <div class="fl">Video Size Calculations</div>512×512 Monochrome video, 25fps, 1 minute:
-        = 25 fps × (512×512×1 bit /8) bytes × 60 sec
-        = 25 × 0.25 MB × 60 = 375 MB/minute (≈6.25 MB/sec)
-
-        HD DVD (1440×1080), 24-bit colour, 25fps, 1 minute:
-        = 25 × (1440×1080×24/8) bytes × 60
-        = 25 × 4.5 MB × 60 = 6,750 MB ≈ 112.5 MB per minute uncompressed (!)
-      </div>
-      <div class="key-box">
-        <div class="key-label">🔑 Key Point</div>
-        Digital video <strong>clearly needs compression</strong>. Codecs like MPEG, H.264, H.265 compress video
-        dramatically.
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        الفيديو = سلسلة من الصور المتتابعة (الإطارات). عادة 25 أو 30 أو 50 إطار/ثانية.<br>
-        فيديو HD بدون ضغط = <strong>112.5 ميجابايت في الدقيقة</strong>! لذلك الضغط ضرورة مطلقة.<br>
-        ملاحظة: مقارنة بالصوت (5-10 MB/min) الفيديو أضخم بكثير.
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Summary: All Media Types Compared <span class="ar">مقارنة جميع أنواع الوسائط</span></div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Media Type</th>
-              <th>Input Method</th>
-              <th>Storage Format</th>
-              <th>Key Size Fact</th>
-              <th>Compression</th>
-              <th>بالعربي</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Text</td>
-              <td>Keyboard</td>
-              <td>ASCII/Unicode</td>
-              <td>~1 byte per char</td>
-              <td>ZIP, optional</td>
-              <td>نص — حجم صغير</td>
-            </tr>
-            <tr>
-              <td>Graphics</td>
-              <td>Drawing software, tablet</td>
-              <td>Vector (equations)</td>
-              <td>Very small</td>
-              <td>Minimal needed</td>
-              <td>رسوميات متجهة</td>
-            </tr>
-            <tr>
-              <td>Images</td>
-              <td>Camera, scanner</td>
-              <td>Bitmap (pixels)</td>
-              <td>512×512 @ 24-bit = 0.75 MB</td>
-              <td>JPEG, PNG, etc.</td>
-              <td>صور بيتماب</td>
-            </tr>
-            <tr>
-              <td>Audio</td>
-              <td>Microphone</td>
-              <td>PCM samples</td>
-              <td>Stereo CD = 10 MB/min</td>
-              <td>MP3, AAC</td>
-              <td>صوت رقمي</td>
-            </tr>
-            <tr>
-              <td>Video</td>
-              <td>Video camera</td>
-              <td>Frames (images)</td>
-              <td>HD = ~112 MB/min</td>
-              <td>MPEG, H.264</td>
-              <td>فيديو — الأضخم</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ════════════════════════════
-       §3  ANALOG vs DIGITAL
-  ════════════════════════════ -->
-    <div id="analog-digital" class="sec-header">
-      <div class="sec-num">3</div>
-      <div class="sec-text">
-        <h3>Analog vs Digital Signals</h3>
-        <div class="ar">الإشارات التماثلية مقابل الرقمية</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">The Physical World &amp; Digitisation <span class="ar">العالم المادي والرقمنة</span></div>
-      <p>The world we sense is full of <strong>analog signals</strong>. Electrical sensors convert these into electrical
-        signals:</p>
-      <ul>
-        <li><strong>Transducers</strong> — convert physical changes (pressure, movement) to electrical signals.</li>
-        <li><strong>Thermocouples</strong> — convert temperature to voltage.</li>
-        <li><strong>Microphones</strong> — convert sound pressure waves to electrical signals.</li>
-      </ul>
-      <div class="g2" style="margin-top:14px">
-        <div class="mini-card">
-          <div class="mc-title" style="color:var(--accent2)">🌊 Analog Signal</div>
-          <ul>
-            <li>Continuous signal — infinite values</li>
-            <li>Naturally how the physical world works</li>
-            <li><strong>Must be digitised</strong> for computer processing</li>
-            <li>Susceptible to noise</li>
-          </ul>
-        </div>
-        <div class="mini-card">
-          <div class="mc-title" style="color:var(--accent)">⬛ Digital Signal</div>
-          <ul>
-            <li>Discrete values (0s and 1s)</li>
-            <li>What computers can readily deal with</li>
-            <li>Noise-resistant</li>
-            <li>Can be processed, stored, transmitted easily</li>
+        <div class="col-card cyan-card">
+          <div class="col-card-title">📺 Display Devices</div>
+          <ul class="points">
+            <li><div class="pt-dot"></div>CD-quality speakers</li>
+            <li><div class="pt-dot"></div>HDTV</li>
+            <li><div class="pt-dot"></div>Monitors</li>
+            <li><div class="pt-dot"></div>Colour printers</li>
           </ul>
         </div>
       </div>
-      <div class="flow" style="margin-top:16px">
-        <div class="fbox o">Physical World<br><small>Sound, Light, Heat</small></div>
-        <div class="arrow">→</div>
-        <div class="fbox y">Sensor / Transducer<br><small>Converts to voltage</small></div>
-        <div class="arrow">→</div>
-        <div class="fbox p">ADC<br><small>Analog → Digital</small></div>
-        <div class="arrow">→</div>
-        <div class="fbox a">Computer<br><small>Digital processing</small></div>
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        العالم الحقيقي مليء بالإشارات التماثلية المستمرة (أصوات، حرارة، ضوء). المستشعرات تحول هذه الظواهر لإشارات
-        كهربائية.<br>
-        <strong>التماثلية (Analog):</strong> إشارة مستمرة لا نهائية القيم — لا يستطيع الحاسوب معالجتها مباشرة.<br>
-        <strong>الرقمية (Digital):</strong> إشارة منفصلة (0 و1) — ما يفهمه الحاسوب.<br>
-        محول ADC (Analog-to-Digital Converter) يحول الإشارة التماثلية لرقمية بأخذ عينات متكررة.
-      </div>
     </div>
+  </div>
 
-    <!-- ════════════════════════════
-       §4  MEDIA CLASSIFICATION
-  ════════════════════════════ -->
-    <div id="media-classification" class="sec-header">
-      <div class="sec-num">4</div>
-      <div class="sec-text">
-        <h3>Media Classification — Static vs Continuous</h3>
-        <div class="ar">تصنيف الوسائط — ثابتة مقابل مستمرة</div>
+  <!-- SECTION 2 -->
+  <div id="images">
+    <div class="sec-header">
+      <div class="sec-number">02</div>
+      <div class="sec-titles">
+        <h3>Images</h3>
+        <div class="ar">الصور</div>
       </div>
+      <div class="sec-line"></div>
     </div>
 
     <div class="card">
-      <div class="card-title">Two Fundamental Categories <span class="ar">الفئتان الأساسيتان</span></div>
-      <div class="g2">
-        <div class="cmp-card green">
-          <div class="cmp-title">🖼️ Static / Discrete Media</div>
-          <p>Information that is <strong>time-independent</strong> — presented in a fixed, unchanging format.</p>
-          <br>
-          <p><strong>Examples:</strong> Text, still images, graphics</p>
-          <br>
-          <p>Normal data, text, single images, graphics — <strong>order and timing do not matter</strong> for rendering.
-          </p>
-        </div>
-        <div class="cmp-card orange">
-          <div class="cmp-title">🎬 Continuous / Dynamic Media</div>
-          <p>Information that is <strong>time-dependent</strong> — meaning depends on timing of presentation.</p>
-          <br>
-          <p><strong>Examples:</strong> Video, animation, audio</p>
-          <br>
-          <p>Meaning is conveyed not only by value but also by <strong>time of occurrence</strong>.</p>
-        </div>
-      </div>
-      <div class="key-box">
-        <div class="key-label">🔑 Key Distinction</div>
-        Static media = <strong>time-independent</strong> — you can display it in any order. Continuous media =
-        <strong>time-dependent</strong> — the timing is part of the information itself.
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        <strong>الوسائط الثابتة (Static/Discrete):</strong> مستقلة عن الزمن — نص، صور ثابتة، رسوميات. يمكن عرضها بأي
-        ترتيب دون التأثير على المعنى.<br>
-        <strong>الوسائط المستمرة (Continuous):</strong> تعتمد على الزمن — صوت، فيديو، أنيميشن. المعنى مرتبط بتوقيت
-        الحدوث. لو غيرت الترتيب، يختل المعنى كله.
-      </div>
-    </div>
+      <div class="card-title"><div class="card-title-icon">🖼️</div> Bitmap Images <span class="ar">الصور النقطية</span></div>
+      <div class="ar-box"><div class="ar-label">Arabic</div>الصور الثابتة غير المضغوطة تُمثَّل كـ Bitmap، أي شبكة من البكسلات.</div>
 
-    <div class="card">
-      <div class="card-title">Media Characteristics — Time, Distribution &amp; Width <span class="ar">خصائص الوسائط
-          الثلاث</span></div>
-      <p>Multimedia data can also be classified according to three properties:</p>
-      <div class="cmp-grid">
-        <div class="cmp-card green">
-          <div class="cmp-title">⏱️ Time Dependency</div>
-          <p>Whether the medium depends on time for its presentation.</p>
-          <ul style="margin-top:8px">
-            <li><span class="g">Time-independent:</span> text, images</li>
-            <li><span class="o">Time-dependent:</span> video, audio</li>
-          </ul>
-        </div>
-        <div class="cmp-card orange">
-          <div class="cmp-title">📊 Time Distribution</div>
-          <p>How data units are distributed over time:</p>
-          <ul style="margin-top:8px">
-            <li>Uncompressed video — <em>constant</em> stream</li>
-            <li>Compressed video (IBP) — <em>variable</em> stream</li>
-            <li>Difference-only stream — <em>sparse</em></li>
-          </ul>
-        </div>
-        <div class="cmp-card purple">
-          <div class="cmp-title">📐 Width Distribution</div>
-          <p>Size/width of data units (packets) in the stream:</p>
-          <ul style="margin-top:8px">
-            <li>Fixed-size packets (CBR)</li>
-            <li>Variable-size packets (VBR)</li>
-          </ul>
-        </div>
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        ثلاث خصائص لتصنيف بيانات الوسائط:<br>
-        <strong>① الاعتماد على الزمن (Time Dependency):</strong> هل الوسيط يحتاج توقيتاً محدداً للعرض؟<br>
-        <strong>② التوزيع الزمني (Time Distribution):</strong> كيف تتوزع وحدات البيانات عبر الزمن؟ (ثابتة، متغيرة،
-        متفرقة).<br>
-        <strong>③ توزيع العرض (Width Distribution):</strong> حجم وحدات البيانات — ثابت (CBR) أو متغير (VBR).
-      </div>
-    </div>
-
-    <!-- ════════════════════════════
-       §5  TRANSMISSION METHODS
-  ════════════════════════════ -->
-    <div id="transmission" class="sec-header">
-      <div class="sec-num">5</div>
-      <div class="sec-text">
-        <h3>Data Transmission Methods — Parallel vs Serial</h3>
-        <div class="ar">طرق نقل البيانات — متوازي ومتسلسل</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Transmission Overview <span class="ar">نظرة عامة على طرق النقل</span></div>
-      <div class="flow">
-        <div class="fbox a" style="min-width:180px;text-align:left;padding:12px 16px">
-          <strong>Data Transmission</strong><br>
-          <span style="font-size:12px;color:var(--muted)">Methods</span>
-        </div>
-        <div class="arrow">→</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="fbox t">⊟ Parallel</div>
-          <div class="fbox a">⊞ Serial
-            <span style="font-size:11px;display:block;color:var(--muted)">Async / Sync / Isochronous</span>
-          </div>
-        </div>
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        طرق نقل البيانات تنقسم إلى:<br>
-        <strong>متوازي (Parallel):</strong> عدة بتات في نفس الوقت على قنوات متعددة.<br>
-        <strong>متسلسل (Serial):</strong> بت واحد في كل مرة — ينقسم إلى ثلاثة أنواع: غير متزامن، متزامن، متزامن معزول.
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Parallel Data Transmission <span class="ar">النقل المتوازي</span></div>
-      <ul>
-        <li>Multiple data bits are sent <strong>simultaneously</strong> over multiple channels.</li>
-        <li>Each channel carries <strong>one bit at the same time</strong>.</li>
-        <li><span class="g">Faster</span> for large data volumes.</li>
-        <li>Almost all parallel transmission is <strong>synchronous</strong>.</li>
-      </ul>
-      <div class="highlight">
-        <strong>When is parallel used?</strong><br>
-        ① A large amount of data is being sent.<br>
-        ② The data is time-sensitive.<br>
-        ③ The data needs to be sent quickly.<br>
-        <strong>Example:</strong> Video streaming — large volumes, time-sensitive.
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        النقل المتوازي: يرسل عدة بتات في آنٍ واحد عبر قنوات متعددة. مثال: ناقل البيانات (Data Bus) داخل الحاسوب يرسل 8
-        أو 16 أو 32 بت في نفس اللحظة.<br>
-        يُستخدم عندما: البيانات كبيرة الحجم + حساسة للوقت + تحتاج سرعة عالية. مثال: بث الفيديو.
-      </div>
-    </div>
-
-    <!-- ════════════════════════════
-       §6  SERIAL TRANSMISSION
-  ════════════════════════════ -->
-    <div id="serial" class="sec-header">
-      <div class="sec-num">6</div>
-      <div class="sec-text">
-        <h3>Serial Transmission — Async, Sync &amp; Isochronous</h3>
-        <div class="ar">النقل المتسلسل — غير متزامن، متزامن، ومعزول</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Asynchronous Transmission <span class="ar">النقل غير المتزامن</span></div>
-      <ul>
-        <li>Packets of data reach the receiver <strong>as fast as possible</strong>.</li>
-        <li>Uses <strong>start and stop bits</strong> to frame each data packet.</li>
-        <li><strong>Arbitrary delay</strong> between the transmission of two data items — no timing guarantee.</li>
-        <li>Works fine for <span class="g">text messages (chat)</span>.</li>
-        <li>If no memory available → <strong>out-of-order packets are dropped</strong> (receives start, then data, then
-          start again with no stop).</li>
-      </ul>
-      <div class="formula">
-        <div class="fl">Asynchronous Frame Structure</div>[START bit] [DATA bits (5-8)] [PARITY bit (optional)] [STOP
-        bit(s)]
-        START = 0, STOP = 1
-        No shared clock between sender and receiver
-      </div>
-      <div class="g2">
-        <div class="mini-card" style="border-color:rgba(52,211,100,.3)">
-          <div class="mc-title" style="color:var(--accent)">✓ Advantages</div>
-          <ul>
-            <li>Cheap &amp; easy to implement</li>
-            <li>No clock sharing needed</li>
-            <li>Can transmit whenever data is ready</li>
-          </ul>
-        </div>
-        <div class="mini-card" style="border-color:rgba(248,113,113,.3)">
-          <div class="mc-title" style="color:var(--red)">✗ Disadvantages</div>
-          <ul>
-            <li>Slower — extra start/stop bits add overhead</li>
-            <li>Gaps between transmissions waste bandwidth</li>
-          </ul>
-        </div>
-      </div>
-      <div class="key-box">
-        <div class="key-label">🔑 When used</div>
-        Data sent <strong>sporadically / irregularly</strong> — e.g., keyboard input, mouse clicks. Not suitable for
-        continuous media.
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        النقل غير المتزامن (Asynchronous): كل حزمة بيانات مستقلة — تُرسَل حين تكون جاهزة دون توقيت محدد.<br>
-        يستخدم بتات بداية (Start) وبتات نهاية (Stop) لتحديد حدود كل حزمة.<br>
-        <strong>مميزات:</strong> رخيص وسهل، لا يحتاج ساعة مشتركة بين المرسل والمستقبل.<br>
-        <strong>عيوب:</strong> أبطأ بسبب بتات الإطار الإضافية، والفجوات بين الحزم تهدر عرض النطاق.<br>
-        <strong>مثال تطبيقي:</strong> لوحة المفاتيح، الفأرة — بيانات متقطعة وغير منتظمة.
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Synchronous Transmission <span class="ar">النقل المتزامن</span></div>
-      <ul>
-        <li>Transmits bits of data <strong>continually</strong> — no start/stop bits per character.</li>
-        <li>Each character (or block) is sent <strong>without start or stop bits</strong>.</li>
-        <li>Requires a <strong>common clock signal</strong> shared between sender and receiver.</li>
-        <li>Uses <strong>packets / framing</strong> when no data is ready to send.</li>
-        <li><strong>Temporary storage (buffer)</strong> required if data arrives out of order (e.g., frame 7 arrives
-          before frame 6 → store frame 7 until frame 6 arrives).</li>
-        <li><strong>Maximum end-to-end delay</strong> is specified — if frame not received within time limit (e.g., 0.1
-          sec), it is <strong>dropped</strong>.</li>
-      </ul>
-      <div class="g2">
-        <div class="mini-card" style="border-color:rgba(52,211,100,.3)">
-          <div class="mc-title" style="color:var(--accent)">✓ Advantages</div>
-          <ul>
-            <li>Fast transmission — no overhead per character</li>
-            <li>Efficient use of bandwidth</li>
-          </ul>
-        </div>
-        <div class="mini-card" style="border-color:rgba(248,113,113,.3)">
-          <div class="mc-title" style="color:var(--red)">✗ Disadvantages</div>
-          <ul>
-            <li>Needs a common clock signal</li>
-            <li>May have to wait briefly to send</li>
-            <li>More complex implementation</li>
-          </ul>
-        </div>
-      </div>
-      <div class="key-box">
-        <div class="key-label">🔑 When used</div>
-        Large continuous data streams. Almost all <strong>parallel transmission is synchronous</strong>.
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        النقل المتزامن (Synchronous): البيانات تُرسَل بشكل مستمر دون توقف — لا توجد بتات بداية/نهاية لكل حرف.<br>
-        يتطلب ساعة مشتركة (Common Clock) بين المرسل والمستقبل لمزامنة الإرسال.<br>
-        يستخدم تخزين مؤقت (Buffer) عند وصول الحزم بترتيب خاطئ.<br>
-        إذا لم تصل الحزمة في الوقت المحدد → تُحذف (Drop).<br>
-        <strong>مثال:</strong> نقل البيانات في الشبكات، USB، الإنترنت.
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Isochronous Transmission <span class="ar">النقل المتزامن المعزول</span></div>
-      <ul>
-        <li>Designed to provide a <strong>steady bit flow</strong> for multimedia applications.</li>
-        <li>Prevents <strong>jitter</strong> — variations in delay that disrupt reception (pops in audio, freezing
-          video).</li>
-        <li><strong>Both maximum AND minimum delays</strong> are specified — unlike synchronous which only specifies
-          max.</li>
-        <li>Minimum delay = time gaps between packets (includes the normal delay time).</li>
-        <li>Isochronous data is <strong>synchronous data transmitted without a clocking source</strong> — timing is
-          recovered from transitions in the data stream itself.</li>
-        <li>Transmission is <strong>transparent</strong> — does not recognise control characters.</li>
-        <li>Used in: <strong>USB devices</strong> (one of the four USB data flow types), secure military applications,
-          <strong>ISOEthernet</strong> (Isochronous Ethernet).
-        </li>
+      <ul class="points">
+        <li><div class="pt-dot"></div>Still pictures, when uncompressed, are represented as a <strong>bitmap</strong>.</li>
+        <li><div class="pt-dot"></div>A bitmap is a <strong>grid of pixels</strong>.</li>
+        <li><div class="pt-dot"></div>Input can be digitally scanned photographs/pictures or images directly from a digital camera.</li>
+        <li><div class="pt-dot"></div>Compression is commonly applied because image size increases quickly.</li>
       </ul>
 
-      <div class="key-box">
-        <div class="key-label">🔑 Jitter Definition</div>
-        <strong>Jitter</strong> = the variability of packet delays within the same packet stream. Isochronous
-        transmission is designed specifically to <strong>eliminate jitter</strong>.
+      <table class="data-table" style="margin-top:16px">
+        <thead>
+          <tr><th>Image Type</th><th>Bits per Pixel</th><th>Meaning</th><th>Arabic</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="highlight">Black and White</td><td>1 bit/pixel</td><td>Two values only</td><td class="muted">أبيض وأسود</td></tr>
+          <tr><td class="highlight">Grey Scale / Colour Map</td><td>8 bits/pixel</td><td>256 possible values</td><td class="muted">رمادي / خريطة ألوان</td></tr>
+          <tr><td class="highlight">True Colour</td><td>24 bits/pixel</td><td>High-quality colour image</td><td class="muted">ألوان حقيقية</td></tr>
+        </tbody>
+      </table>
+
+      <div class="formula-box">
+        <span class="code-label">📐 Related Formula</span>
+        Image Size (bytes) = Width × Height × Bits per Pixel ÷ 8
       </div>
 
-      <div class="warn-box">
-        <strong>⚠️ Isochronous vs Synchronous:</strong><br>
-        Synchronous specifies only <strong>maximum</strong> delay. Isochronous specifies <strong>both maximum AND
-          minimum</strong> delay — guaranteeing a steady, predictable bit flow.
-      </div>
-
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        النقل المتزامن المعزول (Isochronous): مصمم لتوفير تدفق بتات <strong>ثابت ومنتظم</strong> للوسائط المتعددة.<br>
-        يحل مشكلة الـ <strong>Jitter</strong> (تفاوت التأخير) الذي يسبب "فرقعات" في الصوت أو تجمد الفيديو.<br>
-        يحدد <strong>كلاً من الحد الأدنى والأقصى للتأخير</strong> — على عكس المتزامن الذي يحدد الأقصى فقط.<br>
-        التوقيت يُستخرَج من تحولات البيانات نفسها (لا يحتاج مصدر ساعة خارجي).<br>
-        <strong>تطبيقات:</strong> USB، ISOEthernet، التطبيقات العسكرية الآمنة.
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Comparison: Async vs Sync vs Isochronous <span class="ar">مقارنة شاملة للثلاثة
-          أنواع</span></div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Feature</th>
-              <th>Asynchronous</th>
-              <th>Synchronous</th>
-              <th>Isochronous</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Start/Stop bits</td>
-              <td class="g">Yes — per packet</td>
-              <td class="r">No</td>
-              <td class="r">No</td>
-            </tr>
-            <tr>
-              <td>Common clock</td>
-              <td class="g">Not needed</td>
-              <td class="r">Required</td>
-              <td>Self-clocking (from data)</td>
-            </tr>
-            <tr>
-              <td>Timing guarantee</td>
-              <td class="r">None — arbitrary delay</td>
-              <td>Max delay specified</td>
-              <td class="g">Both min &amp; max delay specified</td>
-            </tr>
-            <tr>
-              <td>Jitter</td>
-              <td class="r">Variable (possible)</td>
-              <td>Reduced</td>
-              <td class="g">Eliminated (guaranteed)</td>
-            </tr>
-            <tr>
-              <td>Speed</td>
-              <td class="r">Slower (overhead)</td>
-              <td class="g">Fast</td>
-              <td class="g">Fast &amp; steady</td>
-            </tr>
-            <tr>
-              <td>Cost/Complexity</td>
-              <td class="g">Cheap &amp; simple</td>
-              <td>Medium</td>
-              <td>Complex</td>
-            </tr>
-            <tr>
-              <td>Buffer needed?</td>
-              <td class="r">If no memory → drop</td>
-              <td class="g">Yes — handles reordering</td>
-              <td>Minimal</td>
-            </tr>
-            <tr>
-              <td>Best for</td>
-              <td>Keyboard, mouse, chat</td>
-              <td>Large data streams, networks</td>
-              <td>Audio, video, USB, multimedia</td>
-            </tr>
-            <tr>
-              <td>Example</td>
-              <td>RS-232, keyboard</td>
-              <td>Ethernet frames, HDLC</td>
-              <td>USB isochronous, ISOEthernet</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic — ملخص المقارنة</div>
-        • <strong>غير متزامن (Async):</strong> بتات بداية/نهاية، لا ساعة مشتركة، أبطأ، للبيانات المتقطعة (كيبورد،
-        فأرة).<br>
-        • <strong>متزامن (Sync):</strong> بدون بتات إطار، يحتاج ساعة مشتركة، سريع، يحدد أقصى تأخير، للبيانات
-        الكبيرة.<br>
-        • <strong>متزامن معزول (Isochronous):</strong> تدفق ثابت، لا جيتر، يحدد أدنى وأقصى تأخير، مثالي للوسائط
-        المتعددة.
-      </div>
-    </div>
-
-    <!-- ════════════════════════════
-       §7  TIME & WIDTH DISTRIBUTION
-  ════════════════════════════ -->
-    <div id="distribution" class="sec-header">
-      <div class="sec-num">7</div>
-      <div class="sec-text">
-        <h3>Time Distribution &amp; Width Distribution</h3>
-        <div class="ar">التوزيع الزمني وتوزيع العرض — تدفقات الفيديو</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Time Distribution — How Data Arrives Over Time <span class="ar">كيف تتوزع البيانات عبر
-          الزمن</span></div>
-      <div class="cmp-grid">
-        <div class="cmp-card green">
-          <div class="cmp-title">📦 Constant Rate (Uncompressed)</div>
-          <p>E.g., <strong>uncompressed video</strong>. Same amount of data arrives at every time interval. Predictable
-            but large bandwidth needed.</p>
-        </div>
-        <div class="cmp-card orange">
-          <div class="cmp-title">📦📦📦 Variable Rate (Compressed IBP)</div>
-          <p>E.g., <strong>compressed video stream (IBP)</strong>. I-frames are large, P &amp; B frames are smaller.
-            Data rate varies.</p>
-        </div>
-        <div class="cmp-card teal">
-          <div class="cmp-title">📊 Difference-only Stream</div>
-          <p>Only changes between frames are transmitted. Very sparse when little motion occurs. Most efficient.</p>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:14px;border-color:rgba(251,191,36,.2)">
-        <div class="card-title" style="color:var(--gold)">IPB Video Compression Explained <span class="ar">ضغط الفيديو
-            بأنواع الإطارات</span></div>
-        <p><strong>IPB</strong> stands for <strong>I-frame, P-frame, and B-frame</strong> — a video compression method
-          that balances file size with quality:</p>
-        <div class="cmp-grid">
-          <div class="mini-card" style="border-top:2px solid var(--accent)">
-            <div class="mc-title">I-frame (Intra-frame)</div>
-            <p>Complete, self-contained image. Largest size. A reference point — can be decoded without any other frame.
-            </p>
-          </div>
-          <div class="mini-card" style="border-top:2px solid var(--accent2)">
-            <div class="mc-title">P-frame (Predictive)</div>
-            <p>Stores only differences from the previous I or P frame. Smaller than I-frames.</p>
-          </div>
-          <div class="mini-card" style="border-top:2px solid var(--purple)">
-            <div class="mc-title">B-frame (Bi-directional)</div>
-            <p>References both past and future frames. Smallest size. Most compression efficiency.</p>
-          </div>
-        </div>
-        <div class="ar-box">
-          <div class="ar-label">Arabic</div>
-          ضغط الفيديو بنظام IPB:<br>
-          <strong>I-frame:</strong> صورة كاملة مستقلة (مثل صورة JPEG) — الأكبر حجماً، نقطة مرجعية.<br>
-          <strong>P-frame:</strong> يخزن الفروق عن الإطار السابق فقط — أصغر من I-frame.<br>
-          <strong>B-frame:</strong> يخزن الفروق بين الإطار السابق والقادم — الأصغر والأكثر كفاءة.<br>
-          النتيجة: تدفق بيانات <strong>متغير الحجم (VBR)</strong> — I كبير، P وB صغيران.
-        </div>
-      </div>
-
-      <div class="card-title" style="margin-top:20px">Width Distribution <span class="ar">توزيع عرض الحزم</span></div>
-      <div class="g2">
-        <div class="mini-card">
-          <div class="mc-title" style="color:var(--accent)">CBR — Constant Bit Rate</div>
-          <p>All packets are the same size. Predictable. Used in uncompressed streams or when network needs fixed
-            allocation.</p>
-        </div>
-        <div class="mini-card">
-          <div class="mc-title" style="color:var(--accent2)">VBR — Variable Bit Rate</div>
-          <p>Packets vary in size. More efficient — allocates more bits to complex scenes, fewer to simple ones. Used in
-            compressed video (IBP).</p>
-        </div>
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        <strong>CBR (معدل بت ثابت):</strong> حزم متساوية الحجم دائماً — يسهل التخطيط للشبكة ولكن أقل كفاءة.<br>
-        <strong>VBR (معدل بت متغير):</strong> حجم الحزم يتغير حسب تعقيد المحتوى — أكثر كفاءة وضغطاً، يُستخدم في فيديو
-        IBP.
-      </div>
-    </div>
-
-    <!-- ════════════════════════════
-       §8  LDUs
-  ════════════════════════════ -->
-    <div id="ldus" class="sec-header">
-      <div class="sec-num">8</div>
-      <div class="sec-text">
-        <h3>Logical Data Units (LDUs)</h3>
-        <div class="ar">وحدات البيانات المنطقية</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">LDUs — The Building Blocks of Continuous Media <span class="ar">وحدات البيانات
-          المنطقية</span></div>
-      <div class="highlight">
-        <strong>Definition:</strong> Continuous media consist of a time-dependent sequence of individual information
-        units called <strong>Logical Data Units (LDUs)</strong>.
-      </div>
-      <ul>
-        <li>In multimedia, <strong>continuous media (audio and video)</strong> are defined by time dependency.</li>
-        <li>Information is conveyed not only by its <strong>individual value</strong> but also by the <strong>time of
-            its occurrence</strong>.</li>
-        <li>These media are internally represented and processed as a sequence of discrete LDUs for:
-          <ul>
-            <li><strong>Storage</strong></li>
-            <li><strong>Transmission</strong> (often in packets)</li>
-            <li><strong>Presentation</strong></li>
+      <div class="two-col" style="margin-top:14px">
+        <div class="col-card cyan-card">
+          <div class="col-card-title">📏 Examples from Slides</div>
+          <ul class="points">
+            <li><div class="pt-dot"></div>512 × 512 Grey Scale image, 8-bit → <strong>1/4 MB</strong></li>
+            <li><div class="pt-dot"></div>512 × 512 True Colour image, 24-bit → <strong>3/4 MB</strong></li>
+            <li><div class="pt-dot"></div>Modern high digital camera, 10+ Megapixels → <strong>29 MB uncompressed</strong></li>
           </ul>
-        </li>
+        </div>
+        <div class="col-card gold-card">
+          <div class="col-card-title">🗜️ Compression</div>
+          <ul class="points">
+            <li><div class="pt-dot"></div>Uncompressed images need large storage space.</li>
+            <li><div class="pt-dot"></div>Compression reduces the file size.</li>
+            <li><div class="pt-dot"></div>Compression is commonly applied to images.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div id="audio">
+    <div class="sec-header">
+      <div class="sec-number">03</div>
+      <div class="sec-titles">
+        <h3>Audio</h3>
+        <div class="ar">الصوت</div>
+      </div>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><div class="card-title-icon">🔊</div> Digital Audio <span class="ar">الصوت الرقمي</span></div>
+      <div class="ar-box"><div class="ar-label">Arabic</div>الصوت إشارة تماثلية مستمرة، ويتم إدخاله بواسطة الميكروفون ثم تحويله وتخزينه رقمياً.</div>
+
+      <ul class="points">
+        <li><div class="pt-dot"></div>Audio signals are <strong>continuous analog signals</strong>.</li>
+        <li><div class="pt-dot"></div>Input is captured using microphones, then digitised and stored.</li>
+        <li><div class="pt-dot"></div>CD Quality Audio requires <strong>16-bit sampling at 44.1 kHz</strong>.</li>
+        <li><div class="pt-dot"></div>Higher audiophile rates can be used, such as <strong>24-bit, 96 kHz</strong>.</li>
+        <li><div class="pt-dot"></div>Audio is usually compressed, for example using <strong>MP3</strong>.</li>
       </ul>
-      <div class="formula">
-        <div class="fl">LDU Examples by Media Type</div>Audio → LDU = one audio sample or frame (e.g., 1/44100 second)
-        Video → LDU = one video frame (e.g., 1/25 second)
-        Text → LDU = one character or word (time-independent)
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        وحدة البيانات المنطقية (LDU): الوحدة الأساسية للوسائط المستمرة. الوسائط المستمرة تُعرَّف بتسلسل زمني من
-        LDUs.<br>
-        المعنى لا يُستمَد من القيمة فقط، بل من <strong>قيمة + توقيت الحدوث</strong> معاً.<br>
-        في العملية: تُخزَّن وتُنقَل وتُعرَض كسلسلة من LDUs منفصلة.<br>
-        مثال: في الصوت → كل عينة صوتية = LDU. في الفيديو → كل إطار = LDU.
+
+      <table class="data-table" style="margin-top:16px">
+        <thead>
+          <tr><th>Audio Type</th><th>Uncompressed Size</th><th>Arabic</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="highlight">1 minute Mono CD quality</td><td><strong>5 MB</strong></td><td class="muted">دقيقة مونو = 5 ميغا</td></tr>
+          <tr><td class="highlight">1 minute Stereo CD quality</td><td><strong>10 MB</strong></td><td class="muted">دقيقة ستيريو = 10 ميغا</td></tr>
+        </tbody>
+      </table>
+
+      <div class="formula-box">
+        <span class="code-label">📐 Related Formula</span>
+        Audio Size = Sampling Rate × Bit Depth × Channels × Duration (seconds) ÷ 8
       </div>
     </div>
+  </div>
 
-    <!-- ════════════════════════════
-       §9  MM NETWORKING
-  ════════════════════════════ -->
-    <div id="networking" class="sec-header">
-      <div class="sec-num">9</div>
-      <div class="sec-text">
-        <h3>Multimedia Networking Applications</h3>
-        <div class="ar">تطبيقات شبكات الوسائط المتعددة</div>
-      </div>
-    </div>
+  <!-- REVIEW -->
+  <div id="review" class="review-section">
+    <div class="review-title">📋 Quick Review — PowerPoint Topics Only <span style="font-family:Cairo,sans-serif;color:var(--gold);font-size:.9rem;font-weight:700">مراجعة سريعة</span></div>
+    <table class="review-table">
+      <thead>
+        <tr><th>Topic</th><th>English</th><th>Detail</th><th>العربي</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>COMPONENTS</td><td>Multimedia System Components</td><td>Capture, storage, communication networks, computer systems, display devices</td><td>أجهزة التقاط، تخزين، شبكات، حواسيب، عرض</td></tr>
+        <tr><td>BITMAP</td><td>Bitmap Image</td><td>Still image represented as a grid of pixels</td><td>صورة ثابتة ممثلة كبكسلات</td></tr>
+        <tr><td>1 BIT</td><td>Black and White</td><td>1 bit per pixel</td><td>أبيض وأسود</td></tr>
+        <tr><td>8 BIT</td><td>Grey Scale / Colour Map</td><td>8 bits per pixel</td><td>رمادي أو خريطة ألوان</td></tr>
+        <tr><td>24 BIT</td><td>True Colour</td><td>24 bits per pixel</td><td>ألوان حقيقية</td></tr>
+        <tr><td>AUDIO</td><td>Analog Signal</td><td>Audio signals are continuous analog signals</td><td>الصوت إشارة تماثلية مستمرة</td></tr>
+        <tr><td>CD AUDIO</td><td>CD Quality Audio</td><td>16-bit sampling at 44.1 kHz</td><td>16 بت عند 44.1 كيلوهرتز</td></tr>
+        <tr><td>MONO</td><td>Mono CD Quality</td><td>1 minute uncompressed = 5 MB</td><td>دقيقة واحدة = 5 ميغا</td></tr>
+        <tr><td>STEREO</td><td>Stereo CD Quality</td><td>1 minute uncompressed = 10 MB</td><td>دقيقة واحدة = 10 ميغا</td></tr>
+        <tr><td>MP3</td><td>Compression</td><td>Audio is usually compressed, e.g. MP3</td><td>الصوت غالباً يُضغط مثل MP3</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-    <div class="card">
-      <div class="card-title">Classes of Multimedia Applications <span class="ar">فئات تطبيقات الوسائط المتعددة</span>
+  <!-- EXAM Q&A -->
+  <div id="exam">
+    <div class="sec-header" style="margin-top:60px">
+      <div class="sec-number">📝</div>
+      <div class="sec-titles">
+        <h3>Related Exam Questions & Answers</h3>
+        <div class="ar">أسئلة مرتبطة بمواضيع السلايدات فقط</div>
       </div>
-      <div class="cmp-grid">
-        <div class="cmp-card green">
-          <div class="cmp-title">📼 Streaming Stored Audio/Video</div>
-          <p>Pre-recorded media stored on server → transmitted to client on demand.</p>
-          <p style="margin-top:8px"><strong>Examples:</strong> YouTube, Netflix, Spotify</p>
-          <p style="margin-top:6px;font-size:12px;color:var(--muted)">VCR-like controls: pause, rewind, FF</p>
-        </div>
-        <div class="cmp-card orange">
-          <div class="cmp-title">📡 Streaming Live Audio/Video</div>
-          <p>Live media captured and transmitted in real-time to multiple clients.</p>
-          <p style="margin-top:8px"><strong>Examples:</strong> Live TV, live sports, web radio</p>
-        </div>
-        <div class="cmp-card purple">
-          <div class="cmp-title">📞 Real-time Interactive A/V</div>
-          <p>Two-way real-time communication — both parties send &amp; receive simultaneously.</p>
-          <p style="margin-top:8px"><strong>Examples:</strong> IP telephony (VoIP), video conferencing, Zoom</p>
-        </div>
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        ثلاث فئات رئيسية لتطبيقات الوسائط المتعددة على الشبكات:<br>
-        <strong>① بث مخزون:</strong> ملفات مسجلة مسبقاً على الخادم → تُبَثّ عند الطلب (يوتيوب، نتفليكس).<br>
-        <strong>② بث مباشر:</strong> تصوير وإرسال فوري لجمهور كبير (البث التلفزيوني المباشر).<br>
-        <strong>③ تفاعلي لحظي:</strong> اتصال ثنائي الاتجاه في الوقت الفعلي (مكالمات VoIP، Zoom).
-      </div>
+      <div class="sec-line"></div>
     </div>
 
     <div class="card">
-      <div class="card-title">Fundamental Characteristics of MM Networking <span class="ar">الخصائص الأساسية لشبكات
-          الوسائط</span></div>
-      <div class="g2">
-        <div>
-          <p><strong>Delay-sensitive characteristics:</strong></p>
-          <ul>
-            <li><strong>Inherent frame rate</strong> — media has a natural playback rate that must be maintained.</li>
-            <li><strong>End-to-end delay</strong> — total time from sender to receiver.</li>
-            <li><strong>Delay jitter</strong> — variation in delay. <em>Must be minimised for smooth playback.</em></li>
-          </ul>
-        </div>
-        <div>
-          <p><strong>Loss-tolerant characteristics:</strong></p>
-          <ul>
-            <li>MM apps are <strong>loss-tolerant</strong> — infrequent losses cause only minor, transient glitches.
-            </li>
-            <li>Unlike data apps which are <strong>delay-tolerant but loss-sensitive</strong> (a missing file byte
-              corrupts data).</li>
-          </ul>
-        </div>
-      </div>
-      <div class="key-box">
-        <div class="key-label">🔑 Key Trade-off</div>
-        <strong>Multimedia:</strong> delay-sensitive + loss-tolerant &nbsp;&nbsp;|&nbsp;&nbsp; <strong>Data
-          (files):</strong> delay-tolerant + loss-sensitive
-      </div>
-      <div class="formula">
-        <div class="fl">Real-time Audio Delay Requirements</div>Audio end-to-end delay:
-        < 150 ms → GOOD (users don't notice) < 400 ms → ACCEPTABLE (slight noticeable delay)> 400 ms → POOR
-          (conversation feels awkward)
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        الوسائط المتعددة على الشبكات لها طبيعة خاصة:<br>
-        <strong>حساسة للتأخير (Delay-sensitive):</strong> التأخير الزائد يدمر تجربة المستخدم (الصوت يتقطع، الفيديو
-        يتجمد).<br>
-        <strong>متسامحة مع الفقدان (Loss-tolerant):</strong> فقدان حزمة واحدة بين الحين والآخر يُحدِث تشويشاً بسيطاً لكن
-        لا يكسر التطبيق.<br>
-        <strong>عكس تطبيقات البيانات:</strong> تحميل ملف يتسامح مع التأخير لكن يتحسس من أي فقدان في البيانات.<br>
-        التأخير للصوت: أقل من 150ms ممتاز، أقل من 400ms مقبول، أكثر من 400ms سيئ.
-      </div>
-    </div>
-
-    <!-- ════════════════════════════
-       §10  STREAMING
-  ════════════════════════════ -->
-    <div id="streaming" class="sec-header">
-      <div class="sec-num">10</div>
-      <div class="sec-text">
-        <h3>Streaming — Concepts &amp; Challenges</h3>
-        <div class="ar">البث — المفاهيم والتحديات</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">What is Streaming? <span class="ar">ما هو البث؟</span></div>
-      <div class="highlight">
-        <strong>Streaming definition:</strong> Media stored at source is transmitted to the client. The key property —
-        <strong>client playout begins before all data has arrived</strong>.
-      </div>
-      <div class="flow">
-        <div class="fbox a">1. Video<br>Recorded</div>
-        <div class="arrow">→</div>
-        <div class="fbox o">2. Video<br>Sent (server)</div>
-        <div class="arrow">→</div>
-        <div class="fbox y">3. Network<br>Delay</div>
-        <div class="arrow">→</div>
-        <div class="fbox t">4. Video received<br>&amp; played out</div>
-      </div>
-      <p style="margin-top:10px;font-size:13px;color:var(--muted)"><em>Client plays early part of video while server is
-          still sending later parts — this is the fundamental streaming concept.</em></p>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        البث (Streaming): الوسيط محفوظ على الخادم ويُرسَل للعميل تدريجياً. المبدأ الأساسي: <strong>العميل يبدأ التشغيل
-          قبل وصول كل البيانات</strong>.<br>
-        مثال: تشغيل يوتيوب — المشاهد يشاهد الدقيقة الأولى بينما الخادم لا يزال يرسل الدقيقة العاشرة.
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Challenges in Streaming Stored Video <span class="ar">تحديات بث الفيديو المخزون</span>
-      </div>
-      <ul>
-        <li><strong>Variable bandwidth</strong> — server-to-client bandwidth varies over time due to congestion in
-          different parts of the network (home, access network, internet core, video server).</li>
-        <li><strong>Packet loss and delay</strong> — congestion causes delayed playout or poor video quality.</li>
-        <li><strong>Different client capabilities</strong> — some clients have 28.8 Kbps dialup, others 100 Mbps
-          Ethernet.</li>
-      </ul>
-      <div class="highlight">
-        <strong>Solution for different rates:</strong> Server stores and transmits <strong>multiple copies of video
-          encoded at different rates</strong>.<br>
-        Modern systems use <strong>Adaptive Bitrate Streaming (ABR)</strong> — the client automatically switches to the
-        appropriate quality level.
-      </div>
-      <div class="g2">
-        <div class="mini-card">
-          <div class="mc-title" style="color:var(--accent)">VCR-like Controls (Stored Video)</div>
-          <ul>
-            <li>Pause, Rewind, Fast Forward ✓</li>
-            <li>Push slider bar ✓</li>
-            <li>10-second initial delay → OK</li>
-            <li>1–2 second command response → OK</li>
-          </ul>
-        </div>
-        <div class="mini-card">
-          <div class="mc-title" style="color:var(--accent2)">Adaptive Streaming</div>
-          <ul>
-            <li>Multiple quality versions on server</li>
-            <li>Client detects current bandwidth</li>
-            <li>Requests appropriate quality</li>
-            <li>Switches in real-time (ABR)</li>
-          </ul>
-        </div>
-      </div>
-      <div class="ar-box">
-        <div class="ar-label">Arabic</div>
-        <strong>تحديات بث الفيديو:</strong><br>
-        ① تغيُّر عرض النطاق الترددي بسبب ازدحام الشبكة في أي نقطة (المنزل، الإنترنت، الخادم).<br>
-        ② فقدان الحزم والتأخير يؤدي لتشويش أو توقف التشغيل.<br>
-        ③ اختلاف قدرات العملاء — ديال-آب 28.8 Kbps مقابل إيثرنت 100 Mbps.<br>
-        <strong>الحلول:</strong> الخادم يخزن نسخاً متعددة بجودات مختلفة. البث التكيفي (ABR) يختار الجودة المناسبة
-        تلقائياً. الفيديو المخزون يدعم VCR controls (إيقاف، إرجاع، تقديم).
-      </div>
-    </div>
-
-    <hr class="div">
-
-    <!-- ════════════════════════════
-       §11  REVIEW TABLE
-  ════════════════════════════ -->
-    <div id="review" class="section-header" style="display:flex;align-items:flex-start;gap:16px;margin:44px 0 16px">
-      <div class="sec-num">11</div>
-      <div class="sec-text">
-        <h3>Quick Review Table — Everything in One Place</h3>
-        <div class="ar" style="font-family:Cairo,sans-serif;font-size:.85rem;color:var(--gold);direction:rtl">جدول
-          المراجعة السريعة — كل شيء في مكان واحد</div>
-      </div>
-    </div>
-
-    <div class="quick-ref">
-      <h2>📋 Complete Review Table</h2>
-      <span class="ar-h">مراجعة شاملة لجميع مفاهيم الفصل</span>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Concept</th>
-              <th>Definition / Key Facts</th>
-              <th>Example</th>
-              <th>Arabic — بالعربي</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Multimedia System</td>
-              <td>Integrates multiple media types: text, graphics, images, audio, video</td>
-              <td>YouTube, Zoom</td>
-              <td>نظام يدمج أنواعاً متعددة من الوسائط</td>
-            </tr>
-            <tr>
-              <td>Graphics</td>
-              <td>Vector format — constructed from lines, curves, polygons. Editable.</td>
-              <td>Adobe Illustrator</td>
-              <td>رسوميات متجهة — قابلة للتحرير، حجم صغير</td>
-            </tr>
-            <tr>
-              <td>Images (Bitmap)</td>
-              <td>Grid of pixels. 1-bit B&W, 8-bit grey, 24-bit True Colour</td>
-              <td>JPEG photo</td>
-              <td>صور نقطية — 24 بت = 16.7M لون</td>
-            </tr>
-            <tr>
-              <td>Audio</td>
-              <td>Analog → digital. CD: 16-bit, 44.1 kHz. Mono=5MB/min, Stereo=10MB/min</td>
-              <td>MP3</td>
-              <td>صوت — 16 بت، 44.1 كيلوهرتز</td>
-            </tr>
-            <tr>
-              <td>Video</td>
-              <td>Series of frames. 25/30/50 fps. HD = ~112 MB/min uncompressed</td>
-              <td>MPEG4, H.264</td>
-              <td>فيديو = إطارات متتابعة — الأضخم حجماً</td>
-            </tr>
-            <tr>
-              <td>Static Media</td>
-              <td>Time-independent — text, images, graphics</td>
-              <td>A photo, a document</td>
-              <td>وسائط ثابتة — مستقلة عن الزمن</td>
-            </tr>
-            <tr>
-              <td>Continuous Media</td>
-              <td>Time-dependent — video, audio, animation</td>
-              <td>A song, a video</td>
-              <td>وسائط مستمرة — تعتمد على الزمن</td>
-            </tr>
-            <tr>
-              <td>LDU</td>
-              <td>Logical Data Unit — individual unit of continuous media</td>
-              <td>One video frame</td>
-              <td>وحدة البيانات المنطقية — أصغر وحدة</td>
-            </tr>
-            <tr>
-              <td>Parallel Transmission</td>
-              <td>Multiple bits simultaneously on multiple channels. Synchronous.</td>
-              <td>CPU data bus</td>
-              <td>عدة بتات في آنٍ واحد</td>
-            </tr>
-            <tr>
-              <td>Asynchronous Serial</td>
-              <td>Start/stop bits, no clock. Slow but simple. Sporadic data.</td>
-              <td>Keyboard, mouse</td>
-              <td>بتات بداية/نهاية، لا ساعة، للبيانات المتقطعة</td>
-            </tr>
-            <tr>
-              <td>Synchronous Serial</td>
-              <td>No start/stop, shared clock, max delay specified. Buffering.</td>
-              <td>Ethernet, USB</td>
-              <td>ساعة مشتركة، أسرع، يحدد أقصى تأخير</td>
-            </tr>
-            <tr>
-              <td>Isochronous</td>
-              <td>Steady bit flow. Both min+max delay. No jitter. Self-clocking.</td>
-              <td>USB audio, ISOEthernet</td>
-              <td>تدفق ثابت، لا جيتر، يحدد أدنى وأقصى تأخير</td>
-            </tr>
-            <tr>
-              <td>Jitter</td>
-              <td>Variability of packet delays within the same stream</td>
-              <td>Crackling audio</td>
-              <td>تفاوت التأخير — يُشوِّش الصوت والفيديو</td>
-            </tr>
-            <tr>
-              <td>I-frame</td>
-              <td>Intra-coded — full image, largest, reference frame</td>
-              <td>MPEG key frame</td>
-              <td>إطار كامل ومستقل — الأكبر حجماً</td>
-            </tr>
-            <tr>
-              <td>P-frame</td>
-              <td>Predictive — differences from previous frame</td>
-              <td>MPEG inter-frame</td>
-              <td>يخزن الفروق عن الإطار السابق</td>
-            </tr>
-            <tr>
-              <td>B-frame</td>
-              <td>Bi-directional — differences from prev+next frames, smallest</td>
-              <td>MPEG inter-frame</td>
-              <td>يرجع للماضي والمستقبل — الأصغر والأكفأ</td>
-            </tr>
-            <tr>
-              <td>Streaming</td>
-              <td>Client starts playback before all data received</td>
-              <td>YouTube buffering</td>
-              <td>التشغيل يبدأ قبل وصول كل البيانات</td>
-            </tr>
-            <tr>
-              <td>MM Apps: Classes</td>
-              <td>Streaming stored / Streaming live / Real-time interactive</td>
-              <td>Netflix / Live TV / Zoom</td>
-              <td>بث مخزون / مباشر / تفاعلي لحظي</td>
-            </tr>
-            <tr>
-              <td>Delay-sensitive</td>
-              <td>MM apps cannot tolerate high delay — playback breaks</td>
-              <td>VoIP > 400ms = bad</td>
-              <td>حساسة للتأخير — الكمون العالي يدمر التجربة</td>
-            </tr>
-            <tr>
-              <td>Loss-tolerant</td>
-              <td>MM apps can handle occasional packet loss gracefully</td>
-              <td>Glitch in video</td>
-              <td>تتسامح مع فقدان الحزم أحياناً</td>
-            </tr>
-            <tr>
-              <td>Adaptive Streaming</td>
-              <td>Server stores multiple bitrates; client selects best match</td>
-              <td>Netflix ABR</td>
-              <td>تغيير الجودة تلقائياً حسب الشبكة</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ════════════════════════════
-       §12  EXAM QUESTIONS
-  ════════════════════════════ -->
-    <div id="exam" class="sec-header">
-      <div class="sec-num">12</div>
-      <div class="sec-text">
-        <h3>Exam Questions — Solved &amp; MCQ</h3>
-        <div class="ar">أسئلة الامتحان — مفتوحة ومتعددة الاختيارات</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Short Answer &amp; Essay Questions <span class="ar">أسئلة الإجابة القصيرة</span></div>
+      <div class="card-title"><div class="card-title-icon">🎯</div> Long-Answer Questions <span class="ar">أسئلة مقالية</span></div>
 
       <div class="exam-q">
-        <div class="q-label">Q1 — Components</div>
-        List the five main hardware components required for a multimedia system with one example each.
-        <br><br>
-        <span class="answer">Answer:</span>
-        <ol style="margin-top:8px;padding-left:20px">
-          <li><strong>Capture devices</strong> — microphone, video camera</li>
-          <li><strong>Storage devices</strong> — hard disk, CD-ROM</li>
-          <li><strong>Communication networks</strong> — Internet, LAN</li>
-          <li><strong>Computer systems</strong> — workstation with DSP hardware</li>
-          <li><strong>Display devices</strong> — HDTV monitor, CD-quality speakers</li>
-        </ol>
-        <div class="ar-box">
-          <div class="ar-label">Arabic</div>خمسة مكونات: أجهزة الالتقاط (كاميرا، ميكروفون) + التخزين (هارد، CD) + شبكات
-          الاتصال (إنترنت) + أنظمة الحاسوب (محطات DSP) + أجهزة العرض (شاشات، مكبرات صوت).
-        </div>
-      </div>
-
-      <div class="exam-q">
-        <div class="q-label">Q2 — Audio Calculation</div>
-        Calculate the storage size of 3 minutes of stereo CD-quality audio, uncompressed.
+        <div class="q-label">Q1 — Multimedia Components</div>
+        List the hardware and software components required for a multimedia system.
         <br><br>
         <span class="answer">Answer:</span><br>
-        1 minute stereo CD quality = 10 MB<br>
-        3 minutes = <strong>30 MB</strong> uncompressed.
-        <div class="ar-box">
-          <div class="ar-label">Arabic</div>الستيريو CD = 10 ميجابايت/دقيقة. 3 دقائق = 10 × 3 = <strong>30
-            ميجابايت</strong>.
-        </div>
+        A multimedia system requires: <strong>Capture Devices</strong> such as video cameras, video recorders, microphones, keyboards, mice, graphics tablets, 3D input devices, tactile sensors, VR devices and digitizing hardware; <strong>Storage Devices</strong> such as hard disks, CD-ROMs and DVD-ROM; <strong>Communication Networks</strong> such as local networks, intranets, Internet and special high-speed multimedia networks; <strong>Computer Systems</strong> such as multimedia desktop machines, workstations and MPEG/VIDEO/DSP hardware; and <strong>Display Devices</strong> such as CD-quality speakers, HDTV, monitors and colour printers.
+        <div class="ar-box"><div class="ar-label">Arabic</div>المكونات: أجهزة التقاط + أجهزة تخزين + شبكات اتصال + أنظمة حاسوب + أجهزة عرض.</div>
       </div>
 
       <div class="exam-q">
-        <div class="q-label">Q3 — Image Calculation</div>
-        A 1024×768 True Colour (24-bit) image: what is its uncompressed size in MB?
+        <div class="q-label">Q2 — Bitmap Images</div>
+        Explain how still images are represented digitally.
         <br><br>
         <span class="answer">Answer:</span><br>
-        Size = 1024 × 768 × 24 bits = 18,874,368 bits = 18,874,368 / 8 bytes = 2,359,296 bytes = <strong>≈ 2.25
-          MB</strong>
-        <div class="ar-box">
-          <div class="ar-label">Arabic</div>الحجم = عرض × ارتفاع × bits/pixel = 1024 × 768 × 24 = 18,874,368 بت ÷ 8 =
-          2,359,296 بايت ≈ <strong>2.25 MB</strong>.
-        </div>
+        Still images, when uncompressed, are represented as a <strong>bitmap</strong>, which is a grid of pixels. Images can be input by digitally scanning photographs/pictures or directly from a digital camera. They may be stored using different colour depths such as 1 bit per pixel for black and white, 8 bits per pixel for grey scale or colour map, and 24 bits per pixel for true colour.
+        <div class="ar-box"><div class="ar-label">Arabic</div>الصورة الثابتة تُخزن كـ Bitmap، أي شبكة من البكسلات، ويمكن أن تكون 1-bit أو 8-bit أو 24-bit حسب عمق الألوان.</div>
       </div>
 
       <div class="exam-q">
-        <div class="q-label">Q4 — Transmission Types</div>
-        Explain the difference between asynchronous and synchronous serial transmission. When would you use each?
+        <div class="q-label">Q3 — Image Size</div>
+        Compare the size of a 512×512 grey scale image and a 512×512 true colour image.
         <br><br>
         <span class="answer">Answer:</span><br>
-        <strong>Asynchronous:</strong> Each packet framed with start/stop bits. No shared clock. Simple &amp; cheap.
-        Variable timing. Best for sporadic data (keyboard, mouse).<br>
-        <strong>Synchronous:</strong> Continuous stream, no per-character framing. Requires shared clock. Faster and
-        more efficient. Best for large continuous data (networks, streaming).
-        <div class="ar-box">
-          <div class="ar-label">Arabic</div><strong>Async:</strong> بتات بداية/نهاية، لا ساعة مشتركة، للبيانات المتقطعة
-          (كيبورد). <strong>Sync:</strong> ساعة مشتركة، بدون بتات إطار، أسرع، للبيانات الكبيرة.
-        </div>
+        A 512×512 grey scale image using 8 bits per pixel takes about <strong>1/4 MB</strong> without compression. A 512×512 true colour image using 24 bits per pixel takes about <strong>3/4 MB</strong> without compression. The true colour image is larger because each pixel uses more bits.
+        <div class="ar-box"><div class="ar-label">Arabic</div>512×512 رمادي = 1/4 ميغا، و512×512 ألوان حقيقية = 3/4 ميغا بدون ضغط؛ لأن الألوان الحقيقية تستخدم 24 بت لكل بكسل.</div>
       </div>
 
       <div class="exam-q">
-        <div class="q-label">Q5 — Isochronous</div>
-        What is isochronous transmission and why is it needed for multimedia?
+        <div class="q-label">Q4 — Audio</div>
+        What are the main characteristics of digital audio mentioned in the slides?
         <br><br>
         <span class="answer">Answer:</span><br>
-        Isochronous transmission provides a <strong>steady, guaranteed bit flow</strong> by specifying <strong>both
-          minimum and maximum delays</strong>. It is needed for multimedia because <strong>jitter</strong> (variation in
-        packet delay) causes pops in audio and freezing in video. Isochronous eliminates jitter, ensuring smooth,
-        continuous playback.
-        <div class="ar-box">
-          <div class="ar-label">Arabic</div>Isochronous يضمن تدفقاً ثابتاً بتحديد <strong>الحد الأدنى والأقصى
-            للتأخير</strong> معاً. ضروري لأن Jitter (تفاوت التأخير) يسبب تشويشاً في الصوت وتجمداً في الفيديو.
-        </div>
+        Audio signals are continuous analog signals. They are captured using microphones, then digitised and stored. CD quality audio requires <strong>16-bit sampling at 44.1 kHz</strong>. Higher rates such as 24-bit and 96 kHz can be used. Audio is usually compressed, for example using MP3.
+        <div class="ar-box"><div class="ar-label">Arabic</div>الصوت إشارة تماثلية مستمرة، يُدخل بالميكروفون ثم يحول ويخزن رقمياً. جودة CD = 16-bit عند 44.1 kHz، وغالباً يُضغط مثل MP3.</div>
       </div>
 
       <div class="exam-q">
-        <div class="q-label">Q6 — LDUs</div>
-        Define Logical Data Units (LDUs) and explain their role in continuous media.
+        <div class="q-label">Q5 — Audio Storage</div>
+        Calculate the storage required for 5 minutes of stereo CD-quality audio.
         <br><br>
         <span class="answer">Answer:</span><br>
-        LDUs are the <strong>individual information units</strong> that make up a continuous media stream. Continuous
-        media (audio/video) is defined by a time-dependent sequence of LDUs. The information is conveyed not only by
-        each unit's value but also by its <strong>time of occurrence</strong>. LDUs are used for storage, transmission
-        (as packets), and presentation.
-        <div class="ar-box">
-          <div class="ar-label">Arabic</div>LDU = وحدة المعلومات الفردية في الوسائط المستمرة. الوسائط المستمرة = تسلسل
-          زمني من LDUs. المعنى = القيمة + توقيت الحدوث معاً.
-        </div>
-      </div>
-
-      <div class="exam-q">
-        <div class="q-label">Q7 — Streaming Challenges</div>
-        What are the main challenges in streaming stored video over the Internet? How are they addressed?
-        <br><br>
-        <span class="answer">Answer:</span><br>
-        <strong>Challenges:</strong><br>
-        1. Variable bandwidth due to network congestion at different points.<br>
-        2. Packet loss and delay causing buffering/poor quality.<br>
-        3. Different client capabilities (dialup vs. broadband).<br>
-        <strong>Solutions:</strong> Server stores multiple encoded versions. Adaptive bitrate streaming (ABR) selects
-        the best quality for current conditions. Buffering provides tolerance for short delays.
-        <div class="ar-box">
-          <div class="ar-label">Arabic</div>التحديات: تغير عرض النطاق، فقدان الحزم، اختلاف قدرات العملاء. الحلول: تخزين
-          نسخ متعددة، البث التكيفي ABR، الـ buffer.
-        </div>
+        According to the slides, 1 minute of stereo CD-quality uncompressed audio requires <strong>10 MB</strong>. Therefore, 5 minutes require: <strong>5 × 10 MB = 50 MB</strong>.
+        <div class="ar-box"><div class="ar-label">Arabic</div>دقيقة واحدة ستيريو = 10 ميغا، إذن 5 دقائق = 5 × 10 = 50 ميغا.</div>
       </div>
     </div>
+  </div>
 
-    <!-- MCQ -->
+  <!-- MCQ -->
+  <div id="mcq">
+    <div class="sec-header" style="margin-top:60px">
+      <div class="sec-number">✅</div>
+      <div class="sec-titles">
+        <h3>MCQ — Related Practice</h3>
+        <div class="ar">أسئلة اختيار من متعدد مرتبطة بالسلايدات</div>
+      </div>
+      <div class="sec-line"></div>
+    </div>
+
     <div class="card">
-      <div class="card-title">MCQ — Multiple Choice Practice <span class="ar">أسئلة الاختيار من متعدد</span></div>
-
       <div class="exam-q mcq">
         <div class="q-label mcq">MCQ 1</div>
-        What is the storage size of 1 minute of STEREO CD-quality audio (uncompressed)?
+        Which of the following is a capture device?
         <ul class="mcq-opts">
-          <li>A) 1 MB</li>
-          <li>B) 5 MB</li>
-          <li class="correct">C) 10 MB ✓</li>
-          <li>D) 20 MB</li>
+          <li class="correct">A) Video Camera ✓</li><li>B) Hard disk</li><li>C) CD-ROM</li><li>D) Colour printer</li>
         </ul>
-        <div class="mcq-ans">✓ Answer: <span>C — Mono=5MB/min, Stereo=2×5=10MB/min.</span></div>
+        <div class="mcq-ans">✓ Answer: <span>A — Video camera is used to capture media input.</span></div>
       </div>
 
       <div class="exam-q mcq">
         <div class="q-label mcq">MCQ 2</div>
-        Which type of serial transmission specifies BOTH a minimum AND maximum delay?
+        Still pictures are represented, when uncompressed, as:
         <ul class="mcq-opts">
-          <li>A) Asynchronous</li>
-          <li>B) Synchronous</li>
-          <li class="correct">C) Isochronous ✓</li>
-          <li>D) Parallel</li>
+          <li>A) MP3</li><li class="correct">B) Bitmap ✓</li><li>C) Audio wave</li><li>D) MPEG stream</li>
         </ul>
-        <div class="mcq-ans">✓ Answer: <span>C — Isochronous specifies both min and max. Synchronous specifies only
-            max.</span></div>
+        <div class="mcq-ans">✓ Answer: <span>B — A bitmap is a grid of pixels.</span></div>
       </div>
 
       <div class="exam-q mcq">
         <div class="q-label mcq">MCQ 3</div>
-        Which is an example of STATIC / DISCRETE media?
+        True Colour images use how many bits per pixel?
         <ul class="mcq-opts">
-          <li>A) Audio recording</li>
-          <li>B) Video stream</li>
-          <li class="correct">C) A photograph ✓</li>
-          <li>D) Animation</li>
+          <li>A) 1 bit</li><li>B) 8 bits</li><li class="correct">C) 24 bits ✓</li><li>D) 44.1 bits</li>
         </ul>
-        <div class="mcq-ans">✓ Answer: <span>C — A photograph is time-independent → static media.</span></div>
+        <div class="mcq-ans">✓ Answer: <span>C — True Colour uses 24 bits per pixel.</span></div>
       </div>
 
       <div class="exam-q mcq">
         <div class="q-label mcq">MCQ 4</div>
-        In video compression (IPB), which frame type is the LARGEST in size?
+        What is the size of a 512×512 grey scale image according to the slides?
         <ul class="mcq-opts">
-          <li class="correct">A) I-frame ✓</li>
-          <li>B) P-frame</li>
-          <li>C) B-frame</li>
-          <li>D) All are equal</li>
+          <li>A) 1/8 MB</li><li class="correct">B) 1/4 MB ✓</li><li>C) 3/4 MB</li><li>D) 29 MB</li>
         </ul>
-        <div class="mcq-ans">✓ Answer: <span>A — I-frame (intra-coded) is a complete full image — largest. B-frame is
-            smallest.</span></div>
+        <div class="mcq-ans">✓ Answer: <span>B — 512×512 grey scale, 8-bit, takes 1/4 MB without compression.</span></div>
       </div>
 
       <div class="exam-q mcq">
         <div class="q-label mcq">MCQ 5</div>
-        Jitter is defined as:
+        CD Quality Audio requires:
         <ul class="mcq-opts">
-          <li>A) The total end-to-end delay of a packet</li>
-          <li>B) Packet loss rate in a network</li>
-          <li class="correct">C) The variability of packet delays within the same stream ✓</li>
-          <li>D) The minimum delay between two packets</li>
+          <li>A) 8-bit sampling at 22 kHz</li><li class="correct">B) 16-bit sampling at 44.1 kHz ✓</li><li>C) 24-bit sampling at 10 kHz</li><li>D) 1-bit sampling at 96 kHz</li>
         </ul>
-        <div class="mcq-ans">✓ Answer: <span>C — Jitter = variability of delay, not the delay itself.</span></div>
+        <div class="mcq-ans">✓ Answer: <span>B — CD quality audio = 16-bit at 44.1 kHz.</span></div>
       </div>
 
       <div class="exam-q mcq">
         <div class="q-label mcq">MCQ 6</div>
-        True Colour images use how many bits per pixel?
+        1 minute of stereo CD-quality uncompressed audio requires:
         <ul class="mcq-opts">
-          <li>A) 1 bit</li>
-          <li>B) 8 bits</li>
-          <li class="correct">C) 24 bits ✓</li>
-          <li>D) 32 bits</li>
+          <li>A) 1 MB</li><li>B) 5 MB</li><li class="correct">C) 10 MB ✓</li><li>D) 29 MB</li>
         </ul>
-        <div class="mcq-ans">✓ Answer: <span>C — 24-bit = 8R+8G+8B = 16,777,216 colours = True Colour.</span></div>
+        <div class="mcq-ans">✓ Answer: <span>C — Mono = 5 MB/min, Stereo = 10 MB/min.</span></div>
       </div>
 
       <div class="exam-q mcq">
         <div class="q-label mcq">MCQ 7</div>
-        Which transmission type uses start and stop bits?
+        Audio is usually compressed using formats such as:
         <ul class="mcq-opts">
-          <li class="correct">A) Asynchronous ✓</li>
-          <li>B) Synchronous</li>
-          <li>C) Isochronous</li>
-          <li>D) Parallel</li>
+          <li>A) Bitmap</li><li>B) CD-ROM</li><li class="correct">C) MP3 ✓</li><li>D) HDTV</li>
         </ul>
-        <div class="mcq-ans">✓ Answer: <span>A — Asynchronous uses start/stop bits to frame each packet.</span></div>
+        <div class="mcq-ans">✓ Answer: <span>C — MP3 is an example of audio compression.</span></div>
       </div>
-
-      <div class="exam-q mcq">
-        <div class="q-label mcq">MCQ 8</div>
-        Multimedia networking applications are described as:
-        <ul class="mcq-opts">
-          <li>A) Delay-tolerant and loss-tolerant</li>
-          <li>B) Delay-tolerant and loss-sensitive</li>
-          <li class="correct">C) Delay-sensitive and loss-tolerant ✓</li>
-          <li>D) Delay-sensitive and loss-sensitive</li>
-        </ul>
-        <div class="mcq-ans">✓ Answer: <span>C — MM apps can handle some packet loss but cannot tolerate high
-            delays.</span></div>
-      </div>
-
-      <div class="exam-q mcq">
-        <div class="q-label mcq">MCQ 9</div>
-        What is the CD-quality audio sampling rate?
-        <ul class="mcq-opts">
-          <li>A) 8 kHz</li>
-          <li>B) 22.05 kHz</li>
-          <li class="correct">C) 44.1 kHz ✓</li>
-          <li>D) 96 kHz</li>
-        </ul>
-        <div class="mcq-ans">✓ Answer: <span>C — CD quality = 16-bit samples at 44,100 Hz (44.1 kHz).</span></div>
-      </div>
-
-      <div class="exam-q mcq">
-        <div class="q-label mcq">MCQ 10</div>
-        The key characteristic of STREAMING is:
-        <ul class="mcq-opts">
-          <li>A) All data must be received before playback starts</li>
-          <li class="correct">B) Client playout begins before all data has arrived ✓</li>
-          <li>C) Data is transmitted in parallel channels</li>
-          <li>D) Only compressed data can be streamed</li>
-        </ul>
-        <div class="mcq-ans">✓ Answer: <span>B — Streaming's defining feature: play while downloading.</span></div>
-      </div>
-
-      <div class="exam-q mcq">
-        <div class="q-label mcq">MCQ 11</div>
-        What does LDU stand for?
-        <ul class="mcq-opts">
-          <li>A) Linear Data Unit</li>
-          <li class="correct">B) Logical Data Unit ✓</li>
-          <li>C) Latency Delay Unit</li>
-          <li>D) Layer Data Utility</li>
-        </ul>
-        <div class="mcq-ans">✓ Answer: <span>B — Logical Data Unit — individual units in a continuous media
-            stream.</span></div>
-      </div>
-
-      <div class="exam-q mcq">
-        <div class="q-label mcq">MCQ 12</div>
-        Asynchronous transmission is best suited for:
-        <ul class="mcq-opts">
-          <li>A) Video streaming</li>
-          <li>B) Large file transfers</li>
-          <li class="correct">C) Keyboard and mouse input ✓</li>
-          <li>D) VoIP phone calls</li>
-        </ul>
-        <div class="mcq-ans">✓ Answer: <span>C — Keyboard/mouse generate sporadic, irregular data → perfect for
-            async.</span></div>
-      </div>
-
     </div>
-
-    <p style="text-align:center;color:var(--muted);font-size:12px;margin-top:36px">
-      Chapter 2 — Multimedia Systems &amp; Data Transmission &nbsp;·&nbsp; Complete Final Exam Study Guide &nbsp;·&nbsp;
-      Good Luck! 🎯
-    </p>
-
   </div>
-</body>
 
+</div>
+
+<footer>
+  <div class="footer-logo"> CHAPTER 2</div>
+  
+</footer>
+
+</body>
 </html>
