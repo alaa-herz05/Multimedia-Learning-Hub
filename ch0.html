@@ -1,47 +1,48 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chapter 0 &mdash; Introduction to Multimedia</title>
+<title>Chapter 0 — Introduction to Multimedia</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --black:#000;--dark0:#030a05;--dark1:#060f08;--dark2:#0a150c;--dark3:#0e1c10;--dark4:#111f14;
-  --card:rgba(10,21,12,.8);--border:rgba(0,200,80,.18);
-  --accent:#00c850;--accent2:#00ff80;--dim:rgba(0,200,80,.1);
-  --gold:#c8e600;--amber:#ffbb00;--red:#ff5f6d;--purple:#a78bfa;
-  --text:#d0e8d4;--muted:#5a8a62;--muted2:#3d6b45;
-  --hl:rgba(0,200,80,.07);--ar-bg:rgba(200,230,0,.05);--ar-bdr:rgba(200,230,0,.28);
+  --white:#ffffff;--light0:#f4f9ff;--light1:#e8f4ff;--light2:#d6ebff;--light3:#c0dfff;
+  --card:rgba(255,255,255,.92);--border:rgba(0,160,220,.18);
+  --accent:#00a8e8;--accent2:#00d4ff;--dim:rgba(0,168,232,.1);
+  --gold:#f0a500;--amber:#ffbb00;--red:#ff5f6d;--purple:#a78bfa;
+  --text:#1a2e3b;--muted:#5a8a9e;--muted2:#8ab0c0;
+  --hl:rgba(0,168,232,.07);--ar-bg:rgba(0,168,232,.05);--ar-bdr:rgba(0,168,232,.28);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:Inter,Cairo,sans-serif;background:var(--black);color:var(--text);line-height:1.78;font-size:14.5px;overflow-x:hidden}
-b,strong{color:#e4f4e8}
+body{font-family:Inter,Cairo,sans-serif;background:var(--white);color:var(--text);line-height:1.78;font-size:14.5px;overflow-x:hidden}
+b,strong{color:#0d2233}
 ::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-track{background:var(--dark1)}
+::-webkit-scrollbar-track{background:var(--light1)}
 ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
 /* ── canvas ── */
 #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 /* ── nav ── */
-.top-nav{position:sticky;top:0;z-index:999;background:rgba(3,10,5,.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);padding:10px 20px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
-.top-nav a{text-decoration:none;color:var(--muted);border:1px solid rgba(0,200,80,.2);background:rgba(0,200,80,.04);padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;letter-spacing:.3px;transition:all .22s;white-space:nowrap}
-.top-nav a:hover,.top-nav a.active{color:var(--dark0);background:var(--accent);border-color:var(--accent);box-shadow:0 0 18px rgba(0,200,80,.5)}
+.top-nav{position:sticky;top:0;z-index:999;background:rgba(244,249,255,.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);padding:10px 20px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.top-nav a{text-decoration:none;color:var(--muted);border:1px solid rgba(0,168,232,.2);background:rgba(0,168,232,.04);padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;letter-spacing:.3px;transition:all .22s;white-space:nowrap}
+.top-nav a:hover,.top-nav a.active{color:#fff;background:var(--accent);border-color:var(--accent);box-shadow:0 0 18px rgba(0,168,232,.4)}
 /* ── hero ── */
 .hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 40px 70px;overflow:hidden;border-bottom:1px solid var(--border)}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(0,200,80,.15),transparent 70%),radial-gradient(ellipse 40% 35% at 85% 85%,rgba(0,255,100,.07),transparent 60%),radial-gradient(ellipse 30% 30% at 10% 70%,rgba(200,230,0,.05),transparent 60%);pointer-events:none}
-.hero::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,200,80,.012) 3px,rgba(0,200,80,.012) 4px);pointer-events:none}
-.hero-badge{position:relative;z-index:1;display:inline-flex;align-items:center;gap:9px;border:1px solid var(--accent);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;padding:7px 24px;border-radius:30px;margin-bottom:26px;background:rgba(0,200,80,.08);animation:fadeDown .8s ease both}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(0,168,232,.12),transparent 70%),radial-gradient(ellipse 40% 35% at 85% 85%,rgba(0,212,255,.07),transparent 60%),radial-gradient(ellipse 30% 30% at 10% 70%,rgba(0,130,200,.05),transparent 60%);pointer-events:none}
+.hero::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,168,232,.008) 3px,rgba(0,168,232,.008) 4px);pointer-events:none}
+.hero-badge{position:relative;z-index:1;display:inline-flex;align-items:center;gap:9px;border:1px solid var(--accent);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;padding:7px 24px;border-radius:30px;margin-bottom:26px;background:rgba(0,168,232,.08);animation:fadeDown .8s ease both}
 .dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;box-shadow:0 0 8px var(--accent)}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.5)}}
-.hero h1{position:relative;z-index:1;font-family:Syne,sans-serif;font-size:clamp(2.4rem,6vw,4.5rem);font-weight:800;color:#fff;letter-spacing:-2.5px;line-height:1.1;margin-bottom:10px;animation:fadeDown .9s ease .1s both;text-shadow:0 0 60px rgba(0,200,80,.3)}
+.hero h1{position:relative;z-index:1;font-family:Syne,sans-serif;font-size:clamp(2.4rem,6vw,4.5rem);font-weight:800;color:#0d2233;letter-spacing:-2.5px;line-height:1.1;margin-bottom:10px;animation:fadeDown .9s ease .1s both;text-shadow:0 0 60px rgba(0,168,232,.2)}
 .hero h1 span{color:var(--accent)}
 .hero .ar-title{position:relative;z-index:1;font-family:Cairo,sans-serif;font-size:1.1rem;color:var(--gold);direction:rtl;margin-bottom:18px;animation:fadeDown 1s ease .2s both}
 .hero p{position:relative;z-index:1;color:var(--muted);font-size:13.5px;max-width:580px;margin:0 auto 40px;animation:fadeDown 1s ease .3s both}
 .hero-stats{position:relative;z-index:1;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;animation:fadeDown 1s ease .4s both}
-.hstat{text-align:center;background:rgba(0,200,80,.07);border:1px solid rgba(0,200,80,.22);border-radius:12px;padding:16px 24px;min-width:115px;transition:transform .2s,box-shadow .2s}
-.hstat:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,200,80,.18)}
-.hstat .v{font-family:Syne,sans-serif;font-size:1.9rem;font-weight:800;color:var(--accent);display:block;text-shadow:0 0 20px rgba(0,200,80,.5)}
+.hstat{text-align:center;background:rgba(0,168,232,.07);border:1px solid rgba(0,168,232,.22);border-radius:12px;padding:16px 24px;min-width:115px;transition:transform .2s,box-shadow .2s}
+.hstat:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,168,232,.18)}
+.hstat .v{font-family:Syne,sans-serif;font-size:1.9rem;font-weight:800;color:var(--accent);display:block;text-shadow:0 0 20px rgba(0,168,232,.4)}
 .hstat .l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -50,39 +51,39 @@ b,strong{color:#e4f4e8}
 .container{max-width:1000px;margin:0 auto;padding:44px 24px 110px;position:relative;z-index:1}
 /* ── section header ── */
 .sec-hdr{display:flex;align-items:flex-start;gap:16px;margin:60px 0 22px;padding-bottom:18px;border-bottom:1px solid var(--border)}
-.sec-num{width:50px;height:50px;background:var(--accent);color:var(--dark0);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:Syne,sans-serif;font-weight:800;font-size:18px;flex-shrink:0;margin-top:3px;box-shadow:0 0 24px rgba(0,200,80,.45)}
-.sec-info h2{font-family:Syne,sans-serif;font-size:1.45rem;font-weight:800;color:#fff;letter-spacing:-.5px}
+.sec-num{width:50px;height:50px;background:var(--accent);color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:Syne,sans-serif;font-weight:800;font-size:18px;flex-shrink:0;margin-top:3px;box-shadow:0 0 24px rgba(0,168,232,.4)}
+.sec-info h2{font-family:Syne,sans-serif;font-size:1.45rem;font-weight:800;color:#0d2233;letter-spacing:-.5px}
 .sec-info .ar{font-family:Cairo,sans-serif;font-size:.9rem;color:var(--gold);direction:rtl;text-align:right;margin-top:2px}
 .sec-info .desc{font-size:12px;color:var(--muted);margin-top:4px}
 /* ── card ── */
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 26px;margin-bottom:16px;backdrop-filter:blur(6px);transition:border-color .25s,box-shadow .25s,transform .2s;position:relative;overflow:hidden}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 26px;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,168,232,.06);transition:border-color .25s,box-shadow .25s,transform .2s;position:relative;overflow:hidden}
 .card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);opacity:0;transition:opacity .25s;border-radius:3px 0 0 3px}
-.card:hover{border-color:rgba(0,200,80,.42);box-shadow:0 0 34px rgba(0,200,80,.1),inset 0 0 60px rgba(0,200,80,.03);transform:translateY(-3px)}
+.card:hover{border-color:rgba(0,168,232,.45);box-shadow:0 0 34px rgba(0,168,232,.1),0 4px 20px rgba(0,168,232,.08);transform:translateY(-3px)}
 .card:hover::before{opacity:1}
 .card-title{font-size:.95rem;font-weight:700;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.card-title::before{content:'&#9658;';color:var(--gold);font-size:11px;flex-shrink:0}
+.card-title::before{content:'▶';color:var(--gold);font-size:11px;flex-shrink:0}
 .card-title .ar{font-family:Cairo,sans-serif;font-size:.8rem;color:var(--gold);font-weight:600;direction:rtl}
 .card p,.card li{margin-bottom:5px}
 .card ul,.card ol{padding-left:22px}
 /* ── arabic box ── */
-.ar-box{background:var(--ar-bg);border:1px solid var(--ar-bdr);border-right:4px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 18px;margin-top:13px;direction:rtl;text-align:right;font-family:Cairo,sans-serif;font-size:13.5px;color:#b8d4bc;line-height:2}
+.ar-box{background:var(--ar-bg);border:1px solid var(--ar-bdr);border-right:4px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 18px;margin-top:13px;direction:rtl;text-align:right;font-family:Cairo,sans-serif;font-size:13.5px;color:#2a4a5e;line-height:2}
 .ar-lbl{font-size:9px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;direction:ltr;text-align:left;font-family:Inter,sans-serif}
 /* ── hl / note ── */
-.hl{background:rgba(0,200,80,.07);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:13px 17px;margin:11px 0;font-size:13.5px}
-.hl-gold{background:rgba(200,230,0,.06);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:13px 17px;margin:11px 0;font-size:13.5px}
+.hl{background:rgba(0,168,232,.06);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:13px 17px;margin:11px 0;font-size:13.5px}
+.hl-gold{background:rgba(240,165,0,.06);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:13px 17px;margin:11px 0;font-size:13.5px}
 .note{background:rgba(255,95,109,.06);border:1px solid rgba(255,95,109,.25);border-radius:10px;padding:13px 17px;margin:11px 0;font-size:13.5px}
 .note-lbl{font-size:9px;font-weight:700;color:#ff8a94;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;font-family:Inter,sans-serif}
 .tip{background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.25);border-radius:10px;padding:13px 17px;margin:11px 0;font-size:13.5px}
 .tip-lbl{font-size:9px;font-weight:700;color:var(--purple);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;font-family:Inter,sans-serif}
 /* ── code ── */
-.code{background:rgba(0,0,0,.7);border:1px solid rgba(0,200,80,.2);border-radius:8px;padding:14px 18px;margin:11px 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#7dcf8c;direction:ltr;overflow-x:auto;white-space:pre;line-height:1.85}
+.code{background:rgba(230,242,252,.8);border:1px solid rgba(0,168,232,.2);border-radius:8px;padding:14px 18px;margin:11px 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#005f8a;direction:ltr;overflow-x:auto;white-space:pre;line-height:1.85}
 .code-lbl{font-size:9px;font-weight:700;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-family:Inter,sans-serif}
 /* ── table ── */
 .tw{overflow-x:auto;margin:14px 0}
 table{width:100%;border-collapse:collapse;font-size:13px}
-thead th{background:rgba(0,200,80,.1);color:var(--accent);padding:11px 15px;text-align:left;font-weight:700;font-size:11.5px;letter-spacing:.4px;border-bottom:1px solid var(--border);white-space:nowrap}
-tbody tr{border-bottom:1px solid rgba(0,200,80,.07)}
-tbody tr:hover{background:rgba(0,200,80,.05)}
+thead th{background:rgba(0,168,232,.1);color:var(--accent);padding:11px 15px;text-align:left;font-weight:700;font-size:11.5px;letter-spacing:.4px;border-bottom:1px solid var(--border);white-space:nowrap}
+tbody tr{border-bottom:1px solid rgba(0,168,232,.07)}
+tbody tr:hover{background:rgba(0,168,232,.04)}
 tbody td{padding:10px 15px;vertical-align:top}
 tbody td:first-child{font-weight:700;color:var(--gold);white-space:nowrap}
 /* ── grid ── */
@@ -91,14 +92,14 @@ tbody td:first-child{font-weight:700;color:var(--gold);white-space:nowrap}
 @media(max-width:640px){.g2,.g3{grid-template-columns:1fr}.hero h1{font-size:2rem}.container{padding:28px 14px 80px}.card{padding:16px}.sec-hdr{flex-direction:column}}
 /* ── flow ── */
 .flow{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;margin:14px 0;overflow-x:auto}
-.fbox{background:rgba(0,200,80,.08);border:1px solid rgba(0,200,80,.3);border-radius:9px;padding:9px 16px;font-size:12.5px;font-weight:700;text-align:center;white-space:nowrap;color:var(--accent)}
-.fbox.y{border-color:rgba(200,230,0,.35);color:var(--gold);background:rgba(200,230,0,.06)}
+.fbox{background:rgba(0,168,232,.08);border:1px solid rgba(0,168,232,.3);border-radius:9px;padding:9px 16px;font-size:12.5px;font-weight:700;text-align:center;white-space:nowrap;color:var(--accent)}
+.fbox.y{border-color:rgba(240,165,0,.35);color:var(--gold);background:rgba(240,165,0,.06)}
 .fbox.p{border-color:rgba(167,139,250,.35);color:var(--purple);background:rgba(167,139,250,.07)}
 .fbox.r{border-color:rgba(255,95,109,.35);color:var(--red);background:rgba(255,95,109,.07)}
 .arrow{color:var(--muted2);font-size:20px;padding:0 10px}
 /* ── tags ── */
-.tag{display:inline-block;border:1px solid rgba(0,200,80,.35);color:var(--accent);background:rgba(0,200,80,.09);border-radius:6px;padding:2px 10px;font-size:11px;font-weight:700;margin:2px}
-.tag.y{border-color:rgba(200,230,0,.35);color:var(--gold);background:rgba(200,230,0,.07)}
+.tag{display:inline-block;border:1px solid rgba(0,168,232,.35);color:var(--accent);background:rgba(0,168,232,.09);border-radius:6px;padding:2px 10px;font-size:11px;font-weight:700;margin:2px}
+.tag.y{border-color:rgba(240,165,0,.35);color:var(--gold);background:rgba(240,165,0,.07)}
 .tag.p{border-color:rgba(167,139,250,.3);color:var(--purple);background:rgba(167,139,250,.07)}
 .tag.r{border-color:rgba(255,95,109,.3);color:var(--red);background:rgba(255,95,109,.07)}
 /* ── colors ── */
@@ -110,7 +111,7 @@ hr.div{border:none;height:1px;background:linear-gradient(90deg,transparent,var(-
 .q-lbl{font-size:9px;font-weight:700;color:var(--purple);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;font-family:Inter,sans-serif}
 .ans{color:var(--accent);font-weight:700}
 /* ── final review ── */
-.final{background:linear-gradient(135deg,rgba(0,200,80,.06),rgba(0,0,0,.9));border:1px solid rgba(0,200,80,.4);border-radius:18px;padding:34px;margin-top:56px;box-shadow:0 0 60px rgba(0,200,80,.06)}
+.final{background:linear-gradient(135deg,rgba(0,168,232,.06),rgba(255,255,255,.9));border:1px solid rgba(0,168,232,.35);border-radius:18px;padding:34px;margin-top:56px;box-shadow:0 4px 30px rgba(0,168,232,.08)}
 .final h2{font-family:Syne,sans-serif;font-size:1.25rem;font-weight:800;color:var(--accent);margin-bottom:22px}
 .final h2 .ar{font-family:Cairo,sans-serif;font-size:.9rem;color:var(--gold);font-weight:600;direction:rtl;display:block;margin-top:4px}
 /* ── small ── */
@@ -121,30 +122,29 @@ small,.small{font-size:12px;color:var(--muted)}
 
 <canvas id="bg-canvas"></canvas>
 
-<!-- ══════════════════ HERO ══════════════════ -->
+<!-- HERO -->
 <div class="hero">
   <div class="hero-badge"><span class="dot"></span>COM 205 &mdash; Multimedia Applications &middot; Chapter 0</div>
   <h1>Introduction to <span>Multimedia</span></h1>
-  <div class="ar-title">الشابتر الصفر: مقدمة في الوسائط المتعددة &mdash; دليل الدراسة الشامل للفاينل</div>
-  <p>Full bilingual English + Arabic study guide &middot; All slides covered &middot; Examples, comparisons, and exam questions</p>
+  <div class="ar-title">الشابتر الصفر: مقدمة في الوسائط المتعددة &mdash; ملخص شامل</div>
+  <p>ملخص محتوى البوربوينت كامل &middot; إنجليزي + عربي &middot; أسئلة مراجعة</p>
   <div class="hero-stats">
-    <div class="hstat"><span class="v">40</span><span class="l">Slides</span></div>
+    <div class="hstat"><span class="v">18</span><span class="l">Slides</span></div>
     <div class="hstat"><span class="v">EN+AR</span><span class="l">Bilingual</span></div>
-    <div class="hstat"><span class="v">6</span><span class="l">Sections</span></div>
+    <div class="hstat"><span class="v">5</span><span class="l">Sections</span></div>
     <div class="hstat"><span class="v">100%</span><span class="l">Coverage</span></div>
   </div>
 </div>
 
-<!-- ══════════════════ NAV ══════════════════ -->
+<!-- NAV -->
 <nav class="top-nav">
   <a href="index.html" class="active">🏠 Home</a>
-  <a href="#s1">Definition &amp; Concepts</a>
-  <a href="#s2">WWW &amp; History</a>
-  <a href="#s3">HTML &amp; XML</a>
-  <a href="#s4">Components &amp; Types</a>
-  <a href="#s5">Applications</a>
-  <a href="#s6">VR &amp; Summary</a>
-  <a href="#review">&#x2714; Review Table</a>
+  <a href="#s1">HTTP, URI &amp; HTML</a>
+  <a href="#s2">Components &amp; Types</a>
+  <a href="#s3">Authoring &amp; Storage</a>
+  <a href="#s4">Applications</a>
+  <a href="#s5">Virtual Reality</a>
+  <a href="#review">&#x2714; Review</a>
   <a href="#exam">&#x1F4CB; Exam Q&amp;A</a>
 </nav>
 
@@ -154,125 +154,9 @@ small,.small{font-size:12px;color:var(--muted)}
 <div class="sec-hdr" id="s1">
   <div class="sec-num">1</div>
   <div class="sec-info">
-    <h2>Multimedia &mdash; Definition &amp; Core Concepts</h2>
-    <div class="ar">تعريف الوسائط المتعددة والمفاهيم الأساسية</div>
-    <div class="desc">Slides 1&ndash;8 &middot; What is multimedia, hypertext, hypermedia, WWW</div>
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-title">What Is Multimedia? <span class="ar">ما هي الوسائط المتعددة؟</span></div>
-  <p><strong>Multimedia</strong> means that computer information can be represented through <strong>audio, graphics, images, video, and animation</strong> in addition to traditional media (text).</p>
-  <p>The word comes from: <strong>Multi</strong> (= many, more than one) + <strong>Media</strong> (= the means by which something is communicated to the senses).</p>
-  <div class="g3" style="margin-top:14px">
-    <div class="hl" style="text-align:center"><strong>Sight</strong><br><span class="small">Images, Video, Text, Color</span></div>
-    <div class="hl" style="text-align:center"><strong>Hearing</strong><br><span class="small">Speech, Music, Sounds</span></div>
-    <div class="hl" style="text-align:center"><strong>Touch</strong><br><span class="small">Shape, Texture, Temperature</span></div>
-  </div>
-  <div class="ar-box">
-    <div class="ar-lbl">Arabic Explanation</div>
-    الوسائط المتعددة تعني استخدام الحاسوب لعرض المعلومات بأكثر من وسيلة في آنٍ واحد: النص والصوت والصورة والفيديو والرسوم المتحركة. الكلمة مكوّنة من: <strong>Multi</strong> = متعدد، <strong>Media</strong> = وسيلة اتصال. الهدف هو استثمار حواس الإنسان (البصر، السمع، اللمس) لتوصيل المعلومات بأسلوب أكثر تأثيراً وفاعلية من النص وحده.
-  </div>
-</div>
-
-<div class="g2">
-  <div class="card">
-    <div class="card-title">Hypertext <span class="ar">النص التشعبي</span></div>
-    <p>A system meant to be read <strong>non-linearly</strong>, by following links that point to other parts of the document, or to other documents entirely.</p>
-    <ul style="margin-top:8px">
-      <li><strong>Node:</strong> a unit containing text, graphics, or sounds</li>
-      <li><strong>Link:</strong> a connection between nodes</li>
-      <li><strong>Anchor:</strong> the reference point where a link starts</li>
-    </ul>
-    <div class="ar-box">
-      <div class="ar-lbl">Arabic</div>
-      النص التشعبي: نظام قراءة غير خطي عبر روابط. تضغط على رابط فينقلك لمكان آخر في الوثيقة أو لوثيقة مختلفة. مكوّن من: <strong>Node</strong> (عقدة تحوي المحتوى)، <strong>Link</strong> (الرابط)، <strong>Anchor</strong> (نقطة الانطلاق).
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-title">HyperMedia <span class="ar">الوسائط التشعبية</span></div>
-    <p>Hypermedia is <strong>not constrained to be text-based</strong>. It can include other media such as graphics, images, and especially continuous media like sound and video.</p>
-    <p>The <strong>World Wide Web (WWW)</strong> is the best and most famous example of a hypermedia application.</p>
-    <div class="hl">&#128073; Hypermedia = Hypertext + all other media types (images, audio, video) connected by links.</div>
-    <div class="ar-box">
-      <div class="ar-lbl">Arabic</div>
-      الوسائط التشعبية هي امتداد للنص التشعبي لتشمل جميع أنواع الوسائط (ليس النص فقط). مثال: الويب &mdash; تنقر على صورة فتفتح مقطع فيديو، أو تنقر على كلمة فتنتقل لصفحة أخرى كاملة.
-    </div>
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-title">Multimedia vs Hypermedia &mdash; Full Comparison <span class="ar">مقارنة شاملة</span></div>
-  <div class="tw"><table>
-    <thead><tr><th>Feature</th><th>Multimedia</th><th>Hypermedia</th></tr></thead>
-    <tbody>
-      <tr><td>Definition</td><td>Using computers to present multiple media types together</td><td>Non-linear media connected via hyperlinks</td></tr>
-      <tr><td>Navigation</td><td>May be linear or non-linear</td><td>Always non-linear via links</td></tr>
-      <tr><td>Includes</td><td>Text, graphics, images, audio, video, animation</td><td>All of the above + hyperlinks connecting everything</td></tr>
-      <tr><td>Best Example</td><td>CD-ROM encyclopedia, kiosk presentation</td><td>The World Wide Web</td></tr>
-      <tr><td>User Control</td><td>May or may not give user control</td><td>User always navigates freely via links</td></tr>
-    </tbody>
-  </table></div>
-  <div class="ar-box">
-    <div class="ar-lbl">Arabic</div>
-    الفرق الجوهري: <strong>Multimedia</strong> = دمج وسائط متعددة في مكان واحد (قد يكون خطياً). <strong>Hypermedia</strong> = وسائط متعددة مترابطة بروابط يتنقل بينها المستخدم بحرية (غير خطي دائماً). الويب = أفضل مثال على Hypermedia.
-  </div>
-</div>
-
-<hr class="div">
-
-<!-- ══════ SECTION 2 ══════ -->
-<div class="sec-hdr" id="s2">
-  <div class="sec-num">2</div>
-  <div class="sec-info">
-    <h2>The WWW &mdash; Goals &amp; History</h2>
-    <div class="ar">الشبكة العنكبوتية العالمية &mdash; الأهداف والتاريخ</div>
-    <div class="desc">Slides 9&ndash;17 &middot; W3C goals, timeline of WWW development</div>
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-title">W3C Goals for the WWW <span class="ar">أهداف W3C للويب</span></div>
-  <p>The <strong>World Wide Web Consortium (W3C)</strong> has listed the following goals:</p>
-  <ol style="margin-top:10px;padding-left:22px">
-    <li><strong>Universal access</strong> of web resources &mdash; by everyone, everywhere.</li>
-    <li><strong>Effectiveness</strong> of navigating available information.</li>
-    <li><strong>Responsible use</strong> of posted material.</li>
-  </ol>
-  <div class="ar-box">
-    <div class="ar-lbl">Arabic</div>
-    W3C (اتحاد الويب العالمي) هو المنظمة المسؤولة عن وضع معايير الويب. أهدافه الثلاثة: (1) الوصول الشامل للويب لكل شخص في كل مكان، (2) فاعلية التنقل بين المعلومات، (3) الاستخدام المسؤول للمحتوى المنشور.
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-title">History of the WWW &mdash; Timeline <span class="ar">التسلسل الزمني لتطور الويب</span></div>
-  <div class="tw"><table>
-    <thead><tr><th>Year</th><th>Event</th><th>Significance</th><th>بالعربي</th></tr></thead>
-    <tbody>
-      <tr><td>1960s</td><td>Generalized Markup Language (GML) developed for IBM</td><td>First markup language concept</td><td>أول لغة ترميز في التاريخ</td></tr>
-      <tr><td>1986</td><td>ISO released final version of SGML (Standard Generalized Markup Language)</td><td>International standard for markup</td><td>المعيار الدولي للترميز</td></tr>
-      <tr><td>1990</td><td>HTML (HyperText Markup Language) invented + HTTP (HyperText Transfer Protocol)</td><td>Birth of the modern Web</td><td>ميلاد الويب الحديث</td></tr>
-      <tr><td>1993</td><td>NCSA released Mosaic &mdash; first popular web browser (by Marc Andreessen)</td><td>Web became accessible to public</td><td>أول متصفح ويب شعبي</td></tr>
-      <tr><td>1994</td><td>Netscape Communications Corporation formed</td><td>First commercial browser company</td><td>تأسيس شركة Netscape</td></tr>
-      <tr><td>1998</td><td>W3C accepted XML 1.0 as a Recommendation</td><td>XML superseded HTML as W3C focus</td><td>قبول XML كمعيار رسمي</td></tr>
-    </tbody>
-  </table></div>
-  <div class="ar-box">
-    <div class="ar-lbl">Arabic &mdash; الخط الزمني</div>
-    تطور الويب: 1960s (GML &mdash; أول ترميز) &rarr; 1986 (SGML &mdash; معيار دولي) &rarr; 1990 (HTML + HTTP &mdash; ميلاد الويب) &rarr; 1993 (Mosaic &mdash; أول متصفح شعبي) &rarr; 1994 (Netscape) &rarr; 1998 (XML &mdash; جيل جديد). <strong>تذكر الأعوام جيداً للامتحان!</strong>
-  </div>
-</div>
-
-<hr class="div">
-
-<!-- ══════ SECTION 3 ══════ -->
-<div class="sec-hdr" id="s3">
-  <div class="sec-num">3</div>
-  <div class="sec-info">
-    <h2>HTTP, URI, HTML &amp; XML</h2>
+    <h2>HTTP, URI &amp; HTML</h2>
     <div class="ar">بروتوكولات ولغات الويب</div>
-    <div class="desc">Slides 18&ndash;22 &middot; How the Web works: protocols, languages, and standards</div>
+    <div class="desc">Slides 3–4 &middot; How the Web works: protocols, languages</div>
   </div>
 </div>
 
@@ -281,27 +165,32 @@ small,.small{font-size:12px;color:var(--muted)}
   <div class="g2">
     <div class="hl">
       <strong>HTTP (HyperText Transfer Protocol)</strong><br>
-      A protocol originally designed for transmitting hypermedia, but can also support transmission of any file type. It defines how messages are formatted and transmitted between web servers and browsers.
+      A protocol originally designed for transmitting hypermedia, but can also support the transmission of <strong>any file type</strong>.
     </div>
     <div class="hl">
       <strong>URI (Uniform Resource Identifier)</strong><br>
-      An identifier for the resource being accessed (e.g., the host name). It is <em>always preceded</em> by the token <code style="color:var(--accent)">http://</code> or <code style="color:var(--accent)">https://</code>. Think of it as the address of a web resource.
+      An identifier for the resource accessed (e.g. the host name). Always preceded by the token <code style="color:var(--accent)">http://</code>
     </div>
   </div>
   <div class="ar-box">
     <div class="ar-lbl">Arabic</div>
-    <strong>HTTP</strong>: بروتوكول نقل النص التشعبي &mdash; القواعد التي يتبعها المتصفح والسيرفر لتبادل البيانات. <strong>URI</strong>: معرّف المورد الموحد &mdash; "عنوان" الصفحة على الإنترنت، يبدأ دائماً بـ http:// أو https://. مثال: http://www.google.com هو URI يحدد موقع Google.
+    <strong>HTTP</strong>: بروتوكول نقل النص التشعبي — القواعد التي يتبعها المتصفح والسيرفر لتبادل البيانات. يدعم نقل أي نوع ملف.<br>
+    <strong>URI</strong>: معرّف المورد الموحد — "عنوان" الصفحة على الإنترنت، يبدأ دائماً بـ http://
   </div>
 </div>
 
 <div class="card">
   <div class="card-title">HTML &mdash; HyperText Markup Language <span class="ar">لغة ترميز النص التشعبي</span></div>
-  <p>HTML is a language for publishing <strong>Hypermedia on the World Wide Web</strong>. It is defined using SGML and has two key characteristics:</p>
+  <p>HTML is a language for publishing <strong>Hypermedia on the World Wide Web</strong> — defined using SGML. It has two key properties:</p>
   <div class="g2" style="margin-top:12px">
-    <div class="hl"><strong>1. Uses ASCII &rarr; Portable</strong><br>HTML files use ASCII encoding, making them portable to all different (possibly binary-incompatible) computer hardware. Any computer can read an HTML file.</div>
-    <div class="hl"><strong>2. Tag-based Structure</strong><br>HTML uses <strong>tags</strong> to describe document elements:<br>&bull; <code style="color:var(--accent)">&lt;token params&gt;</code> &mdash; opening/start tag<br>&bull; <code style="color:var(--accent)">&lt;/token&gt;</code> &mdash; closing/end tag<br>&bull; Some elements have no ending tag</div>
+    <div class="hl"><strong>1. Uses ASCII → Portable</strong><br>HTML files use ASCII encoding, making them portable to all different (possibly binary-incompatible) computer hardware.</div>
+    <div class="hl"><strong>2. Tag-based Structure</strong><br>
+      &bull; <code style="color:var(--accent)">&lt;token params&gt;</code> — start tag<br>
+      &bull; <code style="color:var(--accent)">&lt;/token&gt;</code> — end tag<br>
+      &bull; Some elements have no ending tag
+    </div>
   </div>
-  <div class="code-lbl">Basic HTML Page Structure (from slide)</div>
+  <div class="code-lbl">Basic HTML Page Structure</div>
   <div class="code">&lt;HTML&gt;
   &lt;HEAD&gt;
     &lt;TITLE&gt;A sample web page.&lt;/TITLE&gt;
@@ -314,40 +203,24 @@ small,.small{font-size:12px;color:var(--muted)}
     &lt;/P&gt;
   &lt;/BODY&gt;
 &lt;/HTML&gt;</div>
-  <div class="hl-gold">&#128161; <strong>Next Generation:</strong> HTML &rarr; <strong>XHTML</strong> (reformulation of HTML using XML) &rarr; <strong>HTML5</strong> (current standard)</div>
+  <div class="hl-gold">💡 <strong>Next Generation:</strong> HTML → <strong>XHTML</strong> (reformulation of HTML using XML)</div>
   <div class="ar-box">
     <div class="ar-lbl">Arabic</div>
-    HTML هي لغة ترميز صفحات الويب. تستخدم وسوماً (Tags) لتنسيق المحتوى. مثلاً: &lt;B&gt;نص غامق&lt;/B&gt;. مميزاتها: (1) تستخدم ASCII فهي تعمل على جميع الأجهزة. (2) بنية واضحة: وسم فتح + محتوى + وسم إغلاق. الجيل التالي: XHTML (HTML مع قواعد XML الصارمة) ثم HTML5.
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-title">XML &mdash; eXtensible Markup Language <span class="ar">لغة الترميز الموسعة</span></div>
-  <p>XML is a markup language for the WWW in which there is <strong>modularity of data, structure, and view</strong>. Users or applications can define their own tags (structure).</p>
-  <p><strong>Key difference from HTML:</strong> HTML defines HOW data looks. XML defines WHAT data means.</p>
-  <div class="hl-gold">
-    <strong>How XML Works with Databases (from slide example):</strong>
-    <ol style="margin-top:8px;padding-left:22px">
-      <li>First use a global <strong>Document Type Definition (DTD)</strong> that is already defined</li>
-      <li>The server-side script abides by DTD rules to generate an XML document from the database according to a user query</li>
-      <li>Send user the <strong>XML Style Sheet (XSL)</strong> depending on the type of device used to display the information</li>
-    </ol>
-  </div>
-  <div class="ar-box">
-    <div class="ar-lbl">Arabic</div>
-    XML: لغة ترميز موسعة تسمح للمستخدم بتعريف وسوماته الخاصة. الفرق عن HTML: HTML تحدد الشكل، XML تحدد المعنى. مثلاً: &lt;Price&gt;25&lt;/Price&gt; &mdash; الوسم يوضح أن الرقم سعر. تُستخدم XML مع DTD (لتعريف هيكل البيانات) وXSL (لتحديد طريقة عرضها). W3C اعتمدها عام 1998 كمعيار رئيسي يتجاوز HTML.
+    HTML هي لغة ترميز صفحات الويب تستخدم وسوماً (Tags) لتنسيق المحتوى.<br>
+    مميزاتها: (1) تستخدم ASCII فهي تعمل على جميع الأجهزة. (2) بنية واضحة: وسم فتح + محتوى + وسم إغلاق.<br>
+    الجيل التالي: <strong>XHTML</strong> = HTML بقواعد XML الصارمة.
   </div>
 </div>
 
 <hr class="div">
 
-<!-- ══════ SECTION 4 ══════ -->
-<div class="sec-hdr" id="s4">
-  <div class="sec-num">4</div>
+<!-- ══════ SECTION 2 ══════ -->
+<div class="sec-hdr" id="s2">
+  <div class="sec-num">2</div>
   <div class="sec-info">
-    <h2>Multimedia Components, Types &amp; Authoring</h2>
-    <div class="ar">مكونات الوسائط المتعددة وأنواعها وأدوات التأليف</div>
-    <div class="desc">Slides 23&ndash;30 &middot; Six components, three types, authoring tools, CD/DVD</div>
+    <h2>Multimedia Components &amp; Types</h2>
+    <div class="ar">مكونات الوسائط المتعددة وأنواعها</div>
+    <div class="desc">Slides 5–8 &middot; Six components, three types of multimedia</div>
   </div>
 </div>
 
@@ -355,57 +228,73 @@ small,.small{font-size:12px;color:var(--muted)}
   <div class="card-title">The Six Components of Multimedia <span class="ar">المكونات الستة للوسائط المتعددة</span></div>
   <div class="g2" style="margin-top:8px">
     <div>
-      <div class="hl"><strong>1. Text</strong><br>Words, labels, menus, and hyperlinks. The most basic component. Can be formatted, styled, and hyperlinked.</div>
-      <div class="hl"><strong>2. Graphics</strong><br>Vector or bitmap illustrations, icons, charts, and diagrams. Created by software like Illustrator, CorelDraw.</div>
-      <div class="hl"><strong>3. Animation</strong><br>A sequence of images displayed rapidly to create the illusion of motion. Examples: GIF animation, Flash animation.</div>
+      <div class="hl"><strong>1. Text</strong><br>Words, labels, menus, and hyperlinks. The most basic component.</div>
+      <div class="hl"><strong>2. Graphics</strong><br>Vector or bitmap illustrations, icons, charts, and diagrams.</div>
+      <div class="hl"><strong>3. Animation</strong><br>A sequence of images displayed rapidly to create the illusion of motion. E.g. GIF, Flash.</div>
     </div>
     <div>
-      <div class="hl"><strong>4. Sound</strong><br>Audio recordings: speech, music, sound effects. Formats: MP3, WAV, MIDI. Can dramatically enhance a multimedia project.</div>
-      <div class="hl"><strong>5. Images</strong><br>Still photographs or scanned pictures. Bitmap format. Formats: JPEG, PNG, GIF, TIFF.</div>
-      <div class="hl"><strong>6. Videos</strong><br>Moving images combined with audio. High storage requirement. Formats: MP4, AVI, MOV. Usually compressed.</div>
+      <div class="hl"><strong>4. Sound</strong><br>Audio recordings: speech, music, sound effects. Formats: MP3, WAV, MIDI.</div>
+      <div class="hl"><strong>5. Images</strong><br>Still photographs or scanned pictures. Formats: JPEG, PNG, GIF, TIFF.</div>
+      <div class="hl"><strong>6. Videos</strong><br>Moving images combined with audio. High storage requirement. Formats: MP4, AVI, MOV.</div>
     </div>
   </div>
   <div class="ar-box">
     <div class="ar-lbl">Arabic</div>
-    المكونات الستة للوسائط المتعددة: <strong>النص</strong> (كلمات ووسوم)، <strong>الرسوميات</strong> (تصميم وتوضيح)، <strong>الرسوم المتحركة</strong> (تسلسل صور لإيهام الحركة)، <strong>الصوت</strong> (موسيقى وكلام)، <strong>الصور</strong> (صور فوتوغرافية)، <strong>الفيديو</strong> (صور متحركة + صوت). كل مكون له طريقة تمثيل وتخزين خاصة في الحاسوب.
+    المكونات الستة للوسائط المتعددة:<br>
+    <strong>النص</strong> (كلمات ووسوم) &bull; <strong>الرسوميات</strong> (تصميم وتوضيح) &bull; <strong>الرسوم المتحركة</strong> (تسلسل صور لإيهام الحركة) &bull; <strong>الصوت</strong> (موسيقى وكلام) &bull; <strong>الصور</strong> (صور فوتوغرافية) &bull; <strong>الفيديو</strong> (صور متحركة + صوت)
   </div>
 </div>
 
 <div class="card">
-  <div class="card-title">Three Types of Multimedia Interaction <span class="ar">أنواع التفاعل في الوسائط المتعددة</span></div>
+  <div class="card-title">Types of Multimedia Interaction <span class="ar">أنواع التفاعل في الوسائط المتعددة</span></div>
+  <p style="margin-bottom:12px">Interactive multimedia applications fall into <strong>two main categories</strong>, plus interactive:</p>
   <div class="tw"><table>
     <thead><tr><th>Type</th><th>Definition</th><th>User Control</th><th>Example</th><th>بالعربي</th></tr></thead>
     <tbody>
       <tr>
         <td><strong class="y">Linear Media</strong></td>
-        <td>Users start at beginning and progress through a fixed sequence until the end. No skipping or rearranging.</td>
-        <td class="r">None &mdash; fixed order</td>
-        <td>Slide show, movie, play, TV broadcast</td>
-        <td>وسائط خطية: ترتيب ثابت من البداية للنهاية</td>
+        <td>Users start at the beginning and progress through a set of sequences until the end.</td>
+        <td class="r">None — fixed order</td>
+        <td>Slide shows, plays</td>
+        <td>وسائط خطية: ترتيب ثابت</td>
       </tr>
       <tr>
         <td><strong class="g">Non-linear Media</strong></td>
-        <td>Order of events left to user's discretion. No predefined order; users can enter or exit at any point and time.</td>
-        <td class="g">Full &mdash; user chooses path</td>
-        <td>Interactive CD-ROM encyclopedia, website</td>
-        <td>وسائط غير خطية: المستخدم يختار المسار</td>
+        <td>Order of events left to user's discretion. No predefined order; users can enter or exit at any point and any time.</td>
+        <td class="g">Full — user chooses</td>
+        <td>Interactive CD-ROM encyclopedia</td>
+        <td>وسائط غير خطية: المستخدم يختار</td>
       </tr>
       <tr>
         <td><strong class="p">Interactive Multimedia</strong></td>
-        <td>User controls when and what elements are delivered. When linked elements are provided for navigation = becomes hypermedia.</td>
-        <td class="p">Active &mdash; user triggers events</td>
-        <td>Video games, e-learning modules, interactive kiosks</td>
-        <td>وسائط تفاعلية: المستخدم يتحكم في التسليم</td>
+        <td>User controls when and what elements are delivered.</td>
+        <td class="p">Active — user triggers</td>
+        <td>Video games, e-learning</td>
+        <td>وسائط تفاعلية: المستخدم يتحكم</td>
       </tr>
     </tbody>
   </table></div>
   <div class="tip">
-    <div class="tip-lbl">&#x1F4A1; Key Insight</div>
-    When interactive multimedia provides a <strong>structure of linked elements through which users can navigate</strong>, it becomes <strong>hypermedia</strong>. Interactive multimedia &rarr; add navigation links &rarr; Hypermedia.
+    <div class="tip-lbl">💡 Key Insight</div>
+    When interactive multimedia provides a <strong>structure of linked elements</strong> for navigation → it becomes <strong>HyperMedia</strong>.
   </div>
   <div class="ar-box">
     <div class="ar-lbl">Arabic</div>
-    <strong>Linear (خطي)</strong>: مثل مشاهدة فيلم &mdash; لا تتحكم في الترتيب. <strong>Non-linear (غير خطي)</strong>: مثل الموسوعة الإلكترونية &mdash; تختار ما تريد قراءته. <strong>Interactive (تفاعلي)</strong>: المستخدم يتفاعل مع المحتوى ويؤثر فيه. عندما يوفر التفاعلي روابط للتنقل = Hypermedia.
+    <strong>Linear (خطي)</strong>: مثل مشاهدة فيلم — لا تتحكم في الترتيب.<br>
+    <strong>Non-linear (غير خطي)</strong>: مثل الموسوعة الإلكترونية — تختار ما تريد.<br>
+    <strong>Interactive (تفاعلي)</strong>: المستخدم يتحكم فيما يظهر ومتى. عندما يضيف التفاعلي روابط تنقل = يصبح <strong>Hypermedia</strong>.
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════ SECTION 3 ══════ -->
+<div class="sec-hdr" id="s3">
+  <div class="sec-num">3</div>
+  <div class="sec-info">
+    <h2>Authoring Tools &amp; Storage Media</h2>
+    <div class="ar">أدوات التأليف ووسائط التخزين</div>
+    <div class="desc">Slides 9–10 &middot; Authoring software, CD-ROM, DVD</div>
   </div>
 </div>
 
@@ -417,20 +306,18 @@ small,.small{font-size:12px;color:var(--muted)}
     <ul style="margin-top:8px">
       <li>Manage individual multimedia elements</li>
       <li>Provide user interaction</li>
-      <li>Integrate text, graphics, audio, video, and animation</li>
-      <li>Publish to CD-ROM, DVD, or the Web</li>
     </ul>
     <div class="hl" style="margin-top:10px">Examples: <strong>Flash, Adobe Director, Authorware, PowerPoint, HyperCard</strong></div>
     <div class="ar-box">
       <div class="ar-lbl">Arabic</div>
-      أدوات التأليف هي برامج تُستخدم لدمج عناصر الوسائط المتعددة في مشروع واحد متكامل. تسمح بالتحكم في التفاعل والتنقل وتنظيم المحتوى.
+      أدوات التأليف هي برامج تُستخدم لدمج عناصر الوسائط المتعددة في مشروع واحد متكامل وتسمح بالتحكم في التفاعل والتنقل.
     </div>
   </div>
   <div class="card">
-    <div class="card-title">CD-ROM &amp; DVD Storage <span class="ar">وسائط التخزين والتوزيع</span></div>
+    <div class="card-title">CD-ROM &amp; DVD Storage <span class="ar">وسائط التخزين</span></div>
     <p><strong>CD-ROM:</strong></p>
     <ul>
-      <li>Most cost-effective distribution medium for multimedia</li>
+      <li>Most <strong>cost-effective</strong> distribution medium for multimedia</li>
       <li>Contains up to <strong>80 minutes</strong> of full-screen video or sound</li>
       <li>CD burners: read discs and convert to audio/video/data formats</li>
     </ul>
@@ -442,8 +329,55 @@ small,.small{font-size:12px;color:var(--muted)}
     </ul>
     <div class="ar-box">
       <div class="ar-lbl">Arabic</div>
-      <strong>CD-ROM</strong>: الوسيط الأرخص لتوزيع الوسائط المتعددة. يتسع لـ 80 دقيقة فيديو كامل. <strong>DVD</strong>: سعة أكبر بكثير (حتى 18 GB) بفضل التعدد الطبقي. يُستخدم للأفلام والألعاب مع قوائم تفاعلية.
+      <strong>CD-ROM</strong>: الأرخص لتوزيع الوسائط، يتسع لـ 80 دقيقة فيديو.<br>
+      <strong>DVD</strong>: سعة أكبر حتى 18 GB بالتعدد الطبقي. يُستخدم للأفلام والألعاب مع قوائم تفاعلية.
     </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ══════ SECTION 4 ══════ -->
+<div class="sec-hdr" id="s4">
+  <div class="sec-num">4</div>
+  <div class="sec-info">
+    <h2>Multimedia Applications</h2>
+    <div class="ar">تطبيقات الوسائط المتعددة</div>
+    <div class="desc">Slides 11–16 &middot; Business, Schools, Home, Public Places</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Where Multimedia Is Used <span class="ar">أين تُستخدم الوسائط المتعددة؟</span></div>
+  <div class="g2">
+    <div class="hl">
+      <strong>🏢 Business</strong><br>
+      Presentations, training, marketing, advertising, product demos, databases, catalogues, instant messaging, and networked communication.<br>
+      <span class="small">Example: Animated instructional multimedia simulates real procedures — trainees practice turning valves and flipping switches safely.</span>
+    </div>
+    <div class="hl">
+      <strong>🏫 Schools &amp; Education</strong><br>
+      Educational software enriches the learning process. Interactive lessons, e-books with embedded media.<br>
+      <span class="small">Examples: "Just Grandma and Me" for reading skills; medical multimedia (Yale) for physicians to learn new technologies at their own pace.</span>
+    </div>
+    <div class="hl">
+      <strong>🏠 Home</strong><br>
+      Most multimedia projects reach homes via <strong>television sets or monitors</strong> with built-in user inputs.<br>
+      <span class="small">Example: Genealogy software "Reunion" — families build family trees with text, images, sounds, and video clips.</span>
+    </div>
+    <div class="hl">
+      <strong>🗺️ Public Places</strong><br>
+      Stand-alone terminals or <strong>kiosks</strong> provide information and help (airports, malls, museums, hospitals).<br>
+      <span class="small">Example: Kiosks provide directions, event info, ticket purchasing, and wayfinding.</span>
+    </div>
+  </div>
+  <div class="ar-box">
+    <div class="ar-lbl">Arabic</div>
+    تطبيقات الوسائط المتعددة في أربعة مجالات رئيسية:<br>
+    <strong>الأعمال</strong>: عروض تقديمية، تدريب محاكاة، إعلانات<br>
+    <strong>التعليم</strong>: برامج تعليمية تفاعلية، مختبرات افتراضية<br>
+    <strong>المنزل</strong>: عبر التلفاز أو الشاشة (برامج شجرة العائلة، ألعاب)<br>
+    <strong>الأماكن العامة</strong>: أكشاك معلومات في المطارات والمراكز التجارية
   </div>
 </div>
 
@@ -453,207 +387,140 @@ small,.small{font-size:12px;color:var(--muted)}
 <div class="sec-hdr" id="s5">
   <div class="sec-num">5</div>
   <div class="sec-info">
-    <h2>Multimedia Applications</h2>
-    <div class="ar">تطبيقات الوسائط المتعددة</div>
-    <div class="desc">Slides 31&ndash;36 &middot; Business, Education, Home, Public places</div>
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-title">Where Multimedia Is Used <span class="ar">أين تُستخدم الوسائط المتعددة؟</span></div>
-  <div class="g2">
-    <div class="hl">
-      <strong>&#x1F3E2; Business Applications</strong><br>
-      Presentations, training, marketing, advertising, product demonstrations, databases, catalogues, instant messaging, networked communication.<br>
-      <span class="small">Example: Animated instructional multimedia simulates real procedures, allowing trainees to practice turning valves and flipping switches safely.</span>
-    </div>
-    <div class="hl">
-      <strong>&#x1F3EB; Schools &amp; Education</strong><br>
-      Educational software enriches the learning process. Interactive lessons, virtual labs, e-books with embedded media.<br>
-      <span class="small">Examples: "Just Grandma and Me" for reading skills; medical multimedia for physicians to learn new technologies at their own pace.</span>
-    </div>
-    <div class="hl">
-      <strong>&#x1F3E0; Home Use</strong><br>
-      Multimedia projects reach homes via television sets or monitors with built-in user inputs.<br>
-      <span class="small">Example: Genealogy software like "Reunion" lets families build family trees with text, images, sounds, and video clips.</span>
-    </div>
-    <div class="hl">
-      <strong>&#x1F5FA;&#xFE0F; Public Places</strong><br>
-      Stand-alone terminals or <strong>kiosks</strong> provide information and help in public areas (airports, malls, museums, hospitals).<br>
-      <span class="small">Example: Kiosks in public places provide directions, event information, ticket purchasing, and wayfinding.</span>
-    </div>
-  </div>
-  <div class="tw" style="margin-top:14px"><table>
-    <thead><tr><th>Domain</th><th>Key Use Cases</th><th>Notable Example</th><th>بالعربي</th></tr></thead>
-    <tbody>
-      <tr><td>Business</td><td>Presentations, training, advertising</td><td>Interactive product demos, training simulators</td><td>عروض الأعمال والتدريب</td></tr>
-      <tr><td>Education</td><td>Interactive lessons, e-learning, virtual labs</td><td>Medical education software (Yale Medical School)</td><td>التعليم الإلكتروني</td></tr>
-      <tr><td>Home</td><td>Entertainment, family history, learning</td><td>Reunion genealogy software</td><td>الاستخدام المنزلي</td></tr>
-      <tr><td>Public Places</td><td>Information kiosks, wayfinding</td><td>Airport/mall information kiosks</td><td>أكشاك المعلومات العامة</td></tr>
-    </tbody>
-  </table></div>
-  <div class="ar-box">
-    <div class="ar-lbl">Arabic</div>
-    تطبيقات الوسائط المتعددة في أربعة مجالات رئيسية: <strong>الأعمال</strong> (عروض تقديمية، تدريب، إعلانات)، <strong>التعليم</strong> (برامج تعليمية تفاعلية، مختبرات افتراضية)، <strong>المنزل</strong> (برامج ترفيه وتعليم منزلي)، <strong>الأماكن العامة</strong> (أكشاك معلومات في المطارات والمراكز التجارية والمستشفيات).
-  </div>
-</div>
-
-<hr class="div">
-
-<!-- ══════ SECTION 6 ══════ -->
-<div class="sec-hdr" id="s6">
-  <div class="sec-num">6</div>
-  <div class="sec-info">
     <h2>Virtual Reality &amp; Chapter Summary</h2>
     <div class="ar">الواقع الافتراضي وملخص الشابتر</div>
-    <div class="desc">Slides 37&ndash;40 &middot; VR, VRML, key takeaways</div>
+    <div class="desc">Slides 17–18 &middot; VR, VRML, key takeaways</div>
   </div>
 </div>
 
 <div class="g2">
   <div class="card">
     <div class="card-title">Virtual Reality (VR) <span class="ar">الواقع الافتراضي</span></div>
-    <p>Virtual Reality is an <strong>extension of multimedia</strong>. It uses the basic multimedia elements of imagery, sound, and animation to create immersive 3D experiences.</p>
+    <p>Virtual Reality is an <strong>extension of multimedia</strong>. It uses the basic multimedia elements of imagery, sound, and animation.</p>
     <ul style="margin-top:10px">
       <li>Requires <strong>terrific computing power</strong> to be realistic</li>
-      <li>Cyberspace is made up of thousands of <strong>geometric objects</strong> plotted in three-dimensional space</li>
-      <li>Standard for transmitting VR on Web: <strong>VRML</strong> (Virtual Reality Modeling Language)</li>
-      <li>VRML documents use file extension: <strong><code style="color:var(--accent)">.wrl</code></strong></li>
+      <li>Cyberspace is made up of thousands of <strong>geometric objects</strong> in 3D space</li>
+      <li>Standard for VR on Web: <strong>VRML</strong> (Virtual Reality Modeling Language)</li>
+      <li>VRML file extension: <strong><code style="color:var(--accent)">.wrl</code></strong></li>
     </ul>
     <div class="ar-box">
       <div class="ar-lbl">Arabic</div>
-      الواقع الافتراضي هو امتداد للوسائط المتعددة يخلق بيئات ثلاثية الأبعاد. يستخدم الصور والصوت والرسوم المتحركة لمحاكاة الواقع. يتطلب قوة معالجة عالية. معيار نقله عبر الإنترنت: VRML بامتداد ملف <strong>.wrl</strong>.
+      الواقع الافتراضي امتداد للوسائط المتعددة يخلق بيئات ثلاثية الأبعاد. يستخدم الصور والصوت والرسوم المتحركة. يتطلب قوة معالجة عالية.<br>
+      معيار نقله عبر الويب: <strong>VRML</strong> &bull; امتداد الملف: <strong>.wrl</strong>
     </div>
   </div>
   <div class="card">
-    <div class="card-title">Chapter Summary (from Slide 39&ndash;40) <span class="ar">ملخص الشابتر</span></div>
-    <p>Key takeaways from Chapter 0 (as stated in the slides):</p>
+    <div class="card-title">Chapter Summary <span class="ar">ملخص الشابتر</span></div>
+    <p>Key takeaways from Chapter 0:</p>
     <ul style="margin-top:10px">
       <li>Multimedia is a combination of <strong>text, graphic art, sound, animation, and video</strong></li>
       <li>Multimedia projects can be <strong>linear or nonlinear</strong></li>
       <li>Multimedia projects are often stored on <strong>CD-ROM or DVDs</strong>, or hosted on the Web</li>
       <li>Multimedia is widely used in <strong>business, schools, public places, and at home</strong></li>
-      <li><strong>Virtual reality</strong> is an extension of multimedia</li>
+      <li><strong>Virtual Reality</strong> is an extension of multimedia</li>
     </ul>
     <div class="ar-box">
       <div class="ar-lbl">Arabic</div>
-      ملخص الشابتر: الوسائط المتعددة تجمع النص والرسوم والصوت والرسوم المتحركة والفيديو. تكون خطية أو غير خطية. تُحفظ على CD/DVD أو الويب. تُستخدم في الأعمال والتعليم والمنازل والأماكن العامة. الواقع الافتراضي امتداد لها.
+      الوسائط المتعددة تجمع النص والرسوم والصوت والرسوم المتحركة والفيديو.<br>
+      تكون خطية أو غير خطية. تُحفظ على CD/DVD أو الويب.<br>
+      تُستخدم في الأعمال والتعليم والمنازل والأماكن العامة.<br>
+      الواقع الافتراضي امتداد لها.
     </div>
   </div>
 </div>
 
 <hr class="div">
 
-<!-- ══════════════════════ REVIEW TABLE ══════════════════════ -->
+<!-- ══════ REVIEW TABLE ══════ -->
 <div class="final" id="review">
-  <h2>&#x2714; Complete Review Table &mdash; Chapter 0
-    <span class="ar">جدول المراجعة الشامل &mdash; الشابتر الصفر</span>
+  <h2>✔ Quick Review Table — Chapter 0
+    <span class="ar">جدول المراجعة السريعة</span>
   </h2>
   <div class="tw"><table>
-    <thead><tr><th>#</th><th>Topic</th><th>Key Point to Remember</th><th>بالعربي</th></tr></thead>
+    <thead><tr><th>#</th><th>Topic</th><th>Key Point</th><th>بالعربي</th></tr></thead>
     <tbody>
-      <tr><td>1</td><td>Multimedia Definition</td><td>Computer information represented through audio, graphics, images, video, animation + traditional text</td><td>معلومات الحاسوب عبر وسائط متعددة</td></tr>
-      <tr><td>2</td><td>Multi + Media</td><td>Multi = many/more than one &nbsp;|&nbsp; Media = means of communication to the senses</td><td>متعدد + وسيلة اتصال</td></tr>
-      <tr><td>3</td><td>Human Senses</td><td>Multimedia targets: Sight (images, video), Hearing (audio), Touch (haptic)</td><td>البصر، السمع، اللمس</td></tr>
-      <tr><td>4</td><td>Hypertext</td><td>Non-linear reading via links. Components: Node, Link, Anchor</td><td>نص تشعبي: عقدة + رابط + نقطة ارتساء</td></tr>
-      <tr><td>5</td><td>HyperMedia</td><td>Not text-only; includes all media + hyperlinks. WWW is best example</td><td>جميع الوسائط + روابط. مثال: الويب</td></tr>
-      <tr><td>6</td><td>W3C Goals</td><td>(1) Universal access (2) Navigation effectiveness (3) Responsible use</td><td>الوصول الشامل + الفاعلية + المسؤولية</td></tr>
-      <tr><td>7</td><td>GML</td><td>1960s &mdash; first markup language, developed for IBM</td><td>أول لغة ترميز &mdash; لـ IBM في الستينيات</td></tr>
-      <tr><td>8</td><td>SGML</td><td>1986 &mdash; ISO Standard Generalized Markup Language</td><td>معيار دولي للترميز &mdash; 1986</td></tr>
-      <tr><td>9</td><td>HTML + HTTP</td><td>1990 &mdash; birth of the Web. HTML = markup language. HTTP = transfer protocol</td><td>1990 &mdash; ميلاد الويب</td></tr>
-      <tr><td>10</td><td>Mosaic Browser</td><td>1993 &mdash; NCSA released first popular web browser (Marc Andreessen)</td><td>1993 &mdash; أول متصفح شعبي</td></tr>
-      <tr><td>11</td><td>Netscape</td><td>1994 &mdash; first commercial browser company formed</td><td>1994 &mdash; أول شركة متصفح تجاري</td></tr>
-      <tr><td>12</td><td>XML 1.0</td><td>1998 &mdash; W3C accepted XML as Recommendation; supersedes HTML as W3C focus</td><td>1998 &mdash; XML معيار رسمي يتجاوز HTML</td></tr>
-      <tr><td>13</td><td>HTTP</td><td>Protocol for transmitting hypermedia (and any file type) between server and browser</td><td>بروتوكول نقل النص التشعبي</td></tr>
-      <tr><td>14</td><td>URI</td><td>Uniform Resource Identifier &mdash; always preceded by http:// &mdash; the web address</td><td>معرّف المورد الموحد &mdash; عنوان الويب</td></tr>
-      <tr><td>15</td><td>HTML Properties</td><td>(1) Uses ASCII &rarr; portable to all hardware. (2) Tag-based: &lt;tag&gt; open, &lt;/tag&gt; close</td><td>ASCII = قابل للنقل. وسوم = بنية المستند</td></tr>
-      <tr><td>16</td><td>XHTML</td><td>Next generation of HTML = HTML reformulated using XML (stricter rules)</td><td>HTML بقواعد XML الصارمة</td></tr>
-      <tr><td>17</td><td>XML</td><td>Users define their own tags. Modularity: data + structure + view separated. DTD + XSL</td><td>وسوم مخصصة. البيانات + الهيكل + العرض منفصلة</td></tr>
-      <tr><td>18</td><td>6 MM Components</td><td>Text, Graphics, Animation, Sound, Images, Videos</td><td>النص، الرسوميات، الرسوم المتحركة، الصوت، الصور، الفيديو</td></tr>
-      <tr><td>19</td><td>Linear Media</td><td>Fixed start-to-end sequence. No user control over order. Example: slideshow, movie</td><td>ترتيب ثابت &mdash; المشاهد لا يتحكم</td></tr>
-      <tr><td>20</td><td>Non-linear Media</td><td>User controls order. No predefined sequence. Can enter/exit at any point. Example: encyclopedia</td><td>المستخدم يختار المسار &mdash; موسوعة تفاعلية</td></tr>
-      <tr><td>21</td><td>Interactive &rarr; HyperMedia</td><td>Interactive multimedia + navigation links = HyperMedia</td><td>تفاعلي + روابط تنقل = Hypermedia</td></tr>
-      <tr><td>22</td><td>Authoring Tools</td><td>Software to merge MM elements + provide user interaction. Examples: Flash, Director</td><td>برامج دمج العناصر والتفاعل</td></tr>
-      <tr><td>23</td><td>CD-ROM</td><td>Most cost-effective distribution medium. Up to 80 minutes full-screen video/audio</td><td>الأرخص للتوزيع &mdash; 80 دقيقة فيديو</td></tr>
-      <tr><td>24</td><td>DVD</td><td>Multilayer technology &rarr; up to 18 GB. Interactive menus via DVD authoring software</td><td>18 GB &mdash; قوائم تفاعلية</td></tr>
-      <tr><td>25</td><td>Business Apps</td><td>Presentations, training, marketing, advertising, product demos, databases, catalogues</td><td>الأعمال: عروض وتدريب وتسويق</td></tr>
-      <tr><td>26</td><td>Education Apps</td><td>Educational software enriches learning. E.g., medical multimedia for physicians</td><td>التعليم: برامج تثري العملية التعليمية</td></tr>
-      <tr><td>27</td><td>Home Apps</td><td>Via TV sets or monitors with user inputs (genealogy software, games)</td><td>المنزل: عبر التلفاز أو الشاشة</td></tr>
-      <tr><td>28</td><td>Public Place Apps</td><td>Kiosks and stand-alone terminals providing information and help</td><td>أكشاك المعلومات في الأماكن العامة</td></tr>
-      <tr><td>29</td><td>Virtual Reality</td><td>Extension of multimedia. Uses imagery + sound + animation. Needs high computing power</td><td>امتداد للوسائط المتعددة &mdash; قوة حوسبة عالية</td></tr>
-      <tr><td>30</td><td>VRML + .wrl</td><td>Virtual Reality Modeling Language. File extension: .wrl. Standard for VR on Web</td><td>معيار VR على الويب. امتداد: .wrl</td></tr>
+      <tr><td>1</td><td>HTTP</td><td>Protocol for transmitting hypermedia (and any file type) between server and browser</td><td>بروتوكول نقل النص التشعبي</td></tr>
+      <tr><td>2</td><td>URI</td><td>Identifier for the resource accessed. Always preceded by http://</td><td>معرّف المورد الموحد</td></tr>
+      <tr><td>3</td><td>HTML</td><td>Language for publishing hypermedia on the Web using SGML. ASCII-based + tag structure</td><td>لغة ترميز صفحات الويب</td></tr>
+      <tr><td>4</td><td>XHTML</td><td>Next generation of HTML = HTML reformulated using XML (stricter rules)</td><td>HTML بقواعد XML الصارمة</td></tr>
+      <tr><td>5</td><td>6 MM Components</td><td>Text, Graphics, Animation, Sound, Images, Videos</td><td>النص، الرسوميات، الرسوم المتحركة، الصوت، الصور، الفيديو</td></tr>
+      <tr><td>6</td><td>Linear Media</td><td>Fixed start-to-end sequence. No user control. Example: slideshow, play</td><td>ترتيب ثابت — المشاهد لا يتحكم</td></tr>
+      <tr><td>7</td><td>Non-linear Media</td><td>User controls order. No predefined sequence. Can enter/exit at any point. Example: CD-ROM encyclopedia</td><td>المستخدم يختار المسار</td></tr>
+      <tr><td>8</td><td>Interactive → HyperMedia</td><td>Interactive multimedia + navigation links = HyperMedia</td><td>تفاعلي + روابط = Hypermedia</td></tr>
+      <tr><td>9</td><td>Authoring Tools</td><td>Software to merge MM elements and provide user interaction. Examples: Flash, Director</td><td>برامج دمج العناصر والتفاعل</td></tr>
+      <tr><td>10</td><td>CD-ROM</td><td>Most cost-effective distribution medium. Up to 80 minutes full-screen video/audio</td><td>الأرخص للتوزيع — 80 دقيقة فيديو</td></tr>
+      <tr><td>11</td><td>DVD</td><td>Multilayer technology → up to 18 GB. Interactive menus via authoring software</td><td>18 GB — قوائم تفاعلية</td></tr>
+      <tr><td>12</td><td>Business Apps</td><td>Presentations, training, marketing, advertising, product demos</td><td>عروض وتدريب وتسويق</td></tr>
+      <tr><td>13</td><td>Education Apps</td><td>Educational software enriches learning. E.g., medical multimedia for physicians</td><td>برامج تثري العملية التعليمية</td></tr>
+      <tr><td>14</td><td>Home Apps</td><td>Via TV sets or monitors with user inputs (genealogy software)</td><td>عبر التلفاز أو الشاشة</td></tr>
+      <tr><td>15</td><td>Public Place Apps</td><td>Kiosks and stand-alone terminals providing information and help</td><td>أكشاك المعلومات في الأماكن العامة</td></tr>
+      <tr><td>16</td><td>Virtual Reality</td><td>Extension of multimedia. Uses imagery + sound + animation. Needs high computing power</td><td>امتداد للوسائط المتعددة</td></tr>
+      <tr><td>17</td><td>VRML + .wrl</td><td>Virtual Reality Modeling Language. File extension: .wrl. Standard for VR on Web</td><td>معيار VR على الويب. امتداد: .wrl</td></tr>
     </tbody>
   </table></div>
 </div>
 
-<!-- ══════════════════════ EXAM Q&A ══════════════════════ -->
+<!-- ══════ EXAM Q&A ══════ -->
 <div class="final" id="exam" style="margin-top:28px">
-  <h2>&#x1F4CB; Exam Questions &amp; Model Answers &mdash; Chapter 0
+  <h2>📋 Exam Questions &amp; Answers — Chapter 0
     <span class="ar">أسئلة الامتحان والإجابات النموذجية</span>
   </h2>
 
   <div class="exam-q">
-    <div class="q-lbl">Q1 &mdash; Definition</div>
-    Define multimedia. What does "Multi" and "Media" mean?<br>
-    <span class="ans">&#x2714; Answer:</span> Multimedia means that computer information can be represented through audio, graphics, images, video, and animation in addition to traditional media (text). <strong>Multi</strong> = many/more than one. <strong>Media</strong> = the means of communicating information to the senses.
-    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>الوسائط المتعددة تعني استخدام الحاسوب لعرض المعلومات بوسائل متعددة: صوت، رسوم، صور، فيديو، رسوم متحركة إضافة للنص التقليدي. Multi = متعدد. Media = وسيلة اتصال.</div>
+    <div class="q-lbl">Q1 — HTTP &amp; URI</div>
+    What is HTTP? What is URI? How are they related?<br>
+    <span class="ans">✔ Answer:</span> <strong>HTTP</strong> (HyperText Transfer Protocol) is a protocol originally designed for transmitting hypermedia but can support any file type. <strong>URI</strong> (Uniform Resource Identifier) identifies the resource being accessed (e.g. host name) and is always preceded by <code>http://</code>. HTTP is the protocol; URI is the address.
+    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>HTTP: بروتوكول نقل البيانات بين المتصفح والسيرفر، يدعم أي نوع ملف. URI: معرّف المورد = عنوان الصفحة على الإنترنت، يبدأ دائماً بـ http://. HTTP هو البروتوكول، URI هو العنوان.</div>
   </div>
 
   <div class="exam-q">
-    <div class="q-lbl">Q2 &mdash; Hypertext vs HyperMedia</div>
-    What is the difference between Hypertext and HyperMedia? Give an example of each.<br>
-    <span class="ans">&#x2714; Answer:</span> <strong>Hypertext</strong> is text-based, read non-linearly by following links between nodes. <strong>HyperMedia</strong> is not constrained to text &mdash; it includes graphics, images, audio, and video linked together. Example: a text document with links = Hypertext. The World Wide Web = HyperMedia.
-    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>Hypertext: نص فقط مع روابط للتنقل. HyperMedia: جميع أنواع الوسائط (نص + صور + صوت + فيديو) مرتبطة بروابط. مثال على Hypertext: وثيقة نصية بها روابط. مثال على HyperMedia: الويب.</div>
+    <div class="q-lbl">Q2 — HTML Properties</div>
+    What are the two key properties of HTML? What is the next generation of HTML?<br>
+    <span class="ans">✔ Answer:</span> (1) HTML uses <strong>ASCII</strong> encoding → portable to all hardware platforms. (2) HTML uses <strong>tags</strong> to structure content: opening tag <code>&lt;token&gt;</code> and closing tag <code>&lt;/token&gt;</code> (some elements have no ending tag). The next generation is <strong>XHTML</strong> — a reformulation of HTML using XML.
+    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>(1) تستخدم ASCII: تعمل على جميع الأجهزة. (2) تستخدم وسوماً: وسم فتح &lt;tag&gt; ووسم إغلاق &lt;/tag&gt; وبعضها بدون إغلاق. الجيل القادم: XHTML = HTML بقواعد XML.</div>
   </div>
 
   <div class="exam-q">
-    <div class="q-lbl">Q3 &mdash; WWW Timeline</div>
-    List the major milestones in the development of the WWW in chronological order.<br>
-    <span class="ans">&#x2714; Answer:</span> (1) 1960s &mdash; GML for IBM. (2) 1986 &mdash; ISO released SGML. (3) 1990 &mdash; HTML and HTTP invented (birth of Web). (4) 1993 &mdash; NCSA released Mosaic (first popular browser). (5) 1994 &mdash; Netscape Communications formed. (6) 1998 &mdash; W3C accepted XML 1.0.
-    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>1960s (GML) ← 1986 (SGML) ← 1990 (HTML+HTTP &mdash; ميلاد الويب) ← 1993 (Mosaic &mdash; أول متصفح) ← 1994 (Netscape) ← 1998 (XML). هذا التسلسل مهم جداً للامتحان.</div>
+    <div class="q-lbl">Q3 — Six Components</div>
+    Name the six components of multimedia.<br>
+    <span class="ans">✔ Answer:</span> (1) <strong>Text</strong> — words, labels, menus. (2) <strong>Graphics</strong> — illustrations, icons, charts. (3) <strong>Animation</strong> — rapid image sequence creating illusion of motion. (4) <strong>Sound</strong> — speech, music, sound effects. (5) <strong>Images</strong> — still photographs. (6) <strong>Videos</strong> — moving images combined with audio.
+    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>(1) النص (2) الرسوميات (3) الرسوم المتحركة (4) الصوت (5) الصور الثابتة (6) الفيديو</div>
   </div>
 
   <div class="exam-q">
-    <div class="q-lbl">Q4 &mdash; HTML Properties</div>
-    What are the two key properties of HTML? How does it structure content?<br>
-    <span class="ans">&#x2714; Answer:</span> (1) HTML uses <strong>ASCII</strong> encoding &rarr; portable to all hardware platforms. (2) HTML uses <strong>tags</strong> to structure content: opening tag <code>&lt;token&gt;</code> and closing tag <code>&lt;/token&gt;</code>. The next generation is XHTML (HTML reformulated with XML rules).
-    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>(1) تستخدم ASCII: فهي تعمل على جميع الأجهزة. (2) تستخدم وسوماً (Tags): وسم فتح &lt;tag&gt; ومحتوى ووسم إغلاق &lt;/tag&gt;. الجيل القادم: XHTML.</div>
+    <div class="q-lbl">Q4 — Linear vs Non-linear</div>
+    What is the difference between linear and non-linear multimedia? Give an example of each.<br>
+    <span class="ans">✔ Answer:</span> <strong>Linear:</strong> Users start at the beginning and progress through a fixed sequence until the end — no user control over order. Example: slide show, play. <strong>Non-linear:</strong> Order of events left to user's discretion — no predefined sequence, users can enter/exit at any point and any time. Example: interactive CD-ROM encyclopedia.
+    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>خطي: ترتيب ثابت من البداية للنهاية، المستخدم لا يتحكم. مثال: شريط فيديو، عرض شرائح. غير خطي: المستخدم يختار الترتيب، يدخل ويخرج متى يشاء. مثال: موسوعة CD-ROM التفاعلية.</div>
   </div>
 
   <div class="exam-q">
-    <div class="q-lbl">Q5 &mdash; Linear vs Non-linear</div>
-    Differentiate between linear, non-linear, and interactive multimedia with examples.<br>
-    <span class="ans">&#x2714; Answer:</span> <strong>Linear:</strong> fixed start-to-end sequence, no user control (slideshow, movie). <strong>Non-linear:</strong> user controls order, can enter/exit at any point (interactive encyclopedia). <strong>Interactive:</strong> user triggers when/what elements are delivered (games, e-learning). When interactive multimedia provides navigation links &rarr; it becomes <strong>HyperMedia</strong>.
-    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>خطي: ترتيب ثابت لا تتحكم به (فيلم). غير خطي: المستخدم يختار المسار (موسوعة). تفاعلي: المستخدم يتحكم فيما يظهر ومتى (ألعاب). عندما يضيف التفاعلي روابط تنقل = يصبح Hypermedia.</div>
+    <div class="q-lbl">Q5 — CD-ROM vs DVD</div>
+    Compare CD-ROM and DVD as multimedia storage/distribution media.<br>
+    <span class="ans">✔ Answer:</span> <strong>CD-ROM:</strong> Most cost-effective distribution medium; holds up to 80 minutes of full-screen video or sound; CD burners read and convert to audio/video/data. <strong>DVD:</strong> Multilayered technology increases capacity up to <strong>18 GB</strong>; DVD authoring software creates interactive menus for films and games; DVD burners read and convert formats.
+    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>CD-ROM: الأرخص للتوزيع، سعة 80 دقيقة فيديو. DVD: سعة أعلى بكثير حتى 18 GB بالتعدد الطبقي، يدعم قوائم تفاعلية للأفلام والألعاب.</div>
   </div>
 
   <div class="exam-q">
-    <div class="q-lbl">Q6 &mdash; XML</div>
-    What is XML? How does it differ from HTML? Describe the 3-step process for using XML with databases.<br>
-    <span class="ans">&#x2714; Answer:</span> XML (eXtensible Markup Language) allows users to define their own tags and provides modularity of data, structure, and view. Unlike HTML (defines HOW things look), XML defines WHAT data means. Three steps: (1) Use a global DTD. (2) Server generates XML document following DTD rules. (3) Send user an XSL stylesheet based on device type.
-    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>XML تسمح للمستخدم بتعريف وسوماته. HTML تحدد الشكل، XML تحدد المعنى. ثلاث خطوات: (1) DTD يعرّف هيكل البيانات. (2) السيرفر ينشئ XML وفق DTD. (3) XSL تحدد طريقة العرض حسب الجهاز.</div>
-  </div>
-
-  <div class="exam-q">
-    <div class="q-lbl">Q7 &mdash; Virtual Reality</div>
-    What is Virtual Reality? What standard is used for VR on the Web? What is the file extension?<br>
-    <span class="ans">&#x2714; Answer:</span> Virtual Reality is an extension of multimedia using imagery, sound, and animation to create immersive 3D experiences. It requires terrific computing power. Standard for VR on the Web: <strong>VRML</strong> (Virtual Reality Modeling Language). File extension: <strong>.wrl</strong>
-    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>الواقع الافتراضي امتداد للوسائط المتعددة يخلق بيئة ثلاثية الأبعاد باستخدام الصور والصوت والرسوم المتحركة. معيار نقله عبر الويب: VRML. امتداد الملف: .wrl</div>
-  </div>
-
-  <div class="exam-q">
-    <div class="q-lbl">Q8 &mdash; Applications</div>
+    <div class="q-lbl">Q6 — Applications of Multimedia</div>
     Name four application areas of multimedia and give a specific example for each.<br>
-    <span class="ans">&#x2714; Answer:</span> (1) <strong>Business:</strong> training simulators that let trainees practice turning valves virtually. (2) <strong>Education:</strong> medical multimedia (Yale) letting physicians learn at their own pace. (3) <strong>Home:</strong> Reunion genealogy software with family trees containing text, images, sounds, and videos. (4) <strong>Public Places:</strong> information kiosks in malls/airports providing directions and services.
-    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>(1) الأعمال: محاكاة تدريبية تسمح للمتدربين بتجربة عمليات حقيقية بشكل آمن. (2) التعليم: برامج طبية للأطباء. (3) المنزل: برامج شجرة العائلة. (4) الأماكن العامة: أكشاك إرشاد في المطارات والمراكز التجارية.</div>
+    <span class="ans">✔ Answer:</span> (1) <strong>Business:</strong> training simulators letting trainees practice turning valves and flipping switches safely. (2) <strong>Schools:</strong> medical multimedia (Yale) letting physicians learn new technologies at their own pace. (3) <strong>Home:</strong> Reunion genealogy software letting families build family trees with text, images, sounds, and videos. (4) <strong>Public Places:</strong> information kiosks in malls/airports providing directions and services.
+    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>(1) الأعمال: محاكاة تدريبية آمنة. (2) التعليم: برامج طبية لكلية Yale. (3) المنزل: برنامج Reunion لشجرة العائلة. (4) الأماكن العامة: أكشاك إرشاد في المطارات والمراكز التجارية.</div>
+  </div>
+
+  <div class="exam-q">
+    <div class="q-lbl">Q7 — Virtual Reality</div>
+    What is Virtual Reality? What standard is used for VR on the Web? What is the file extension?<br>
+    <span class="ans">✔ Answer:</span> Virtual Reality is an <strong>extension of multimedia</strong> that uses imagery, sound, and animation to create immersive 3D experiences. It requires terrific computing power. Cyberspace is made up of thousands of geometric objects in 3D space. Standard for VR on the Web: <strong>VRML</strong> (Virtual Reality Modeling Language). File extension: <strong>.wrl</strong>
+    <div class="ar-box" style="margin-top:10px"><div class="ar-lbl">Arabic Answer</div>الواقع الافتراضي امتداد للوسائط المتعددة يخلق بيئة ثلاثية الأبعاد باستخدام الصور والصوت والرسوم المتحركة. يتطلب قوة حوسبة عالية. معيار نقله عبر الويب: VRML. امتداد الملف: .wrl</div>
   </div>
 </div>
 
-<p style="text-align:center;color:var(--muted2);font-size:12px;margin-top:40px;font-family:Inter,sans-serif;letter-spacing:1px">COM 205 Multimedia Applications &mdash; Chapter 0 Complete Study Guide &middot; Good Luck on Your Final! &#x1F3C6;</p>
+<p style="text-align:center;color:var(--muted2);font-size:12px;margin-top:40px;font-family:Inter,sans-serif;letter-spacing:1px">COM 205 Multimedia Applications &mdash; Chapter 0 Study Guide &middot; Good Luck! 🏆</p>
 </div>
 
 <script>
-/* ── Particle Canvas ── */
+/* Particle Canvas */
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
 let W, H, pts = [];
@@ -666,7 +533,7 @@ function mkPt() {
     r: Math.random() * 1.4 + 0.3,
     vx: (Math.random() - 0.5) * 0.28,
     vy: (Math.random() - 0.5) * 0.28,
-    o: Math.random() * 0.35 + 0.07
+    o: Math.random() * 0.18 + 0.04
   };
 }
 
@@ -677,7 +544,7 @@ function draw() {
   pts.forEach(p => {
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(0,200,80,${p.o})`;
+    ctx.fillStyle = `rgba(0,168,232,${p.o})`;
     ctx.fill();
     p.x += p.vx; p.y += p.vy;
     if (p.x < 0 || p.x > W) p.vx *= -1;
@@ -691,7 +558,7 @@ function draw() {
         ctx.beginPath();
         ctx.moveTo(pts[i].x, pts[i].y);
         ctx.lineTo(pts[j].x, pts[j].y);
-        ctx.strokeStyle = `rgba(0,200,80,${0.07 * (1 - d / 110)})`;
+        ctx.strokeStyle = `rgba(0,168,232,${0.06 * (1 - d / 110)})`;
         ctx.lineWidth = 0.5;
         ctx.stroke();
       }
@@ -703,7 +570,7 @@ function draw() {
 resize(); init(); draw();
 window.addEventListener('resize', () => { resize(); init(); });
 
-/* ── Active nav on scroll ── */
+/* Active nav on scroll */
 const secs = document.querySelectorAll('[id]');
 const links = document.querySelectorAll('.top-nav a');
 const obs = new IntersectionObserver(entries => {
@@ -717,7 +584,7 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
 secs.forEach(s => obs.observe(s));
 
-/* ── 3D card hover ── */
+/* 3D card hover */
 document.querySelectorAll('.card').forEach(card => {
   card.addEventListener('mousemove', e => {
     const r = card.getBoundingClientRect();
@@ -728,7 +595,7 @@ document.querySelectorAll('.card').forEach(card => {
   card.addEventListener('mouseleave', () => { card.style.transform = ''; });
 });
 
-/* ── Animate sections on scroll ── */
+/* Animate sections on scroll */
 const animObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
