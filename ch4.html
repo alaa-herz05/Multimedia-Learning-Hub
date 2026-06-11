@@ -6,31 +6,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chapter 4 — Multimedia Skills & Team Roles</title>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
   <style>
     /* ══════════════════════════════════════
    ROOT — Dark Green Theme
 ══════════════════════════════════════ */
     :root {
-      --navy: #040d07;
-      --deep: #071209;
-      --mid: #0c1f10;
-      --card-bg: rgba(12, 31, 16, .7);
-      --border: rgba(0, 210, 90, .18);
-      --accent: #00d25a;
-      --accent2: #ff8c42;
-      --gold: #ffc940;
-      --green2: #6effc8;
+      --white: #ffffff; --light0: #f4f9ff; --light1: #e8f4ff; --light2: #d6ebff; --light3: #c0dfff;
+      --navy: #f4f9ff;
+      --deep: #e8f4ff;
+      --mid: #f4f9ff;
+      --card-bg: rgba(255,255,255,.92);
+      --border: rgba(0,160,220,.18);
+      --accent: #00a8e8;
+      --accent2: #00d4ff;
+      --gold: #f0a500;
+      --green2: #00d4ff;
       --red: #ff5f6d;
-      --purple: #b48aff;
-      --sky: #38d9f5;
-      --text: #d2edda;
-      --muted: #5e8068;
-      --muted2: #8aab92;
-      --hl: rgba(0, 210, 90, .07);
-      --ar-bg: rgba(255, 201, 64, .05);
-      --ar-border: rgba(255, 201, 64, .25);
+      --purple: #a78bfa;
+      --sky: #00a8e8;
+      --text: #1a2e3b;
+      --muted: #5a8a9e;
+      --muted2: #8ab0c0;
+      --hl: rgba(0,168,232,.07);
+      --ar-bg: rgba(0,168,232,.05);
+      --ar-border: rgba(0,168,232,.28);
     }
 
     *,
@@ -41,13 +42,16 @@
       box-sizing: border-box;
     }
 
+    ::-webkit-scrollbar{width:5px;height:5px}
+    ::-webkit-scrollbar-track{background:var(--light1)}
+    ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
     html {
       scroll-behavior: smooth;
     }
 
     body {
-      font-family: Cairo, sans-serif;
-      background: var(--navy);
+      font-family: Inter, Cairo, sans-serif;
+      background: #f4f9ff;
       color: var(--text);
       line-height: 1.8;
       font-size: 14.5px;
@@ -56,7 +60,7 @@
 
     b,
     strong {
-      color: #fff;
+      color: #0d2233;
     }
 
     /* ── CANVAS + GRID ── */
@@ -73,8 +77,8 @@
       z-index: 0;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(0, 210, 90, .03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 210, 90, .03) 1px, transparent 1px);
+        linear-gradient(rgba(0,168,232,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,168,232,.03) 1px, transparent 1px);
       background-size: 55px 55px;
     }
 
@@ -85,7 +89,7 @@
       position: sticky;
       top: 0;
       z-index: 999;
-      background: rgba(4, 13, 7, .95);
+      background: rgba(244,249,255,.97);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       padding: 10px 20px;
@@ -99,7 +103,7 @@
       text-decoration: none;
       color: var(--text);
       border: 1px solid var(--border);
-      background: rgba(12, 31, 16, .85);
+      background: rgba(0,168,232,.04);
       padding: 7px 13px;
       border-radius: 9px;
       font-size: 12px;
@@ -111,10 +115,10 @@
 
     .topic-nav a:hover,
     .topic-nav a.active {
-      color: var(--navy);
+      color: #fff;
       background: var(--accent);
       border-color: var(--accent);
-      box-shadow: 0 0 14px rgba(0, 210, 90, .4);
+      box-shadow: 0 0 18px rgba(0,168,232,.4);
     }
 
     /* ══════════════════════════════════════
@@ -139,8 +143,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0, 210, 90, .14) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0, 210, 90, .06) 0%, transparent 60%);
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0,168,232,.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0,212,255,.07) 0%, transparent 60%);
       pointer-events: none;
     }
 
@@ -157,7 +161,7 @@
       border-radius: 30px;
       margin-bottom: 22px;
       text-transform: uppercase;
-      background: rgba(0, 210, 90, .07);
+      background: rgba(0,168,232,.08);
       animation: fadeDown .8s ease both;
     }
 
@@ -187,12 +191,12 @@
       font-family: Syne, sans-serif;
       font-size: clamp(2.2rem, 5.5vw, 4rem);
       font-weight: 800;
-      color: #fff;
+      color: #0d2233;
       letter-spacing: -2px;
       line-height: 1.05;
       margin-bottom: 8px;
       animation: fadeDown .9s ease .1s both;
-      text-shadow: 0 0 50px rgba(0, 210, 90, .3);
+      text-shadow: 0 0 60px rgba(0,168,232,.2);
     }
 
     .hero h1 span {
@@ -240,7 +244,7 @@
 
     /* ── Chapter Banner ── */
     .chapter-banner {
-      background: linear-gradient(135deg, rgba(0, 210, 90, .09), rgba(4, 13, 7, .75));
+      background: linear-gradient(135deg, rgba(0,168,232,.07), rgba(244,249,255,.9));
       border: 1px solid var(--accent);
       border-radius: 18px;
       padding: 22px 28px;
@@ -248,14 +252,14 @@
       display: flex;
       align-items: center;
       gap: 18px;
-      box-shadow: 0 8px 40px rgba(0, 0, 0, .45), 0 0 0 1px rgba(0, 210, 90, .07);
+      box-shadow: 0 8px 40px rgba(0,168,232,.1), 0 0 0 1px rgba(0,168,232,.07);
     }
 
     .ch-num {
       width: 58px;
       height: 58px;
-      background: linear-gradient(135deg, var(--accent), #007a33);
-      color: var(--navy);
+      background: linear-gradient(135deg, var(--accent), #0077b6);
+      color: #fff;
       border-radius: 14px;
       display: flex;
       align-items: center;
@@ -263,14 +267,14 @@
       font-weight: 900;
       font-size: 22px;
       flex-shrink: 0;
-      box-shadow: 0 4px 20px rgba(0, 210, 90, .4);
+      box-shadow: 0 4px 20px rgba(0,168,232,.4);
     }
 
     .ch-titles h2 {
       font-family: Syne, sans-serif;
       font-size: 1.5rem;
       font-weight: 800;
-      color: #fff;
+      color: #0d2233;
       letter-spacing: -.3px;
     }
 
@@ -301,9 +305,9 @@
     .sec-num {
       width: 42px;
       height: 42px;
-      background: rgba(0, 210, 90, .13);
+      background: var(--accent);
       border: 1px solid var(--accent);
-      color: var(--accent);
+      color: #fff;
       border-radius: 11px;
       display: flex;
       align-items: center;
@@ -318,7 +322,7 @@
       font-family: Syne, sans-serif;
       font-size: 1.15rem;
       font-weight: 800;
-      color: #fff;
+      color: #0d2233;
       letter-spacing: -.2px;
     }
 
@@ -346,8 +350,7 @@
       border-radius: 14px;
       padding: 22px 26px;
       margin-bottom: 14px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, .35), 0 1px 0 rgba(255, 255, 255, .03) inset;
+      box-shadow: 0 2px 12px rgba(0,168,232,.06);
     }
 
     .card-title {
@@ -363,7 +366,7 @@
 
     .card-title::before {
       content: '▶';
-      color: var(--accent2);
+      color: var(--gold);
       font-size: 10px;
       flex-shrink: 0;
     }
@@ -394,7 +397,7 @@
 
     /* Highlight / Note / Tip / AR boxes */
     .hl {
-      background: var(--hl);
+      background: rgba(0,168,232,.04);
       border-left: 3px solid var(--accent);
       border-radius: 0 8px 8px 0;
       padding: 13px 16px;
@@ -403,8 +406,8 @@
     }
 
     .note {
-      background: rgba(255, 140, 66, .07);
-      border: 1px solid rgba(255, 140, 66, .28);
+      background: rgba(255,95,109,.06);
+      border: 1px solid rgba(255,95,109,.25);
       border-radius: 10px;
       padding: 13px 16px;
       margin: 10px 0;
@@ -414,7 +417,7 @@
     .note-label {
       font-size: 10px;
       font-weight: 700;
-      color: var(--accent2);
+      color: #ff8a94;
       letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: 5px;
@@ -422,8 +425,8 @@
     }
 
     .tip {
-      background: rgba(0, 210, 90, .05);
-      border: 1px solid rgba(0, 210, 90, .25);
+      background: rgba(167,139,250,.07);
+      border: 1px solid rgba(167,139,250,.25);
       border-radius: 10px;
       padding: 13px 16px;
       margin: 10px 0;
@@ -433,7 +436,7 @@
     .tip-label {
       font-size: 10px;
       font-weight: 700;
-      color: var(--accent);
+      color: var(--purple);
       letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: 5px;
@@ -451,7 +454,7 @@
       text-align: right;
       font-family: Cairo, sans-serif;
       font-size: 13.5px;
-      color: #ccd6e8;
+      color: #2a4a5e;
       line-height: 1.9;
     }
 
@@ -480,7 +483,7 @@
     }
 
     thead th {
-      background: var(--mid);
+      background: rgba(0,168,232,.1);
       color: var(--accent);
       padding: 11px 14px;
       text-align: left;
@@ -491,11 +494,11 @@
     }
 
     tbody tr {
-      border-bottom: 1px solid rgba(0, 210, 90, .07);
+      border-bottom: 1px solid rgba(0,168,232,.07);
     }
 
     tbody tr:hover {
-      background: var(--hl);
+      background: rgba(0,168,232,.04);
     }
 
     tbody td {
@@ -528,7 +531,7 @@
       display: inline-block;
       border: 1px solid var(--accent);
       color: var(--accent);
-      background: rgba(0, 210, 90, .1);
+      background: rgba(0,168,232,.09);
       border-radius: 5px;
       padding: 2px 10px;
       font-size: 11px;
@@ -612,7 +615,7 @@
       transition: .3s;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, .3);
+      box-shadow: 0 2px 12px rgba(0,168,232,.06);
     }
 
     .role-card::before {
@@ -628,7 +631,7 @@
     .role-card:hover {
       border-color: var(--accent);
       transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0, 210, 90, .15);
+      box-shadow: 0 8px 24px rgba(0,168,232,.18);
     }
 
     .role-card.pm::before {
@@ -673,7 +676,7 @@
       font-family: Syne, sans-serif;
       font-size: 1rem;
       font-weight: 800;
-      color: #fff;
+      color: #0d2233;
       margin-bottom: 4px;
     }
 
@@ -723,7 +726,7 @@
     }
 
     .role-section li strong {
-      color: var(--text);
+      color: #1a2e3b;
     }
 
     /* step boxes */
@@ -739,7 +742,7 @@
       width: 28px;
       height: 28px;
       background: var(--accent);
-      color: var(--navy);
+      color: #fff;
       border-radius: 7px;
       display: flex;
       align-items: center;
@@ -754,7 +757,7 @@
    FINAL REFERENCE TABLE
 ══════════════════════════════════════ */
     .final {
-      background: linear-gradient(135deg, rgba(0, 210, 90, .07), rgba(4, 13, 7, .9));
+      background: linear-gradient(135deg, rgba(0,168,232,.05), rgba(244,249,255,.97));
       border: 1px solid var(--accent);
       border-radius: 18px;
       padding: 32px;
@@ -786,7 +789,7 @@
     footer {
       position: relative;
       z-index: 1;
-      background: linear-gradient(180deg, transparent, var(--deep));
+      background: linear-gradient(180deg, transparent, var(--light1));
       border-top: 1px solid var(--border);
       padding: 50px 24px 36px;
     }
@@ -807,7 +810,7 @@
       font-family: Syne, sans-serif;
       font-size: 1.1rem;
       font-weight: 800;
-      color: #fff;
+      color: #0d2233;
       margin-bottom: 8px;
     }
 
@@ -862,7 +865,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      background: rgba(12, 31, 16, .7);
+      background: rgba(0,168,232,.04);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 12px 16px;
@@ -873,7 +876,7 @@
 
     .contact-card:hover {
       border-color: var(--accent);
-      background: rgba(0, 210, 90, .07);
+      background: rgba(0,168,232,.08);
       transform: translateX(4px);
     }
 
@@ -2068,7 +2071,7 @@
       ctx.clearRect(0, 0, W, H);
       particles.forEach(p => {
         ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0,210,90,${p.o})`; ctx.fill();
+        ctx.fillStyle = `rgba(0,168,232,${p.o})`; ctx.fill();
         p.x += p.vx; p.y += p.vy;
         if (p.x < 0 || p.x > W) p.vx *= -1;
         if (p.y < 0 || p.y > H) p.vy *= -1;
@@ -2079,7 +2082,7 @@
           const d = Math.sqrt(dx * dx + dy * dy);
           if (d < 88) {
             ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(0,210,90,${.06 * (1 - d / 88)})`; ctx.lineWidth = .5; ctx.stroke();
+            ctx.strokeStyle = `rgba(0,168,232,${.06 * (1 - d / 88)})`; ctx.lineWidth = .5; ctx.stroke();
           }
         }
       }
