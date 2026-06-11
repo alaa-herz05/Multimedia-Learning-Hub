@@ -1,57 +1,43 @@
-
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <meta content="Chapter 7 study guide for Graphic/Image Data Structures and Compression." name="description"/>
-  <title>
-   Chapter 7 &mdash; Graphic/Image Data Structures &amp; Compression
-  </title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&amp;family=Cairo:wght@300;400;600;700;900&amp;family=JetBrains+Mono:wght@400;600&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 7 — Graphic/Image Data Structures & Compression</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Cairo:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-   /* ═══════════════════════════════════════════
-   ROOT — Dark Green Theme
+    /* ═══════════════════════════════════════════
+   ROOT — Light White / Sky-Blue Theme
 ═══════════════════════════════════════════ */
     :root {
-      --black: #060608;
-      --deep: #090e0a;
-      --surface: #0d1410;
-      --card: #111a13;
-      --card2: #172019;
-      --border: rgba(34, 170, 60, .22);
-      --border2: rgba(255, 255, 255, .06);
-      --green: #1aaa3c;
-      --green2: #22cc48;
-      --green3: #2eef58;
-      --green-glow: rgba(26, 170, 60, .28);
-      --green-dim: rgba(26, 170, 60, .09);
-      --gold: #ffc940;
-      --gold-dim: rgba(255, 201, 64, .09);
-      --red: #ff4455;
-      --blue: #00c8ff;
-      --purple: #b48aff;
-      --text: #ddeedd;
-      --muted: #5a7060;
-      --muted2: #8aaa90;
-      --mono: 'JetBrains Mono', monospace;
+      --black:    #ffffff;
+      --deep:     #f0f6ff;
+      --surface:  #e8f2ff;
+      --card:     #ffffff;
+      --card2:    #f4f9ff;
+      --border:   rgba(0, 140, 230, .22);
+      --border2:  rgba(0, 100, 200, .10);
+      --blue:     #0090e0;
+      --blue2:    #00aaf0;
+      --blue3:    #00c4ff;
+      --blue-glow: rgba(0, 160, 230, .28);
+      --blue-dim:  rgba(0, 160, 230, .09);
+      --gold:     #e07800;
+      --gold-dim: rgba(224, 120, 0, .09);
+      --red:      #e02040;
+      --purple:   #6b40cc;
+      --text:     #1a2e44;
+      --muted:    #7090b0;
+      --muted2:   #406080;
+      --mono:     'JetBrains Mono', monospace;
     }
 
-    *,
-    *::before,
-    *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: Inter, Cairo, sans-serif;
-      background: var(--black);
+      background: var(--deep);
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
@@ -59,15 +45,8 @@
       line-height: 1.75;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    strong,
-    b {
-      color: #fff;
-    }
+    a { text-decoration: none; color: inherit; }
+    strong, b { color: #0a1a2e; }
 
     /* ═══════════════════════════════════════════
    ANIMATED BACKGROUND
@@ -79,138 +58,63 @@
       pointer-events: none;
       overflow: hidden;
     }
-
     .bg-grid {
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(26, 170, 60, .04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(26, 170, 60, .04) 1px, transparent 1px);
+        linear-gradient(rgba(0, 140, 230, .05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 140, 230, .05) 1px, transparent 1px);
       background-size: 50px 50px;
     }
-
     .bg-orb {
       position: absolute;
       border-radius: 50%;
       filter: blur(90px);
       animation: orbPulse 9s ease-in-out infinite;
     }
-
-    .orb1 {
-      width: 550px;
-      height: 550px;
-      top: -150px;
-      left: -120px;
-      background: radial-gradient(circle, rgba(26, 170, 60, .08), transparent 70%);
-      animation-delay: 0s;
-    }
-
-    .orb2 {
-      width: 380px;
-      height: 380px;
-      bottom: -100px;
-      right: -80px;
-      background: radial-gradient(circle, rgba(180, 138, 255, .05), transparent 70%);
-      animation-delay: -5s;
-    }
-
-    .orb3 {
-      width: 300px;
-      height: 300px;
-      top: 45%;
-      left: 55%;
-      background: radial-gradient(circle, rgba(0, 200, 255, .03), transparent 70%);
-      animation-delay: -2.5s;
-    }
-
-    @keyframes orbPulse {
-
-      0%,
-      100% {
-        transform: scale(1)
-      }
-
-      50% {
-        transform: scale(1.14)
-      }
-    }
+    .orb1 { width:550px; height:550px; top:-150px; left:-120px; background: radial-gradient(circle, rgba(0,160,230,.10), transparent 70%); animation-delay:0s; }
+    .orb2 { width:380px; height:380px; bottom:-100px; right:-80px; background: radial-gradient(circle, rgba(100,80,255,.06), transparent 70%); animation-delay:-5s; }
+    .orb3 { width:300px; height:300px; top:45%; left:55%; background: radial-gradient(circle, rgba(0,200,255,.05), transparent 70%); animation-delay:-2.5s; }
+    @keyframes orbPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.14)} }
 
     /* ═══════════════════════════════════════════
    STICKY TOP NAV
 ═══════════════════════════════════════════ */
     .top-nav {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: rgba(6, 6, 8, .88);
+      position: sticky; top: 0; z-index: 999;
+      background: rgba(255,255,255,.90);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       padding: 0 20px;
+      box-shadow: 0 2px 16px rgba(0,120,200,.08);
     }
-
     .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 0;
-      height: 54px;
-      overflow-x: auto;
-      scrollbar-width: none;
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; gap: 0;
+      height: 54px; overflow-x: auto; scrollbar-width: none;
     }
-
-    .nav-inner::-webkit-scrollbar {
-      display: none;
-    }
-
+    .nav-inner::-webkit-scrollbar { display: none; }
     .nav-brand {
-      font-family: Orbitron, monospace;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--green2);
-      letter-spacing: 2px;
-      white-space: nowrap;
-      padding-right: 20px;
-      border-right: 1px solid var(--border);
-      margin-right: 16px;
-      flex-shrink: 0;
+      font-family: Orbitron, monospace; font-size: 11px; font-weight: 700;
+      color: var(--blue2); letter-spacing: 2px; white-space: nowrap;
+      padding-right: 20px; border-right: 1px solid var(--border);
+      margin-right: 16px; flex-shrink: 0;
     }
-
-    .nav-links {
-      display: flex;
-      gap: 4px;
-      flex-shrink: 0;
-    }
-
+    .nav-links { display: flex; gap: 4px; flex-shrink: 0; }
     .nav-links a {
-      font-size: 11.5px;
-      font-weight: 600;
-      color: var(--muted2);
-      padding: 6px 12px;
-      border-radius: 8px;
-      white-space: nowrap;
-      transition: .2s;
-      letter-spacing: .3px;
+      font-size: 11.5px; font-weight: 600; color: var(--muted);
+      padding: 6px 12px; border-radius: 8px; white-space: nowrap;
+      transition: .2s; letter-spacing: .3px;
     }
-
-    .nav-links a:hover {
-      color: var(--green2);
-      background: var(--green-dim);
-    }
-
-    .nav-links a.active {
-      color: var(--green3);
-      background: var(--green-dim);
-    }
+    .nav-links a:hover { color: var(--blue2); background: var(--blue-dim); }
+    .nav-links a.active { color: var(--blue2); background: var(--blue-dim); }
 
     /* ═══════════════════════════════════════════
    PAGE WRAP
 ═══════════════════════════════════════════ */
     .page-wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 1000px;
-      margin: 0 auto;
+      position: relative; z-index: 1;
+      max-width: 1000px; margin: 0 auto;
       padding: 0 20px 80px;
     }
 
@@ -222,146 +126,65 @@
       padding: 64px 24px 52px;
       border-bottom: 1px solid var(--border);
       margin-bottom: 48px;
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
-
     .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 65% at 50% 0%, rgba(26, 170, 60, .12), transparent 70%);
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 65% at 50% 0%, rgba(0,160,230,.10), transparent 70%);
       pointer-events: none;
     }
-
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid var(--border);
-      color: var(--green2);
-      font-family: Orbitron, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      padding: 6px 22px;
-      border-radius: 20px;
-      background: var(--green-dim);
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      box-shadow: 0 0 22px var(--green-glow);
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--border); color: var(--blue2);
+      font-family: Orbitron, monospace; font-size: 10px; font-weight: 700;
+      letter-spacing: 3px; padding: 6px 22px; border-radius: 20px;
+      background: var(--blue-dim); margin-bottom: 20px; text-transform: uppercase;
+      box-shadow: 0 0 22px var(--blue-glow);
       animation: badgePulse 3s ease-in-out infinite;
     }
-
     @keyframes badgePulse {
-
-      0%,
-      100% {
-        box-shadow: 0 0 22px var(--green-glow)
-      }
-
-      50% {
-        box-shadow: 0 0 44px rgba(26, 170, 60, .45)
-      }
+      0%,100%{box-shadow:0 0 22px var(--blue-glow)}
+      50%{box-shadow:0 0 44px rgba(0,160,230,.45)}
     }
-
     .hero h1 {
       font-family: Orbitron, monospace;
       font-size: clamp(1.6rem, 5vw, 3rem);
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: -1px;
-      margin-bottom: 8px;
-      text-shadow: 0 0 44px rgba(26, 170, 60, .4);
+      font-weight: 900; color: #0a1a2e;
+      letter-spacing: -1px; margin-bottom: 8px;
+      text-shadow: 0 0 44px rgba(0,160,230,.3);
       line-height: 1.1;
     }
-
-    .hero h1 span {
-      color: var(--green2);
-    }
-
+    .hero h1 span { color: var(--blue2); }
     .hero-sub {
-      font-family: Cairo, sans-serif;
-      font-size: 1rem;
-      color: var(--gold);
-      margin-bottom: 14px;
-      text-shadow: 0 0 18px rgba(255, 201, 64, .3);
+      font-family: Cairo, sans-serif; font-size: 1rem;
+      color: var(--gold); margin-bottom: 14px;
+      text-shadow: 0 0 18px rgba(224,120,0,.25);
     }
-
-    .hero-desc {
-      font-size: 13.5px;
-      color: var(--muted2);
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.9;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 22px;
-    }
-
+    .hero-desc { font-size: 13.5px; color: var(--muted2); max-width: 600px; margin: 0 auto; line-height: 1.9; }
+    .hero-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 22px; }
     .hero-tag {
-      font-size: 11px;
-      padding: 4px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--muted2);
-      font-weight: 600;
-      letter-spacing: .5px;
+      font-size: 11px; padding: 4px 14px; border-radius: 12px;
+      border: 1px solid var(--border); background: var(--card);
+      color: var(--muted2); font-weight: 600; letter-spacing: .5px;
     }
 
     /* ═══════════════════════════════════════════
    SECTION
 ═══════════════════════════════════════════ */
-    .section {
-      margin-bottom: 52px;
-      scroll-margin-top: 70px;
-    }
-
-    .sec-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 24px;
-      position: relative;
-    }
-
+    .section { margin-bottom: 52px; scroll-margin-top: 70px; }
+    .sec-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; position: relative; }
     .sec-number {
-      font-family: Orbitron, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--black);
-      background: var(--green2);
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 0 14px var(--green-glow);
+      font-family: Orbitron, monospace; font-size: 10px; font-weight: 700;
+      color: #fff; background: var(--blue2);
+      width: 30px; height: 30px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; box-shadow: 0 0 14px var(--blue-glow);
     }
-
     .sec-title {
-      font-family: Orbitron, monospace;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--green2);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      flex: 1;
+      font-family: Orbitron, monospace; font-size: 13px; font-weight: 700;
+      color: var(--blue2); letter-spacing: 2px; text-transform: uppercase; flex: 1;
     }
-
-    .sec-line {
-      height: 1px;
-      flex: 1;
-      background: linear-gradient(90deg, var(--border), transparent);
-    }
+    .sec-line { height: 1px; flex: 1; background: linear-gradient(90deg, var(--border), transparent); }
 
     /* ═══════════════════════════════════════════
    CONTENT CARD
@@ -370,3061 +193,1004 @@
       background: var(--card);
       border: 1px solid var(--border2);
       border-radius: 18px;
-      padding: 28px 28px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 6px 30px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .04) inset;
-      margin-bottom: 16px;
-      transition: .25s;
+      padding: 28px;
+      position: relative; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,100,200,.08), 0 1px 0 rgba(255,255,255,.8) inset;
+      margin-bottom: 16px; transition: .25s;
     }
-
     .content-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--green), transparent);
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--blue), transparent);
     }
-
-    .content-card:hover {
-      border-color: var(--border);
-    }
+    .content-card:hover { border-color: var(--border); box-shadow: 0 6px 28px rgba(0,120,200,.14); }
 
     .card-title {
-      font-family: Cairo, sans-serif;
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-family: Cairo, sans-serif; font-size: 1.1rem; font-weight: 900;
+      color: #0a1a2e; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
     }
-
     .card-title-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      background: var(--green-dim);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      flex-shrink: 0;
+      width: 34px; height: 34px; border-radius: 10px;
+      background: var(--blue-dim); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; flex-shrink: 0;
     }
-
     .card-ar {
-      font-family: Cairo, sans-serif;
-      font-size: 13px;
-      color: var(--gold);
-      background: var(--gold-dim);
-      border: 1px solid rgba(255, 201, 64, .15);
-      border-radius: 10px;
-      padding: 12px 16px;
-      margin-bottom: 16px;
-      direction: rtl;
-      line-height: 1.85;
+      font-family: Cairo, sans-serif; font-size: 13px;
+      color: var(--gold); background: var(--gold-dim);
+      border: 1px solid rgba(224,120,0,.15); border-radius: 10px;
+      padding: 12px 16px; margin-bottom: 16px;
+      direction: rtl; line-height: 1.85;
     }
-
     .card-ar-label {
-      font-size: 10px;
-      font-family: Orbitron, monospace;
-      color: var(--gold);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 6px;
-      opacity: .7;
+      font-size: 10px; font-family: Orbitron, monospace; color: var(--gold);
+      letter-spacing: 2px; text-transform: uppercase;
+      display: block; margin-bottom: 6px; opacity: .7;
     }
-
-    .card-body {
-      font-size: 14px;
-      color: var(--muted2);
-      line-height: 1.9;
-    }
-
-    .card-body p {
-      margin-bottom: 10px;
-    }
-
-    .card-body p:last-child {
-      margin-bottom: 0;
-    }
+    .card-body { font-size: 14px; color: var(--muted2); line-height: 1.9; }
+    .card-body p { margin-bottom: 10px; }
+    .card-body p:last-child { margin-bottom: 0; }
 
     /* ═══════════════════════════════════════════
    POINTS LIST
 ═══════════════════════════════════════════ */
-    .points {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
+    .points { list-style: none; margin: 0; padding: 0; }
     .points li {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      padding: 9px 0;
-      border-bottom: 1px solid var(--border2);
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.7;
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 9px 0; border-bottom: 1px solid var(--border2);
+      font-size: 14px; color: var(--text); line-height: 1.7;
     }
-
-    .points li:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
+    .points li:last-child { border-bottom: none; padding-bottom: 0; }
     .pt-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--green2);
-      flex-shrink: 0;
-      margin-top: 7px;
-      box-shadow: 0 0 6px var(--green-glow);
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--blue2); flex-shrink: 0; margin-top: 7px;
+      box-shadow: 0 0 6px var(--blue-glow);
     }
 
     /* ═══════════════════════════════════════════
    CODE BLOCK
 ═══════════════════════════════════════════ */
     .code-block {
-      background: var(--card2);
-      border: 1px solid var(--border2);
-      border-radius: 12px;
-      padding: 16px 20px;
-      font-family: var(--mono);
-      font-size: 13px;
-      color: var(--green3);
-      margin: 14px 0;
-      overflow-x: auto;
-      line-height: 1.7;
+      background: var(--card2); border: 1px solid var(--border2);
+      border-radius: 12px; padding: 16px 20px;
+      font-family: var(--mono); font-size: 13px; color: #005c99;
+      margin: 14px 0; overflow-x: auto; line-height: 1.7;
     }
-
     .code-label {
-      font-family: Orbitron, monospace;
-      font-size: 9px;
-      font-weight: 700;
-      color: var(--green);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      display: block;
-      opacity: .7;
+      font-family: Orbitron, monospace; font-size: 9px; font-weight: 700;
+      color: var(--blue); letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 8px; display: block; opacity: .7;
     }
 
     /* ═══════════════════════════════════════════
    TABLE
 ═══════════════════════════════════════════ */
     .data-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-      margin: 12px 0;
-      border-radius: 12px;
-      overflow: hidden;
+      width: 100%; border-collapse: collapse; font-size: 13px;
+      margin: 12px 0; border-radius: 12px; overflow: hidden;
     }
-
     .data-table th {
-      background: var(--green-dim);
-      color: var(--green2);
-      padding: 11px 14px;
-      text-align: left;
-      font-family: Orbitron, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+      background: var(--blue-dim); color: var(--blue2);
+      padding: 11px 14px; text-align: left;
+      font-family: Orbitron, monospace; font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
       border-bottom: 1px solid var(--border);
     }
-
     .data-table td {
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--border2);
-      color: var(--text);
-      vertical-align: top;
+      padding: 10px 14px; border-bottom: 1px solid var(--border2);
+      color: var(--text); vertical-align: top;
     }
-
-    .data-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .data-table tr:hover td {
-      background: rgba(26, 170, 60, .04);
-    }
-
-    .data-table .highlight {
-      color: var(--green3);
-      font-weight: 700;
-    }
-
-    .data-table .muted {
-      color: var(--muted2);
-    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: rgba(0,160,230,.04); }
+    .data-table .highlight { color: var(--blue2); font-weight: 700; }
+    .data-table .muted { color: var(--muted2); }
 
     /* ═══════════════════════════════════════════
    TWO COLUMN
 ═══════════════════════════════════════════ */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 14px;
-    }
-
-    .col-card {
-      background: var(--card2);
-      border: 1px solid var(--border2);
-      border-radius: 14px;
-      padding: 18px;
-    }
-
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .col-card { background: var(--card2); border: 1px solid var(--border2); border-radius: 14px; padding: 18px; }
     .col-card-title {
-      font-family: Orbitron, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-family: Orbitron, monospace; font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
     }
-
-    .col-card.green-card {
-      border-color: rgba(26, 170, 60, .25);
-    }
-
-    .col-card.green-card .col-card-title {
-      color: var(--green2);
-    }
-
-    .col-card.gold-card {
-      border-color: rgba(255, 201, 64, .2);
-    }
-
-    .col-card.gold-card .col-card-title {
-      color: var(--gold);
-    }
-
-    .col-card.red-card {
-      border-color: rgba(255, 68, 85, .2);
-    }
-
-    .col-card.red-card .col-card-title {
-      color: var(--red);
-    }
+    .col-card.blue-card { border-color: rgba(0,160,230,.25); }
+    .col-card.blue-card .col-card-title { color: var(--blue2); }
+    .col-card.gold-card { border-color: rgba(224,120,0,.2); }
+    .col-card.gold-card .col-card-title { color: var(--gold); }
+    .col-card.red-card { border-color: rgba(224,32,64,.2); }
+    .col-card.red-card .col-card-title { color: var(--red); }
 
     /* ═══════════════════════════════════════════
    FORMULA / HIGHLIGHT BOX
 ═══════════════════════════════════════════ */
     .formula-box {
-      background: rgba(26, 170, 60, .07);
-      border: 1px solid rgba(26, 170, 60, .3);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin: 14px 0;
-      font-family: var(--mono);
-      font-size: 14px;
-      color: var(--green3);
-      text-align: center;
-      letter-spacing: .5px;
+      background: rgba(0,160,230,.07); border: 1px solid rgba(0,160,230,.3);
+      border-radius: 12px; padding: 16px 20px; margin: 14px 0;
+      font-family: var(--mono); font-size: 14px; color: #005c99;
+      text-align: center; letter-spacing: .5px;
     }
-
     .highlight-box {
-      background: var(--gold-dim);
-      border: 1px solid rgba(255, 201, 64, .2);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin: 14px 0;
-      font-size: 13.5px;
-      color: var(--text);
-      line-height: 1.85;
+      background: var(--gold-dim); border: 1px solid rgba(224,120,0,.2);
+      border-radius: 12px; padding: 16px 20px; margin: 14px 0;
+      font-size: 13.5px; color: var(--text); line-height: 1.85;
+    }
+    .highlight-box .hl-label {
+      font-family: Orbitron, monospace; font-size: 9px; font-weight: 700;
+      color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+      display: block; margin-bottom: 6px;
+    }
+    .info-box {
+      background: var(--blue-dim); border: 1px solid rgba(0,160,230,.2);
+      border-radius: 12px; padding: 16px 20px; margin: 14px 0;
+      font-size: 13.5px; color: var(--text); line-height: 1.85;
+    }
+    .info-box .hl-label {
+      font-family: Orbitron, monospace; font-size: 9px; font-weight: 700;
+      color: var(--blue); letter-spacing: 2px; text-transform: uppercase;
+      display: block; margin-bottom: 6px;
     }
 
-    .highlight-box .hl-label {
-      font-family: Orbitron, monospace;
-      font-size: 9px;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 6px;
+    /* ═══════════════════════════════════════════
+   HUFFMAN TREE VISUALIZATION
+═══════════════════════════════════════════ */
+    .tree-container {
+      background: var(--card2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px; margin: 16px 0;
+      overflow-x: auto;
     }
+    .tree-title {
+      font-family: Orbitron, monospace; font-size: 10px; font-weight: 700;
+      color: var(--blue); letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 16px; display: block;
+    }
+    .tree-svg { display: block; margin: 0 auto; }
+
+    /* ═══════════════════════════════════════════
+   STEP CARDS (for Huffman steps)
+═══════════════════════════════════════════ */
+    .steps-grid { display: flex; flex-direction: column; gap: 10px; margin: 14px 0; }
+    .step-card {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: var(--card2); border: 1px solid var(--border2);
+      border-radius: 12px; padding: 14px 16px;
+    }
+    .step-num {
+      width: 28px; height: 28px; border-radius: 8px; background: var(--blue2);
+      color: #fff; font-family: Orbitron, monospace; font-size: 11px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .step-content { flex: 1; }
+    .step-title { font-weight: 700; color: #0a1a2e; font-size: 14px; margin-bottom: 4px; }
+    .step-desc { font-size: 13px; color: var(--muted2); line-height: 1.7; }
+
+    /* ═══════════════════════════════════════════
+   QUESTIONS SECTION
+═══════════════════════════════════════════ */
+    .questions-section {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 22px; padding: 36px 32px; margin-top: 52px;
+      position: relative; overflow: hidden;
+    }
+    .questions-section::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--blue3), transparent);
+    }
+    .q-section-title {
+      font-family: Orbitron, monospace; font-size: 14px; font-weight: 900;
+      color: #0a1a2e; margin-bottom: 8px; letter-spacing: 2px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .q-section-sub {
+      font-family: Cairo, sans-serif; color: var(--muted2); font-size: 13px; margin-bottom: 28px;
+    }
+    .q-category { margin-bottom: 30px; }
+    .q-category-label {
+      font-family: Orbitron, monospace; font-size: 10px; font-weight: 700;
+      color: var(--blue); letter-spacing: 2px; text-transform: uppercase;
+      border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 16px;
+    }
+    .q-item {
+      background: var(--card2); border: 1px solid var(--border2);
+      border-radius: 14px; padding: 16px 20px; margin-bottom: 10px;
+    }
+    .q-item:last-child { margin-bottom: 0; }
+    .q-num {
+      font-family: Orbitron, monospace; font-size: 9px; font-weight: 700;
+      color: var(--blue2); letter-spacing: 1px; margin-bottom: 6px;
+    }
+    .q-text { font-size: 14px; color: var(--text); line-height: 1.75; margin-bottom: 10px; }
+    .q-answer {
+      background: rgba(0,160,230,.06); border: 1px solid rgba(0,160,230,.15);
+      border-radius: 8px; padding: 10px 14px;
+      font-size: 13px; color: var(--muted2); line-height: 1.7;
+      display: none;
+    }
+    .q-answer.show { display: block; }
+    .q-toggle {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 700; font-family: Orbitron, monospace;
+      letter-spacing: 1px; text-transform: uppercase; color: var(--blue2);
+      background: var(--blue-dim); border: 1px solid var(--border);
+      padding: 5px 14px; border-radius: 8px; cursor: pointer;
+      transition: .2s;
+    }
+    .q-toggle:hover { background: rgba(0,160,230,.18); }
 
     /* ═══════════════════════════════════════════
    REVIEW TABLE SECTION
 ═══════════════════════════════════════════ */
     .review-section {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 36px 32px;
-      margin-top: 60px;
-      position: relative;
-      overflow: hidden;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 22px; padding: 36px 32px; margin-top: 60px;
+      position: relative; overflow: hidden;
     }
-
     .review-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--green), var(--gold), transparent);
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--gold), transparent);
     }
-
     .review-title {
-      font-family: Orbitron, monospace;
-      font-size: 14px;
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 24px;
-      letter-spacing: 2px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      font-family: Orbitron, monospace; font-size: 14px; font-weight: 900;
+      color: #0a1a2e; margin-bottom: 24px; letter-spacing: 2px;
+      display: flex; align-items: center; gap: 12px;
     }
-
-    .review-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13.5px;
-    }
-
+    .review-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
     .review-table th {
-      background: var(--green-dim);
-      color: var(--green2);
-      padding: 12px 16px;
-      text-align: right;
-      direction: rtl;
-      font-family: Cairo, sans-serif;
-      font-size: 12px;
-      font-weight: 700;
+      background: var(--blue-dim); color: var(--blue2);
+      padding: 12px 16px; text-align: right; direction: rtl;
+      font-family: Cairo, sans-serif; font-size: 12px; font-weight: 700;
       border-bottom: 1px solid var(--border);
     }
-
     .review-table th:first-child {
-      text-align: left;
-      direction: ltr;
-      font-family: Orbitron, monospace;
-      font-size: 9px;
-      letter-spacing: 1.5px;
+      text-align: left; direction: ltr;
+      font-family: Orbitron, monospace; font-size: 9px; letter-spacing: 1.5px;
     }
-
-    .review-table td {
-      padding: 11px 16px;
-      border-bottom: 1px solid var(--border2);
-      vertical-align: top;
-      line-height: 1.7;
-    }
-
-    .review-table td:first-child {
-      font-family: Orbitron, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--green2);
-      white-space: nowrap;
-    }
-
-    .review-table td:nth-child(2) {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .review-table td:nth-child(3) {
-      color: var(--muted2);
-      font-size: 12.5px;
-    }
-
-    .review-table td:nth-child(4) {
-      color: var(--gold);
-      direction: rtl;
-      font-family: Cairo, sans-serif;
-      font-size: 12.5px;
-    }
-
-    .review-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .review-table tr:hover td {
-      background: rgba(26, 170, 60, .04);
-    }
+    .review-table td { padding: 11px 16px; border-bottom: 1px solid var(--border2); vertical-align: top; line-height: 1.7; }
+    .review-table td:first-child { font-family: Orbitron, monospace; font-size: 10px; font-weight: 700; color: var(--blue2); white-space: nowrap; }
+    .review-table td:nth-child(2) { color: var(--text); font-weight: 600; }
+    .review-table td:nth-child(3) { color: var(--muted2); font-size: 12.5px; }
+    .review-table td:nth-child(4) { color: var(--gold); direction: rtl; font-family: Cairo, sans-serif; font-size: 12.5px; }
+    .review-table tr:last-child td { border-bottom: none; }
+    .review-table tr:hover td { background: rgba(0,160,230,.04); }
 
     /* ═══════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════ */
     footer {
       border-top: 1px solid var(--border);
-      padding: 36px 24px 28px;
-      text-align: center;
-      position: relative;
-      margin-top: 60px;
+      padding: 36px 24px 28px; text-align: center;
+      position: relative; margin-top: 60px;
     }
-
     footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--green), transparent);
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 100px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
     }
-
-    .footer-logo {
-      font-family: Orbitron, monospace;
-      font-size: 1rem;
-      font-weight: 900;
-      color: var(--green2);
-      letter-spacing: 2px;
-      margin-bottom: 5px;
-    }
-
-    .footer-name {
-      font-family: Cairo, sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 16px;
-    }
-
-    .footer-info {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
+    .footer-logo { font-family: Orbitron, monospace; font-size: 1rem; font-weight: 900; color: var(--blue2); letter-spacing: 2px; margin-bottom: 5px; }
+    .footer-name { font-family: Cairo, sans-serif; font-size: 1rem; font-weight: 700; color: #0a1a2e; margin-bottom: 16px; }
+    .footer-info { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 16px; }
     .footer-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--muted2);
-      font-family: Cairo, sans-serif;
-      background: var(--card);
-      border: 1px solid var(--border2);
-      padding: 7px 16px;
-      border-radius: 50px;
-      transition: .2s;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--muted2); font-family: Cairo, sans-serif;
+      background: var(--card); border: 1px solid var(--border2);
+      padding: 7px 16px; border-radius: 50px; transition: .2s;
     }
-
-    .footer-item:hover {
-      border-color: var(--border);
-      color: var(--text);
-    }
-
-    .footer-copy {
-      font-size: 11px;
-      color: var(--muted);
-      font-family: Orbitron, monospace;
-      letter-spacing: 1.5px;
-    }
-
-    .footer-copy span {
-      color: var(--green2);
-    }
+    .footer-item:hover { border-color: var(--border); color: var(--text); }
+    .footer-copy { font-size: 11px; color: var(--muted); font-family: Orbitron, monospace; letter-spacing: 1.5px; }
+    .footer-copy span { color: var(--blue2); }
 
     /* ═══════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════ */
     @media(max-width:650px) {
-      .two-col {
-        grid-template-columns: 1fr;
-      }
-
-      .content-card {
-        padding: 20px 16px;
-      }
-
-      .review-section {
-        padding: 22px 14px;
-      }
-
-      .data-table th,
-      .data-table td {
-        padding: 8px 10px;
-        font-size: 12px;
-      }
+      .two-col { grid-template-columns: 1fr; }
+      .content-card { padding: 20px 16px; }
+      .review-section, .questions-section { padding: 22px 14px; }
+      .data-table th, .data-table td { padding: 8px 10px; font-size: 12px; }
     }
   </style>
- </head>
- <body>
+</head>
+
+<body>
+
+  <!-- BG -->
   <div class="bg-layer">
-   <div class="bg-grid">
-   </div>
-   <div class="bg-orb orb1">
-   </div>
-   <div class="bg-orb orb2">
-   </div>
-   <div class="bg-orb orb3">
-   </div>
+    <div class="bg-grid"></div>
+    <div class="bg-orb orb1"></div>
+    <div class="bg-orb orb2"></div>
+    <div class="bg-orb orb3"></div>
   </div>
-  <!-- NAV -->
+
+  <!-- ════════ TOP NAV ════════ -->
   <nav class="top-nav">
-   <div class="nav-inner">
-    <div class="nav-brand">
-     CH7
+    <div class="nav-inner">
+      <div class="nav-links">
+         <a href="index.html" class="active">🏠 Home</a>
+        <a href="#s1">Pixels</a>
+        <a href="#s2">Color Depth</a>
+        <a href="#s3">Image Types</a>
+        <a href="#s4">Formats</a>
+        <a href="#s5">Editing</a>
+        <a href="#s6">Analysis</a>
+        <a href="#s7">RGB & BMP</a>
+        <a href="#s8">Compression</a>
+        <a href="#s9">RLE</a>
+        <a href="#s10">🌳 Huffman</a>
+        <a href="#review">📋 Review</a>
+        <a href="#questions">❓ Questions</a>
+      </div>
     </div>
-    <div class="nav-links">
-     <a href="index.html">
-      🏠 Home
-     </a>
-     <a href="#s1">
-      Pixels &amp; Resolution
-     </a>
-     <a href="#s2">
-      CRT &amp; Interlacing
-     </a>
-     <a href="#s3">
-      Color Depth
-     </a>
-     <a href="#s4">
-      Image Types
-     </a>
-     <a href="#s5">
-      Bitmap vs Vector
-     </a>
-     <a href="#s6">
-      GIF Format
-     </a>
-     <a href="#s7">
-      Image Editing
-     </a>
-     <a href="#s8">
-      Image Analysis
-     </a>
-     <a href="#s9">
-      Digital Camera
-     </a>
-     <a href="#s10">
-      RGB &amp; Color Space
-     </a>
-     <a href="#s11">
-      Bitmap Structure
-     </a>
-     <a href="#s12">
-      Compression
-     </a>
-     <a href="#s13">
-      RLE
-     </a>
-     <a href="#s14">
-      Huffman
-     </a>
-     <a href="#review">
-      📋 Review
-     </a>
-    </div>
-   </div>
   </nav>
+
+  <!-- ════════ PAGE WRAP ════════ -->
   <div class="page-wrap">
-   <!-- HERO -->
-   <header class="hero">
-    <div class="hero-badge">
-     <span>
-      ●
-     </span>
-     CHAPTER 7
-     <span>
-      ●
-     </span>
-    </div>
-    <h1>
-     Graphic / Image
-     <br/>
-     <span>
-      Data Structures
-     </span>
-    </h1>
-    <div class="hero-sub">
-     هياكل بيانات الصور والرسوميات
-    </div>
-    <p class="hero-desc">
-     A complete visual study guide &mdash; pixels, CRT, color depth, image types, formats, editing, compression (RLE &amp; Huffman), and the bitmap file structure. All slides covered with diagrams and Arabic explanations.
-    </p>
-    <div class="hero-tags">
-     <span class="hero-tag">
-      Pixels &amp; Resolution
-     </span>
-     <span class="hero-tag">
-      CRT &amp; Interlacing
-     </span>
-     <span class="hero-tag">
-      RGB / True Color
-     </span>
-     <span class="hero-tag">
-      Bitmap File Structure
-     </span>
-     <span class="hero-tag">
-      Lossless vs Lossy
-     </span>
-     <span class="hero-tag">
-      Run-Length Encoding
-     </span>
-     <span class="hero-tag">
-      Huffman Encoding
-     </span>
-    </div>
-   </header>
-   <!-- ═══ S1: Pixels & Resolution ═══ -->
-   <section class="section" id="s1">
-    <div class="sec-header">
-     <div class="sec-number">
-      01
-     </div>
-     <div class="sec-title">
-      Pixels &amp; Resolution
-     </div>
-     <div class="sec-line">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🖼️
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-badge"><span>●</span> CHAPTER 7 <span>●</span></div>
+      <h1>Graphic / Image<br><span>Data Structures</span></h1>
+      <div class="hero-sub">هياكل بيانات الصور والرسوميات — ملخص شامل</div>
+      <p class="hero-desc">
+        دليل الدراسة الشامل: تمثيل الصور الرقمية، عمق اللون، تقنيات الضغط (RLE وHuffman)، تحرير الصور، نموذج RGB، وهياكل ملفات Bitmap — مع شرح تفصيلي لخوارزمية Huffman وأسئلة مراجعة شاملة.
+      </p>
+      <div class="hero-tags">
+        <span class="hero-tag">Pixels & Resolution</span>
+        <span class="hero-tag">Bitmap & Vector</span>
+        <span class="hero-tag">RGB Color Model</span>
+        <span class="hero-tag">Lossless vs Lossy</span>
+        <span class="hero-tag">Run-Length Encoding</span>
+        <span class="hero-tag">🌳 Huffman Encoding</span>
+        <span class="hero-tag">Image Editing</span>
+        <span class="hero-tag">Image Analysis</span>
       </div>
-      Digital Image Fundamentals
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      الصورة الرقمية تتكون من عدد كبير من عناصر الصورة (Pixels). كلما زاد عدد البكسلات زادت الجودة والدقة. طريقة تخزين الصور تُسمى
-      <strong>
-       Bitmap
-      </strong>
-      &mdash; وهي نفس الطريقة التي يُخزَّن بها محتوى الشاشة في ذاكرة الفيديو.
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       A digital image consists of many
-       <strong>
-        picture elements = pixels
-       </strong>
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Number of pixels determines
-       <strong>
-        image quality / resolution
-       </strong>
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Higher resolution &rarr; always better quality
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Bit-map
-       </strong>
-       stores image data the same way monitor contents are stored in video memory
-      </li>
-     </ul>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       📐
+    </header>
+
+    <!-- ════ SECTION 1: Pixels & Resolution ════ -->
+    <section class="section" id="s1">
+      <div class="sec-header">
+        <div class="sec-number">01</div>
+        <div class="sec-title">Pixels &amp; Resolution</div>
+        <div class="sec-line"></div>
       </div>
-      Resolution Formula &amp; Pixel Depth
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      دقة الصورة = العرض &times; الارتفاع. عمق الألوان (Pixel Depth) = عدد البتات لكل بكسل &rarr; عدد الألوان = 2^n. مثال امتحاني: صورة 100&times;100 بكسل، عمق 8 بت &rarr; الحجم = 100&times;100&times;8 = 80,000 بت = 10KB.
-     </div>
-     <div class="two-col">
-      <div class="col-card green-card">
-       <div class="col-card-title">
-        Resolution = W &times; H
-       </div>
-       <ul class="points">
-        <li>
-         <span class="pt-dot">
-         </span>
-         Width &times; Height in pixels
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         e.g. 640&times;480, 1920&times;1080
-        </li>
-       </ul>
+
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">🖼️</div>What is a Digital Image?</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          الصورة الرقمية تتكون من عدد كبير من عناصر الصورة تُسمى <strong>بكسل (Pixels)</strong>. كلما زاد عدد البكسلات كانت الصورة ذات دقة أعلى وجودة أفضل. طريقة تخزين الصور تُسمى <strong>Bitmap</strong> وهي نفس طريقة تخزين محتويات الشاشة في ذاكرة الفيديو.
+        </div>
+        <ul class="points">
+          <li><span class="pt-dot"></span><span>A digital image consists of many <strong>picture elements (pixels)</strong>.</span></li>
+          <li><span class="pt-dot"></span><span>The number of pixels determines <strong>image quality (resolution)</strong> — more pixels = better quality.</span></li>
+          <li><span class="pt-dot"></span><span>A <strong>bit-map</strong> stores graphic data the same way a monitor stores data in video memory.</span></li>
+        </ul>
       </div>
-      <div class="col-card gold-card">
-       <div class="col-card-title">
-        Pixel Depth
-       </div>
-       <ul class="points">
-        <li>
-         <span class="pt-dot">
-         </span>
-         8, 16, 24, or n bits per pixel
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         Colors = 2
-         <sup>
-          n
-         </sup>
-        </li>
-       </ul>
+
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">📐</div>Resolution &amp; Pixel Depth</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          دقة الصورة = <strong>العرض × الارتفاع</strong> (بالبكسلات). عمق البكسل = عدد البتات لكل بكسل ويحدد عدد الألوان = 2 أس عدد البتات. مثال: عمق 8 بت = 256 لون.
+        </div>
+        <div class="two-col">
+          <div class="col-card blue-card">
+            <div class="col-card-title">📏 Resolution</div>
+            <ul class="points">
+              <li><span class="pt-dot"></span>Width × Height (in pixels)</li>
+              <li><span class="pt-dot"></span>e.g. 1920 × 1080 = Full HD</li>
+            </ul>
+          </div>
+          <div class="col-card gold-card">
+            <div class="col-card-title">🎨 Pixel Depth</div>
+            <ul class="points">
+              <li><span class="pt-dot"></span>8-bit, 16-bit, 24-bit, or n-bit</li>
+              <li><span class="pt-dot"></span>Colors = 2<sup>n</sup></li>
+            </ul>
+          </div>
+        </div>
+        <div class="highlight-box">
+          <span class="hl-label">📝 Exam Example</span>
+          A picture of <strong>100×100 pixels</strong> with pixel depth of <strong>8 bits</strong>. What is the size?<br>
+          <strong>100 × 100 × 8 = 80,000 bits = 80 Kbits = 10 KB</strong> (since 8 bits → 1 Byte)
+        </div>
       </div>
-     </div>
-     <div class="highlight-box">
-      <span class="hl-label">
-       📝 Exam Example
-      </span>
-      100&times;100 pixels, 8-bit depth &rarr;
-      <strong>
-       100 &times; 100 &times; 8 = 80,000 bits = 80 Kbit = 10 KB
-      </strong>
-      <br/>
-      (Note: 8 bits &rarr; 1 Byte)
-     </div>
-    </div>
-   </section>
-   <!-- ═══ S2: CRT & Interlacing ═══ -->
-   <section class="section" id="s2">
-    <div class="sec-header">
-     <div class="sec-number">
-      02
-     </div>
-     <div class="sec-title">
-      CRT Display &amp; Interlacing
-     </div>
-     <div class="sec-line">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       📺
+    </section>
+
+    <!-- ════ SECTION 2: Color Depth ════ -->
+    <section class="section" id="s2">
+      <div class="sec-header">
+        <div class="sec-number">02</div>
+        <div class="sec-title">Color Depth &amp; Graphics Standards</div>
+        <div class="sec-line"></div>
       </div>
-      CRT Components
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      شاشة CRT تعمل بمسدس إلكتروني يطلق شعاعاً نحو شاشة مطلية بالفوسفور تضيء عند الاصطدام. نهاية كل سطر =
-      <strong>
-       Horizontal Flyback
-      </strong>
-      . نهاية الإطار كاملاً =
-      <strong>
-       Vertical Flyback
-      </strong>
-      .
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Evacuated tube
-       </strong>
-       &mdash; vacuum chamber
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Electron gun
-       </strong>
-       fires a beam of electrons
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Focus mechanism
-       </strong>
-       &mdash; focuses the beam
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Horizontal &amp; vertical deflection plates
-       </strong>
-       steer the beam
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Phosphor-coated surface
-       </strong>
-       glows when hit (phosphorescence)
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       End of line =
-       <strong>
-        horizontal flyback
-       </strong>
-       | End of image =
-       <strong>
-        vertical (frame) flyback
-       </strong>
-      </li>
-     </ul>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       ⚡
+
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">🖥️</div>Pixel Depth &amp; Color Count</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          عمق اللون يحدد عدد الألوان الممكنة وحجم كل بكسل. اللون الحقيقي (True Color) = 24 بت = 16.7 مليون لون. كلما زاد عمق اللون زادت جودة الصورة وحجمها.
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Bit Depth</th><th>Colors</th><th>Bytes/Pixel</th><th>Mode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="highlight">1-Bit</td><td>2</td><td>1/8</td><td>Monochrome (Binary)</td></tr>
+            <tr><td class="highlight">2-Bit</td><td>4</td><td>1/4</td><td>4 Grayscale levels</td></tr>
+            <tr><td class="highlight">8-Bit</td><td>256</td><td>1</td><td>256 Colors</td></tr>
+            <tr><td class="highlight">16-Bit</td><td>65,536</td><td>2</td><td>High Color</td></tr>
+            <tr><td class="highlight">24-Bit</td><td>16,777,216</td><td>3</td><td>True Color</td></tr>
+            <tr><td class="highlight">32-Bit</td><td>16,777,216</td><td>4</td><td>True Color + Alpha</td></tr>
+          </tbody>
+        </table>
       </div>
-      Interlacing
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      تقنية تقليل عرض النطاق الترددي للنصف. الإطار يُعرض على مرحلتين (حقلين): الحقل الأول = الأسطر الفردية (1,3,5...) ثم الحقل الثاني = الأسطر الزوجية (0,2,4...). معدل تحديث 50 هرتز interlaced &rarr; معدل الإطارات الفعلي = 25 هرتز.
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       Halves bandwidth from memory to video controller
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Frame displayed in
-       <strong>
-        2 passes (fields)
-       </strong>
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        1st field:
-       </strong>
-       odd scan lines (1, 3, 5&hellip;)
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        2nd field:
-       </strong>
-       even scan lines (0, 2, 4&hellip;)
-      </li>
-     </ul>
-     <div class="formula-box">
-      50 Hz interlaced &rarr; 1/50 + 1/50 = 2/50 = 1/25 =
-      <strong>
-       25 Hz frame rate
-      </strong>
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🌈
+    </section>
+
+    <!-- ════ SECTION 3: Image Types ════ -->
+    <section class="section" id="s3">
+      <div class="sec-header">
+        <div class="sec-number">03</div>
+        <div class="sec-title">Image Types: Binary, Grayscale &amp; Color</div>
+        <div class="sec-line"></div>
       </div>
-      Color CRT &mdash; Shadow Mask
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      شاشة الألوان: 3 مسدسات إلكترون (R, G, B). القناع الظلي يوجّه كل شعاع نحو نقطة الفوسفور الصحيحة. كل ثلاثي (Triad) = بكسل واحد.
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        3 electron guns:
-       </strong>
-       Red, Green, Blue
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Shadow mask
-       </strong>
-       directs each beam to the correct phosphor dot
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Each
-       <strong>
-        phosphor triad (R+G+B dot)
-       </strong>
-       = one pixel
-      </li>
-     </ul>
-    </div>
-   </section>
-   <!-- ═══ S3: Color Depth & Standards ═══ -->
-   <section class="section" id="s3">
-    <div class="sec-header">
-     <div class="sec-number">
-      03
-     </div>
-     <div class="sec-title">
-      Graphics Standards &amp; Color Depth
-     </div>
-     <div class="sec-line">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🖥️
+
+      <div class="two-col">
+        <div class="content-card" style="margin-bottom:0">
+          <div class="card-title"><div class="card-title-icon">⬛</div>Binary Image</div>
+          <div class="card-ar">
+            <span class="card-ar-label">الشرح بالعربي</span>
+            صورة ثنائية — كل بكسل إما أسود (0) أو أبيض (1). تستخدم بت واحد فقط لكل بكسل.
+          </div>
+          <ul class="points">
+            <li><span class="pt-dot"></span>Only 2 values: <strong>0 = black, 1 = white</strong></li>
+            <li><span class="pt-dot"></span>1-bit pixel depth</li>
+            <li><span class="pt-dot"></span>Used in logos, text, documents</li>
+          </ul>
+        </div>
+        <div class="content-card" style="margin-bottom:0">
+          <div class="card-title"><div class="card-title-icon">🔲</div>Grayscale Image</div>
+          <div class="card-ar">
+            <span class="card-ar-label">الشرح بالعربي</span>
+            صورة رمادية — 8 بت = 256 درجة من الرمادي. كل بكسل له شدة ضوء واحدة.
+          </div>
+          <ul class="points">
+            <li><span class="pt-dot"></span>Single intensity value per pixel</li>
+            <li><span class="pt-dot"></span>Range: 0 (black) → 255 (white)</li>
+            <li><span class="pt-dot"></span>Common: <strong>8 bits = 256 shades</strong></li>
+            <li><span class="pt-dot"></span>2-bit: 00=black, 01=dark gray, 10=light gray, 11=white</li>
+          </ul>
+        </div>
       </div>
-      Graphics Card Standards
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      تطور معايير كروت الشاشة من CGA 1981 إلى UXGA مع تزايد الدقة وعدد الألوان مع كل جيل.
-     </div>
-     <table class="data-table">
-      <thead>
-       <tr>
-        <th>
-         Standard
-        </th>
-        <th>
-         Year
-        </th>
-        <th>
-         Resolution
-        </th>
-        <th>
-         Colors
-        </th>
-       </tr>
-      </thead>
-      <tbody>
-       <tr>
-        <td class="highlight">
-         CGA
-        </td>
-        <td>
-         1981
-        </td>
-        <td>
-         640&times;200 / 160&times;200
-        </td>
-        <td>
-         2 / 16
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         EGA
-        </td>
-        <td>
-         1984
-        </td>
-        <td>
-         640&times;350
-        </td>
-        <td>
-         16&ndash;64
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         VGA
-        </td>
-        <td>
-         1987
-        </td>
-        <td>
-         640&times;480 / 320&times;200
-        </td>
-        <td>
-         16 / 256
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         SVGA
-        </td>
-        <td>
-         1988
-        </td>
-        <td>
-         800&times;600
-        </td>
-        <td>
-         16.7M
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         XGA
-        </td>
-        <td>
-         1990
-        </td>
-        <td>
-         1024&times;768
-        </td>
-        <td>
-         16.7M
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         SXGA
-        </td>
-        <td>
-         1991
-        </td>
-        <td>
-         1280&times;1024
-        </td>
-        <td>
-         16.7M
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         UXGA
-        </td>
-        <td>
-         &mdash;
-        </td>
-        <td>
-         1600&times;1200
-        </td>
-        <td>
-         16.7M
-        </td>
-       </tr>
-      </tbody>
-     </table>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🎨
+
+      <div class="content-card" style="margin-top:16px">
+        <div class="card-title"><div class="card-title-icon">🌈</div>RGB Color Image</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          كل بكسل في صورة RGB يتكون من ثلاث قيم: Red + Green + Blue. دمج القيم الثلاثة ينتج الألوان. اللون الحقيقي 24-bit = 8 bits لكل قناة = 16.7 مليون لون.
+        </div>
+        <ul class="points">
+          <li><span class="pt-dot"></span>Each pixel has 3 channels: <strong>R, G, B</strong></li>
+          <li><span class="pt-dot"></span>24-bit: 8 bits per channel → 16.7 million colors</li>
+          <li><span class="pt-dot"></span>Additive color model — adding light</li>
+          <li><span class="pt-dot"></span>Device-dependent: same RGB looks different on different screens</li>
+        </ul>
       </div>
-      Pixel Depth &amp; Color Count
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      عمق اللون يحدد عدد الألوان الممكنة. اللون الحقيقي (True Color) = 24 بت = 16.7 مليون لون.
-     </div>
-     <table class="data-table">
-      <thead>
-       <tr>
-        <th>
-         Bit Depth
-        </th>
-        <th>
-         Colors
-        </th>
-        <th>
-         Bytes/Pixel
-        </th>
-        <th>
-         Mode
-        </th>
-       </tr>
-      </thead>
-      <tbody>
-       <tr>
-        <td class="highlight">
-         1-Bit
-        </td>
-        <td>
-         2
-        </td>
-        <td>
-         1/8
-        </td>
-        <td>
-         Monochrome
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         4-Bit
-        </td>
-        <td>
-         16
-        </td>
-        <td>
-         0.5
-        </td>
-        <td>
-         VGA 16-color
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         8-Bit
-        </td>
-        <td>
-         256
-        </td>
-        <td>
-         1
-        </td>
-        <td>
-         256 Colors
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         16-Bit
-        </td>
-        <td>
-         65,536
-        </td>
-        <td>
-         2
-        </td>
-        <td>
-         High Color
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         24-Bit
-        </td>
-        <td>
-         16,777,216
-        </td>
-        <td>
-         3
-        </td>
-        <td>
-         True Color
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         32-Bit
-        </td>
-        <td>
-         16,777,216
-        </td>
-        <td>
-         4
-        </td>
-        <td>
-         True Color + Alpha
-        </td>
-       </tr>
-      </tbody>
-     </table>
-    </div>
-   </section>
-   <!-- ═══ S4: Image Types ═══ -->
-   <section class="section" id="s4">
-    <div class="sec-header">
-     <div class="sec-number">
-      04
-     </div>
-     <div class="sec-title">
-      Image Types: Binary, Grayscale &amp; Color
-     </div>
-     <div class="sec-line">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       ⬛
+    </section>
+
+    <!-- ════ SECTION 4: Image Formats ════ -->
+    <section class="section" id="s4">
+      <div class="sec-header">
+        <div class="sec-number">04</div>
+        <div class="sec-title">Image Formats: Bitmap vs Vector</div>
+        <div class="sec-line"></div>
       </div>
-      Binary Image (1-Bit)
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      الصورة الثنائية: كل بكسل إما أسود (0) أو أبيض (1). تستخدم بت واحد فقط لكل بكسل.
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        1-bit per pixel
-       </strong>
-       &mdash; only 2 possible values
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <code style="color:var(--green3);font-family:var(--mono)">
-        0
-       </code>
-       = black (background),
-       <code style="color:var(--green3);font-family:var(--mono)">
-        1
-       </code>
-       = white (foreground)
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Used for text, logos, documents
-      </li>
-     </ul>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🔲
+
+      <div class="two-col">
+        <div class="col-card blue-card">
+          <div class="col-card-title">🗺️ Bitmap (Raster)</div>
+          <ul class="points">
+            <li><span class="pt-dot"></span>Stores pixels directly</li>
+            <li><span class="pt-dot"></span><strong>Disadvantage:</strong> loses quality when enlarged</li>
+            <li><span class="pt-dot"></span>Examples: BMP, JPEG, PNG, GIF</li>
+          </ul>
+        </div>
+        <div class="col-card gold-card">
+          <div class="col-card-title">📐 Vector</div>
+          <ul class="points">
+            <li><span class="pt-dot"></span>Stored as equations: start point, length, direction</li>
+            <li><span class="pt-dot"></span><strong>Advantage:</strong> scales without quality loss, smaller size</li>
+            <li><span class="pt-dot"></span>Examples: SVG, AI (similar to MIDI for audio)</li>
+          </ul>
+        </div>
       </div>
-      Grayscale Image
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      الصورة الرمادية: كل بكسل له شدة ضوء واحدة. 8 بت = 256 درجة رمادي. 2 بت = 4 درجات: 00=أسود، 01=رمادي داكن، 10=رمادي فاتح، 11=أبيض. مختلف عن الثنائية التي تحتوي على درجتين فقط.
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       Single sample per pixel =
-       <strong>
-        intensity
-       </strong>
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Range: 0 (black) &rarr; 1 (white), stored as 8-bit:
-       <strong>
-        256 gray levels
-       </strong>
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Distinct from binary &mdash; many shades between black and white
-      </li>
-     </ul>
-     <div class="highlight-box">
-      <span class="hl-label">
-       2-Bit Grayscale Example
-      </span>
-      <code style="color:var(--green3);font-family:var(--mono)">
-       00
-      </code>
-      =black &nbsp;|&nbsp;
-      <code style="color:var(--green3);font-family:var(--mono)">
-       01
-      </code>
-      =dark gray &nbsp;|&nbsp;
-      <code style="color:var(--green3);font-family:var(--mono)">
-       10
-      </code>
-      =light gray &nbsp;|&nbsp;
-      <code style="color:var(--green3);font-family:var(--mono)">
-       11
-      </code>
-      =white
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🌈
+
+      <div class="content-card" style="margin-top:14px">
+        <div class="card-title"><div class="card-title-icon">📄</div>GIF Format</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          صيغة GIF مناسبة للصور ذات الحواف الحادة كالشعارات. تدعم الرسوم المتحركة. محدودة بـ 256 لون — لا تُستخدم للصور الفوتوغرافية.
+        </div>
+        <ul class="points">
+          <li><span class="pt-dot"></span>Suitable for <strong>sharp-edged line art</strong> (logos) with limited colors</li>
+          <li><span class="pt-dot"></span>Uses <strong>lossless compression</strong></li>
+          <li><span class="pt-dot"></span>Can store <strong>small animations</strong> and low-res film clips</li>
+          <li><span class="pt-dot"></span><strong>Max 256 colors</strong> → NOT suitable for photography</li>
+          <li><span class="pt-dot"></span>GIF, JPEG, PNG can be viewed directly in a <strong>web browser</strong></li>
+        </ul>
       </div>
-      RGB Color Image
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      كل بكسل في صورة RGB يتكون من 3 قيم: Red + Green + Blue. 24 بت = 8 بت لكل قناة &rarr; 16.7 مليون لون. الصورة الملونة = ثلاث صور رمادية مدمجة.
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       Each pixel:
-       <strong>
-        3 channels (R, G, B)
-       </strong>
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       24-bit: 8 bits &times; 3 = 16.7 million colors
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Zooming in reveals individual colored squares per pixel
-      </li>
-     </ul>
-    </div>
-   </section>
-   <!-- ═══ S5: Bitmap vs Vector ═══ -->
-   <section class="section" id="s5">
-    <div class="sec-header">
-     <div class="sec-number">
-      05
-     </div>
-     <div class="sec-title">
-      Bitmap vs Vector Formats
-     </div>
-     <div class="sec-line">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🗺️
+    </section>
+
+    <!-- ════ SECTION 5: Image Editing ════ -->
+    <section class="section" id="s5">
+      <div class="sec-header">
+        <div class="sec-number">05</div>
+        <div class="sec-title">Image Editing Operations</div>
+        <div class="sec-line"></div>
       </div>
-      Two Graphic File Formats
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      <strong>
-       Bitmap:
-      </strong>
-      يخزن البكسلات مباشرة &mdash; عيب: يفقد الجودة عند التكبير.
-      <strong>
-       Vector:
-      </strong>
-      يخزن الخطوط كمعادلات رياضية (نقطة بداية + طول + اتجاه) &mdash; ميزة: لا يفقد الجودة عند التكبير وحجمه أصغر (مثل MIDI للصوت).
-     </div>
-     <div class="two-col">
-      <div class="col-card green-card">
-       <div class="col-card-title">
-        🗺️ Bitmap (Raster)
-       </div>
-       <ul class="points">
-        <li>
-         <span class="pt-dot">
-         </span>
-         Stores pixels on screen
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         ❌ Loses quality when enlarged (pixelation)
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         Formats: BMP, JPEG, PNG, GIF
-        </li>
-       </ul>
+
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">✏️</div>Common Editing Techniques</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          عمليات تحرير الصور: الدمج، الشفافية، التحسين، التصفية، التباين، الرسم بالقلم، التحويل للرمادي، العكس، وكشف الحواف.
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Operation</th><th>Description</th><th>الشرح</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="highlight">Combine/Composite</td><td>Merge elements from multiple photos</td><td class="muted">دمج عناصر من صور متعددة</td></tr>
+            <tr><td class="highlight">Transparency</td><td>Compose image with partial transparency</td><td class="muted">إضافة طبقة شفافية</td></tr>
+            <tr><td class="highlight">Sharpen</td><td>Show more detail, clearer edges</td><td class="muted">إظهار تفاصيل وحواف أوضح</td></tr>
+            <tr><td class="highlight">Despeckle/Filter</td><td>Suppress noise in images</td><td class="muted">إزالة التشويش</td></tr>
+            <tr><td class="highlight">Contrast Adjust</td><td>Increase/decrease light-dark differences</td><td class="muted">زيادة أو تقليل التباين</td></tr>
+            <tr><td class="highlight">Pencil Sketch</td><td>Convert to B&W sketch-like filter</td><td class="muted">تحويل لرسم بالقلم الرصاص</td></tr>
+            <tr><td class="highlight">Convert to Gray</td><td>Remove color, replace with gray shades</td><td class="muted">تحويل للتدرج الرمادي</td></tr>
+            <tr><td class="highlight">Edge Detection</td><td>Detect boundaries of objects</td><td class="muted">كشف حواف الأجسام</td></tr>
+          </tbody>
+        </table>
       </div>
-      <div class="col-card gold-card">
-       <div class="col-card-title">
-        📐 Vector
-       </div>
-       <ul class="points">
-        <li>
-         <span class="pt-dot">
-         </span>
-         Lines stored as equations: start, length, direction
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         ✅ Scales without quality loss, smaller file size
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         Formats: SVG, AI (similar to MIDI for audio)
-        </li>
-       </ul>
+    </section>
+
+    <!-- ════ SECTION 6: Image Analysis ════ -->
+    <section class="section" id="s6">
+      <div class="sec-header">
+        <div class="sec-number">06</div>
+        <div class="sec-title">Image Analysis &amp; Digital Camera</div>
+        <div class="sec-line"></div>
       </div>
-     </div>
-     <div class="highlight-box">
-      <span class="hl-label">
-       Image Viewing
-      </span>
-      <strong>
-       GIF, JPEG, and PNG
-      </strong>
-      can be viewed directly in a web browser &mdash; they are the standard internet image formats.
-     </div>
-    </div>
-   </section>
-   <!-- ═══ S6: GIF Format ═══ -->
-   <section class="section" id="s6">
-    <div class="sec-header">
-     <div class="sec-number">
-      06
-     </div>
-     <div class="sec-title">
-      GIF Format
-     </div>
-     <div class="sec-line">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🎞️
+
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">🔍</div>Image Analysis (Image Processing)</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          معلومات البكسل وحدها غير كافية! نحتاج تحليل الصور لمعرفة شكل الأجسام واتجاهها والتفسير ثلاثي الأبعاد. التطبيقات: كشف الأجسام، التعرف على الأنماط، الرؤية الحاسوبية.
+        </div>
+        <div class="two-col" style="margin-top:14px">
+          <div class="col-card blue-card">
+            <div class="col-card-title">Applications</div>
+            <ul class="points">
+              <li><span class="pt-dot"></span>Object Detection</li>
+              <li><span class="pt-dot"></span>Pattern Recognition</li>
+              <li><span class="pt-dot"></span>Scene Analysis</li>
+              <li><span class="pt-dot"></span>Computer Vision</li>
+            </ul>
+          </div>
+          <div class="col-card gold-card">
+            <div class="col-card-title">Traffic Example Problems</div>
+            <ul class="points">
+              <li><span class="pt-dot"></span>Is there a traffic sign?</li>
+              <li><span class="pt-dot"></span>Is a car in front?</li>
+              <li><span class="pt-dot"></span>What is its relative speed?</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      GIF Characteristics
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      GIF مناسب للشعارات ذات الحواف الحادة وعدد محدود من الألوان. يدعم الرسوم المتحركة. محدود بـ 256 لون فقط لذا لا يُستخدم للصور الفوتوغرافية. المصورون يستخدمون TIFF أو RAW أو JPEG.
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       Suitable for
-       <strong>
-        sharp-edged line art (logos)
-       </strong>
-       with limited colors
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Uses
-       <strong>
-        lossless compression
-       </strong>
-       &mdash; favors flat areas of uniform color
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Can store
-       <strong>
-        small animations
-       </strong>
-       and low-resolution film clips
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Can be used for
-       <strong>
-        low-color sprite data
-       </strong>
-       in games
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       ❌ Max
-       <strong>
-        256 colors
-       </strong>
-       &rarr; NOT suitable for photography
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Photographers use
-       <strong>
-        TIFF, RAW, or JPEG
-       </strong>
-       instead
-      </li>
-     </ul>
-    </div>
-   </section>
-   <!-- ═══ S7: Image Editing ═══ -->
-   <section class="section" id="s7">
-    <div class="sec-header">
-     <div class="sec-number">
-      07
-     </div>
-     <div class="sec-title">
-      Image Editing Operations
-     </div>
-     <div class="sec-line">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       ✏️
+
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">📷</div>Digital Camera Pipeline</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          الكاميرا الرقمية: الضوء من العدسة → مصفوفة CCD تخزّن الشدة كجهد → ADC يحوّل للرقم → الذاكرة.
+        </div>
+        <div class="formula-box" style="text-align:center; letter-spacing:0; font-size:13px; line-height:2;">
+          Lens → CCD Array → ADC → Memory → I/O Interface
+        </div>
+        <ul class="points" style="margin-top:8px">
+          <li><span class="pt-dot"></span><strong>Shutter</strong> opened briefly to expose lens to light</li>
+          <li><span class="pt-dot"></span>Light falls on <strong>CCD array</strong> — intensity stored as voltage</li>
+          <li><span class="pt-dot"></span>Charge converted to digital value by <strong>ADC</strong></li>
+          <li><span class="pt-dot"></span>Digital image stored in <strong>memory</strong> for viewing or transfer</li>
+        </ul>
       </div>
-      Editing Operations with Examples
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      عمليات تحرير الصور الرئيسية: الدمج، الشفافية، التحسين، التصفية، التباين، الرسم بالقلم، التحويل للرمادي، العكس، وكشف الحواف.
-     </div>
-     <table class="data-table">
-      <thead>
-       <tr>
-        <th>
-         Operation
-        </th>
-        <th>
-         Description
-        </th>
-        <th>
-         الشرح
-        </th>
-       </tr>
-      </thead>
-      <tbody>
-       <tr>
-        <td class="highlight">
-         Combine
-        </td>
-        <td>
-         Merge elements from multiple photos into one image
-        </td>
-        <td class="muted">
-         دمج عناصر من صور متعددة
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         Transparency
-        </td>
-        <td>
-         Compose new image with partial transparency
-        </td>
-        <td class="muted">
-         إضافة طبقة شفافية جزئية
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         Sharpen
-        </td>
-        <td>
-         Show more detail by enhancing edges
-        </td>
-        <td class="muted">
-         إظهار تفاصيل أكثر وحواف أوضح
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         Despeckle / Filter
-        </td>
-        <td>
-         Suppress noise in satellite or noisy images
-        </td>
-        <td class="muted">
-         إزالة التشويش من الصور
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         Contrast
-        </td>
-        <td>
-         Increase or decrease differences between light and dark
-        </td>
-        <td class="muted">
-         زيادة أو تقليل التباين
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         Pencil Sketch
-        </td>
-        <td>
-         Convert to B&amp;W with a sketch-like filter
-        </td>
-        <td class="muted">
-         تحويل الصورة لرسم بالقلم الرصاص
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         Convert to Gray
-        </td>
-        <td>
-         Remove all color, replace with shades of gray
-        </td>
-        <td class="muted">
-         تحويل الصورة للتدرج الرمادي
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         Image Negation
-        </td>
-        <td>
-         Invert pixel values (dark&harr;light)
-        </td>
-        <td class="muted">
-         عكس قيم البكسلات &mdash; الأبيض يصبح أسود والعكس
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         Edge Detection
-        </td>
-        <td>
-         Detect boundaries of objects in the image
-        </td>
-        <td class="muted">
-         الكشف عن حواف وحدود الأجسام
-        </td>
-       </tr>
-      </tbody>
-     </table>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🖼️
+    </section>
+
+    <!-- ════ SECTION 7: RGB & BMP ════ -->
+    <section class="section" id="s7">
+      <div class="sec-header">
+        <div class="sec-number">07</div>
+        <div class="sec-title">RGB Model &amp; Bitmap Structure</div>
+        <div class="sec-line"></div>
       </div>
-      Editing Visual Examples
-     </div>
-    </div>
-   </section>
-   <!-- ═══ S8: Image Analysis ═══ -->
-   <section class="section" id="s8">
-    <div class="sec-header">
-     <div class="sec-number">
-      08
-     </div>
-     <div class="sec-title">
-      Image Analysis &amp; Processing
-     </div>
-     <div class="sec-line">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🔍
+
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">🎨</div>RGB Color Model</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          نموذج RGB تضافري: الأحمر + الأخضر + الأزرق تُضاف معاً لإنتاج ألوان مختلفة. يعتمد على الجهاز — نفس قيمة RGB تظهر بألوان مختلفة على أجهزة مختلفة. في بث التلفزيون: الإشارة تُقسَّم لـ Luminance (سطوع) + Chrominance (لون) للتوافق مع الأجهزة القديمة.
+        </div>
+        <ul class="points">
+          <li><span class="pt-dot"></span>Red, Green, Blue light <strong>added together</strong> = additive model</li>
+          <li><span class="pt-dot"></span><strong>Device-dependent</strong> — same RGB value looks different on different screens</li>
+          <li><span class="pt-dot"></span>TV broadcast: signal split into <strong>Luminance + Chrominance</strong></li>
+          <li><span class="pt-dot"></span>Input devices: TV cameras, scanners, digital cameras</li>
+          <li><span class="pt-dot"></span>Output devices: CRT, LCD, plasma, monitors, JumboTron</li>
+        </ul>
       </div>
-      Why Image Analysis is Needed
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      معلومات البكسل وحدها غير كافية! لا تحتوي على معلومات عن: شكل الجسم، اتجاهه، أو التفسير ثلاثي الأبعاد. لذا نحتاج تحليل الصور. تطبيقات: كشف الأجسام، التعرف على الأنماط، تحليل المشاهد، الرؤية الحاسوبية.
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       Pixel info alone is
-       <strong>
-        insufficient
-       </strong>
-       &mdash; no info about shape, orientation, or 3D interpretation
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Image Analysis / Image Processing
-       </strong>
-       is required
-      </li>
-     </ul>
-     <div class="two-col" style="margin-top:14px">
-      <div class="col-card green-card">
-       <div class="col-card-title">
-        Applications
-       </div>
-       <ul class="points">
-        <li>
-         <span class="pt-dot">
-         </span>
-         Object Detection
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         Pattern Recognition
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         Scene Analysis
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         Computer Vision
-        </li>
-       </ul>
+
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">🗄️</div>BMP File Structure</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          كل ملف Bitmap يحتوي على: (1) ترويسة الملف (File Header) — نوع وحجم الملف. (2) جدول الألوان. (3) مصفوفة البيانات — بيانات البكسلات الفعلية.
+        </div>
+        <ul class="points">
+          <li><span class="pt-dot"></span><strong>File Header</strong> — type (wType), size (dwSize), offset to data (dwOffBits)</li>
+          <li><span class="pt-dot"></span><strong>Color Table Array</strong></li>
+          <li><span class="pt-dot"></span><strong>Bitmap Data Array</strong> — actual pixel values</li>
+        </ul>
+        <div class="code-block">
+          <span class="code-label">BITMAPFILEHEADER struct</span>
+          WORD  wType;        // File type identifier<br>
+          DWORD dwSize;       // File size in bytes<br>
+          WORD  wReserved1;<br>
+          WORD  wReserved2;<br>
+          DWORD dwOffBits;    // Offset to bitmap data
+        </div>
       </div>
-      <div class="col-card gold-card">
-       <div class="col-card-title">
-        Traffic Example Questions
-       </div>
-       <ul class="points">
-        <li>
-         <span class="pt-dot">
-         </span>
-         Is there a traffic sign visible?
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         Which traffic sign?
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         Is a moving car ahead?
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         What is its relative speed?
-        </li>
-       </ul>
+    </section>
+
+    <!-- ════ SECTION 8: Data Compression ════ -->
+    <section class="section" id="s8">
+      <div class="sec-header">
+        <div class="sec-number">08</div>
+        <div class="sec-title">Data Compression — Overview</div>
+        <div class="sec-line"></div>
       </div>
-     </div>
-    </div>
-   </section>
-   <!-- ═══ S9: Digital Camera ═══ -->
-   <section class="section" id="s9">
-    <div class="sec-header">
-     <div class="sec-number">
-      09
-     </div>
-     <div class="sec-title">
-      Digital Camera Pipeline
-     </div>
-     <div class="sec-line">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       📷
+
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">📦</div>Why Compression?</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          البيانات غير المضغوطة تحتاج مساحة هائلة. تلفزيون PAL يحتاج 216 ميجابت/ثانية! لذا الضغط ضرورة لا رفاهية.
+        </div>
+        <div class="highlight-box">
+          <span class="hl-label">📝 Video Size Example</span>
+          100×100 RGB video at 24 fps for 1 minute:<br>
+          <strong>100 × 100 × 24 bits × 24 frames × 60 seconds ÷ 8 = 43.2 MB</strong>
+        </div>
       </div>
-      How a Digital Camera Works
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      الضوء يدخل من العدسة &rarr; يسقط على مصفوفة CCD التي تخزن الشدة كجهد كهربائي &rarr; محول ADC يحول الشحنة لقيمة رقمية &rarr; الصورة تُخزَّن في الذاكرة للعرض أو النقل.
-     </div>
-     <div class="formula-box" style="font-size:13px;letter-spacing:0;text-align:left;direction:ltr;line-height:2;">
-      Lens &rarr; CCD Array &rarr; ADC &rarr; Memory &rarr; I/O Interface
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Shutter
-       </strong>
-       opened briefly to expose lens to light
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Light falls on
-       <strong>
-        CCD array
-       </strong>
-       &mdash; intensity stored as voltage
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Charge converted to digital value by
-       <strong>
-        ADC
-       </strong>
-       (Analog-to-Digital Converter)
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Digital image stored in
-       <strong>
-        memory
-       </strong>
-       for viewing or transfer
-      </li>
-     </ul>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       📡
+
+      <div class="two-col">
+        <div class="content-card" style="margin-bottom:0">
+          <div class="card-title"><div class="card-title-icon">✅</div>Lossless Compression</div>
+          <div class="card-ar"><span class="card-ar-label">الشرح بالعربي</span>ضغط بدون فقدان — يمكن استعادة البيانات الأصلية بالكامل. مطلوب للصور الطبية.</div>
+          <ul class="points">
+            <li><span class="pt-dot"></span>Decompressed data <strong>exactly matches original</strong></li>
+            <li><span class="pt-dot"></span>Entropy encoding is lossless</li>
+            <li><span class="pt-dot"></span>Required for: X-Rays, legal docs</li>
+            <li><span class="pt-dot"></span>Exploits <strong>statistical redundancy</strong></li>
+          </ul>
+        </div>
+        <div class="content-card" style="margin-bottom:0">
+          <div class="card-title"><div class="card-title-icon">⚠️</div>Lossy Compression</div>
+          <div class="card-ar"><span class="card-ar-label">الشرح بالعربي</span>ضغط مع فقدان — بعض البيانات غير الضرورية تُفقد ولا يمكن استعادتها. يعطي نسب ضغط أعلى.</div>
+          <ul class="points">
+            <li><span class="pt-dot"></span><strong>Some insignificant data lost</strong> when decompressing</li>
+            <li><span class="pt-dot"></span>Source encoding is usually lossy</li>
+            <li><span class="pt-dot"></span>JPEG, MPEG — higher compression ratio</li>
+            <li><span class="pt-dot"></span>Not reversible</li>
+          </ul>
+        </div>
       </div>
-      TV Broadcast Signal
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      الإشارة المركّبة للتلفزيون تُقسَّم إلى:
-      <strong>
-       Luminance
-      </strong>
-      (الإضاءة/السطوع) +
-      <strong>
-       Chrominance
-      </strong>
-      (اللون). هذا يضمن التوافق العكسي مع أجهزة التلفزيون الأبيض والأسود القديمة.
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       Broadcast:
-       <strong>
-        composite signal
-       </strong>
-       on a single channel
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Signal divided into
-       <strong>
-        luminance
-       </strong>
-       (brightness) +
-       <strong>
-        chrominance
-       </strong>
-       (color) components
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Backward compatible with
-       <strong>
-        black &amp; white receivers
-       </strong>
-      </li>
-     </ul>
-    </div>
-   </section>
-   <!-- ═══ S10: RGB & Color Space ═══ -->
-   <section class="section" id="s10">
-    <div class="sec-header">
-     <div class="sec-number">
-      10
-     </div>
-     <div class="sec-title">
-      RGB Color Model &amp; Color Space
-     </div>
-     <div class="sec-line">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🎨
+
+      <div class="content-card" style="margin-top:14px">
+        <div class="card-title"><div class="card-title-icon">🗂️</div>Compression Standards</div>
+        <table class="data-table">
+          <thead><tr><th>Standard</th><th>Use Case</th><th>Type</th></tr></thead>
+          <tbody>
+            <tr><td class="highlight">JPEG</td><td>Still images</td><td>Lossy (hybrid)</td></tr>
+            <tr><td class="highlight">H.261</td><td>Video conferencing (ISDN/mobile)</td><td>Lossy</td></tr>
+            <tr><td class="highlight">MPEG</td><td>Video and audio</td><td>Lossy</td></tr>
+            <tr><td class="highlight">DVI</td><td>Still + continuous media (PLV & RTV modes)</td><td>Lossy</td></tr>
+            <tr><td class="highlight">RLE</td><td>Repetitive data, bitmap rows</td><td>Lossless</td></tr>
+            <tr><td class="highlight">Huffman</td><td>Text, entropy encoding</td><td>Lossless</td></tr>
+          </tbody>
+        </table>
       </div>
-      RGB Color Model
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      نموذج RGB تضافري (Additive): الأحمر + الأخضر + الأزرق تُضاف بنسب مختلفة لإنتاج مجموعة واسعة من الألوان. يعتمد على الجهاز (Device-Dependent) &mdash; نفس القيمة قد تظهر بشكل مختلف على أجهزة مختلفة بسبب اختلاف الفوسفور أو الأصباغ.
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       R, G, B light
-       <strong>
-        added together
-       </strong>
-       &rarr; broad array of colors (additive model)
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Main purpose: sensing, representation, and
-       <strong>
-        display in electronic systems
-       </strong>
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Device-dependent
-       </strong>
-       &mdash; same RGB value looks different on different devices
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Input devices:
-       </strong>
-       color TV cameras, image scanners, digital cameras
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Output devices:
-       </strong>
-       CRT, LCD, plasma TVs, projectors, LED displays, JumboTron
-      </li>
-     </ul>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🔢
+    </section>
+
+    <!-- ════ SECTION 9: Run-Length Encoding ════ -->
+    <section class="section" id="s9">
+      <div class="sec-header">
+        <div class="sec-number">09</div>
+        <div class="sec-title">Run-Length Encoding (RLE)</div>
+        <div class="sec-line"></div>
       </div>
-      RGB Hex Representation
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      كل قناة (R, G, B) تُمثَّل بقيمة من 0 إلى 255 (8 بت). في النظام الست عشري: 00 إلى FF. مثال: الأحمر الخالص = FF0000، الأبيض = FFFFFF، الأسود = 000000.
-     </div>
-     <div class="code-block">
-      <span class="code-label">
-       RGB Hex Examples
-      </span>
-      Red   = #FF0000 &nbsp;&nbsp;(R=255, G=0,   B=0  )
-      Green = #00FF00 &nbsp;&nbsp;(R=0,   G=255, B=0  )
-      Blue  = #0000FF &nbsp;&nbsp;(R=0,   G=0,   B=255)
-      White = #FFFFFF &nbsp;&nbsp;(R=255, G=255, B=255)
-      Black = #000000 &nbsp;&nbsp;(R=0,   G=0,   B=0  )
-     </div>
-    </div>
-   </section>
-   <!-- ═══ S11: Bitmap File Structure ═══ -->
-   <section class="section" id="s11">
-    <div class="sec-header">
-     <div class="sec-number">
-      11
-     </div>
-     <div class="sec-title">
-      Bitmap File Structure
-     </div>
-     <div class="sec-line">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🗄️
+
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">🔁</div>How RLE Works</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          ترميز طول التشغيل: تسلسلات البايتات المتكررة تُستبدل بعدد تكراراتها وقيمتها. بدلاً من AAAA نخزن (A,4). يُستخدم كثيراً في ضغط الصور وهو جزء من pipeline ضغط JPEG. في أسوأ حالة (ضوضاء عشوائية) قد ينتج ملفاً أكبر!
+        </div>
+        <ul class="points">
+          <li><span class="pt-dot"></span>Content-dependent coding — replaces repeated bytes with <strong>(count, value)</strong></li>
+          <li><span class="pt-dot"></span>A special <strong>flag byte</strong> is used (one not in the data stream)</li>
+          <li><span class="pt-dot"></span>If a byte occurs <strong>≥ 4 consecutive times</strong>: count = occurrences − 4</li>
+          <li><span class="pt-dot"></span>Can represent <strong>4 to 259 bytes with just 3 bytes</strong></li>
+        </ul>
+        <div class="code-block">
+          <span class="code-label">RLE Example</span>
+          Original:  BBBBWWWYYYYYYGGGGYYY<br>
+          Encoded:   (B,4) , (W,3) , (Y,6) , (G,4) , (Y,4)
+        </div>
+        <div class="highlight-box">
+          <span class="hl-label">⚠️ Worst Case</span>
+          For <strong>random noise</strong> images — RLE can produce a <em>larger</em> file than the original!
+        </div>
       </div>
-      BMP File Components
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      كل ملف Bitmap يتكون من ثلاثة أجزاء: (1) ترويسة الملف &mdash; النوع والحجم. (2) جدول الألوان. (3) مصفوفة البيانات &mdash; البكسلات الفعلية.
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Header
-       </strong>
-       &mdash; file type and size info
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Color Table Array
-       </strong>
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Bitmap Data Array
-       </strong>
-       &mdash; actual pixel data
-      </li>
-     </ul>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       📋
+    </section>
+
+    <!-- ════ SECTION 10: HUFFMAN (DETAILED) ════ -->
+    <!-- ════ REVIEW TABLE ════ -->
+    <section class="review-section" id="review">
+      <div class="review-title">📋 Quick Review Table — جدول المراجعة السريعة</div>
+      <table class="review-table">
+        <thead>
+          <tr>
+            <th>TOPIC</th>
+            <th>Key Concept</th>
+            <th>Details / Formula</th>
+            <th>الشرح</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Pixel</td><td>Picture element</td><td>Smallest unit of a digital image</td><td>أصغر وحدة في الصورة الرقمية</td></tr>
+          <tr><td>Resolution</td><td>Width × Height</td><td>More pixels = better quality</td><td>عدد البكسلات يحدد الجودة</td></tr>
+          <tr><td>Image Size</td><td>W × H × Depth</td><td>100×100×8bit = 80Kbit = 10KB</td><td>حساب حجم الصورة</td></tr>
+          <tr><td>Binary Image</td><td>1-bit depth</td><td>0=black, 1=white</td><td>بت واحد لكل بكسل</td></tr>
+          <tr><td>Grayscale</td><td>8-bit = 256 shades</td><td>Single intensity value per pixel</td><td>256 درجة رمادي</td></tr>
+          <tr><td>True Color</td><td>24-bit RGB</td><td>8 bits × 3 channels = 16.7M colors</td><td>اللون الحقيقي</td></tr>
+          <tr><td>Bitmap</td><td>Raster format</td><td>Loses quality on enlarge</td><td>تفقد الجودة عند التكبير</td></tr>
+          <tr><td>Vector</td><td>Math equations</td><td>Scales without quality loss</td><td>تكبير بدون فقدان جودة</td></tr>
+          <tr><td>GIF</td><td>Max 256 colors</td><td>Lossless, supports animation, not for photos</td><td>مناسب للشعارات</td></tr>
+          <tr><td>RGB Model</td><td>Additive color</td><td>Device-dependent, used in screens/TVs</td><td>نموذج تضافري</td></tr>
+          <tr><td>BMP Header</td><td>3 parts</td><td>File Header + Color Table + Bitmap Data</td><td>ترويسة + جدول + بيانات</td></tr>
+          <tr><td>Digital Camera</td><td>Lens→CCD→ADC→Memory</td><td>CCD stores intensity as voltage</td><td>الضوء → كهرباء → رقم</td></tr>
+          <tr><td>Lossless</td><td>No data lost</td><td>Entropy encoding, required for X-Rays</td><td>ضغط بدون فقدان</td></tr>
+          <tr><td>Lossy</td><td>Some data lost</td><td>Higher compression ratio, not reversible</td><td>ضغط مع فقدان</td></tr>
+          <tr><td>RLE</td><td>Replace runs</td><td>BBBBWWW → (B,4)(W,3)</td><td>استبدال التكرارات</td></tr>
+          <tr><td>Huffman Idea</td><td>Freq → short codes</td><td>Prefix-free, optimal lossless code</td><td>الشائع = قصير</td></tr>
+          <tr><td>Huffman Tree</td><td>Binary tree</td><td>Merge 2 lowest repeatedly until root=1.0</td><td>ادمج الأقل تكراراً أولاً</td></tr>
+          <tr><td>Avg Length</td><td>Σ(bits × prob)</td><td>(3×0.16)+(1×0.51)+... = 1.98 bits</td><td>متوسط طول الرمز</td></tr>
+          <tr><td>Huffman Saving</td><td>vs ASCII</td><td>248 B vs 1 KB → ~75% reduction for 1000 chars</td><td>توفير 75% من الحجم</td></tr>
+          <tr><td>Prefix-Free</td><td>Unique decoding</td><td>No code is a prefix of another → no ambiguity</td><td>لا غموض في فك الضغط</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ════ QUESTIONS ════ -->
+    <section class="questions-section" id="questions">
+      <div class="q-section-title">❓ Review Questions — أسئلة المراجعة</div>
+      <div class="q-section-sub">اضغط على "Show Answer" لرؤية الإجابة</div>
+
+      <!-- General Questions -->
+      <div class="q-category">
+        <div class="q-category-label">🖼️ General — الأسئلة العامة</div>
+
+        <div class="q-item">
+          <div class="q-num">Q01</div>
+          <div class="q-text">A picture is 200×150 pixels with a pixel depth of 16 bits. What is the size of this picture in KB?</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">200 × 150 × 16 = 480,000 bits ÷ 8 = 60,000 bytes = <strong>60 KB</strong></div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">Q02</div>
+          <div class="q-text">What is the difference between a bitmap image and a vector image? Give one advantage and one disadvantage of each.</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">
+            <strong>Bitmap:</strong> stores pixels — disadvantage: loses quality when enlarged. Advantage: easy to display.<br>
+            <strong>Vector:</strong> stores equations — advantage: scales without quality loss, smaller size. Disadvantage: not suitable for complex photos.
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">Q03</div>
+          <div class="q-text">What is the difference between Lossless and Lossy compression? Give an example use case for each.</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">
+            <strong>Lossless:</strong> decompressed data exactly matches original. Used for: medical X-Rays, legal documents. Examples: RLE, Huffman.<br>
+            <strong>Lossy:</strong> some data is permanently lost. Higher compression ratio. Used for: JPEG photos, MP3 audio, MPEG video.
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">Q04</div>
+          <div class="q-text">An uncompressed RGB video is 100×100 pixels at 24 fps. How much storage does 1 minute require?</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">100 × 100 × 24 bits × 24 fps × 60 seconds ÷ 8 = <strong>43,200,000 bytes ≈ 43.2 MB</strong></div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">Q05</div>
+          <div class="q-text">Why is GIF not suitable for photographic images?</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">GIF supports a maximum of <strong>256 colors</strong>. Photographs require thousands or millions of colors for accurate representation. Digital photographers use JPEG, TIFF, or RAW instead.</div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">Q06</div>
+          <div class="q-text">Why is the RGB color model described as "device-dependent"?</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">The same RGB value looks different on different devices because each device uses different phosphors, dyes, or display technology. A color that appears bright red on one monitor may appear slightly orange on another.</div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">Q07</div>
+          <div class="q-text">Encode the following row using RLE: AAAABBBBBBCCCDDDD</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer"><strong>(A,4), (B,6), (C,3), (D,4)</strong><br>Original: 17 bytes. Encoded: 4 pairs × 2 = 8 bytes. Good compression here!</div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">Q08</div>
+          <div class="q-text">Describe the digital camera image capture pipeline in order.</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">
+            1. <strong>Shutter opens</strong> briefly to expose the lens to light.<br>
+            2. Light falls on the <strong>CCD array</strong> where intensity is stored as voltage.<br>
+            3. <strong>ADC</strong> (Analog-to-Digital Converter) converts the charge to a digital value.<br>
+            4. Digital image stored in <strong>memory</strong> for viewing or transfer via I/O interface.
+          </div>
+        </div>
       </div>
-      BITMAPINFOHEADER Fields
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      ترويسة المعلومات تحتوي على: الحجم، العرض، الارتفاع، عدد طبقات الألوان، عمق الألوان، نوع الضغط، حجم الصورة، ودقة الجهاز.
-     </div>
-     <table class="data-table">
-      <thead>
-       <tr>
-        <th>
-         Member
-        </th>
-        <th>
-         Description
-        </th>
-       </tr>
-      </thead>
-      <tbody>
-       <tr>
-        <td class="highlight">
-         dwSize
-        </td>
-        <td>
-         Size of BITMAPINFOHEADER structure (bytes)
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         dwWidth
-        </td>
-        <td>
-         Width of bitmap (pixels)
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         dwHeight
-        </td>
-        <td>
-         Height of bitmap (pixels)
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         wPlanes
-        </td>
-        <td>
-         Number of planes for target device &mdash; must be 1
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         wBitCount
-        </td>
-        <td>
-         Bits per pixel &mdash; must be 1, 4, 8, or 24
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         dwCompression
-        </td>
-        <td>
-         BI_RGB, BI_RLE8, or BI_RLE4
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         dwSizeImage
-        </td>
-        <td>
-         Size of image in bytes (0 if uncompressed / BI_RGB)
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         dwXPelsPerMeter
-        </td>
-        <td>
-         Horizontal resolution (pixels per meter)
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         dwYPelsPerMeter
-        </td>
-        <td>
-         Vertical resolution (pixels per meter)
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         dwClrUsed
-        </td>
-        <td>
-         Number of color indexes used (0 = max for bit depth)
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         dwClrImportant
-        </td>
-        <td>
-         Important color indexes (0 = all important)
-        </td>
-       </tr>
-      </tbody>
-     </table>
-    </div>
-   </section>
-   <!-- ═══ S12: Compression ═══ -->
-   <section class="section" id="s12">
-    <div class="sec-header">
-     <div class="sec-number">
-      12
-     </div>
-     <div class="sec-title">
-      Data Compression
-     </div>
-     <div class="sec-line">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       📦
+
+      <!-- Huffman Questions -->
+      <div class="q-category">
+        <div class="q-category-label">🌳 Huffman Encoding — أسئلة هوفمان</div>
+
+        <div class="q-item">
+          <div class="q-num">H01</div>
+          <div class="q-text">What is the core idea behind Huffman encoding? How does it achieve compression?</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">
+            Huffman assigns <strong>shorter binary codes to more frequent characters</strong> and longer codes to rare characters. Since frequent characters use fewer bits, the total number of bits in the encoded message is reduced. The result is a lossless, prefix-free code.
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">H02</div>
+          <div class="q-text">Given: A(p=0.16), B(p=0.51), C(p=0.09), D(p=0.13), E(p=0.11). Build the Huffman tree and find all codes.</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">
+            <strong>Codes:</strong> B=1, A=011, D=010, E=001, C=000<br>
+            <strong>Average length:</strong> (1×0.51)+(3×0.16)+(3×0.13)+(3×0.11)+(3×0.09) = 0.51+0.48+0.39+0.33+0.27 = <strong>1.98 bits/symbol</strong>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">H03</div>
+          <div class="q-text">Using the codes from H02, encode the message "BADE".</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">B=1, A=011, D=010, E=001<br><strong>Encoded: 1 · 011 · 010 · 001 = 1011010001</strong> (10 bits)</div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">H04</div>
+          <div class="q-text">Using the codes from H02, decode the bit string: 1 001 000 011</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">
+            1 → B | 001 → E | 000 → C | 011 → A<br>
+            <strong>Decoded: BECA</strong>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">H05</div>
+          <div class="q-text">What does "Prefix-Free" mean in Huffman codes? Why is this property important?</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">
+            Prefix-free means <strong>no code is the beginning (prefix) of another code</strong>. Example: if B=1, no other code starts with 1 alone. This guarantees that when decoding a bit stream from left to right, each character is uniquely identifiable — there is no ambiguity about where one character ends and the next begins.
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">H06</div>
+          <div class="q-text">If a text has 500 characters with the probabilities from H02, how many bytes does Huffman encoding use vs ASCII?</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">
+            <strong>Huffman:</strong> 500 × 1.98 = 990 bits ≈ <strong>124 Bytes</strong><br>
+            <strong>ASCII:</strong> 500 × 8 = 4,000 bits = <strong>500 Bytes</strong><br>
+            <strong>Saving: 376 Bytes (75% reduction)</strong>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">H07</div>
+          <div class="q-text">Given: X(p=0.5), Y(p=0.3), Z(p=0.2). Build the Huffman tree and calculate the average code length.</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">
+            Sort: Z(0.2), Y(0.3), X(0.5). Combine Z+Y = ZY(0.5). Combine ZY+X = Root(1.0)<br>
+            <strong>Codes:</strong> X=0, Y=11, Z=10<br>
+            <strong>Avg Length:</strong> (1×0.5)+(2×0.3)+(2×0.2) = 0.5+0.6+0.4 = <strong>1.5 bits/symbol</strong>
+          </div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">H08</div>
+          <div class="q-text">What information must both sender and receiver share for Huffman to work?</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">Both must know the <strong>probability/frequency table</strong> of the characters (or equivalently, the Huffman tree itself). If the receiver doesn't have the tree, they cannot decode the bit stream. This is a key overhead — the table/tree must be transmitted alongside the compressed data.</div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">H09</div>
+          <div class="q-text">In the Huffman algorithm, when building the tree, which two nodes are combined at each step?</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">At each step, the <strong>two nodes with the lowest probabilities</strong> are combined into a new parent node. The parent node's probability equals the sum of the two children's probabilities. This is repeated until only one node (the root) remains.</div>
+        </div>
+
+        <div class="q-item">
+          <div class="q-num">H10</div>
+          <div class="q-text">Compare Huffman encoding vs RLE. When would you prefer each?</div>
+          <button class="q-toggle" onclick="toggleAnswer(this)">Show Answer ▼</button>
+          <div class="q-answer">
+            <strong>RLE:</strong> best when data has long runs of repeated values (e.g., simple images, logos, horizontal areas of same color). Fails with random/noisy data — can make files larger.<br>
+            <strong>Huffman:</strong> best when character frequencies are skewed (some much more common than others). Works on any data type. Always produces optimal prefix-free codes. Often used inside JPEG as part of its compression pipeline.
+          </div>
+        </div>
       </div>
-      Why Compression is Needed
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      البيانات غير المضغوطة تحتاج مساحة هائلة: ثانية واحدة من صوت الهاتف = 64 كيلوبت. ثانية من صوت CD = 705.6 كيلوبت. PAL TV بدون ضغط = 216 ميجابت/ثانية! لذا الضغط ضرورة قصوى.
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Telephone audio
-       </strong>
-       (8 kHz, 8-bit): 64 Kbits/sec
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        CD stereo
-       </strong>
-       (44.1 kHz, 16-bit): 705.6 Kbits/sec
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        PAL TV
-       </strong>
-       : (13.5 + 6.75 + 6.75) MHz &times; 8 bits =
-       <strong>
-        216 Mbit/sec
-       </strong>
-      </li>
-     </ul>
-     <div class="highlight-box">
-      <span class="hl-label">
-       📝 Video Size Example
-      </span>
-      100&times;100 RGB video, 24 fps, 1 minute:
-      <br/>
-      <strong>
-       100 &times; 100 &times; 24 bits &times; 24 frames &times; 60 sec &divide; 8 = 43.2 MB
-      </strong>
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       ⚖️
-      </div>
-      Lossless vs Lossy
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      <strong>
-       Lossless:
-      </strong>
-      ضغط بدون فقدان &mdash; يستعيد البيانات الأصلية بالكامل.
-      <strong>
-       Lossy:
-      </strong>
-      ضغط مع فقدان &mdash; بعض البيانات غير الضرورية تُفقد، نسبة ضغط أعلى. المثال: 25.888888888 &rarr; Lossless: 25.[9]8 | Lossy: 26.
-     </div>
-     <div class="two-col">
-      <div class="col-card green-card">
-       <div class="col-card-title">
-        ✅ Lossless
-       </div>
-       <ul class="points">
-        <li>
-         <span class="pt-dot">
-         </span>
-         Decompressed =
-         <strong>
-          exactly matches original
-         </strong>
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         Entropy encoding is usually lossless
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         Required for: medical X-Rays, legal docs
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         Exploits statistical redundancy
-        </li>
-       </ul>
-      </div>
-      <div class="col-card red-card">
-       <div class="col-card-title">
-        ⚠️ Lossy
-       </div>
-       <ul class="points">
-        <li>
-         <span class="pt-dot">
-         </span>
-         <strong>
-          Some data is permanently lost
-         </strong>
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         Source encoding is usually lossy
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         JPEG "rounds off" less-important info
-        </li>
-        <li>
-         <span class="pt-dot">
-         </span>
-         Higher compression ratio, not reversible
-        </li>
-       </ul>
-      </div>
-     </div>
-     <div style="margin-top:12px">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🗂️
-      </div>
-      Compression Classification
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      ثلاثة تصنيفات: Entropy Encoding (بدون فقدان)، Source Encoding (مع فقدان)، Hybrid (دمج الاثنين &mdash; الأكثر شيوعاً في الأنظمة الحديثة).
-     </div>
-     <table class="data-table">
-      <thead>
-       <tr>
-        <th>
-         Type
-        </th>
-        <th>
-         Approach
-        </th>
-        <th>
-         Loss?
-        </th>
-        <th>
-         Examples
-        </th>
-       </tr>
-      </thead>
-      <tbody>
-       <tr>
-        <td class="highlight">
-         Entropy
-        </td>
-        <td>
-         Data as digital sequence, no semantics
-        </td>
-        <td style="color:var(--green2)">
-         Lossless
-        </td>
-        <td>
-         RLE, Huffman, Arithmetic
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         Source
-        </td>
-        <td>
-         Semantics taken into account (DCT etc.)
-        </td>
-        <td style="color:var(--red)">
-         Lossy
-        </td>
-        <td>
-         JPEG (partial), MPEG
-        </td>
-       </tr>
-       <tr>
-        <td class="highlight">
-         Hybrid
-        </td>
-        <td>
-         Combination of entropy + source
-        </td>
-        <td style="color:var(--gold)">
-         Both
-        </td>
-        <td>
-         JPEG, MPEG, H.261, DVI
-        </td>
-       </tr>
-      </tbody>
-     </table>
-     <div class="highlight-box" style="margin-top:12px">
-      <span class="hl-label">
-       Compression Standards
-      </span>
-      <strong>
-       JPEG
-      </strong>
-      &mdash; still images &nbsp;|&nbsp;
-      <strong>
-       H.261
-      </strong>
-      &mdash; video conferencing &nbsp;|&nbsp;
-      <strong>
-       MPEG
-      </strong>
-      &mdash; video + audio &nbsp;|&nbsp;
-      <strong>
-       DVI
-      </strong>
-      &mdash; still + continuous media (PLV &amp; RTV modes)
-     </div>
-    </div>
-   </section>
-   <!-- ═══ S13: RLE ═══ -->
-   <section class="section" id="s13">
-    <div class="sec-header">
-     <div class="sec-number">
-      13
-     </div>
-     <div class="sec-title">
-      Run-Length Encoding (RLE)
-     </div>
-     <div class="sec-line">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🔁
-      </div>
-      How RLE Works
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      ترميز طول التشغيل: تسلسلات البايتات المتكررة تُستبدل بـ (العدد، القيمة). إذا تكرر بايت 4 مرات أو أكثر متتالية، يُخزَّن كـ (البايت + العلامة الخاصة + العدد - 4). يُطبَّق صفاً صفاً على الصور. أسوأ حالة = صورة عشوائية (ضوضاء) &rarr; الملف المضغوط أكبر من الأصل!
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       Content-dependent coding &mdash; sequences of
-       <strong>
-        identical bytes replaced by (count, value)
-       </strong>
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       A special
-       <strong>
-        flag byte
-       </strong>
-       is used (not in the stream itself)
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       If a byte occurs
-       <strong>
-        &ge; 4 consecutive times
-       </strong>
-       : count = occurrences &minus; 4 (offset = 4)
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Can represent
-       <strong>
-        4 to 259 bytes with just 3 bytes
-       </strong>
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Applied
-       <strong>
-        row-by-row
-       </strong>
-       to images as pairs (color, length)
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Component in the
-       <strong>
-        JPEG compression pipeline
-       </strong>
-      </li>
-     </ul>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       📋
-      </div>
-      RLE Example
-     </div>
-     <div class="code-block">
-      <span class="code-label">
-       Original Sequence (1 Row)
-      </span>
-      BBBBWWWYYYYYYGGGGYYY
-      <span class="code-label" style="margin-top:12px">
-       RLE Encoded
-      </span>
-      (B,4) , (W,3) , (Y,6) , (G,4) , (Y,4)
-     </div>
-     <div class="highlight-box">
-      <span class="hl-label">
-       ⚠️ Worst Case
-      </span>
-      For
-      <strong>
-       random noise
-      </strong>
-      images &mdash; RLE produces a
-      <em>
-       larger
-      </em>
-      file than the original.
-      <br/>
-      Savings are entirely
-      <strong>
-       dependent on data content
-      </strong>
-      .
-     </div>
-    </div>
-   </section>
-   <!-- ═══ S14: Huffman ═══ -->
-   <section class="section" id="s14">
-    <div class="sec-header">
-     <div class="sec-number">
-      14
-     </div>
-     <div class="sec-title">
-      Huffman Encoding
-     </div>
-     <div class="sec-line">
-     </div>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🌳
-      </div>
-      Huffman Concept
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      ترميز هوفمان: طريقة إحصائية مثلى. الحروف الأكثر تكراراً تأخذ رموزاً أقصر، والأقل تكراراً تأخذ رموزاً أطول. الناتج خالٍ من البادئات (Prefix-Free) &rarr; فك الضغط فريد ومضمون. يُبنى شجرة ثنائية لتحديد الرموز.
-     </div>
-     <ul class="points">
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Optimal code
-       </strong>
-       using minimum bits for given character probabilities
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       <strong>
-        Frequent chars &rarr; shorter codes
-       </strong>
-       | Rare chars &rarr; longer codes
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Successive characters coded
-       <strong>
-        independently
-       </strong>
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       Resulting code is
-       <strong>
-        Prefix-Free
-       </strong>
-       &rarr; guaranteed unique decoding
-      </li>
-      <li>
-       <span class="pt-dot">
-       </span>
-       A
-       <strong>
-        binary tree
-       </strong>
-       : leaves = characters, nodes = probabilities, edges = 0/1
-      </li>
-     </ul>
-    </div>
-    <div class="content-card">
-     <div class="card-title">
-      <div class="card-title-icon">
-       🧮
-      </div>
-      Full Worked Example (A, B, C, D, E)
-     </div>
-     <div class="card-ar">
-      <span class="card-ar-label">
-       الشرح بالعربي
-      </span>
-      B=0.51 (الأعلى) &rarr; أقصر رمز = "1". C=0.09 (الأدنى) &rarr; أطول رمز = "000". متوسط طول الرمز = 1.98 بت/رمز. 1000 حرف بـ Huffman = 248 بايت مقابل 1000 بايت بـ ASCII &rarr; توفير 75%!
-     </div>
-     <div class="code-block">
-      <span class="code-label">
-       Given Probabilities
-      </span>
-      A: p=0.16  |  B: p=0.51  |  C: p=0.09  |  D: p=0.13  |  E: p=0.11
-      <span class="code-label" style="margin-top:12px">
-       Huffman Codes
-      </span>
-      B = 1       (shortest &mdash; most frequent)
-      A = 010
-      D = 011
-      E = 001
-      C = 000     (longest &mdash; least frequent)
-     </div>
-     <div class="code-block">
-      <span class="code-label">
-       Average Code Length
-      </span>
-      = (3&times;0.16) + (1&times;0.51) + (3&times;0.09) + (3&times;0.13) + (3&times;0.11)
-      = 0.48 + 0.51 + 0.27 + 0.39 + 0.33
-      = 1.98 bits/symbol
-     </div>
-     <div class="highlight-box">
-      <span class="hl-label">
-       📊 Compression Result &mdash; 1000 Characters
-      </span>
-      <strong>
-       Huffman:
-      </strong>
-      1000 &times; 1.98 = 1980 bits =
-      <strong>
-       248 Bytes
-      </strong>
-      <br/>
-      <strong>
-       ASCII:
-      </strong>
-      1000 &times; 8 bits = 8000 bits =
-      <strong>
-       1000 Bytes (1 KB)
-      </strong>
-      <br/>
-      <strong>
-       &rarr; ~75% size reduction!
-      </strong>
-     </div>
-     <div class="highlight-box" style="margin-top:10px">
-      <span class="hl-label">
-       Tree Building Steps
-      </span>
-      1. Sort characters by probability (lowest first)
-      <br/>
-      2. Combine two lowest &rarr; new node (sum of probabilities)
-      <br/>
-      3. Repeat until one root node (probability = 1.0)
-      <br/>
-      4. Assign 0 / 1 to left / right edges
-      <br/>
-      5. Read code from root &rarr; leaf for each character
-     </div>
-     <div class="highlight-box" style="margin-top:10px">
-      <span class="hl-label">
-       📝 Slide 53 Note
-      </span>
-      Example: AB &rarr;
-      <code style="color:var(--green3);font-family:var(--mono)">
-       1011
-      </code>
-      &nbsp;|&nbsp;
-      DE &rarr;
-      <code style="color:var(--green3);font-family:var(--mono)">
-       011010
-      </code>
-     </div>
-    </div>
-   </section>
-   <!-- ═══ REVIEW TABLE ═══ -->
-   <section class="review-section" id="review">
-    <div class="review-title">
-     📋 Quick Review Table &mdash; جدول المراجعة السريعة
-    </div>
-    <table class="review-table">
-     <thead>
-      <tr>
-       <th>
-        TOPIC
-       </th>
-       <th>
-        Key Concept
-       </th>
-       <th>
-        Details / Formula
-       </th>
-       <th>
-        الشرح
-       </th>
-      </tr>
-     </thead>
-     <tbody>
-      <tr>
-       <td>
-        Pixel
-       </td>
-       <td>
-        Picture element
-       </td>
-       <td>
-        Smallest unit of a digital image
-       </td>
-       <td>
-        أصغر وحدة في الصورة الرقمية
-       </td>
-      </tr>
-      <tr>
-       <td>
-        Resolution
-       </td>
-       <td>
-        W &times; H (pixels)
-       </td>
-       <td>
-        More pixels = better quality
-       </td>
-       <td>
-        عدد البكسلات يحدد الجودة
-       </td>
-      </tr>
-      <tr>
-       <td>
-        Image Size
-       </td>
-       <td>
-        W &times; H &times; Depth
-       </td>
-       <td>
-        100&times;100&times;8bit = 80Kbit = 10KB
-       </td>
-       <td>
-        حساب حجم الصورة
-       </td>
-      </tr>
-      <tr>
-       <td>
-        Interlacing
-       </td>
-       <td>
-        Halves bandwidth
-       </td>
-       <td>
-        50Hz interlaced &rarr; 25Hz frame rate; odd then even lines
-       </td>
-       <td>
-        عرض الإطار في مرحلتين لتوفير النطاق
-       </td>
-      </tr>
-      <tr>
-       <td>
-        CRT
-       </td>
-       <td>
-        Electron gun + Phosphor
-       </td>
-       <td>
-        R,G,B guns &rarr; shadow mask &rarr; phosphor triad per pixel
-       </td>
-       <td>
-        ثلاثة مسدسات إلكترون &mdash; قناع ظلي &mdash; ثلاثي الفوسفور
-       </td>
-      </tr>
-      <tr>
-       <td>
-        H. Flyback
-       </td>
-       <td>
-        End of scan line
-       </td>
-       <td>
-        Beam returns to start of next line
-       </td>
-       <td>
-        نهاية كل سطر &mdash; الشعاع يعود لبداية السطر التالي
-       </td>
-      </tr>
-      <tr>
-       <td>
-        V. Flyback
-       </td>
-       <td>
-        End of frame
-       </td>
-       <td>
-        Beam returns to top-left corner
-       </td>
-       <td>
-        نهاية الإطار كاملاً &mdash; الشعاع يعود للزاوية العلوية
-       </td>
-      </tr>
-      <tr>
-       <td>
-        Binary Image
-       </td>
-       <td>
-        1-bit/pixel
-       </td>
-       <td>
-        0=black, 1=white only
-       </td>
-       <td>
-        بت واحد لكل بكسل &mdash; أسود أو أبيض فقط
-       </td>
-      </tr>
-      <tr>
-       <td>
-        Grayscale
-       </td>
-       <td>
-        8-bit = 256 shades
-       </td>
-       <td>
-        Single intensity value; distinct from binary
-       </td>
-       <td>
-        256 درجة رمادي &mdash; شدة واحدة لكل بكسل
-       </td>
-      </tr>
-      <tr>
-       <td>
-        True Color
-       </td>
-       <td>
-        24-bit RGB
-       </td>
-       <td>
-        8 bits &times; 3 channels = 16.7M colors
-       </td>
-       <td>
-        8 بت لكل قناة &rarr; 16.7 مليون لون
-       </td>
-      </tr>
-      <tr>
-       <td>
-        Bitmap
-       </td>
-       <td>
-        Raster format
-       </td>
-       <td>
-        ❌ Loses quality when enlarged (pixelation)
-       </td>
-       <td>
-        يفقد الجودة عند التكبير
-       </td>
-      </tr>
-      <tr>
-       <td>
-        Vector
-       </td>
-       <td>
-        Math equations
-       </td>
-       <td>
-        ✅ Scales without quality loss, smaller size
-       </td>
-       <td>
-        تكبير بدون فقدان جودة &mdash; حجم أصغر
-       </td>
-      </tr>
-      <tr>
-       <td>
-        GIF
-       </td>
-       <td>
-        Max 256 colors
-       </td>
-       <td>
-        Lossless, supports animation, NOT for photos
-       </td>
-       <td>
-        مناسب للشعارات والرسوم المتحركة &mdash; ليس الصور
-       </td>
-      </tr>
-      <tr>
-       <td>
-        RGB Model
-       </td>
-       <td>
-        Additive color
-       </td>
-       <td>
-        Device-dependent; input: cameras; output: monitors/TVs
-       </td>
-       <td>
-        نموذج تضافري يعتمد على الجهاز
-       </td>
-      </tr>
-      <tr>
-       <td>
-        BMP File
-       </td>
-       <td>
-        3 parts
-       </td>
-       <td>
-        Header + Color Table + Bitmap Data Array
-       </td>
-       <td>
-        ترويسة + جدول الألوان + مصفوفة البيانات
-       </td>
-      </tr>
-      <tr>
-       <td>
-        Lossless
-       </td>
-       <td>
-        No data lost
-       </td>
-       <td>
-        Entropy encoding; required for X-Rays; reversible
-       </td>
-       <td>
-        ضغط بدون فقدان &mdash; يستعيد الأصل بالكامل
-       </td>
-      </tr>
-      <tr>
-       <td>
-        Lossy
-       </td>
-       <td>
-        Some data lost
-       </td>
-       <td>
-        Source encoding; higher ratio; not reversible; JPEG
-       </td>
-       <td>
-        ضغط مع فقدان &mdash; نسبة أعلى &mdash; غير قابل للعكس
-       </td>
-      </tr>
-      <tr>
-       <td>
-        PAL TV
-       </td>
-       <td>
-        216 Mbit/sec
-       </td>
-       <td>
-        (13.5+6.75+6.75)MHz &times; 8bits uncompressed
-       </td>
-       <td>
-        حاجة هائلة للنطاق بدون ضغط
-       </td>
-      </tr>
-      <tr>
-       <td>
-        RLE
-       </td>
-       <td>
-        Replace runs
-       </td>
-       <td>
-        BBBBWWW&rarr;(B,4)(W,3); worst case=random noise
-       </td>
-       <td>
-        استبدال التكرارات بـ (القيمة، العدد)
-       </td>
-      </tr>
-      <tr>
-       <td>
-        Huffman
-       </td>
-       <td>
-        Freq &rarr; short codes
-       </td>
-       <td>
-        Avg length = &Sigma;(bits &times; prob); prefix-free; binary tree
-       </td>
-       <td>
-        الحروف الشائعة = رموز أقصر &rarr; ضغط أمثل
-       </td>
-      </tr>
-      <tr>
-       <td>
-        Huffman Example
-       </td>
-       <td>
-        B=1 (shortest)
-       </td>
-       <td>
-        Avg=1.98 bits; 1000chars=248B vs ASCII=1KB (75% saving)
-       </td>
-       <td>
-        B أكثر تكراراً &rarr; رمز واحد فقط
-       </td>
-      </tr>
-      <tr>
-       <td>
-        Digital Camera
-       </td>
-       <td>
-        Lens&rarr;CCD&rarr;ADC&rarr;Memory
-       </td>
-       <td>
-        CCD stores intensity as voltage &rarr; ADC converts to digital
-       </td>
-       <td>
-        الضوء &rarr; كهرباء &rarr; رقم &rarr; صورة
-       </td>
-      </tr>
-      <tr>
-       <td>
-        Luminance
-       </td>
-       <td>
-        Brightness channel
-       </td>
-       <td>
-        TV signal split into luminance + chrominance for B&amp;W compatibility
-       </td>
-       <td>
-        قناة السطوع &mdash; توافق مع الأبيض والأسود
-       </td>
-      </tr>
-      <tr>
-       <td>
-        Hybrid Encoding
-       </td>
-       <td>
-        Best of both
-       </td>
-       <td>
-        JPEG, MPEG, H.261, DVI &mdash; most multimedia systems use this
-       </td>
-       <td>
-        دمج Entropy + Source &mdash; الأنظمة الحديثة
-       </td>
-      </tr>
-     </tbody>
-    </table>
-   </section>
-  </div>
-  <!-- end page-wrap -->
+    </section>
+
+  </div><!-- end page-wrap -->
+
   <footer>
-   <div class="footer-logo">
-    CHAPTER 7
-   </div>
-   <div class="footer-name">
-    إعداد: علاء حرزالله
-   </div>
-   <div class="footer-info">
-    <div class="footer-item">
-     💬 WhatsApp: 0775725298
+    <div class="footer-logo">CH 07</div>
+    <div class="footer-name">Graphic / Image Data Structures</div>
+    <div class="footer-info">
+      <span class="footer-item">👨‍🏫 Dr. Saleh Ali Alomari</span>
+      <span class="footer-item">📚 Data Structures — Chapter 7</span>
+      <span class="footer-item">🌳 Huffman Focus Edition</span>
     </div>
-    <div class="footer-item">
-     👤 Ataa Herzallah
-    </div>
-   </div>
-   <div class="footer-copy">
-    &copy; 2025
-    <span>
-     KAFAYAT
-    </span>
-    &mdash; ALL RIGHTS RESERVED
-   </div>
+    <div class="footer-copy">STUDY GUIDE • <span>CH07</span> • LIGHT THEME</div>
   </footer>
+
   <script>
-   const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navLinks.forEach(l => l.classList.remove('active'));
-      const link = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
-      if (link) { link.classList.add('active'); link.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }
+    function toggleAnswer(btn) {
+      const answer = btn.nextElementSibling;
+      answer.classList.toggle('show');
+      btn.textContent = answer.classList.contains('show') ? 'Hide Answer ▲' : 'Show Answer ▼';
     }
-  });
-}, { threshold: 0.3, rootMargin: '-60px 0px -40% 0px' });
-sections.forEach(s => observer.observe(s));
+
+    // Highlight active nav link on scroll
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const link = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+          if (link) {
+            link.classList.add('active');
+            link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        }
+      });
+    }, { threshold: 0.25, rootMargin: '-60px 0px -40% 0px' });
+    sections.forEach(s => observer.observe(s));
   </script>
- </body>
+</body>
 </html>
