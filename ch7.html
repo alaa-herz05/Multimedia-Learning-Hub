@@ -979,24 +979,46 @@
         <div class="card-title"><div class="card-title-icon">🔍</div>Image Analysis (Image Processing)</div>
         <div class="card-ar">
           <span class="card-ar-label">الشرح بالعربي</span>
-          معلومات البكسل وحدها غير كافية! نحتاج تحليل الصور لمعرفة شكل الأجسام واتجاهها والتفسير ثلاثي الأبعاد. التطبيقات: كشف الأجسام، التعرف على الأنماط، الرؤية الحاسوبية.
+          معلومات البكسل وحدها غير كافية! لا توجد معلومات عن: <strong>شكل الجسم</strong>، <strong>اتجاه الجسم</strong>، <strong>التفسير ثلاثي الأبعاد</strong>. لذلك نحتاج إلى تحليل الصور (Image Analysis / Image Processing). التطبيقات: كشف الأجسام، التعرف على الأنماط، تحليل المشاهد، الرؤية الحاسوبية.
         </div>
-        <div class="two-col" style="margin-top:14px">
+
+        <!-- Why pixel info is insufficient -->
+        <div class="info-box">
+          <span class="hl-label">📌 Why Pixel Information is Insufficient</span>
+          Pixel information (color and brightness values) alone is <strong>very often insufficient</strong>. Raw pixel data provides no information about:
+        </div>
+        <ul class="points" style="margin-bottom:16px;">
+          <li><span class="pt-dot"></span><strong>Shape of an object</strong> — pixel values cannot describe the geometric form or outline of objects in a scene.</li>
+          <li><span class="pt-dot"></span><strong>Orientation of an object</strong> — there is no information about which direction an object is facing or how it is rotated.</li>
+          <li><span class="pt-dot"></span><strong>Three-dimensional interpretation</strong> — a 2D pixel grid cannot directly represent depth, volume, or spatial relationships between objects.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <span class="hl-label">➔ Therefore</span>
+          <strong>Image Analysis (Image Processing) is required</strong> to extract meaningful, higher-level information from raw pixel data — going beyond brightness and color to understand what is actually in the scene.
+        </div>
+
+        <!-- Applications -->
+        <div style="margin-top:18px; margin-bottom:12px; font-family:Orbitron,monospace; font-size:10px; font-weight:700; color:var(--blue2); letter-spacing:2px; text-transform:uppercase;">
+          Applications &amp; Special Topics
+        </div>
+        <div class="two-col">
           <div class="col-card blue-card">
-            <div class="col-card-title">Applications</div>
+            <div class="col-card-title">🧠 Core Applications</div>
             <ul class="points">
-              <li><span class="pt-dot"></span>Object Detection</li>
-              <li><span class="pt-dot"></span>Pattern Recognition</li>
-              <li><span class="pt-dot"></span>Scene Analysis</li>
-              <li><span class="pt-dot"></span>Computer Vision</li>
+              <li><span class="pt-dot"></span><strong>Object Detection</strong> — identifying and locating objects within an image.</li>
+              <li><span class="pt-dot"></span><strong>Pattern Recognition</strong> — classifying patterns such as faces, fingerprints, or handwriting.</li>
+              <li><span class="pt-dot"></span><strong>Scene Analysis</strong> — understanding the overall content and context of an image.</li>
+              <li><span class="pt-dot"></span><strong>Computer Vision</strong> — enabling machines to interpret and understand visual information from the world.</li>
             </ul>
           </div>
           <div class="col-card gold-card">
-            <div class="col-card-title">Traffic Example Problems</div>
+            <div class="col-card-title">🚗 Real-World Example — Traffic</div>
             <ul class="points">
-              <li><span class="pt-dot"></span>Is there a traffic sign?</li>
-              <li><span class="pt-dot"></span>Is a car in front?</li>
-              <li><span class="pt-dot"></span>What is its relative speed?</li>
+              <li><span class="pt-dot"></span>Is there a <strong>traffic sign</strong> ahead?</li>
+              <li><span class="pt-dot"></span>Is there a <strong>car in front</strong>?</li>
+              <li><span class="pt-dot"></span>What is its <strong>relative speed</strong>?</li>
+              <li><span class="pt-dot"></span>Is a <strong>pedestrian</strong> crossing the road?</li>
             </ul>
           </div>
         </div>
