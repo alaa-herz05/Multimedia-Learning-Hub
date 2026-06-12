@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huffman Coding — Essay Questions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:        #0d1117;
+      --surface:   #161b22;
+      --card:      #1c2330;
+      --border:    rgba(48, 54, 61, 0.8);
+      --border2:   rgba(48, 54, 61, 0.4);
+      --green:     #3fb950;
+      --green2:    #56d364;
+      --green-dim: rgba(63, 185, 80, 0.08);
+      --green-glow:rgba(63, 185, 80, 0.25);
+      --teal:      #79c0ff;
+      --teal-dim:  rgba(121, 192, 255, 0.07);
+      --gold:      #e3b341;
+      --gold-dim:  rgba(227, 179, 65, 0.08);
+      --red:       #f85149;
+      --muted:     #8b949e;
+      --muted2:    #6e7681;
+      --text:      #e6edf3;
+      --text2:     #c9d1d9;
+      --mono:      'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    /* ── GRID BG ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(63,185,80,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(63,185,80,.03) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    /* ── NAV ── */
+    .top-nav {
+      position: sticky; top: 0; z-index: 999;
+      background: rgba(13,17,23,.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 900px; margin: 0 auto;
+      display: flex; align-items: center;
+      height: 52px; gap: 16px;
+    }
+    .nav-brand {
+      font-family: Orbitron, monospace; font-size: 10px; font-weight: 700;
+      color: var(--green2); letter-spacing: 3px; white-space: nowrap;
+    }
+    .nav-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+    .nav-sub { font-size: 12px; color: var(--muted); font-weight: 500; letter-spacing: .3px; }
+    .nav-badge {
+      margin-left: auto;
+      background: var(--green-dim); border: 1px solid rgba(63,185,80,.3);
+      color: var(--green2); font-size: 10px; font-family: var(--mono);
+      padding: 3px 12px; border-radius: 20px; font-weight: 600; letter-spacing: 1px;
+    }
+
+    /* ── WRAP ── */
+    .page-wrap {
+      position: relative; z-index: 1;
+      max-width: 900px; margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 72px 24px 56px;
+      border-bottom: 1px solid var(--border2);
+      margin-bottom: 56px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 10px; font-weight: 600;
+      color: var(--green); letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow::before, .hero-eyebrow::after {
+      content: ''; display: block;
+      width: 32px; height: 1px; background: var(--green-glow);
+    }
+    .hero h1 {
+      font-family: Orbitron, monospace;
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #e6edf3 30%, var(--green2) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+    .hero-sub {
+      font-size: 14px; color: var(--muted); max-width: 520px;
+      margin: 0 auto 28px; line-height: 1.8;
+    }
+    .hero-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .chip {
+      font-size: 11px; font-weight: 600; letter-spacing: .5px;
+      padding: 5px 14px; border-radius: 20px;
+      border: 1px solid var(--border); color: var(--muted2);
+      background: var(--surface);
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar-wrap {
+      background: var(--surface); border: 1px solid var(--border2);
+      border-radius: 16px; padding: 20px 28px;
+      margin-bottom: 40px;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .progress-label {
+      font-family: var(--mono); font-size: 11px; color: var(--muted);
+      white-space: nowrap; flex-shrink: 0; letter-spacing: 1px;
+    }
+    .progress-track {
+      flex: 1; height: 6px; background: var(--border);
+      border-radius: 3px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--green), var(--green2));
+      border-radius: 3px;
+      transition: width .6s cubic-bezier(.4,0,.2,1);
+      box-shadow: 0 0 10px var(--green-glow);
+    }
+    .progress-count {
+      font-family: var(--mono); font-size: 13px; font-weight: 700;
+      color: var(--green2); white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* ── SECTION HEADER ── */
+    .sec-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px;
+    }
+    .sec-tag {
+      font-family: var(--mono); font-size: 9px; font-weight: 700;
+      color: var(--green); letter-spacing: 3px; text-transform: uppercase;
+      background: var(--green-dim); border: 1px solid rgba(63,185,80,.2);
+      padding: 4px 12px; border-radius: 6px; flex-shrink: 0;
+    }
+    .sec-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+
+    /* ── QUESTION CARD ── */
+    .q-card {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 16px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .q-card:hover { border-color: rgba(63,185,80,.2); }
+    .q-card.revealed { border-color: rgba(63,185,80,.3); box-shadow: 0 0 24px rgba(63,185,80,.06); }
+
+    .q-header {
+      padding: 24px 28px 20px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .q-num {
+      font-family: var(--mono); font-size: 10px; font-weight: 700;
+      color: var(--green); background: var(--green-dim);
+      border: 1px solid rgba(63,185,80,.2);
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; letter-spacing: 1px;
+    }
+    .q-body { flex: 1; }
+    .q-label {
+      font-family: var(--mono); font-size: 9px; font-weight: 600;
+      color: var(--muted2); letter-spacing: 2.5px; text-transform: uppercase;
+      margin-bottom: 8px; display: block;
+    }
+    .q-text {
+      font-size: 15px; font-weight: 600; color: var(--text);
+      line-height: 1.65; letter-spacing: -.1px;
+    }
+
+    /* ── TOGGLE BUTTON ── */
+    .q-footer {
+      padding: 0 28px 22px;
+      display: flex; justify-content: flex-start;
+    }
+    .toggle-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: none; border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 20px;
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      color: var(--muted); letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; transition: all .2s;
+      position: relative; overflow: hidden;
+    }
+    .toggle-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--green-dim); opacity: 0;
+      transition: opacity .2s;
+    }
+    .toggle-btn:hover { border-color: rgba(63,185,80,.4); color: var(--green2); }
+    .toggle-btn:hover::before { opacity: 1; }
+    .toggle-btn.open { border-color: rgba(63,185,80,.4); color: var(--green2); background: var(--green-dim); }
+    .btn-icon { font-size: 14px; transition: transform .3s cubic-bezier(.4,0,.2,1); }
+    .toggle-btn.open .btn-icon { transform: rotate(180deg); }
+
+    /* ── ANSWER PANEL ── */
+    .answer-panel {
+      max-height: 0; overflow: hidden;
+      transition: max-height .5s cubic-bezier(.4,0,.2,1);
+      border-top: 1px solid transparent;
+    }
+    .answer-panel.open {
+      max-height: 3000px;
+      border-top-color: var(--border2);
+    }
+    .answer-inner {
+      padding: 28px 28px 28px;
+    }
+
+    /* ── ANSWER CONTENT STYLES ── */
+    .ans-block { margin-bottom: 22px; }
+    .ans-block:last-child { margin-bottom: 0; }
+
+    .ans-section-title {
+      font-family: var(--mono); font-size: 10px; font-weight: 700;
+      color: var(--teal); letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+    }
+    .ans-section-title::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, rgba(121,192,255,.2), transparent);
+    }
+
+    .ans-p {
+      font-size: 14px; color: var(--text2); line-height: 1.85;
+      margin-bottom: 10px;
+    }
+    .ans-p:last-child { margin-bottom: 0; }
+    .ans-p strong { color: var(--text); }
+    .ans-p em { color: var(--green2); font-style: normal; font-weight: 600; }
+
+    /* Steps list */
+    .steps { list-style: none; margin: 0; padding: 0; }
+    .steps li {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 10px 0; border-bottom: 1px solid var(--border2);
+      font-size: 14px; color: var(--text2); line-height: 1.7;
+    }
+    .steps li:last-child { border-bottom: none; }
+    .step-num {
+      font-family: var(--mono); font-size: 10px; font-weight: 700;
+      color: var(--green); background: var(--green-dim);
+      border: 1px solid rgba(63,185,80,.2);
+      min-width: 28px; height: 28px; border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+
+    /* Bullet list */
+    .bullets { list-style: none; margin: 0; padding: 0; }
+    .bullets li {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 7px 0; font-size: 14px; color: var(--text2); line-height: 1.7;
+      border-bottom: 1px solid var(--border2);
+    }
+    .bullets li:last-child { border-bottom: none; }
+    .bul-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green); flex-shrink: 0; margin-top: 8px;
+      box-shadow: 0 0 6px var(--green-glow);
+    }
+    .bullets li strong { color: var(--text); }
+
+    /* Two-col */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .col-box {
+      background: var(--surface); border: 1px solid var(--border2);
+      border-radius: 12px; padding: 16px 18px;
+    }
+    .col-box-title {
+      font-family: var(--mono); font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .col-box.green-box { border-color: rgba(63,185,80,.2); }
+    .col-box.green-box .col-box-title { color: var(--green2); }
+    .col-box.red-box { border-color: rgba(248,81,73,.2); }
+    .col-box.red-box .col-box-title { color: var(--red); }
+
+    /* Table */
+    .ans-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 8px 0; }
+    .ans-table th {
+      background: rgba(63,185,80,.07); color: var(--green2);
+      padding: 10px 14px; text-align: left;
+      font-family: var(--mono); font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      border-bottom: 1px solid rgba(63,185,80,.15);
+    }
+    .ans-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border2);
+      color: var(--text2);
+    }
+    .ans-table tr:last-child td { border-bottom: none; }
+    .ans-table tr:hover td { background: rgba(255,255,255,.02); }
+    .ans-table .hl { color: var(--green2); font-family: var(--mono); font-weight: 600; }
+    .ans-table .muted { color: var(--muted); }
+
+    /* Tree visualization */
+    .tree-box {
+      background: var(--surface); border: 1px solid rgba(121,192,255,.15);
+      border-radius: 12px; padding: 20px 24px;
+      font-family: var(--mono); font-size: 13px; color: var(--teal);
+      line-height: 1.9; overflow-x: auto; margin: 12px 0;
+      white-space: pre;
+    }
+
+    /* Code / formula box */
+    .formula-box {
+      background: rgba(63,185,80,.05); border: 1px solid rgba(63,185,80,.2);
+      border-radius: 12px; padding: 14px 20px;
+      font-family: var(--mono); font-size: 14px; color: var(--green2);
+      text-align: center; margin: 12px 0; letter-spacing: .5px;
+    }
+
+    /* Highlight / note box */
+    .note-box {
+      background: var(--gold-dim); border: 1px solid rgba(227,179,65,.2);
+      border-radius: 12px; padding: 14px 18px; margin: 12px 0;
+      font-size: 13.5px; color: var(--text2); line-height: 1.8;
+    }
+    .note-box .note-label {
+      font-family: var(--mono); font-size: 9px; font-weight: 700;
+      color: var(--gold); letter-spacing: 2px; text-transform: uppercase;
+      display: block; margin-bottom: 5px;
+    }
+
+    /* Conclusion box */
+    .conclusion-box {
+      background: linear-gradient(135deg, rgba(63,185,80,.06), rgba(63,185,80,.02));
+      border: 1px solid rgba(63,185,80,.25);
+      border-radius: 12px; padding: 18px 22px; margin-top: 14px;
+      font-size: 14px; color: var(--text2); line-height: 1.85;
+    }
+    .conclusion-box strong { color: var(--green2); }
+
+    /* Divider */
+    .ans-divider {
+      height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 20px 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border2);
+      padding: 32px 24px 24px; text-align: center;
+      position: relative; z-index: 1;
+    }
+    .footer-text {
+      font-family: var(--mono); font-size: 10px; color: var(--muted2);
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+    .footer-text span { color: var(--green); }
+
+    @media (max-width: 640px) {
+      .two-col { grid-template-columns: 1fr; }
+      .q-header, .answer-inner, .q-footer { padding-left: 18px; padding-right: 18px; }
+      .tree-box { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="top-nav">
+    <div class="nav-inner">
+      <div class="nav-brand">HUFFMAN</div>
+      <div class="nav-dot"></div>
+      <div class="nav-sub">Essay Questions</div>
+      <div class="nav-badge" id="revealedCount">0 / 2 Revealed</div>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-eyebrow">Study Guide</div>
+      <h1>Huffman Coding</h1>
+      <p class="hero-sub">
+        Two comprehensive essay questions covering the working principle, construction,
+        advantages, disadvantages, and compression analysis of Huffman Coding.
+      </p>
+      <div class="hero-chips">
+        <span class="chip">Lossless Compression</span>
+        <span class="chip">Binary Tree</span>
+        <span class="chip">Entropy Encoding</span>
+        <span class="chip">JPEG · PNG · ZIP</span>
+        <span class="chip">Multimedia Systems</span>
+      </div>
+    </header>
+
+    <!-- PROGRESS -->
+    <div class="progress-bar-wrap">
+      <span class="progress-label">PROGRESS</span>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <span class="progress-count" id="progressText">0 / 2</span>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         QUESTION 1
+    ═══════════════════════════════════════ -->
+    <div class="sec-header">
+      <span class="sec-tag">Essay Q1</span>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="q-card" id="card1">
+      <div class="q-header">
+        <div class="q-num">Q1</div>
+        <div class="q-body">
+          <span class="q-label">Essay Question</span>
+          <div class="q-text">
+            Explain Huffman Coding. Discuss its working principle, advantages, disadvantages, and its role in multimedia compression.
+          </div>
+        </div>
+      </div>
+      <div class="q-footer">
+        <button class="toggle-btn" onclick="toggleAnswer(1)">
+          <span class="btn-icon">▼</span>
+          <span class="btn-label">Show Answer</span>
+        </button>
+      </div>
+
+      <div class="answer-panel" id="answer1">
+        <div class="answer-inner">
+
+          <!-- Introduction -->
+          <div class="ans-block">
+            <div class="ans-section-title">Introduction</div>
+            <p class="ans-p">
+              <strong>Huffman Coding</strong> is a <em>lossless data compression technique</em> developed by
+              David A. Huffman in 1952. It reduces file size by assigning
+              <strong>shorter binary codes</strong> to frequently occurring symbols and
+              <strong>longer binary codes</strong> to less frequent symbols.
+            </p>
+            <p class="ans-p">
+              It is widely used in multimedia applications such as image, audio, and video
+              compression because it reduces storage requirements without losing any original information.
+            </p>
+          </div>
+
+          <div class="ans-divider"></div>
+
+          <!-- Working Principle -->
+          <div class="ans-block">
+            <div class="ans-section-title">Working Principle</div>
+            <p class="ans-p">Huffman Coding works by analyzing the <strong>frequency of occurrence</strong> of each symbol in a file, then building an optimal binary tree:</p>
+            <ol class="steps">
+              <li><span class="step-num">01</span><span>Count the <strong>frequency</strong> of each symbol in the data.</span></li>
+              <li><span class="step-num">02</span><span>Create a <strong>leaf node</strong> for each symbol.</span></li>
+              <li><span class="step-num">03</span><span>Arrange all nodes in <strong>ascending order</strong> of frequency.</span></li>
+              <li><span class="step-num">04</span><span>Combine the <strong>two nodes with the lowest frequencies</strong> into a new parent node.</span></li>
+              <li><span class="step-num">05</span><span>Repeat until only <strong>one node (the root)</strong> remains — the tree is complete.</span></li>
+              <li><span class="step-num">06</span><span>Assign <strong>Left branch = 0</strong> and <strong>Right branch = 1</strong>.</span></li>
+              <li><span class="step-num">07</span><span>Generate binary codes by <strong>tracing paths</strong> from the root to each leaf symbol.</span></li>
+            </ol>
+          </div>
+
+          <div class="ans-divider"></div>
+
+          <!-- Example -->
+          <div class="ans-block">
+            <div class="ans-section-title">Example</div>
+            <p class="ans-p" style="margin-bottom:12px;">Given the following symbol frequencies:</p>
+            <table class="ans-table">
+              <thead><tr><th>Symbol</th><th>Frequency</th><th>Huffman Code</th><th>Code Length</th></tr></thead>
+              <tbody>
+                <tr><td class="hl">A</td><td>40</td><td class="hl">0</td><td class="muted">1 bit</td></tr>
+                <tr><td class="hl">B</td><td>30</td><td class="hl">10</td><td class="muted">2 bits</td></tr>
+                <tr><td class="hl">C</td><td>20</td><td class="hl">110</td><td class="muted">3 bits</td></tr>
+                <tr><td class="hl">D</td><td>10</td><td class="hl">111</td><td class="muted">3 bits</td></tr>
+              </tbody>
+            </table>
+            <div class="note-box" style="margin-top:12px;">
+              <span class="note-label">💡 Key Insight</span>
+              The most frequent symbol <strong>A (freq=40)</strong> gets the shortest code (1 bit), while the least frequent <strong>D (freq=10)</strong> gets the longest (3 bits). This variable-length strategy minimizes total bits used.
+            </div>
+          </div>
+
+          <div class="ans-divider"></div>
+
+          <!-- Advantages & Disadvantages -->
+          <div class="ans-block">
+            <div class="ans-section-title">Advantages &amp; Disadvantages</div>
+            <div class="two-col">
+              <div class="col-box green-box">
+                <div class="col-box-title">✅ Advantages</div>
+                <ul class="bullets">
+                  <li><span class="bul-dot"></span><span><strong>Lossless</strong> — no data is lost during compression or decompression.</span></li>
+                  <li><span class="bul-dot"></span><span><strong>Efficient storage</strong> — reduces file size significantly for skewed frequencies.</span></li>
+                  <li><span class="bul-dot"></span><span><strong>Fast decoding</strong> — traversing the tree from root to leaf is straightforward.</span></li>
+                  <li><span class="bul-dot"></span><span><strong>Widely adopted</strong> — implemented in JPEG, PNG, ZIP, PDF.</span></li>
+                  <li><span class="bul-dot"></span><span><strong>Simple algorithm</strong> — easy to understand and implement.</span></li>
+                </ul>
+              </div>
+              <div class="col-box red-box">
+                <div class="col-box-title">❌ Disadvantages</div>
+                <ul class="bullets">
+                  <li><span class="bul-dot" style="background:var(--red);box-shadow:0 0 6px rgba(248,81,73,.3);"></span><span>Requires <strong>frequency analysis</strong> before encoding begins.</span></li>
+                  <li><span class="bul-dot" style="background:var(--red);box-shadow:0 0 6px rgba(248,81,73,.3);"></span><span><strong>Less effective</strong> when symbol frequencies are nearly equal.</span></li>
+                  <li><span class="bul-dot" style="background:var(--red);box-shadow:0 0 6px rgba(248,81,73,.3);"></span><span>The <strong>Huffman tree itself</strong> must be stored alongside compressed data.</span></li>
+                  <li><span class="bul-dot" style="background:var(--red);box-shadow:0 0 6px rgba(248,81,73,.3);"></span><span>Compression ratio may be <strong>lower</strong> than more advanced modern techniques.</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="ans-divider"></div>
+
+          <!-- Applications -->
+          <div class="ans-block">
+            <div class="ans-section-title">Applications in Multimedia</div>
+            <ul class="bullets">
+              <li><span class="bul-dot"></span><span><strong>JPEG</strong> — used in the entropy coding stage of image compression.</span></li>
+              <li><span class="bul-dot"></span><span><strong>PNG</strong> — combined with DEFLATE for lossless image files.</span></li>
+              <li><span class="bul-dot"></span><span><strong>ZIP / GZIP</strong> — forms a core part of general-purpose file archiving.</span></li>
+              <li><span class="bul-dot"></span><span><strong>PDF documents</strong> — used to compress embedded text and image streams.</span></li>
+              <li><span class="bul-dot"></span><span><strong>Multimedia storage &amp; transmission</strong> — reduces bandwidth in data pipelines.</span></li>
+            </ul>
+          </div>
+
+          <!-- Conclusion -->
+          <div class="conclusion-box">
+            <strong>Conclusion:</strong> Huffman Coding is one of the most important lossless compression techniques in multimedia systems. By assigning shorter codes to frequent symbols and longer codes to rare ones, it effectively reduces file size while preserving all original data. Its simplicity, efficiency, and reliability make it a fundamental component of modern data compression.
+          </div>
+
+        </div>
+      </div>
+    </div><!-- end card1 -->
+
+
+    <!-- ═══════════════════════════════════════
+         QUESTION 2
+    ═══════════════════════════════════════ -->
+    <div class="sec-header" style="margin-top: 40px;">
+      <span class="sec-tag">Essay Q2</span>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="q-card" id="card2">
+      <div class="q-header">
+        <div class="q-num">Q2</div>
+        <div class="q-body">
+          <span class="q-label">Tree Construction &amp; Analysis</span>
+          <div class="q-text">
+            Given: A(40), B(30), C(20), D(10). Construct the Huffman Tree, assign codes, calculate the total bits required, and explain why Huffman Coding achieves compression compared to fixed-length encoding.
+          </div>
+        </div>
+      </div>
+      <div class="q-footer">
+        <button class="toggle-btn" onclick="toggleAnswer(2)">
+          <span class="btn-icon">▼</span>
+          <span class="btn-label">Show Answer</span>
+        </button>
+      </div>
+
+      <div class="answer-panel" id="answer2">
+        <div class="answer-inner">
+
+          <!-- Step 1 -->
+          <div class="ans-block">
+            <div class="ans-section-title">Step 1 — Sort by Frequency (Ascending)</div>
+            <table class="ans-table">
+              <thead><tr><th>Symbol</th><th>Frequency</th></tr></thead>
+              <tbody>
+                <tr><td class="hl">D</td><td>10 ← lowest</td></tr>
+                <tr><td class="hl">C</td><td>20</td></tr>
+                <tr><td class="hl">B</td><td>30</td></tr>
+                <tr><td class="hl">A</td><td>40 ← highest</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="ans-divider"></div>
+
+          <!-- Step 2 -->
+          <div class="ans-block">
+            <div class="ans-section-title">Step 2 — Combine Two Lowest (D + C = 30)</div>
+            <div class="tree-box">        30
+       /  \
+   D(10) C(20)</div>
+          </div>
+
+          <div class="ans-divider"></div>
+
+          <!-- Step 3 -->
+          <div class="ans-block">
+            <div class="ans-section-title">Step 3 — Combine Next Two Lowest (DC=30 + B=30 = 60)</div>
+            <p class="ans-p" style="margin-bottom:10px;">Remaining: <strong>30</strong> (DC node), <strong>30</strong> (B), <strong>40</strong> (A) — combine the two 30s:</p>
+            <div class="tree-box">          60
+         /  \
+      B(30)  30
+            /  \
+        D(10) C(20)</div>
+          </div>
+
+          <div class="ans-divider"></div>
+
+          <!-- Step 4 -->
+          <div class="ans-block">
+            <div class="ans-section-title">Step 4 — Final Combination (A=40 + 60 = Root 100)</div>
+            <div class="tree-box">              100
+             /    \
+          A(40)    60
+                  /  \
+              B(30)   30
+                     /  \
+                 D(10) C(20)</div>
+          </div>
+
+          <div class="ans-divider"></div>
+
+          <!-- Step 5 -->
+          <div class="ans-block">
+            <div class="ans-section-title">Step 5 — Assign Binary Values (Left=0, Right=1)</div>
+            <div class="tree-box">              100
+             /    \
+          0 /      \ 1
+          /          \
+       A(40)          60
+                     /  \
+                  0 /    \ 1
+                  /        \
+               B(30)        30
+                           /  \
+                        0 /    \ 1
+                        /        \
+                    D(10)       C(20)</div>
+          </div>
+
+          <div class="ans-divider"></div>
+
+          <!-- Step 6 -->
+          <div class="ans-block">
+            <div class="ans-section-title">Step 6 — Huffman Codes</div>
+            <table class="ans-table">
+              <thead><tr><th>Symbol</th><th>Frequency</th><th>Huffman Code</th><th>Code Length</th></tr></thead>
+              <tbody>
+                <tr><td class="hl">A</td><td>40</td><td class="hl">0</td><td>1 bit</td></tr>
+                <tr><td class="hl">B</td><td>30</td><td class="hl">10</td><td>2 bits</td></tr>
+                <tr><td class="hl">D</td><td>10</td><td class="hl">110</td><td>3 bits</td></tr>
+                <tr><td class="hl">C</td><td>20</td><td class="hl">111</td><td>3 bits</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="ans-divider"></div>
+
+          <!-- Step 7 -->
+          <div class="ans-block">
+            <div class="ans-section-title">Step 7 — Calculate Total Bits</div>
+            <div class="formula-box">Total Bits = Σ (Frequency × Code Length)</div>
+            <table class="ans-table" style="margin-top:10px;">
+              <thead><tr><th>Symbol</th><th>Frequency</th><th>Code</th><th>Length</th><th>Bits Used</th></tr></thead>
+              <tbody>
+                <tr><td class="hl">A</td><td>40</td><td>0</td><td>1</td><td>40 × 1 = <strong>40</strong></td></tr>
+                <tr><td class="hl">B</td><td>30</td><td>10</td><td>2</td><td>30 × 2 = <strong>60</strong></td></tr>
+                <tr><td class="hl">C</td><td>20</td><td>111</td><td>3</td><td>20 × 3 = <strong>60</strong></td></tr>
+                <tr><td class="hl">D</td><td>10</td><td>110</td><td>3</td><td>10 × 3 = <strong>30</strong></td></tr>
+                <tr style="background:rgba(63,185,80,.05);">
+                  <td colspan="4" style="color:var(--green2);font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:1px;">TOTAL</td>
+                  <td style="color:var(--green2);font-family:var(--mono);font-weight:700;">= <strong>190 bits</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="ans-divider"></div>
+
+          <!-- Step 8 -->
+          <div class="ans-block">
+            <div class="ans-section-title">Step 8 — Compare with Fixed-Length Encoding</div>
+            <div class="two-col">
+              <div class="col-box green-box">
+                <div class="col-box-title">🌳 Huffman</div>
+                <ul class="bullets">
+                  <li><span class="bul-dot"></span><span>Variable-length codes</span></li>
+                  <li><span class="bul-dot"></span><span>Total = <strong>190 bits</strong></span></li>
+                </ul>
+              </div>
+              <div class="col-box" style="border-color:rgba(121,192,255,.2);">
+                <div class="col-box-title" style="color:var(--teal);">📏 Fixed-Length</div>
+                <ul class="bullets">
+                  <li><span class="bul-dot" style="background:var(--teal);"></span><span>log₂(4) = <strong>2 bits/symbol</strong></span></li>
+                  <li><span class="bul-dot" style="background:var(--teal);"></span><span>100 symbols × 2 = <strong>200 bits</strong></span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="formula-box" style="margin-top:12px;">
+              Compression = (200 − 190) ÷ 200 × 100 = <strong>5% savings</strong>
+            </div>
+          </div>
+
+          <!-- Conclusion -->
+          <div class="conclusion-box">
+            <strong>Conclusion:</strong> Huffman Coding compresses data by assigning <strong>shorter codes to frequently occurring symbols</strong> and <strong>longer codes to less frequent symbols</strong>. In this example, the message size was reduced from <strong>200 bits → 190 bits</strong>, demonstrating efficient lossless compression. The savings grow significantly when frequency differences are larger.
+          </div>
+
+        </div>
+      </div>
+    </div><!-- end card2 -->
+
+  </div><!-- end page-wrap -->
+
+  <footer>
+    <div class="footer-text">HUFFMAN CODING • ESSAY QUESTIONS • <span>CH07</span></div>
+  </footer>
+
+  <script>
+    let revealed = 0;
+
+    function toggleAnswer(n) {
+      const panel  = document.getElementById('answer' + n);
+      const card   = document.getElementById('card'   + n);
+      const btn    = card.querySelector('.toggle-btn');
+      const label  = btn.querySelector('.btn-label');
+      const isOpen = panel.classList.contains('open');
+
+      if (isOpen) {
+        panel.classList.remove('open');
+        btn.classList.remove('open');
+        card.classList.remove('revealed');
+        label.textContent = 'Show Answer';
+        revealed--;
+      } else {
+        panel.classList.add('open');
+        btn.classList.add('open');
+        card.classList.add('revealed');
+        label.textContent = 'Hide Answer';
+        revealed++;
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const total  = 2;
+      const pct    = (revealed / total) * 100;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressText').textContent = revealed + ' / ' + total;
+      document.getElementById('revealedCount').textContent = revealed + ' / ' + total + ' Revealed';
+    }
+  </script>
+</body>
+</html>
