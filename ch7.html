@@ -729,15 +729,15 @@
         <div class="sec-line"></div>
       </div>
 
-      <!-- Intro overview card -->
+      <!-- Overview card -->
       <div class="content-card">
-        <div class="card-title"><div class="card-title-icon">✏️</div>Image Editing — Overview</div>
+        <div class="card-title"><div class="card-title-icon">✏️</div>Image Editing Examples</div>
         <div class="card-ar">
           <span class="card-ar-label">الشرح بالعربي</span>
-          تحرير الصور هو عملية تعديل أو تحسين الصور الرقمية باستخدام برامج متخصصة. تشمل العمليات: الدمج، الشفافية، التحسين، التصفية، تعديل التباين، رسم القلم الرصاص، التحويل للرمادي، وكشف الحواف.
+          تحرير الصور هو عملية تعديل أو تحسين الصور الرقمية باستخدام برامج متخصصة. تشمل العمليات الشائعة: الدمج، الشفافية، التحديد، التصفية، ضبط التباين، الرسم بالقلم، والتحويل للرمادي.
         </div>
         <div class="card-body">
-          <p>Image editing software allows users to manipulate and enhance digital images through a variety of operations. Each technique serves a specific purpose — from combining multiple images into one composite, to applying artistic filters, to adjusting technical properties like contrast and sharpness.</p>
+          <p>Image editing refers to the processes of altering images using software tools. Modern image editors support a wide range of operations that allow users to combine, enhance, filter, and stylize images. Below are the most common techniques covered in this chapter.</p>
         </div>
       </div>
 
@@ -746,39 +746,37 @@
         <div class="card-title"><div class="card-title-icon">🖼️</div>1 — Combine / Composite</div>
         <div class="card-ar">
           <span class="card-ar-label">الشرح بالعربي</span>
-          الدمج: يسمح بأخذ العناصر المرغوبة من صورتين أو أكثر ودمجها في صورة واحدة. مثلاً، أخذ السماء من صورة والأشخاص من صورة أخرى.
-        </div>
-        <div class="card-body">
-          <p><strong>Combine the desired elements of the top two photos into one image.</strong></p>
-          <p>This technique, known as compositing, lets you select specific parts from multiple source images and layer them together to produce a single, unified result. It is widely used in advertising, photography retouching, and visual effects to create scenes that would be impossible to capture in a single shot.</p>
+          دمج الصور: يتيح لك أخذ العناصر المرغوبة من صورتين أو أكثر ودمجها في صورة واحدة جديدة — مثل وضع شخص من صورة على خلفية من صورة أخرى.
         </div>
         <div class="info-box">
-          <span class="hl-label">💡 Example</span>
-          Take the clear sky from Photo A and the people from Photo B → merge into one perfect composite image.
+          <span class="hl-label">📌 Definition</span>
+          <strong>Combine the desired elements of the top two photos into one image.</strong> This technique, also called compositing, allows you to select regions or layers from different photographs and merge them seamlessly into a single output image.
         </div>
+        <ul class="points">
+          <li><span class="pt-dot"></span>Used in professional photography to place subjects in different backgrounds.</li>
+          <li><span class="pt-dot"></span>Requires careful selection (masking) of the elements to be merged.</li>
+          <li><span class="pt-dot"></span>Tools like Photoshop use layers to stack and blend image parts.</li>
+          <li><span class="pt-dot"></span>Common use: removing an unwanted object and filling with background from another shot.</li>
+        </ul>
       </div>
 
-      <!-- 2. Transparency -->
+      <!-- 2. Partial Transparency -->
       <div class="content-card">
-        <div class="card-title"><div class="card-title-icon">🔲</div>2 — Partial Transparency</div>
+        <div class="card-title"><div class="card-title-icon">🌫️</div>2 — Partial Transparency</div>
         <div class="card-ar">
           <span class="card-ar-label">الشرح بالعربي</span>
-          الشفافية الجزئية: تُستخدم لتركيب صورة جديدة بحيث تكون بعض أجزائها شبه شفافة، مما يتيح ظهور الخلفية من خلالها. تُقاس الشفافية بقناة Alpha.
+          الشفافية الجزئية: إنشاء صورة تحتوي على مناطق شفافة أو شبه شفافة، مما يسمح للخلفية بالظهور من خلالها. تُستخدم هذا التقنية في تصميم الشعارات والواجهات الرسومية.
         </div>
-        <div class="card-body">
-          <p><strong>Compose a new image with partial transparency.</strong></p>
-          <p>Transparency is controlled via an <em>alpha channel</em> — a value ranging from 0 (fully transparent) to 255 (fully opaque) for each pixel. Partial transparency allows layers to blend smoothly, creating effects like frosted glass, watermarks, and soft shadows.</p>
+        <div class="info-box">
+          <span class="hl-label">📌 Definition</span>
+          <strong>Compose a new image with partial transparency.</strong> Transparency allows portions of an image to be see-through, blending the foreground image with whatever lies behind it.
         </div>
-        <div class="two-col" style="margin-top:12px">
-          <div class="col-card blue-card">
-            <div class="col-card-title">🔵 Fully Opaque (α = 255)</div>
-            <div class="card-body" style="font-size:13px">Pixel completely hides what is behind it. No background shows through.</div>
-          </div>
-          <div class="col-card gold-card">
-            <div class="col-card-title">⬜ Fully Transparent (α = 0)</div>
-            <div class="card-body" style="font-size:13px">Pixel is invisible. The layer below is fully visible.</div>
-          </div>
-        </div>
+        <ul class="points">
+          <li><span class="pt-dot"></span>Controlled via an <strong>alpha channel</strong> — a fourth channel (in addition to R, G, B) that stores opacity values (0 = fully transparent, 255 = fully opaque).</li>
+          <li><span class="pt-dot"></span>Supported by formats like <strong>PNG</strong> and <strong>GIF</strong> (GIF supports only binary transparency).</li>
+          <li><span class="pt-dot"></span>Used extensively in web graphics, logos, and UI overlays.</li>
+          <li><span class="pt-dot"></span>Allows smooth blending between a foreground object and its background.</li>
+        </ul>
       </div>
 
       <!-- 3. Sharpen -->
@@ -786,17 +784,19 @@
         <div class="card-title"><div class="card-title-icon">🔍</div>3 — Sharpen</div>
         <div class="card-ar">
           <span class="card-ar-label">الشرح بالعربي</span>
-          التحسين (Sharpen): يزيد من وضوح التفاصيل في الصورة عن طريق تعزيز التباين بين البكسلات المجاورة، مما يجعل الحواف أكثر حدة ووضوحاً.
+          التحديد / الشحذ: يعزز حواف الصورة ويبرز التفاصيل الدقيقة فيها. يجعل الصورة تبدو أكثر وضوحاً وحدةً مقارنةً بالصورة الأصلية.
         </div>
-        <div class="card-body">
-          <p><strong>Sharpen an image to show more detail.</strong></p>
-          <p>Sharpening enhances edge contrast — it increases the difference in brightness between neighbouring pixels along edges, making them appear crisper. It is especially useful for images that appear slightly blurry due to camera focus or resizing.</p>
-          <p>The opposite operation, <strong>Smooth / Blur</strong>, blends neighbouring pixel colours together, softening hard edges and reducing noise.</p>
+        <div class="info-box">
+          <span class="hl-label">📌 Definition</span>
+          <strong>Sharpen an image to show more detail.</strong> Sharpening enhances the edges and fine details within a photo, making it appear crisper and clearer.
         </div>
-        <div class="highlight-box">
-          <span class="hl-label">⚠️ Note</span>
-          Over-sharpening can introduce artifacts (halos or noise). Always apply sharpening as the last step in your editing workflow.
-        </div>
+        <ul class="points">
+          <li><span class="pt-dot"></span>Works by increasing contrast between neighboring pixels at edges.</li>
+          <li><span class="pt-dot"></span>Common algorithm: <strong>Unsharp Mask</strong> — despite the name, it actually sharpens by subtracting a blurred version from the original.</li>
+          <li><span class="pt-dot"></span>Useful for fixing slightly blurry or out-of-focus images.</li>
+          <li><span class="pt-dot"></span>Over-sharpening can introduce noise and artifacts — moderation is key.</li>
+          <li><span class="pt-dot"></span>Contrast between Sharpen and Smooth: Sharpen accentuates edges, while <strong>Smooth</strong> blends/averages neighboring pixels to reduce sharp transitions.</li>
+        </ul>
       </div>
 
       <!-- 4. Filtering / Despeckle -->
@@ -804,44 +804,64 @@
         <div class="card-title"><div class="card-title-icon">📡</div>4 — Filtering / Despeckle</div>
         <div class="card-ar">
           <span class="card-ar-label">الشرح بالعربي</span>
-          التصفية / إزالة التشويش: الصور الملتقطة بأجهزة استشعار (كالأقمار الاصطناعية) تحتوي غالباً على تشويش (Noise). فلتر Despeckle يكشف هذا التشويش ويقلله دون التأثير على التفاصيل الأصلية.
+          التصفية وإزالة التشويش: تُستخدم لإزالة الضوضاء (التشويش) من الصور. على اليسار صورة ساتلايت مشوشة، وعلى اليمين الصورة بعد تطبيق فلتر Despeckle الذي يُخفف من هذا التأثير.
         </div>
-        <div class="card-body">
-          <p><strong>Filtering — On the left is a noisy satellite image. Despeckle suppresses this effect.</strong></p>
-          <p>Sensor noise appears as random pixel variations that were not present in the original scene. The <em>Despeckle</em> filter analyses the image and smooths out these random variations while trying to preserve genuine edges and details. It is widely applied in satellite imagery, medical scans, and low-light photography.</p>
+        <div class="info-box">
+          <span class="hl-label">📌 Definition</span>
+          <strong>Filtering — On the left is a noisy satellite image. Despeckle suppresses this effect.</strong> Image filters apply mathematical operations to pixels in order to achieve specific visual effects such as noise removal, blurring, or edge enhancement.
         </div>
-        <div class="two-col" style="margin-top:12px">
-          <div class="col-card red-card">
-            <div class="col-card-title">❌ Before — Noisy Image</div>
-            <div class="card-body" style="font-size:13px">Random speckles scattered across the image make it hard to interpret fine details.</div>
-          </div>
+        <div class="two-col">
           <div class="col-card blue-card">
-            <div class="col-card-title">✅ After — Despeckled</div>
-            <div class="card-body" style="font-size:13px">Noise suppressed; the real features of the image are now clearly visible.</div>
+            <div class="col-card-title" style="color:var(--blue2);">🔇 Despeckle / Noise Reduction</div>
+            <ul class="points">
+              <li><span class="pt-dot"></span>Removes random pixel variations (noise/speckle) from images.</li>
+              <li><span class="pt-dot"></span>Commonly applied to satellite and medical images.</li>
+              <li><span class="pt-dot"></span>Algorithms: Median filter, Gaussian blur.</li>
+            </ul>
+          </div>
+          <div class="col-card gold-card">
+            <div class="col-card-title" style="color:var(--gold);">📷 Where Noise Comes From</div>
+            <ul class="points">
+              <li><span class="pt-dot"></span>Low-light photography (high ISO settings).</li>
+              <li><span class="pt-dot"></span>Sensor limitations in cameras.</li>
+              <li><span class="pt-dot"></span>Signal interference in satellite/radar imaging.</li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <!-- 5. Contrast -->
+      <!-- 5. Change Contrast -->
       <div class="content-card">
         <div class="card-title"><div class="card-title-icon">☀️</div>5 — Change Contrast</div>
         <div class="card-ar">
           <span class="card-ar-label">الشرح بالعربي</span>
-          تعديل التباين: يمكنك زيادة التباين لإبراز الفروق بين الأجزاء الفاتحة والداكنة، أو تقليله لتليين هذه الفروق. التباين العالي يجعل الصورة أكثر حدة، والمنخفض يجعلها أكثر نعومة.
+          ضبط التباين: يمكنك زيادة التباين لتعزيز الفروق بين المناطق الفاتحة والداكنة، أو تقليله لمزج الألوان بشكل أكثر نعومة. التباين العالي يجعل الصورة تبدو أكثر حيوية.
         </div>
-        <div class="card-body">
-          <p><strong>Change Contrast — You also have the option of increasing or decreasing the contrast of an image.</strong></p>
-          <p>Contrast accentuates the differences in light and dark areas of an image, while <strong>Smooth / Sharpen</strong> blends colours. Increasing contrast makes bright areas brighter and dark areas darker, producing a more vivid, punchy look. Decreasing contrast brings all tones closer together, creating a flat or faded appearance.</p>
+        <div class="info-box">
+          <span class="hl-label">📌 Definition</span>
+          <strong>Change Contrast — You also have the option of increasing or decreasing the contrast of an image. Contrast accentuates the differences in light and dark while Smooth/Sharpen blends colors.</strong>
         </div>
-        <div class="two-col" style="margin-top:12px">
+        <div class="two-col">
           <div class="col-card blue-card">
-            <div class="col-card-title">📈 Increase Contrast</div>
-            <div class="card-body" style="font-size:13px">Highlights get brighter, shadows get darker. Differences are accentuated — more dramatic look.</div>
+            <div class="col-card-title" style="color:var(--blue2);">⬆️ Increase Contrast</div>
+            <ul class="points">
+              <li><span class="pt-dot"></span>Makes light areas lighter and dark areas darker.</li>
+              <li><span class="pt-dot"></span>Accentuates differences between light and dark regions.</li>
+              <li><span class="pt-dot"></span>Results in a more vivid, punchy image.</li>
+            </ul>
           </div>
           <div class="col-card gold-card">
-            <div class="col-card-title">📉 Decrease Contrast</div>
-            <div class="card-body" style="font-size:13px">Tones converge toward the middle. Softer, flatter appearance — used for certain artistic effects.</div>
+            <div class="col-card-title" style="color:var(--gold);">⬇️ Decrease Contrast</div>
+            <ul class="points">
+              <li><span class="pt-dot"></span>Brings light and dark tones closer together.</li>
+              <li><span class="pt-dot"></span>Produces a softer, flatter, more faded look.</li>
+              <li><span class="pt-dot"></span>Can simulate a vintage or foggy effect.</li>
+            </ul>
           </div>
+        </div>
+        <div class="highlight-box">
+          <span class="hl-label">💡 Key Distinction</span>
+          <strong>Contrast</strong> accentuates the differences between light and dark pixels. <strong>Smooth/Sharpen</strong> instead blends or separates colors at the pixel level — Smooth averages neighboring pixels (softens edges), while Sharpen increases edge contrast locally.
         </div>
       </div>
 
@@ -850,55 +870,98 @@
         <div class="card-title"><div class="card-title-icon">✏️</div>6 — Pencil Sketch</div>
         <div class="card-ar">
           <span class="card-ar-label">الشرح بالعربي</span>
-          رسم القلم الرصاص: يحوّل الصورة الملونة إلى رسم بالقلم الرصاص بالأبيض والأسود. يعمل عن طريق كشف الحواف وإبرازها بخطوط داكنة على خلفية فاتحة.
-        </div>
-        <div class="card-body">
-          <p><strong>Pencil Sketch — The Pencil Sketch simply converts an image to black and white and imposes a "sketch-like" filter.</strong></p>
-          <p>The pencil feature provides a black and white sketch effect by detecting the edges in the image and rendering them as dark pencil strokes on a light background. All colour information is discarded, and the result resembles a hand-drawn illustration. This effect is popular for portraits and artistic prints.</p>
+          تأثير رسم القلم الرصاص: يحوّل الصورة الملونة إلى رسم بالأبيض والأسود يشبه الرسم اليدوي بالقلم. يبرز الحواف ويُخفي الألوان والتفاصيل الدقيقة.
         </div>
         <div class="info-box">
-          <span class="hl-label">💡 How it works</span>
-          The filter first converts the image to grayscale, then applies an <strong>edge-detection</strong> algorithm to find boundaries between regions, and finally inverts and blends the result to simulate pencil strokes.
+          <span class="hl-label">📌 Definition</span>
+          <strong>Pencil Sketch — The Pencil Sketch simply converts an image to black and white and imposes a "sketch-like" filter. The pencil feature provides a black and white sketch.</strong>
         </div>
+        <ul class="points">
+          <li><span class="pt-dot"></span>First converts the image to grayscale, then applies edge-detection to mimic pencil strokes.</li>
+          <li><span class="pt-dot"></span>The result looks like a hand-drawn pencil illustration of the original photo.</li>
+          <li><span class="pt-dot"></span>Often achieved by inverting a blurred copy of the image and combining it with the grayscale original using a "Color Dodge" blend mode.</li>
+          <li><span class="pt-dot"></span>Popular artistic filter for portraits and architectural photos.</li>
+          <li><span class="pt-dot"></span>Output is always <strong>black and white</strong> — no color is retained.</li>
+        </ul>
       </div>
 
       <!-- 7. Convert to Gray -->
       <div class="content-card">
-        <div class="card-title"><div class="card-title-icon">⬜</div>7 — Convert to Grayscale</div>
+        <div class="card-title"><div class="card-title-icon">🩶</div>7 — Convert to Gray</div>
         <div class="card-ar">
           <span class="card-ar-label">الشرح بالعربي</span>
-          التحويل للرمادي: يُزيل هذا الخيار جميع الألوان من الصورة ويستبدلها بدرجات الرمادي. كل بكسل يحصل على قيمة واحدة تمثل سطوعه بدلاً من ثلاث قيم (R, G, B).
+          التحويل إلى التدرج الرمادي: يزيل الألوان من الصورة ويستبدلها بدرجات الرمادي. تُحسب قيمة الرمادي من مزيج من قيم الأحمر والأخضر والأزرق لكل بكسل.
         </div>
-        <div class="card-body">
-          <p><strong>Convert to Gray — The Convert to Gray option removes all colour from an image, replacing colours with shades of gray.</strong></p>
-          <p>In a grayscale image, each pixel is represented by a single brightness value (0 = black, 255 = white) instead of three colour channels (R, G, B). The conversion typically uses a weighted formula to preserve perceived brightness:</p>
+        <div class="info-box">
+          <span class="hl-label">📌 Definition</span>
+          <strong>Convert to Gray — The Convert to Gray option removes all color from an image, replacing colors with shades of gray.</strong>
         </div>
-        <div class="formula-box">
-          Gray = 0.299 × R &nbsp;+&nbsp; 0.587 × G &nbsp;+&nbsp; 0.114 × B
-        </div>
-        <div class="card-body">
-          <p>Green contributes the most to perceived brightness because the human eye is most sensitive to green light, followed by red and then blue.</p>
+        <ul class="points">
+          <li><span class="pt-dot"></span>Each pixel's color (R, G, B) is converted to a single brightness value.</li>
+          <li><span class="pt-dot"></span>Standard formula: <code style="background:var(--card2);padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:12px;">Gray = 0.299·R + 0.587·G + 0.114·B</code></li>
+          <li><span class="pt-dot"></span>The green channel is weighted highest because human eyes are most sensitive to green light.</li>
+          <li><span class="pt-dot"></span>Result: a grayscale image that retains luminance (brightness) information without hue.</li>
+          <li><span class="pt-dot"></span>Difference from Pencil Sketch: Convert to Gray keeps all detail and smooth tones; Pencil Sketch further stylizes the result to look like a line drawing.</li>
+        </ul>
+        <div class="highlight-box">
+          <span class="hl-label">💡 Compare: Gray vs Binary vs Pencil Sketch</span>
+          <strong>Binary</strong> — only 2 values (0 black, 1 white). <strong>Grayscale</strong> — up to 256 shades from black to white. <strong>Pencil Sketch</strong> — grayscale with edges stylized to mimic hand-drawn lines.
         </div>
       </div>
 
       <!-- 8. Edge Detection -->
       <div class="content-card">
-        <div class="card-title"><div class="card-title-icon">🔲</div>8 — Edge Detection</div>
+        <div class="card-title"><div class="card-title-icon">🔎</div>8 — Edge Detection</div>
         <div class="card-ar">
           <span class="card-ar-label">الشرح بالعربي</span>
-          كشف الحواف: يحدد حدود الأجسام داخل الصورة عن طريق إيجاد الأماكن التي يتغير فيها السطوع بشكل مفاجئ. يُستخدم كأساس لتحليل الصور والرؤية الحاسوبية.
+          كشف الحواف: يحدد ويبرز حدود الأجسام داخل الصورة. يعمل عن طريق اكتشاف التغيرات المفاجئة في قيم البكسلات (التباين العالي بين بكسل وجاره). يُستخدم في الرؤية الحاسوبية والتحليل الطبي.
         </div>
-        <div class="card-body">
-          <p><strong>Edge Detection identifies the boundaries of objects within an image.</strong></p>
-          <p>An edge occurs where there is a sharp change in pixel intensity. Edge-detection algorithms (such as Sobel, Canny, and Laplacian) scan the image for these sudden intensity transitions and highlight them, producing an outline of every object. The result is a simplified image that retains structural information while discarding colour and texture detail.</p>
-          <p>Edge detection is a critical first step in many <strong>Image Analysis</strong> tasks such as object recognition, scene understanding, and computer vision applications.</p>
+        <div class="info-box">
+          <span class="hl-label">📌 Definition</span>
+          <strong>Edge Detection</strong> identifies the boundaries (edges) of objects within an image by detecting sharp changes in pixel intensity between neighboring pixels. The output highlights outlines while suppressing interior regions.
+        </div>
+        <div class="two-col">
+          <div class="col-card blue-card">
+            <div class="col-card-title" style="color:var(--blue2);">⚙️ How It Works</div>
+            <ul class="points">
+              <li><span class="pt-dot"></span>Scans for sudden changes in brightness between adjacent pixels.</li>
+              <li><span class="pt-dot"></span>Common algorithms: <strong>Sobel, Canny, Laplacian</strong> operators.</li>
+              <li><span class="pt-dot"></span>High contrast between two neighboring pixels → detected as an edge.</li>
+            </ul>
+          </div>
+          <div class="col-card gold-card">
+            <div class="col-card-title" style="color:var(--gold);">🧪 Applications</div>
+            <ul class="points">
+              <li><span class="pt-dot"></span>Object recognition and segmentation.</li>
+              <li><span class="pt-dot"></span>Medical imaging (detecting tumors, bones).</li>
+              <li><span class="pt-dot"></span>Autonomous vehicles (lane and obstacle detection).</li>
+            </ul>
+          </div>
         </div>
         <div class="highlight-box">
-          <span class="hl-label">📌 Common Algorithms</span>
-          <strong>Sobel</strong> — detects horizontal &amp; vertical edges using gradient filters. &nbsp;|&nbsp;
-          <strong>Canny</strong> — multi-step algorithm; best accuracy &amp; noise resistance. &nbsp;|&nbsp;
-          <strong>Laplacian</strong> — detects edges in all directions simultaneously.
+          <span class="hl-label">💡 Relation to Image Analysis</span>
+          Edge Detection is the bridge between <strong>Image Editing</strong> and <strong>Image Analysis</strong>. Raw pixel data alone doesn't describe shapes — edge maps make object boundaries machine-readable, enabling pattern recognition, computer vision, and scene analysis.
         </div>
+      </div>
+
+      <!-- Quick reference table -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">📋</div>Quick Reference — All Image Editing Operations</div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Operation</th><th>Description</th><th>الشرح</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="highlight">Combine / Composite</td><td>Merge desired elements from two or more photos into one image</td><td class="muted">دمج عناصر من صور متعددة في صورة واحدة</td></tr>
+            <tr><td class="highlight">Partial Transparency</td><td>Compose image with see-through regions using alpha channel</td><td class="muted">إنشاء مناطق شفافة باستخدام قناة ألفا</td></tr>
+            <tr><td class="highlight">Sharpen</td><td>Enhance edges to show more detail</td><td class="muted">تعزيز الحواف لإظهار تفاصيل أوضح</td></tr>
+            <tr><td class="highlight">Despeckle / Filter</td><td>Suppress noise/speckle in noisy images (e.g. satellite)</td><td class="muted">إزالة التشويش من الصور</td></tr>
+            <tr><td class="highlight">Contrast Adjust</td><td>Increase or decrease difference between light and dark areas</td><td class="muted">زيادة أو تقليل الفروق بين الفاتح والداكن</td></tr>
+            <tr><td class="highlight">Pencil Sketch</td><td>Convert to B&amp;W sketch-like filter mimicking hand drawing</td><td class="muted">تحويل الصورة لرسم بالقلم الرصاص بالأبيض والأسود</td></tr>
+            <tr><td class="highlight">Convert to Gray</td><td>Remove all color, replace with shades of gray</td><td class="muted">إزالة الألوان واستبدالها بتدرجات الرمادي</td></tr>
+            <tr><td class="highlight">Edge Detection</td><td>Detect and highlight the boundaries/outlines of objects</td><td class="muted">كشف حواف وحدود الأجسام في الصورة</td></tr>
+          </tbody>
+        </table>
       </div>
 
     </section>
@@ -977,6 +1040,68 @@
           <li><span class="pt-dot"></span>Input devices: TV cameras, scanners, digital cameras</li>
           <li><span class="pt-dot"></span>Output devices: CRT, LCD, plasma, monitors, JumboTron</li>
         </ul>
+      </div>
+
+      <!-- TV Broadcast / Composite Signal -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">📺</div>TV Broadcast — Composite Signal</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          البث التلفزيوني يُرسل إشارة مركّبة (Composite) على قناة واحدة. تُقسَّم هذه الإشارة إلى مكوّنين: <strong>Luminance (Y)</strong> — معلومات السطوع (الأبيض والأسود)، و<strong>Chrominance (C)</strong> — معلومات اللون. هذا التقسيم يضمن التوافق مع أجهزة التلفاز القديمة (أبيض وأسود).
+        </div>
+        <div class="two-col">
+          <div class="col-card blue-card">
+            <div class="col-card-title" style="color:var(--blue2);">💡 Luminance (Y)</div>
+            <ul class="points">
+              <li><span class="pt-dot"></span>Carries <strong>brightness</strong> (light/dark) information.</li>
+              <li><span class="pt-dot"></span>Equivalent to a grayscale version of the image.</li>
+              <li><span class="pt-dot"></span>Used by black-and-white TVs for full display.</li>
+            </ul>
+          </div>
+          <div class="col-card gold-card">
+            <div class="col-card-title" style="color:var(--gold);">🎨 Chrominance (C)</div>
+            <ul class="points">
+              <li><span class="pt-dot"></span>Carries <strong>color</strong> (hue and saturation) information.</li>
+              <li><span class="pt-dot"></span>Ignored by black-and-white receivers.</li>
+              <li><span class="pt-dot"></span>Decoded by color TVs to reproduce full color.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="highlight-box">
+          <span class="hl-label">💡 Why This Design?</span>
+          Splitting into Luminance + Chrominance provides <strong>backward compatibility</strong> — a color broadcast can be received by both old B&amp;W TVs (using Y only) and modern color TVs (using Y + C together). This is the basis of the <strong>YCbCr</strong> color space used in JPEG and MPEG compression.
+        </div>
+      </div>
+
+      <!-- RGB Hex Representation -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">🔢</div>RGB Hexadecimal Representation</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          التمثيل السداسي عشري لـ RGB: كل قناة لون (أحمر، أخضر، أزرق) تُمثَّل برقمين سداسيين (00 إلى FF). القيمة الكاملة تكون 6 أرقام: مثلاً <strong>FF0000</strong> = أحمر نقي، <strong>00FF00</strong> = أخضر نقي، <strong>0000FF</strong> = أزرق نقي، <strong>FFFFFF</strong> = أبيض، <strong>000000</strong> = أسود.
+        </div>
+        <div class="info-box">
+          <span class="hl-label">📌 Format</span>
+          Each color channel (R, G, B) has a value from <strong>0 to 255</strong> in decimal, which maps to <strong>00 to FF</strong> in hexadecimal. The hex color is written as <code style="background:var(--card2);padding:2px 8px;border-radius:4px;font-family:var(--mono);font-size:13px;">#RRGGBB</code>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>Color</th><th>R (dec)</th><th>G (dec)</th><th>B (dec)</th><th>Hex Code</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="highlight">Red</td><td>255</td><td>0</td><td>0</td><td><code style="font-family:var(--mono);color:var(--red);">#FF0000</code></td></tr>
+            <tr><td class="highlight">Green</td><td>0</td><td>255</td><td>0</td><td><code style="font-family:var(--mono);color:green;">#00FF00</code></td></tr>
+            <tr><td class="highlight">Blue</td><td>0</td><td>0</td><td>255</td><td><code style="font-family:var(--mono);color:var(--blue2);">#0000FF</code></td></tr>
+            <tr><td class="highlight">White</td><td>255</td><td>255</td><td>255</td><td><code style="font-family:var(--mono);">#FFFFFF</code></td></tr>
+            <tr><td class="highlight">Black</td><td>0</td><td>0</td><td>0</td><td><code style="font-family:var(--mono);">#000000</code></td></tr>
+            <tr><td class="highlight">Yellow</td><td>255</td><td>255</td><td>0</td><td><code style="font-family:var(--mono);color:#ccaa00;">#FFFF00</code></td></tr>
+          </tbody>
+        </table>
+        <div class="highlight-box">
+          <span class="hl-label">📝 Conversion Steps</span>
+          To convert RGB decimal to Hex: divide the value by 16 → quotient is the first digit, remainder is the second digit. Then map 10→A, 11→B, 12→C, 13→D, 14→E, 15→F.<br>
+          <strong>Example:</strong> R=255 → 255 ÷ 16 = 15 remainder 15 → <code style="font-family:var(--mono);">FF</code>
+        </div>
       </div>
 
       <div class="content-card">
@@ -1099,6 +1224,18 @@
         <div class="sec-number">10</div>
         <div class="sec-title">🌳 Huffman Encoding — Detailed</div>
         <div class="sec-line"></div>
+      </div>
+
+      <!-- Video -->
+      <div class="content-card" style="padding:20px;">
+        <div class="card-title"><div class="card-title-icon">🎬</div>شرح موضوع الـ Huffman — فيديو</div>
+        <video
+          src="huffman.mp4"
+          controls
+          style="width:100%; border-radius:12px; margin-top:6px; background:#000; max-height:480px; display:block;"
+          preload="metadata">
+          متصفحك لا يدعم تشغيل الفيديو.
+        </video>
       </div>
 
       <!-- Concept -->
