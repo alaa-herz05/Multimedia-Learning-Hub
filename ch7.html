@@ -729,28 +729,178 @@
         <div class="sec-line"></div>
       </div>
 
+      <!-- Intro overview card -->
       <div class="content-card">
-        <div class="card-title"><div class="card-title-icon">✏️</div>Common Editing Techniques</div>
+        <div class="card-title"><div class="card-title-icon">✏️</div>Image Editing — Overview</div>
         <div class="card-ar">
           <span class="card-ar-label">الشرح بالعربي</span>
-          عمليات تحرير الصور: الدمج، الشفافية، التحسين، التصفية، التباين، الرسم بالقلم، التحويل للرمادي، العكس، وكشف الحواف.
+          تحرير الصور هو عملية تعديل أو تحسين الصور الرقمية باستخدام برامج متخصصة. تشمل العمليات: الدمج، الشفافية، التحسين، التصفية، تعديل التباين، رسم القلم الرصاص، التحويل للرمادي، وكشف الحواف.
         </div>
-        <table class="data-table">
-          <thead>
-            <tr><th>Operation</th><th>Description</th><th>الشرح</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="highlight">Combine/Composite</td><td>Merge elements from multiple photos</td><td class="muted">دمج عناصر من صور متعددة</td></tr>
-            <tr><td class="highlight">Transparency</td><td>Compose image with partial transparency</td><td class="muted">إضافة طبقة شفافية</td></tr>
-            <tr><td class="highlight">Sharpen</td><td>Show more detail, clearer edges</td><td class="muted">إظهار تفاصيل وحواف أوضح</td></tr>
-            <tr><td class="highlight">Despeckle/Filter</td><td>Suppress noise in images</td><td class="muted">إزالة التشويش</td></tr>
-            <tr><td class="highlight">Contrast Adjust</td><td>Increase/decrease light-dark differences</td><td class="muted">زيادة أو تقليل التباين</td></tr>
-            <tr><td class="highlight">Pencil Sketch</td><td>Convert to B&W sketch-like filter</td><td class="muted">تحويل لرسم بالقلم الرصاص</td></tr>
-            <tr><td class="highlight">Convert to Gray</td><td>Remove color, replace with gray shades</td><td class="muted">تحويل للتدرج الرمادي</td></tr>
-            <tr><td class="highlight">Edge Detection</td><td>Detect boundaries of objects</td><td class="muted">كشف حواف الأجسام</td></tr>
-          </tbody>
-        </table>
+        <div class="card-body">
+          <p>Image editing software allows users to manipulate and enhance digital images through a variety of operations. Each technique serves a specific purpose — from combining multiple images into one composite, to applying artistic filters, to adjusting technical properties like contrast and sharpness.</p>
+        </div>
       </div>
+
+      <!-- 1. Combine -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">🖼️</div>1 — Combine / Composite</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          الدمج: يسمح بأخذ العناصر المرغوبة من صورتين أو أكثر ودمجها في صورة واحدة. مثلاً، أخذ السماء من صورة والأشخاص من صورة أخرى.
+        </div>
+        <div class="card-body">
+          <p><strong>Combine the desired elements of the top two photos into one image.</strong></p>
+          <p>This technique, known as compositing, lets you select specific parts from multiple source images and layer them together to produce a single, unified result. It is widely used in advertising, photography retouching, and visual effects to create scenes that would be impossible to capture in a single shot.</p>
+        </div>
+        <div class="info-box">
+          <span class="hl-label">💡 Example</span>
+          Take the clear sky from Photo A and the people from Photo B → merge into one perfect composite image.
+        </div>
+      </div>
+
+      <!-- 2. Transparency -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">🔲</div>2 — Partial Transparency</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          الشفافية الجزئية: تُستخدم لتركيب صورة جديدة بحيث تكون بعض أجزائها شبه شفافة، مما يتيح ظهور الخلفية من خلالها. تُقاس الشفافية بقناة Alpha.
+        </div>
+        <div class="card-body">
+          <p><strong>Compose a new image with partial transparency.</strong></p>
+          <p>Transparency is controlled via an <em>alpha channel</em> — a value ranging from 0 (fully transparent) to 255 (fully opaque) for each pixel. Partial transparency allows layers to blend smoothly, creating effects like frosted glass, watermarks, and soft shadows.</p>
+        </div>
+        <div class="two-col" style="margin-top:12px">
+          <div class="col-card blue-card">
+            <div class="col-card-title">🔵 Fully Opaque (α = 255)</div>
+            <div class="card-body" style="font-size:13px">Pixel completely hides what is behind it. No background shows through.</div>
+          </div>
+          <div class="col-card gold-card">
+            <div class="col-card-title">⬜ Fully Transparent (α = 0)</div>
+            <div class="card-body" style="font-size:13px">Pixel is invisible. The layer below is fully visible.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Sharpen -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">🔍</div>3 — Sharpen</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          التحسين (Sharpen): يزيد من وضوح التفاصيل في الصورة عن طريق تعزيز التباين بين البكسلات المجاورة، مما يجعل الحواف أكثر حدة ووضوحاً.
+        </div>
+        <div class="card-body">
+          <p><strong>Sharpen an image to show more detail.</strong></p>
+          <p>Sharpening enhances edge contrast — it increases the difference in brightness between neighbouring pixels along edges, making them appear crisper. It is especially useful for images that appear slightly blurry due to camera focus or resizing.</p>
+          <p>The opposite operation, <strong>Smooth / Blur</strong>, blends neighbouring pixel colours together, softening hard edges and reducing noise.</p>
+        </div>
+        <div class="highlight-box">
+          <span class="hl-label">⚠️ Note</span>
+          Over-sharpening can introduce artifacts (halos or noise). Always apply sharpening as the last step in your editing workflow.
+        </div>
+      </div>
+
+      <!-- 4. Filtering / Despeckle -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">📡</div>4 — Filtering / Despeckle</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          التصفية / إزالة التشويش: الصور الملتقطة بأجهزة استشعار (كالأقمار الاصطناعية) تحتوي غالباً على تشويش (Noise). فلتر Despeckle يكشف هذا التشويش ويقلله دون التأثير على التفاصيل الأصلية.
+        </div>
+        <div class="card-body">
+          <p><strong>Filtering — On the left is a noisy satellite image. Despeckle suppresses this effect.</strong></p>
+          <p>Sensor noise appears as random pixel variations that were not present in the original scene. The <em>Despeckle</em> filter analyses the image and smooths out these random variations while trying to preserve genuine edges and details. It is widely applied in satellite imagery, medical scans, and low-light photography.</p>
+        </div>
+        <div class="two-col" style="margin-top:12px">
+          <div class="col-card red-card">
+            <div class="col-card-title">❌ Before — Noisy Image</div>
+            <div class="card-body" style="font-size:13px">Random speckles scattered across the image make it hard to interpret fine details.</div>
+          </div>
+          <div class="col-card blue-card">
+            <div class="col-card-title">✅ After — Despeckled</div>
+            <div class="card-body" style="font-size:13px">Noise suppressed; the real features of the image are now clearly visible.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Contrast -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">☀️</div>5 — Change Contrast</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          تعديل التباين: يمكنك زيادة التباين لإبراز الفروق بين الأجزاء الفاتحة والداكنة، أو تقليله لتليين هذه الفروق. التباين العالي يجعل الصورة أكثر حدة، والمنخفض يجعلها أكثر نعومة.
+        </div>
+        <div class="card-body">
+          <p><strong>Change Contrast — You also have the option of increasing or decreasing the contrast of an image.</strong></p>
+          <p>Contrast accentuates the differences in light and dark areas of an image, while <strong>Smooth / Sharpen</strong> blends colours. Increasing contrast makes bright areas brighter and dark areas darker, producing a more vivid, punchy look. Decreasing contrast brings all tones closer together, creating a flat or faded appearance.</p>
+        </div>
+        <div class="two-col" style="margin-top:12px">
+          <div class="col-card blue-card">
+            <div class="col-card-title">📈 Increase Contrast</div>
+            <div class="card-body" style="font-size:13px">Highlights get brighter, shadows get darker. Differences are accentuated — more dramatic look.</div>
+          </div>
+          <div class="col-card gold-card">
+            <div class="col-card-title">📉 Decrease Contrast</div>
+            <div class="card-body" style="font-size:13px">Tones converge toward the middle. Softer, flatter appearance — used for certain artistic effects.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Pencil Sketch -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">✏️</div>6 — Pencil Sketch</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          رسم القلم الرصاص: يحوّل الصورة الملونة إلى رسم بالقلم الرصاص بالأبيض والأسود. يعمل عن طريق كشف الحواف وإبرازها بخطوط داكنة على خلفية فاتحة.
+        </div>
+        <div class="card-body">
+          <p><strong>Pencil Sketch — The Pencil Sketch simply converts an image to black and white and imposes a "sketch-like" filter.</strong></p>
+          <p>The pencil feature provides a black and white sketch effect by detecting the edges in the image and rendering them as dark pencil strokes on a light background. All colour information is discarded, and the result resembles a hand-drawn illustration. This effect is popular for portraits and artistic prints.</p>
+        </div>
+        <div class="info-box">
+          <span class="hl-label">💡 How it works</span>
+          The filter first converts the image to grayscale, then applies an <strong>edge-detection</strong> algorithm to find boundaries between regions, and finally inverts and blends the result to simulate pencil strokes.
+        </div>
+      </div>
+
+      <!-- 7. Convert to Gray -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">⬜</div>7 — Convert to Grayscale</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          التحويل للرمادي: يُزيل هذا الخيار جميع الألوان من الصورة ويستبدلها بدرجات الرمادي. كل بكسل يحصل على قيمة واحدة تمثل سطوعه بدلاً من ثلاث قيم (R, G, B).
+        </div>
+        <div class="card-body">
+          <p><strong>Convert to Gray — The Convert to Gray option removes all colour from an image, replacing colours with shades of gray.</strong></p>
+          <p>In a grayscale image, each pixel is represented by a single brightness value (0 = black, 255 = white) instead of three colour channels (R, G, B). The conversion typically uses a weighted formula to preserve perceived brightness:</p>
+        </div>
+        <div class="formula-box">
+          Gray = 0.299 × R &nbsp;+&nbsp; 0.587 × G &nbsp;+&nbsp; 0.114 × B
+        </div>
+        <div class="card-body">
+          <p>Green contributes the most to perceived brightness because the human eye is most sensitive to green light, followed by red and then blue.</p>
+        </div>
+      </div>
+
+      <!-- 8. Edge Detection -->
+      <div class="content-card">
+        <div class="card-title"><div class="card-title-icon">🔲</div>8 — Edge Detection</div>
+        <div class="card-ar">
+          <span class="card-ar-label">الشرح بالعربي</span>
+          كشف الحواف: يحدد حدود الأجسام داخل الصورة عن طريق إيجاد الأماكن التي يتغير فيها السطوع بشكل مفاجئ. يُستخدم كأساس لتحليل الصور والرؤية الحاسوبية.
+        </div>
+        <div class="card-body">
+          <p><strong>Edge Detection identifies the boundaries of objects within an image.</strong></p>
+          <p>An edge occurs where there is a sharp change in pixel intensity. Edge-detection algorithms (such as Sobel, Canny, and Laplacian) scan the image for these sudden intensity transitions and highlight them, producing an outline of every object. The result is a simplified image that retains structural information while discarding colour and texture detail.</p>
+          <p>Edge detection is a critical first step in many <strong>Image Analysis</strong> tasks such as object recognition, scene understanding, and computer vision applications.</p>
+        </div>
+        <div class="highlight-box">
+          <span class="hl-label">📌 Common Algorithms</span>
+          <strong>Sobel</strong> — detects horizontal &amp; vertical edges using gradient filters. &nbsp;|&nbsp;
+          <strong>Canny</strong> — multi-step algorithm; best accuracy &amp; noise resistance. &nbsp;|&nbsp;
+          <strong>Laplacian</strong> — detects edges in all directions simultaneously.
+        </div>
+      </div>
+
     </section>
 
     <!-- ════ SECTION 6: Image Analysis ════ -->
