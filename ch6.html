@@ -1013,89 +1013,186 @@
 <!-- ══════════════════════════════════
    SECTION 6 — MIDI vs DIGITAL COMPARISON
 ══════════════════════════════════ -->
+<!-- ══════════════════════════════════
+   SECTION 6 — MIDI vs DIGITAL AUDIO (FULL DETAIL)
+══════════════════════════════════ -->
 <div class="section-header" id="compare">
 <div class="sec-num">6</div>
 <div class="sec-titles">
 <h3>MIDI vs Digital Audio</h3>
-<div class="ar">MIDI مقابل الصوت الرقمي</div>
-<div class="desc">Analogy · Pros · Cons · When to use each</div>
+<div class="ar">MIDI مقابل الصوت الرقمي — مقارنة شاملة</div>
+<div class="desc">Analogy · Advantages · Disadvantages · When to use each</div>
 </div>
 </div>
+
+<!-- CARD 1: Core Analogy -->
 <div class="card">
-<div class="card-title"><span class="card-title-icon">⚖️</span> The Core Analogy — Like Graphics!</div>
+<div class="card-title"><span class="card-title-icon">🖼️</span> The Core Analogy — Like Graphics!</div>
 <div class="two-col">
 <div class="col-card cyan-card">
 <div class="col-card-title">🎹 MIDI ← like → Vector Graphics</div>
 <ul class="points">
-<li><span class="pt-dot"></span><div>Stores <strong>instructions/numeric data</strong> to recreate sound</div></li>
-<li><span class="pt-dot"></span><div><strong>Device dependent</strong> — different sound on different devices</div></li>
-<li><span class="pt-dot"></span><div>Very <strong>small file size</strong></div></li>
-<li><span class="pt-dot"></span><div>Can change length <strong>without changing pitch</strong></div></li>
+<li><span class="pt-dot"></span><div>Stores <strong>numeric instructions</strong> to recreate sound — like a musical score sheet telling a player what to play.</div></li>
+<li><span class="pt-dot"></span><div><strong>Device dependent</strong> — the output sound changes depending on which synthesizer or sound card plays it back.</div></li>
+<li><span class="pt-dot"></span><div>Very <strong>compact file size</strong> — loads fast on the web.</div></li>
+<li><span class="pt-dot"></span><div>Can change tempo/length <strong>without changing pitch</strong>.</div></li>
 </ul>
 </div>
 <div class="col-card gold-card">
 <div class="col-card-title">💿 Digital Audio ← like → Bitmap Image</div>
 <ul class="points">
-<li><span class="pt-dot"></span><div>Stores <strong>actual sampled waveform</strong> (a copy)</div></li>
-<li><span class="pt-dot"></span><div><strong>Device independent</strong> — same sound everywhere</div></li>
-<li><span class="pt-dot"></span><div><strong>Larger file size</strong></div></li>
-<li><span class="pt-dot"></span><div>Quality depends on <strong>sampling quality at recording time</strong></div></li>
+<li><span class="pt-dot"></span><div>Samples the original sound wave to create an <strong>actual recorded copy</strong> of the sound.</div></li>
+<li><span class="pt-dot"></span><div><strong>Device independent</strong> — sounds identical on every device or computer.</div></li>
+<li><span class="pt-dot"></span><div><strong>Larger file size</strong> — requires more RAM and bandwidth.</div></li>
+<li><span class="pt-dot"></span><div>Quality depends on <strong>sampling rate and bit depth</strong> at the time of recording.</div></li>
 </ul>
 </div>
 </div>
 <div class="ar-box">
 <span class="ar-label">شرح بالعربي</span>
-      تمثيل بياني: <strong>MIDI = رسومات المتجهات (Vector)</strong> — تخزّن التعليمات لإعادة الرسم. <strong>الصوت الرقمي = رسومات النقطية (Bitmap)</strong> — تخزّن نسخة من الصوت الفعلي. MIDI معتمد على الجهاز، الرقمي مستقل عنه.
-    </div>
+التشبيه الأساسي: <strong>MIDI = رسومات المتجهات (Vector)</strong> — تخزّن <em>تعليمات</em> لإعادة إنتاج الصوت، مثل ورقة نوتات موسيقية تُخبر العازف بما يعزفه. <strong>الصوت الرقمي = رسومات النقطية (Bitmap)</strong> — تخزّن <em>نسخة فعلية مسجّلة</em> من الصوت. MIDI معتمد على الجهاز (Device Dependent)، بينما الصوت الرقمي مستقل عنه (Device Independent).
 </div>
+</div>
+
+<!-- CARD 2: MIDI Advantages -->
 <div class="card">
-<div class="card-title"><span class="card-title-icon">📋</span> Full Comparison Table</div>
+<div class="card-title"><span class="card-title-icon">✅</span> MIDI Advantages — مميزات MIDI</div>
+<ul class="points">
+<li><span class="pt-dot"></span><div>
+  <strong>Compact size — Very small file size:</strong> MIDI files are much more compact than digital audio files, taking up far less memory and system resources.
+  <br/><span style="color:var(--muted2);font-size:13px;">حجم ملفات MIDI أصغر بكثير من الصوت الرقمي، تستهلك ذاكرة وموارد أقل بكثير.</span>
+</div></li>
+<li><span class="pt-dot"></span><div>
+  <strong>Fast web loading:</strong> MIDI files embedded in web pages load and play much faster than digital audio files.
+  <br/><span style="color:var(--muted2);font-size:13px;">ملفات MIDI المضمّنة في صفحات الويب تُحمَّل وتُشغَّل بسرعة أكبر بكثير من الصوت الرقمي.</span>
+</div></li>
+<li><span class="pt-dot"></span><div>
+  <strong>Flexible tempo:</strong> You can change the length of a MIDI file by simply varying its tempo — the pitch stays the same.
+  <br/><span style="color:var(--muted2);font-size:13px;">يمكن تغيير طول ملف MIDI بتغيير الإيقاع فقط دون التأثير على درجة الصوت.</span>
+</div></li>
+<li><span class="pt-dot"></span><div>
+  <strong>Potentially better sound:</strong> With high-quality MIDI devices and synthesizers, MIDI files may actually sound better than digital audio.
+  <br/><span style="color:var(--muted2);font-size:13px;">مع أجهزة MIDI عالية الجودة، قد يبدو الصوت أفضل من الصوت الرقمي.</span>
+</div></li>
+</ul>
+<div class="ar-box">
+<span class="ar-label">شرح بالعربي — ملخص مميزات MIDI</span>
+✅ حجم صغير جداً ← يوفّر الذاكرة والباندويث. ✅ تحميل سريع على الويب. ✅ يمكن تغيير مدته دون التأثير على الطبقة الصوتية (Pitch). ✅ مع أجهزة جيدة قد يتفوق على الصوت الرقمي.
+</div>
+</div>
+
+<!-- CARD 3: MIDI Disadvantages -->
+<div class="card">
+<div class="card-title"><span class="card-title-icon">❌</span> MIDI Disadvantages — عيوب MIDI</div>
+<ul class="points">
+<li><span class="pt-dot"></span><div>
+  <strong>Represents instruments, not sounds:</strong> MIDI stores musical instrument instructions — it will only be accurate if your playback device is identical to the production device. A violin on one synthesizer may sound completely different on another.
+  <br/><span style="color:var(--muted2);font-size:13px;">MIDI يُمثّل تعليمات للآلات الموسيقية وليس الصوت الفعلي — دقته مرتبطة بتطابق جهاز التشغيل مع جهاز الإنتاج.</span>
+</div></li>
+<li><span class="pt-dot"></span><div>
+  <strong>Inconsistent sound:</strong> Because MIDI depends on the playback hardware, the same MIDI file can sound entirely different on different systems.
+  <br/><span style="color:var(--muted2);font-size:13px;">الصوت غير متّسق — نفس الملف يُنتج أصواتاً مختلفة على أجهزة مختلفة.</span>
+</div></li>
+<li><span class="pt-dot"></span><div>
+  <strong>Cannot reproduce speech:</strong> MIDI cannot be easily used to reproduce spoken dialog or the human voice — it's designed for musical instruments only.
+  <br/><span style="color:var(--muted2);font-size:13px;">لا يمكن استخدام MIDI بسهولة لتمثيل الكلام المنطوق — مصمّم للآلات الموسيقية فقط.</span>
+</div></li>
+</ul>
+<div class="ar-box">
+<span class="ar-label">شرح بالعربي — ملخص عيوب MIDI</span>
+❌ يمثّل الآلات لا الأصوات الحقيقية ← دقته تتطلب تطابق الأجهزة. ❌ الصوت غير متّسق على أجهزة مختلفة. ❌ لا يصلح لتمثيل الكلام المنطوق.
+</div>
+</div>
+
+<!-- CARD 4: Digital Audio Advantages -->
+<div class="card">
+<div class="card-title"><span class="card-title-icon">🏆</span> Digital Audio Advantages — مميزات الصوت الرقمي</div>
+<ul class="points">
+<li><span class="pt-dot"></span><div>
+  <strong>Consistent and device independent:</strong> Digital audio sound is identical on any device or computer — it captures the actual waveform, so playback is always the same.
+  <br/><span style="color:var(--muted2);font-size:13px;">الصوت الرقمي متّسق ومستقل عن الجهاز — يُسمَع بنفس الجودة على أي جهاز أو كمبيوتر.</span>
+</div></li>
+<li><span class="pt-dot"></span><div>
+  <strong>Wide software support:</strong> A wide selection of software is available for both Mac and PC to record, edit, and produce digital audio.
+  <br/><span style="color:var(--muted2);font-size:13px;">يوجد دعم برمجي واسع لكلا نظامَي Mac وPC لتسجيل وتحرير الصوت الرقمي.</span>
+</div></li>
+<li><span class="pt-dot"></span><div>
+  <strong>No music theory required:</strong> Unlike MIDI production, creating digital audio does not require knowledge of music theory — anyone can record and edit.
+  <br/><span style="color:var(--muted2);font-size:13px;">لا تحتاج معرفة نظرية الموسيقى لإنتاج الصوت الرقمي — على عكس MIDI الذي يتطلبها.</span>
+</div></li>
+<li><span class="pt-dot"></span><div>
+  <strong>Supports spoken dialog:</strong> Digital audio can perfectly capture and reproduce the human voice and speech — ideal for narration, voiceover, and dialog.
+  <br/><span style="color:var(--muted2);font-size:13px;">مثالي لتسجيل الصوت البشري والكلام المنطوق — مناسب للتعليق الصوتي والحوار.</span>
+</div></li>
+</ul>
+<div class="ar-box">
+<span class="ar-label">شرح بالعربي — ملخص مميزات الصوت الرقمي</span>
+✅ متّسق ومستقل عن الجهاز — نفس الصوت على أي جهاز. ✅ دعم برمجي واسع لـ Mac وPC. ✅ لا تحتاج معرفة نظرية الموسيقى. ✅ يدعم الكلام المنطوق والتعليق الصوتي.
+</div>
+</div>
+
+<!-- CARD 5: Full Comparison Table -->
+<div class="card">
+<div class="card-title"><span class="card-title-icon">📋</span> Full Comparison Table — مقارنة كاملة</div>
 <div class="table-wrap">
 <table class="data-table">
 <thead>
-<tr><th>Feature</th><th>MIDI</th><th>Digital Audio</th></tr>
+<tr><th>Feature</th><th>🎹 MIDI</th><th>💿 Digital Audio</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>Nature</strong></td><td>Instructions / Score</td><td>Sampled waveform copy</td></tr>
-<tr><td><strong>Device Dependency</strong></td><td class="hl">Dependent 🔴</td><td>Independent ✅</td></tr>
-<tr><td><strong>File Size</strong></td><td class="hl">Very small ✅</td><td>Large 🔴</td></tr>
-<tr><td><strong>Web Loading</strong></td><td class="hl">Fast ✅</td><td>Slower 🔴</td></tr>
-<tr><td><strong>Speech/Dialog</strong></td><td>❌ Not suitable</td><td class="hl">✅ Perfect</td></tr>
-<tr><td><strong>Consistency</strong></td><td>Inconsistent 🔴</td><td class="hl">Consistent ✅</td></tr>
-<tr><td><strong>Music Theory</strong></td><td>Required 🔴</td><td class="hl">Not required ✅</td></tr>
-<tr><td><strong>Change Length</strong></td><td class="hl">Without pitch change ✅</td><td>Affects quality 🔴</td></tr>
-<tr><td><strong>Instruments</strong></td><td class="hl">100+ synthesized ✅</td><td>Records actual sound</td></tr>
+<tr><td><strong>Nature</strong></td><td>Numeric instructions (like a score)</td><td>Sampled waveform — actual copy</td></tr>
+<tr><td><strong>Analogy</strong></td><td class="hl">Like Vector Graphics 🎨</td><td>Like Bitmap Image 🖼️</td></tr>
+<tr><td><strong>Device Dependency</strong></td><td style="color:var(--red)">Device Dependent 🔴<br/><small>Sounds differ on each device</small></td><td style="color:green">Device Independent ✅<br/><small>Same sound everywhere</small></td></tr>
+<tr><td><strong>File Size</strong></td><td class="hl">Very Small ✅<br/><small>Less RAM &amp; bandwidth needed</small></td><td style="color:var(--red)">Large 🔴<br/><small>More RAM &amp; bandwidth needed</small></td></tr>
+<tr><td><strong>Web Loading</strong></td><td class="hl">Fast ✅</td><td style="color:var(--red)">Slower 🔴</td></tr>
+<tr><td><strong>Sound Consistency</strong></td><td style="color:var(--red)">Inconsistent 🔴<br/><small>Depends on playback hardware</small></td><td class="hl">Consistent ✅<br/><small>Always identical</small></td></tr>
+<tr><td><strong>Speech / Dialog</strong></td><td style="color:var(--red)">❌ Not suitable</td><td class="hl">✅ Perfect for voice</td></tr>
+<tr><td><strong>Music Theory Needed</strong></td><td style="color:var(--red)">Yes — usually required 🔴</td><td class="hl">No — not required ✅</td></tr>
+<tr><td><strong>Change Length</strong></td><td class="hl">Change tempo — no pitch effect ✅</td><td style="color:var(--red)">Affects quality 🔴</td></tr>
+<tr><td><strong>Instruments</strong></td><td class="hl">100+ synthesized instruments ✅</td><td>Records actual real sound</td></tr>
+<tr><td><strong>Software Support</strong></td><td>Sequencer software needed</td><td class="hl">Wide Mac &amp; PC support ✅</td></tr>
 </tbody>
 </table>
 </div>
+<div class="ar-box">
+<span class="ar-label">شرح بالعربي — قراءة الجدول</span>
+MIDI: حجم صغير + سريع على الويب + مرن في الإيقاع، لكن معتمد على الجهاز وغير متّسق ولا يصلح للكلام. الصوت الرقمي: ثابت ومستقل عن الجهاز ويدعم الكلام، لكن حجمه أكبر ويحتاج موارد أعلى.
 </div>
+</div>
+
+<!-- CARD 6: When to Choose Each -->
 <div class="card">
-<div class="card-title"><span class="card-title-icon">🎯</span> When to Use Each?</div>
+<div class="card-title"><span class="card-title-icon">🎯</span> When to Choose Each? — متى تختار كلاً منهما؟</div>
 <div class="two-col">
 <div class="col-card cyan-card">
-<div class="col-card-title">✅ Use MIDI When…</div>
+<div class="col-card-title">🎹 Choose MIDI Data When…</div>
 <ul class="points">
-<li><span class="pt-dot"></span><div>You don't have enough <strong>RAM/bandwidth</strong> for digital audio.</div></li>
-<li><span class="pt-dot"></span><div>You have a <strong>high-quality sound source</strong>.</div></li>
-<li><span class="pt-dot"></span><div>You have <strong>complete control</strong> over the playback hardware.</div></li>
-<li><span class="pt-dot"></span><div>You do <strong>NOT need spoken dialog</strong>.</div></li>
+<li><span class="pt-dot"></span><div>You <strong>don't have enough RAM or bandwidth</strong> for digital audio files.</div></li>
+<li><span class="pt-dot"></span><div>You have a <strong>high-quality sound source</strong> (premium synthesizer or sound card).</div></li>
+<li><span class="pt-dot"></span><div>You have <strong>complete control over the playback hardware</strong> — you know exactly what device the audience will use.</div></li>
+<li><span class="pt-dot"></span><div>You do <strong>NOT need spoken dialog</strong> or human voice in your project.</div></li>
 </ul>
 </div>
 <div class="col-card gold-card">
-<div class="col-card-title">✅ Use Digital Audio When…</div>
+<div class="col-card-title">💿 Choose Digital Audio When…</div>
 <ul class="points">
-<li><span class="pt-dot"></span><div>You do <strong>NOT have control</strong> over the playback hardware.</div></li>
-<li><span class="pt-dot"></span><div>You have computing resources and <strong>bandwidth</strong> for larger files.</div></li>
-<li><span class="pt-dot"></span><div>You need <strong>spoken dialog</strong>.</div></li>
-<li><span class="pt-dot"></span><div>You need <strong>consistent quality</strong> across all devices.</div></li>
+<li><span class="pt-dot"></span><div>You do <strong>NOT have control</strong> over the playback hardware — your audience uses many different devices.</div></li>
+<li><span class="pt-dot"></span><div>You have the <strong>computing resources and bandwidth</strong> to handle larger digital files.</div></li>
+<li><span class="pt-dot"></span><div>You need <strong>spoken dialog</strong>, narration, or human voice in your project.</div></li>
+<li><span class="pt-dot"></span><div>You need <strong>consistent, identical sound quality</strong> across all platforms and devices.</div></li>
 </ul>
 </div>
 </div>
+<div class="highlight-box" style="margin-top:14px;">
+<span class="hl-label">💡 Quick Decision Rule</span>
+<strong>No control over hardware + need speech = Digital Audio.</strong><br/>
+<strong>Limited resources + control over hardware + no speech = MIDI.</strong>
+</div>
 <div class="ar-box">
 <span class="ar-label">شرح بالعربي</span>
-      استخدم <strong>MIDI</strong> إذا: كانت الموارد محدودة، تتحكم في جهاز التشغيل، لا تحتاج كلاماً منطوقاً.<br/>
-      استخدم <strong>الصوت الرقمي</strong> إذا: لا تتحكم في الجهاز، تحتاج كلاماً منطوقاً، تريد جودة متسقة.
-    </div>
+اختر <strong>MIDI</strong> عندما: الموارد محدودة (RAM/Bandwidth) + تتحكم في جهاز التشغيل + لا تحتاج كلاماً منطوقاً + لديك مصدر صوت جيد.<br/>
+اختر <strong>الصوت الرقمي</strong> عندما: لا تتحكم في أجهزة الجمهور + تحتاج كلاماً منطوقاً + لديك موارد كافية + تريد جودة متّسقة على كل الأجهزة.
+</div>
 </div>
 <!-- ══════════════════════════════════
    SECTION 7 — FILE FORMATS
